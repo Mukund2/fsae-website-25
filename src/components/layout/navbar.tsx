@@ -40,14 +40,14 @@ export function Navbar() {
         className={cn(
           "fixed top-0 left-0 z-50 w-full transition-all duration-300",
           scrolled
-            ? "border-b border-white/5 bg-[#0a0a0a]/80 backdrop-blur-md"
+            ? "border-b border-[#D4A843]/10 bg-[#0a0a0a]/80 backdrop-blur-md"
             : "bg-transparent"
         )}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           {/* Brand */}
           <Link href="/" className="group flex items-center gap-1">
-            <span className="font-display text-xl tracking-wider md:text-2xl">
+            <span className="font-display text-2xl tracking-wider md:text-[1.7rem]">
               <span className="text-[#D4A843] transition-colors group-hover:text-[#e4bc63]">
                 SPARTAN
               </span>{" "}

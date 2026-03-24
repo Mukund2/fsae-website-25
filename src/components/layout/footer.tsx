@@ -80,9 +80,13 @@ const socialIcons = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-white/5 bg-[#141414]">
-      <div className="mx-auto max-w-7xl px-6 py-16">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
+    <footer className="relative border-t border-white/5 bg-[#141414]">
+      {/* Top gradient fade */}
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#D4A843]/30 to-transparent" aria-hidden="true" />
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#D4A843]/[0.03] to-transparent" aria-hidden="true" />
+
+      <div className="mx-auto max-w-7xl px-6 py-20">
+        <div className="grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand Column */}
           <div className="space-y-5">
             <h3 className="font-display text-2xl tracking-wider">
@@ -101,9 +105,9 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-white/50 transition-all duration-200 hover:border-[#D4A843]/40 hover:text-[#D4A843] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A843] focus-visible:ring-offset-2 focus-visible:ring-offset-[#141414]"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/50 transition-all duration-200 hover:border-[#D4A843]/40 hover:text-[#D4A843] hover:shadow-[0_0_12px_rgba(212,168,67,0.15)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A843] focus-visible:ring-offset-2 focus-visible:ring-offset-[#141414]"
                 >
-                  <Icon size={16} />
+                  <Icon size={18} />
                 </a>
               ))}
             </div>

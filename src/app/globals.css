@@ -26,9 +26,23 @@
 
 /* Base styles */
 body {
-  background: var(--background);
+  background: radial-gradient(ellipse at 50% 50%, #111111 0%, #0a0a0a 60%, #080808 100%);
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-body), system-ui, sans-serif;
+}
+
+/* Gold gradient text utility */
+.text-gradient-gold {
+  background: linear-gradient(135deg, #D4A843, #f0d78c, #D4A843);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Gold glow utility */
+.glow-gold {
+  box-shadow: 0 0 40px rgba(212, 168, 67, 0.15);
 }
 
 /* Smooth scroll handled by Lenis - disable native */

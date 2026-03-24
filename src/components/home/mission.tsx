@@ -5,8 +5,11 @@ import { RevealText } from "@/components/animation/reveal-text";
 
 export function Mission() {
   return (
-    <Section>
-      <div className="grid gap-12 md:grid-cols-2 md:gap-16">
+    <Section className="relative overflow-hidden">
+      {/* Subtle background accent */}
+      <div className="pointer-events-none absolute -left-40 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-gold/[0.03] blur-[100px]" aria-hidden="true" />
+
+      <div className="relative grid gap-12 md:grid-cols-2 md:gap-16">
         <div>
           <RevealText
             as="h2"
@@ -21,6 +24,8 @@ export function Mission() {
           >
             Excellence
           </RevealText>
+          {/* Decorative gold rule */}
+          <div className="mt-6 h-px w-24 bg-gradient-to-r from-gold to-transparent" />
         </div>
         <RevealText
           as="p"

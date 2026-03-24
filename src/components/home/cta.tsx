@@ -16,7 +16,7 @@ export function CTA() {
           className="font-display text-5xl uppercase tracking-tight md:text-7xl lg:text-8xl"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1, margin: "100px" }}
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
         >
           Join{" "}
@@ -26,7 +26,7 @@ export function CTA() {
           className="mx-auto mt-6 max-w-xl text-lg text-muted md:text-xl"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1, margin: "100px" }}
           transition={{
             duration: 0.6,
             ease: [0.25, 0.1, 0.25, 1],
@@ -39,7 +39,7 @@ export function CTA() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          viewport={{ once: true, amount: 0.1, margin: "100px" }}
           transition={{
             duration: 0.6,
             ease: [0.25, 0.1, 0.25, 1],

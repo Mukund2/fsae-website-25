@@ -19,7 +19,7 @@ export function Counter({
 }: CounterProps) {
   const ref = useRef<HTMLSpanElement>(null);
   const [count, setCount] = useState(0);
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const hasAnimatedRef = useRef(false);
 
   useEffect(() => {
     const el = ref.current;
@@ -27,13 +27,12 @@ export function Counter({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated) {
-          setHasAnimated(true);
+        if (entry.isIntersecting && !hasAnimatedRef.current) {
+          hasAnimatedRef.current = true;
           const start = performance.now();
           const animate = (now: number) => {
             const elapsed = now - start;
             const progress = Math.min(elapsed / (duration * 1000), 1);
-            // ease out cubic
             const eased = 1 - Math.pow(1 - progress, 3);
             setCount(Math.round(eased * value));
             if (progress < 1) requestAnimationFrame(animate);
@@ -41,12 +40,12 @@ export function Counter({
           requestAnimationFrame(animate);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
 
     observer.observe(el);
     return () => observer.disconnect();
-  }, [value, duration, hasAnimated]);
+  }, [value, duration]);
 
   return (
     <span ref={ref} className={className}>

@@ -35,9 +35,12 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-background text-foreground">
         <SmoothScrollProvider>
+          <a href="#main-content" className="skip-nav">
+            Skip to main content
+          </a>
           <NoiseOverlay />
           <Navbar />
-          <main className="flex-1">{children}</main>
+          <main id="main-content" className="flex-1">{children}</main>
           <Footer />
         </SmoothScrollProvider>
       </body>

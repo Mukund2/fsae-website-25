@@ -62,7 +62,7 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   className={cn(
-                    "relative py-1 text-sm font-medium uppercase tracking-widest transition-colors duration-200",
+                    "relative py-1 text-sm font-medium uppercase tracking-widest transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A843] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]",
                     isActive(link.href)
                       ? "text-[#D4A843]"
                       : "text-white/70 hover:text-white"
@@ -84,8 +84,9 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="relative z-50 flex h-10 w-10 items-center justify-center text-white md:hidden"
+            className="relative z-50 flex h-10 w-10 items-center justify-center text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A843] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] md:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileOpen}
           >
             {mobileOpen ? <X size={24} /> : <Menu size={24} />}
           </button>

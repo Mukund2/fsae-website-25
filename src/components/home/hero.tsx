@@ -63,7 +63,7 @@ export function Hero() {
       </div>
 
       {/* Gradient overlay for text legibility */}
-      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-background via-background/40 to-background/60" />
+      <div className="absolute inset-0 z-[1] bg-gradient-to-t from-background/80 via-transparent to-background/30" />
 
       {/* Text overlay */}
       <div className="relative z-[2] flex h-full flex-col items-center justify-center">

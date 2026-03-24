@@ -2,27 +2,31 @@
 
 import { motion } from "motion/react";
 import { Section } from "@/components/layout/section";
-import { useInView } from "@/hooks/use-in-view";
 
 export function CTA() {
-  const { ref, isInView } = useInView<HTMLDivElement>({ threshold: 0.3 });
-
   return (
-    <Section className="text-center">
-      <div ref={ref}>
+    <Section className="relative overflow-hidden text-center">
+      {/* Background radial glow */}
+      <div className="pointer-events-none absolute inset-0 flex items-center justify-center" aria-hidden="true">
+        <div className="h-[500px] w-[500px] rounded-full bg-gold/[0.06] blur-[120px]" />
+      </div>
+
+      <div className="relative z-10">
         <motion.h2
-          className="font-display text-4xl uppercase tracking-tight md:text-6xl lg:text-7xl"
+          className="font-display text-5xl uppercase tracking-tight md:text-7xl lg:text-8xl"
           initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
         >
           Join{" "}
-          <span className="text-gold">Spartan Racing</span>
+          <span className="text-gradient-gold">Spartan Racing</span>
         </motion.h2>
         <motion.p
-          className="mx-auto mt-4 max-w-xl text-lg text-muted"
+          className="mx-auto mt-6 max-w-xl text-lg text-muted md:text-xl"
           initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{
             duration: 0.6,
             ease: [0.25, 0.1, 0.25, 1],
@@ -34,7 +38,8 @@ export function CTA() {
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
           transition={{
             duration: 0.6,
             ease: [0.25, 0.1, 0.25, 1],
@@ -43,7 +48,7 @@ export function CTA() {
         >
           <a
             href="/join"
-            className="mt-8 inline-block rounded-none bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-background transition-all hover:bg-gold/90 hover:shadow-[0_0_30px_rgba(212,168,67,0.3)]"
+            className="glow-gold mt-10 inline-block rounded-none bg-gold px-12 py-5 font-display text-xl uppercase tracking-wider text-background transition-all hover:bg-gold/90 hover:shadow-[0_0_50px_rgba(212,168,67,0.4)]"
           >
             Get Involved
           </a>

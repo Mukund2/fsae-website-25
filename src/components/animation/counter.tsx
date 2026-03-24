@@ -1,8 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { motion, useSpring, useTransform } from "motion/react";
-import { useInView } from "@/hooks/use-in-view";
+import { useEffect, useRef, useState } from "react";
 
 interface CounterProps {
   value: number;
@@ -19,28 +17,40 @@ export function Counter({
   className,
   duration = 2,
 }: CounterProps) {
-  const { ref, isInView } = useInView<HTMLSpanElement>({ threshold: 0.5 });
+  const ref = useRef<HTMLSpanElement>(null);
+  const [count, setCount] = useState(0);
   const [hasAnimated, setHasAnimated] = useState(false);
 
-  const springValue = useSpring(0, {
-    duration: duration * 1000,
-    bounce: 0,
-  });
-
-  const display = useTransform(springValue, (v) =>
-    `${prefix}${Math.round(v)}${suffix}`
-  );
-
   useEffect(() => {
-    if (isInView && !hasAnimated) {
-      springValue.set(value);
-      setHasAnimated(true);
-    }
-  }, [isInView, hasAnimated, springValue, value]);
+    const el = ref.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !hasAnimated) {
+          setHasAnimated(true);
+          const start = performance.now();
+          const animate = (now: number) => {
+            const elapsed = now - start;
+            const progress = Math.min(elapsed / (duration * 1000), 1);
+            // ease out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.round(eased * value));
+            if (progress < 1) requestAnimationFrame(animate);
+          };
+          requestAnimationFrame(animate);
+        }
+      },
+      { threshold: 0.3 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [value, duration, hasAnimated]);
 
   return (
-    <motion.span ref={ref} className={className}>
-      {display}
-    </motion.span>
+    <span ref={ref} className={className}>
+      {prefix}{count}{suffix}
+    </span>
   );
 }

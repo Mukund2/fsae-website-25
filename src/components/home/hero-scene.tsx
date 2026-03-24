@@ -20,7 +20,7 @@ function SR17Model() {
   return (
     <primitive
       object={scene}
-      scale={0.8}
+      scale={1.2}
       position={[0, 0.1, 0]}
       rotation={[0, Math.PI / 4, 0]}
     />
@@ -30,7 +30,7 @@ function SR17Model() {
 function Scene() {
   return (
     <>
-      <ambientLight intensity={0.2} />
+      <ambientLight intensity={0.5} />
       <spotLight
         position={[5, 8, 5]}
         angle={0.4}
@@ -46,10 +46,18 @@ function Scene() {
         intensity={0.8}
         color="#4488ff"
       />
-      <pointLight position={[0, 3, 0]} intensity={0.3} color="#ffffff" />
+      <pointLight position={[0, 3, 0]} intensity={0.5} color="#ffffff" />
+      <directionalLight position={[2, 5, 2]} intensity={1.0} color="#D4A843" />
 
       <Float speed={1.5} rotationIntensity={0.08} floatIntensity={0.3}>
-        <Suspense fallback={null}>
+        <Suspense
+          fallback={
+            <mesh>
+              <boxGeometry args={[1, 0.5, 2]} />
+              <meshStandardMaterial color="#D4A843" opacity={0.3} transparent />
+            </mesh>
+          }
+        >
           <SR17Model />
         </Suspense>
       </Float>
@@ -98,6 +106,7 @@ function Scene() {
 export default function HeroScene() {
   return (
     <Canvas
+      flat
       dpr={[1, 2]}
       camera={{ position: [3.5, 2, 3.5], fov: 35 }}
       gl={{ antialias: true, alpha: true }}

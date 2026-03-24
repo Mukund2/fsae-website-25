@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
-import { useInView } from "@/hooks/use-in-view";
+
 import { useMediaQuery } from "@/hooks/use-media-query";
 
 type TextElement = "h1" | "h2" | "h3" | "h4" | "p" | "span";
@@ -23,7 +23,6 @@ export function RevealText({
   splitBy = "word",
   staggerDelay = 0.05,
 }: RevealTextProps) {
-  const { ref, isInView } = useInView<HTMLDivElement>();
   const prefersReducedMotion = useMediaQuery(
     "(prefers-reduced-motion: reduce)"
   );
@@ -35,14 +34,14 @@ export function RevealText({
 
   if (prefersReducedMotion) {
     return (
-      <div ref={ref}>
+      <div>
         <Tag className={className}>{children}</Tag>
       </div>
     );
   }
 
   return (
-    <div ref={ref}>
+    <div>
       <Tag className={className} style={{ overflow: "hidden" }}>
         {segments.map((segment, i) => {
           const isWhitespace = /^\s+$/.test(segment);
@@ -69,11 +68,8 @@ export function RevealText({
               <motion.span
                 style={{ display: "inline-block" }}
                 initial={{ opacity: 0, y: "100%" }}
-                animate={
-                  isInView
-                    ? { opacity: 1, y: "0%" }
-                    : { opacity: 0, y: "100%" }
-                }
+                whileInView={{ opacity: 1, y: "0%" }}
+                viewport={{ once: true, amount: 0.1 }}
                 transition={{
                   duration: 0.5,
                   ease: [0.25, 0.1, 0.25, 1],

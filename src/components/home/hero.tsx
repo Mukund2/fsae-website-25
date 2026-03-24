@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, lazy, useEffect, useState } from "react";
+import { Suspense, lazy, useEffect, useRef, useCallback } from "react";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { ChevronDown } from "lucide-react";
 
@@ -8,13 +8,63 @@ const HeroScene = lazy(() => import("./hero-scene"));
 
 export function Hero() {
   const isMobile = useMediaQuery("(max-width: 768px)");
-  const [show, setShow] = useState(false);
+  const lettersRef = useRef<(HTMLSpanElement | null)[]>([]);
+  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  const setLetterRef = useCallback(
+    (i: number) => (el: HTMLSpanElement | null) => {
+      lettersRef.current[i] = el;
+    },
+    []
+  );
 
   useEffect(() => {
-    // Trigger animations after hydration
-    const timer = setTimeout(() => setShow(true), 100);
-    return () => clearTimeout(timer);
+    // Animate letters in with JS — bulletproof, no CSS dependency
+    const letters = lettersRef.current.filter(Boolean) as HTMLSpanElement[];
+
+    // Start hidden
+    letters.forEach((el) => {
+      el.style.opacity = "0";
+      el.style.transform = "translateY(40px)";
+    });
+    if (subtitleRef.current) {
+      subtitleRef.current.style.opacity = "0";
+      subtitleRef.current.style.transform = "translateY(20px)";
+    }
+    if (scrollRef.current) {
+      scrollRef.current.style.opacity = "0";
+    }
+
+    // Stagger reveal each letter
+    letters.forEach((el, i) => {
+      const delay = i < 7 ? 300 + i * 40 : 600 + (i - 7) * 40; // SPARTAN then RACING
+      setTimeout(() => {
+        el.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
+        el.style.opacity = "1";
+        el.style.transform = "translateY(0)";
+      }, delay);
+    });
+
+    // Subtitle
+    setTimeout(() => {
+      if (subtitleRef.current) {
+        subtitleRef.current.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
+        subtitleRef.current.style.opacity = "1";
+        subtitleRef.current.style.transform = "translateY(0)";
+      }
+    }, 1200);
+
+    // Scroll indicator
+    setTimeout(() => {
+      if (scrollRef.current) {
+        scrollRef.current.style.transition = "opacity 0.6s ease-out";
+        scrollRef.current.style.opacity = "1";
+      }
+    }, 1800);
   }, []);
+
+  const allLetters = [..."SPARTAN", ..."RACING"];
 
   return (
     <section className="relative h-svh overflow-hidden bg-background">
@@ -45,13 +95,9 @@ export function Hero() {
             <span aria-label="SPARTAN">
               {"SPARTAN".split("").map((letter, i) => (
                 <span
-                  key={i}
-                  className="inline-block text-gold transition-all duration-500 ease-out"
-                  style={{
-                    opacity: show ? 1 : 0,
-                    transform: show ? "translateY(0)" : "translateY(40px)",
-                    transitionDelay: `${300 + i * 40}ms`,
-                  }}
+                  key={`s${i}`}
+                  ref={setLetterRef(i)}
+                  className="inline-block text-gold"
                 >
                   {letter}
                 </span>
@@ -61,13 +107,9 @@ export function Hero() {
             <span aria-label="RACING">
               {"RACING".split("").map((letter, i) => (
                 <span
-                  key={i}
-                  className="inline-block text-foreground transition-all duration-500 ease-out"
-                  style={{
-                    opacity: show ? 1 : 0,
-                    transform: show ? "translateY(0)" : "translateY(40px)",
-                    transitionDelay: `${600 + i * 40}ms`,
-                  }}
+                  key={`r${i}`}
+                  ref={setLetterRef(7 + i)}
+                  className="inline-block text-foreground"
                 >
                   {letter}
                 </span>
@@ -75,12 +117,8 @@ export function Hero() {
             </span>
           </h1>
           <p
-            className="mt-4 text-lg text-muted transition-all duration-600 ease-out md:text-xl"
-            style={{
-              opacity: show ? 1 : 0,
-              transform: show ? "translateY(0)" : "translateY(20px)",
-              transitionDelay: "1200ms",
-            }}
+            ref={subtitleRef}
+            className="mt-4 text-lg text-muted md:text-xl"
           >
             San Jos&eacute; State University Formula SAE
           </p>
@@ -89,11 +127,8 @@ export function Hero() {
 
       {/* Scroll indicator */}
       <div
-        className="absolute bottom-8 left-1/2 z-[2] -translate-x-1/2 transition-opacity duration-600"
-        style={{
-          opacity: show ? 1 : 0,
-          transitionDelay: "1800ms",
-        }}
+        ref={scrollRef}
+        className="absolute bottom-8 left-1/2 z-[2] -translate-x-1/2"
       >
         <div className="animate-bounce">
           <ChevronDown className="h-8 w-8 text-muted/50" />

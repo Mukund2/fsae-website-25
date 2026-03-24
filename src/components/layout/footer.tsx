@@ -80,20 +80,16 @@ const socialIcons = [
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-white/5 bg-[#141414]">
-      {/* Top gradient fade */}
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#D4A843]/30 to-transparent" aria-hidden="true" />
-      <div className="pointer-events-none absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#D4A843]/[0.03] to-transparent" aria-hidden="true" />
-
+    <footer className="relative border-t border-gold/30 bg-background">
       <div className="mx-auto max-w-7xl px-6 py-20">
         <div className="grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand Column */}
           <div className="space-y-5">
             <h3 className="font-display text-2xl tracking-wider">
-              <span className="text-[#D4A843]">SPARTAN</span>{" "}
-              <span className="text-white">RACING</span>
+              <span className="text-gold">SPARTAN</span>{" "}
+              <span className="text-foreground">RACING</span>
             </h3>
-            <p className="text-sm leading-relaxed text-white/50">
+            <p className="text-sm leading-relaxed text-muted">
               Engineering excellence since 1991. Designing, building, and racing
               formula-style vehicles at San&nbsp;Jos&eacute; State University.
             </p>
@@ -105,7 +101,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-white/10 text-white/50 transition-all duration-200 hover:border-[#D4A843]/40 hover:text-[#D4A843] hover:shadow-[0_0_12px_rgba(212,168,67,0.15)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A843] focus-visible:ring-offset-2 focus-visible:ring-offset-[#141414]"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted transition-all duration-200 hover:border-gold/40 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <Icon size={18} />
                 </a>
@@ -115,7 +111,7 @@ export function Footer() {
 
           {/* Navigation Column */}
           <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/30">
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted">
               Navigation
             </h4>
             <ul className="space-y-3">
@@ -123,7 +119,7 @@ export function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="text-sm text-white/50 transition-colors duration-200 hover:text-[#D4A843]"
+                    className="text-sm text-muted transition-colors duration-200 hover:text-gold"
                   >
                     {link.label}
                   </Link>
@@ -134,13 +130,13 @@ export function Footer() {
 
           {/* Subteams Column */}
           <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/30">
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted">
               Subteams
             </h4>
             <ul className="space-y-3">
               {SUBTEAMS.map((team) => (
                 <li key={team}>
-                  <span className="text-sm text-white/50">{team}</span>
+                  <span className="text-sm text-muted">{team}</span>
                 </li>
               ))}
             </ul>
@@ -148,11 +144,11 @@ export function Footer() {
 
           {/* Contact Column */}
           <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/30">
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted">
               Contact
             </h4>
             <address className="space-y-3 not-italic">
-              <p className="text-sm leading-relaxed text-white/50">
+              <p className="text-sm leading-relaxed text-muted">
                 San Jos&eacute; State University
                 <br />
                 One Washington Square
@@ -161,7 +157,7 @@ export function Footer() {
               </p>
               <a
                 href="mailto:sjsu.fsae@gmail.com"
-                className="inline-block text-sm text-white/50 transition-colors duration-200 hover:text-[#D4A843]"
+                className="inline-block text-sm text-muted transition-colors duration-200 hover:text-gold"
               >
                 sjsu.fsae@gmail.com
               </a>
@@ -171,8 +167,8 @@ export function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-white/5">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-6 text-xs text-white/30 sm:flex-row">
+      <div className="border-t border-border">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-6 text-xs text-muted sm:flex-row">
           <span>&copy; 2024 SJSU Spartan Racing. All rights reserved.</span>
           <span>Built with passion by Spartan Racing</span>
         </div>

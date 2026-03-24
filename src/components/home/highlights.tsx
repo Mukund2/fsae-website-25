@@ -1,71 +1,51 @@
 "use client";
 
-import { Section } from "@/components/layout/section";
+import Image from "next/image";
 
-interface HighlightCard {
-  title: string;
-  value: string;
-  description: string;
-  span?: "1" | "2";
-}
-
-const highlights: HighlightCard[] = [
-  {
-    title: "Latest Car",
-    value: "SR-16e",
-    description:
-      "Our 16th generation electric formula car, designed and manufactured entirely by students.",
-    span: "2",
-  },
-  {
-    title: "Competition",
-    value: "Formula SAE",
-    description:
-      "Competing against 120+ university teams in engineering design, cost, and performance events.",
-    span: "1",
-  },
-  {
-    title: "Founded",
-    value: "1991",
-    description:
-      "Over three decades of engineering excellence and hands-on education at San Jose State.",
-    span: "1",
-  },
-  {
-    title: "Team Size",
-    value: "100+",
-    description:
-      "Mechanical, electrical, software, and business students working together across 7 subteams.",
-    span: "2",
-  },
+const specs = [
+  { value: "3.2s", label: "0–60 mph" },
+  { value: "485", label: "lbs curb weight" },
+  { value: "80kW", label: "peak power" },
+  { value: "85", label: "mph top speed" },
 ];
-
-function Card({ card }: { card: HighlightCard }) {
-  return (
-    <div
-      className={`group relative overflow-hidden rounded-sm border border-border bg-gradient-to-br from-surface to-elevated/50 p-8 transition-colors hover:border-gold/30 ${
-        card.span === "2" ? "md:col-span-2" : "md:col-span-1"
-      }`}
-    >
-      <div className="absolute left-0 top-0 h-full w-[2px] bg-gradient-to-b from-gold/60 via-gold/20 to-transparent" />
-      <div className="absolute left-0 top-0 h-0.5 w-full bg-gradient-to-r from-gold/0 via-gold to-gold/0 opacity-0 transition-opacity group-hover:opacity-100" />
-      <span className="text-xs uppercase tracking-widest text-gold">{card.title}</span>
-      <div className="mt-3 font-display text-5xl uppercase tracking-tight md:text-6xl">
-        {card.value}
-      </div>
-      <p className="mt-3 text-sm leading-relaxed text-muted">{card.description}</p>
-    </div>
-  );
-}
 
 export function Highlights() {
   return (
-    <Section>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-        {highlights.map((card) => (
-          <Card key={card.title} card={card} />
-        ))}
+    <section className="bg-surface">
+      {/* Full-width car photo */}
+      <div className="relative aspect-[21/9] w-full overflow-hidden">
+        <Image
+          src="/images/cars/car-2.jpg"
+          alt="Two SJSU Spartan Racing cars side by side at sunset"
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
       </div>
-    </Section>
+
+      {/* Specs strip */}
+      <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
+        <p className="mb-10 text-xs uppercase tracking-[0.3em] text-muted">
+          SR-16e Performance
+        </p>
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-0">
+          {specs.map((spec, i) => (
+            <div
+              key={spec.label}
+              className={`${
+                i > 0 ? "md:border-l md:border-border md:pl-8" : ""
+              }`}
+            >
+              <div className="font-display text-5xl tracking-tight text-foreground md:text-6xl lg:text-7xl">
+                {spec.value}
+              </div>
+              <div className="mt-2 text-sm uppercase tracking-widest text-muted">
+                {spec.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

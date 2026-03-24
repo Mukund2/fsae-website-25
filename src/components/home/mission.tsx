@@ -1,39 +1,41 @@
 "use client";
 
+import Image from "next/image";
 import { Section } from "@/components/layout/section";
-import { RevealText } from "@/components/animation/reveal-text";
 
 export function Mission() {
   return (
     <Section className="relative overflow-hidden">
-      {/* Subtle background accent */}
-      <div className="pointer-events-none absolute -left-40 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full bg-gold/[0.03] blur-[100px]" aria-hidden="true" />
-
-      <div className="relative grid gap-12 md:grid-cols-2 md:gap-16">
-        <div>
-          <RevealText
-            as="h2"
-            className="font-display text-4xl uppercase tracking-tight md:text-5xl"
-          >
-            {"Engineering "}
-          </RevealText>
-          <RevealText
-            as="span"
-            className="font-display text-4xl uppercase tracking-tight text-gold md:text-5xl"
-            delay={0.2}
-          >
-            Excellence
-          </RevealText>
-          {/* Decorative gold rule */}
-          <div className="mt-6 h-px w-24 bg-gradient-to-r from-gold to-transparent" />
+      <div className="relative grid items-center gap-10 md:grid-cols-5 md:gap-16">
+        {/* Large photo — 60% */}
+        <div className="relative aspect-[4/3] overflow-hidden md:col-span-3">
+          <Image
+            src="/images/cars/car-1.jpg"
+            alt="SJSU Spartan Racing car E227 at autocross competition"
+            fill
+            className="object-cover"
+            sizes="(max-width: 768px) 100vw, 60vw"
+          />
         </div>
-        <RevealText
-          as="p"
-          className="text-lg leading-relaxed text-muted"
-          delay={0.3}
-        >
-          SJSU Spartan Racing is a student-run engineering team that designs, builds, and races a formula-style race car every year. We compete in the Formula SAE competition series, pushing the boundaries of what&apos;s possible with innovation, teamwork, and relentless drive.
-        </RevealText>
+
+        {/* Text — 40% */}
+        <div className="md:col-span-2">
+          <h2 className="font-display text-4xl uppercase tracking-tight text-foreground md:text-5xl">
+            Built by students.
+            <br />
+            <span className="text-gold">Driven to compete.</span>
+          </h2>
+          <div className="mt-6 h-px w-24 bg-gradient-to-r from-gold to-transparent" />
+          <p className="mt-6 text-lg leading-relaxed text-muted">
+            Since 1991, we&apos;ve designed and built 16 formula-style race cars.
+            Every bolt, every weld, every line of code — done by San&nbsp;Jos&eacute;
+            State students who learn by building something real.
+          </p>
+          <p className="mt-4 text-lg leading-relaxed text-muted">
+            We compete in Formula SAE against 120+ university teams worldwide,
+            tested on engineering design, cost analysis, and raw performance.
+          </p>
+        </div>
       </div>
     </Section>
   );

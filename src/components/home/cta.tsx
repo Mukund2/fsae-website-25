@@ -1,32 +1,37 @@
-import { Section } from "@/components/layout/section";
+import Image from "next/image";
 
 export function CTA() {
   return (
-    <Section className="relative overflow-hidden text-center">
-      <div
-        className="pointer-events-none absolute inset-0 flex items-center justify-center"
-        aria-hidden="true"
-      >
-        <div className="h-[500px] w-[500px] rounded-full bg-gold/[0.06] blur-[120px]" />
-      </div>
+    <section className="relative overflow-hidden">
+      {/* Background photo */}
+      <div className="relative flex min-h-[60vh] items-center justify-center px-6 py-24">
+        <Image
+          src="/images/team/team-1.jpg"
+          alt="SJSU Spartan Racing car on Sonoma raceway"
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/50" />
 
-      <div className="relative z-10">
-        <h2 className="font-display text-5xl uppercase tracking-tight md:text-7xl lg:text-8xl">
-          Join <span className="text-gradient-gold">Spartan Racing</span>
-        </h2>
-        <p className="mx-auto mt-6 max-w-xl text-lg text-muted md:text-xl">
-          Be part of something extraordinary. No experience required — just
-          passion and dedication.
-        </p>
-        <div className="mt-10">
-          <a
-            href="/join"
-            className="glow-gold inline-block rounded-none bg-gold px-12 py-5 font-display text-xl uppercase tracking-wider text-background transition-all hover:bg-gold/90 hover:shadow-[0_0_50px_rgba(212,168,67,0.4)]"
-          >
-            Get Involved
-          </a>
+        <div className="relative z-10 text-center">
+          <h2 className="font-display text-5xl uppercase tracking-tight text-white md:text-7xl lg:text-8xl">
+            Join Spartan Racing
+          </h2>
+          <p className="mx-auto mt-6 max-w-xl text-lg text-white/80 md:text-xl">
+            Be part of something extraordinary. No experience required — just
+            passion and dedication.
+          </p>
+          <div className="mt-10">
+            <a
+              href="/join"
+              className="glow-gold inline-block bg-gold px-12 py-5 font-display text-xl uppercase tracking-wider text-white hover:bg-gold/90"
+            >
+              Get Involved
+            </a>
+          </div>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }

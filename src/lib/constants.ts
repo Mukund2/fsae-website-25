@@ -5,9 +5,9 @@ export const SITE_URL = "https://sjsuformulasae.com";
 export const COLORS = {
   gold: "#D4A843",
   blue: "#0055A2",
-  base: "#0a0a0a",
-  surface: "#141414",
-  elevated: "#1a1a1a",
+  base: "#FAFAF8",
+  surface: "#F0F0EC",
+  elevated: "#FFFFFF",
 } as const;
 
 export const NAV_LINKS = [

@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0a0a0a;
-  --foreground: #ededed;
-  --surface: #141414;
-  --elevated: #1a1a1a;
+  --background: #FAFAF8;
+  --foreground: #1A1A1A;
+  --surface: #F0F0EC;
+  --elevated: #FFFFFF;
   --gold: #D4A843;
   --blue: #0055A2;
-  --muted: #a1a1a1;
-  --border: #262626;
+  --muted: #6B6B6B;
+  --border: #E0E0DC;
 }
 
 @theme inline {
@@ -26,8 +26,7 @@
 
 /* Base styles */
 body {
-  background: radial-gradient(ellipse at 50% 50%, #111111 0%, #0a0a0a 60%, #080808 100%);
-  background-attachment: fixed;
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-body), system-ui, sans-serif;
 }
@@ -42,7 +41,7 @@ body {
 
 /* Gold glow utility */
 .glow-gold {
-  box-shadow: 0 0 40px rgba(212, 168, 67, 0.15);
+  box-shadow: 0 0 40px rgba(212, 168, 67, 0.2);
 }
 
 /* Smooth scroll */
@@ -53,7 +52,7 @@ html {
 /* Selection color */
 ::selection {
   background-color: rgba(212, 168, 67, 0.3);
-  color: #ffffff;
+  color: #1A1A1A;
 }
 
 /* Scrollbar */
@@ -66,7 +65,7 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--elevated);
+  background: var(--border);
   border-radius: 4px;
 }
 
@@ -132,7 +131,7 @@ html {
   height: auto;
   padding: 0.75rem 1.5rem;
   background: var(--gold);
-  color: var(--background);
+  color: white;
   font-weight: 600;
   font-size: 0.875rem;
   z-index: 100;

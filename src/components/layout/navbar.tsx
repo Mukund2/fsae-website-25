@@ -22,7 +22,6 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [handleScroll]);
 
-  // Lock body scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
     return () => {
@@ -39,7 +38,7 @@ export function Navbar() {
         className={cn(
           "fixed top-0 left-0 z-50 w-full transition-all duration-300",
           scrolled
-            ? "border-b border-[#D4A843]/10 bg-[#0a0a0a]/80 backdrop-blur-md"
+            ? "border-b border-border bg-white/80 backdrop-blur-md"
             : "bg-transparent"
         )}
       >
@@ -47,10 +46,17 @@ export function Navbar() {
           {/* Brand */}
           <Link href="/" className="group flex items-center gap-1">
             <span className="font-display text-2xl tracking-wider md:text-[1.7rem]">
-              <span className="text-[#D4A843] transition-colors group-hover:text-[#e4bc63]">
+              <span
+                className={cn(
+                  "transition-colors group-hover:text-[#e4bc63]",
+                  scrolled ? "text-gold" : "text-gold"
+                )}
+              >
                 SPARTAN
               </span>{" "}
-              <span className="text-white">RACING</span>
+              <span className={scrolled ? "text-foreground" : "text-white"}>
+                RACING
+              </span>
             </span>
           </Link>
 
@@ -61,17 +67,21 @@ export function Navbar() {
                 <Link
                   href={link.href}
                   className={cn(
-                    "relative py-1 text-sm font-medium uppercase tracking-widest transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A843] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a]",
-                    isActive(link.href)
-                      ? "text-[#D4A843]"
-                      : "text-white/70 hover:text-white"
+                    "relative py-1 text-sm font-medium uppercase tracking-widest transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2",
+                    scrolled
+                      ? isActive(link.href)
+                        ? "text-gold"
+                        : "text-foreground/70 hover:text-foreground"
+                      : isActive(link.href)
+                        ? "text-gold"
+                        : "text-white/80 hover:text-white"
                   )}
                 >
                   {link.label}
                   <span
                     className={cn(
-                      "absolute -bottom-0.5 left-0 h-[1.5px] bg-[#D4A843] transition-all duration-300",
-                      isActive(link.href) ? "w-full" : "w-0 group-hover:w-full"
+                      "absolute -bottom-0.5 left-0 h-[1.5px] bg-gold transition-all duration-300",
+                      isActive(link.href) ? "w-full" : "w-0"
                     )}
                   />
                 </Link>
@@ -83,7 +93,14 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen((prev) => !prev)}
-            className="relative z-50 flex h-10 w-10 items-center justify-center text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#D4A843] focus-visible:ring-offset-2 focus-visible:ring-offset-[#0a0a0a] md:hidden"
+            className={cn(
+              "relative z-50 flex h-10 w-10 items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 md:hidden",
+              mobileOpen
+                ? "text-foreground"
+                : scrolled
+                  ? "text-foreground"
+                  : "text-white"
+            )}
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >
@@ -95,7 +112,7 @@ export function Navbar() {
       {/* Mobile Menu Overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-40 flex flex-col items-center justify-center bg-[#0a0a0a]/95 backdrop-blur-lg transition-transform duration-300 ease-in-out md:hidden",
+          "fixed inset-0 z-40 flex flex-col items-center justify-center bg-white/95 backdrop-blur-lg transition-transform duration-300 ease-in-out md:hidden",
           mobileOpen ? "translate-x-0" : "translate-x-full"
         )}
         aria-hidden={!mobileOpen}
@@ -116,8 +133,8 @@ export function Navbar() {
                 className={cn(
                   "font-display text-3xl uppercase tracking-widest transition-colors duration-200",
                   isActive(link.href)
-                    ? "text-[#D4A843]"
-                    : "text-white/70 hover:text-white"
+                    ? "text-gold"
+                    : "text-foreground/70 hover:text-foreground"
                 )}
               >
                 {link.label}

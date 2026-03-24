@@ -11,7 +11,7 @@ const stats = [
 
 export function StatsBar() {
   return (
-    <section className="border-y border-gold/20 bg-surface">
+    <section className="border-y border-border bg-background">
       <div className="mx-auto grid max-w-7xl grid-cols-2 gap-8 px-6 py-12 md:grid-cols-4 md:py-16">
         {stats.map((stat) => (
           <div key={stat.label} className="text-center">
@@ -20,7 +20,7 @@ export function StatsBar() {
               suffix={stat.suffix}
               className="font-display text-4xl text-gold md:text-5xl"
             />
-            <div className="mt-2 text-sm uppercase tracking-widest text-muted">
+            <div className="mt-2 text-sm uppercase tracking-widest text-foreground">
               {stat.label}
             </div>
           </div>

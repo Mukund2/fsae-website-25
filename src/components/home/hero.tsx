@@ -1,13 +1,9 @@
 "use client";
 
-import { Suspense, lazy, useEffect, useRef, useCallback } from "react";
-import { useMediaQuery } from "@/hooks/use-media-query";
+import { useEffect, useRef, useCallback } from "react";
 import { ChevronDown } from "lucide-react";
 
-const HeroScene = lazy(() => import("./hero-scene"));
-
 export function Hero() {
-  const isMobile = useMediaQuery("(max-width: 768px)");
   const lettersRef = useRef<(HTMLSpanElement | null)[]>([]);
   const subtitleRef = useRef<HTMLParagraphElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -60,21 +56,11 @@ export function Hero() {
 
   return (
     <section className="relative h-svh overflow-hidden bg-background">
-      {/* 3D Canvas background */}
-      <div className="absolute inset-0 z-0">
-        {!isMobile ? (
-          <Suspense
-            fallback={
-              <div className="h-full w-full bg-gradient-to-b from-background via-surface to-background" />
-            }
-          >
-            <HeroScene />
-          </Suspense>
-        ) : (
-          <div className="h-full w-full bg-gradient-to-b from-background via-surface to-background">
-            <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/5 blur-3xl" />
-          </div>
-        )}
+      {/* Background effects */}
+      <div className="absolute inset-0">
+        <div className="h-full w-full bg-gradient-to-b from-background via-surface to-background" />
+        <div className="absolute left-1/2 top-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/[0.07] blur-[120px]" />
+        <div className="absolute left-1/3 top-1/3 h-64 w-64 rounded-full bg-blue/[0.04] blur-[100px]" />
       </div>
 
       {/* Gradient overlay for text legibility */}

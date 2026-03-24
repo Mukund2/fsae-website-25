@@ -61,7 +61,7 @@ export function Hero() {
   return (
     <section className="relative h-svh overflow-hidden bg-background">
       {/* 3D Canvas background */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 z-0">
         {!isMobile ? (
           <Suspense
             fallback={

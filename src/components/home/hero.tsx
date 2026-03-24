@@ -20,7 +20,6 @@ export function Hero() {
   );
 
   useEffect(() => {
-    // Animate letters in with JS — bulletproof, no CSS dependency
     const letters = lettersRef.current.filter(Boolean) as HTMLSpanElement[];
 
     // Start hidden
@@ -30,17 +29,15 @@ export function Hero() {
     });
     if (subtitleRef.current) {
       subtitleRef.current.style.opacity = "0";
-      subtitleRef.current.style.transform = "translateY(20px)";
     }
     if (scrollRef.current) {
       scrollRef.current.style.opacity = "0";
     }
 
-    // Stagger reveal each letter
+    // Stagger reveal each letter — no CSS transition, just direct set
     letters.forEach((el, i) => {
-      const delay = i < 7 ? 300 + i * 40 : 600 + (i - 7) * 40; // SPARTAN then RACING
+      const delay = i < 7 ? 300 + i * 60 : 600 + (i - 7) * 60;
       setTimeout(() => {
-        el.style.transition = "opacity 0.5s ease-out, transform 0.5s ease-out";
         el.style.opacity = "1";
         el.style.transform = "translateY(0)";
       }, delay);
@@ -49,22 +46,17 @@ export function Hero() {
     // Subtitle
     setTimeout(() => {
       if (subtitleRef.current) {
-        subtitleRef.current.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
         subtitleRef.current.style.opacity = "1";
-        subtitleRef.current.style.transform = "translateY(0)";
       }
     }, 1200);
 
     // Scroll indicator
     setTimeout(() => {
       if (scrollRef.current) {
-        scrollRef.current.style.transition = "opacity 0.6s ease-out";
         scrollRef.current.style.opacity = "1";
       }
     }, 1800);
   }, []);
-
-  const allLetters = [..."SPARTAN", ..."RACING"];
 
   return (
     <section className="relative h-svh overflow-hidden bg-background">

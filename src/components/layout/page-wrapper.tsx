@@ -1,20 +1,28 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useEffect, useState } from "react";
 
 interface PageWrapperProps {
   children: React.ReactNode;
 }
 
 export function PageWrapper({ children }: PageWrapperProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    // Trigger animation on next frame after mount
+    requestAnimationFrame(() => setMounted(true));
+  }, []);
+
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
-      transition={{ duration: 0.5, ease: "easeInOut" }}
+    <div
+      style={{
+        opacity: mounted ? 1 : 0,
+        transform: mounted ? "translateY(0)" : "translateY(20px)",
+        transition: "opacity 0.5s ease-in-out, transform 0.5s ease-in-out",
+      }}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

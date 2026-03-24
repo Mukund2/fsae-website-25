@@ -1,49 +1,60 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import { Section } from "@/components/layout/section";
 
 export function CTA() {
+  const ref = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <Section className="relative overflow-hidden text-center">
-      {/* Background radial glow */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center" aria-hidden="true">
         <div className="h-[500px] w-[500px] rounded-full bg-gold/[0.06] blur-[120px]" />
       </div>
 
-      <div className="relative z-10">
-        <motion.h2
+      <div ref={ref} className="relative z-10">
+        <h2
           className="font-display text-5xl uppercase tracking-tight md:text-7xl lg:text-8xl"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1, margin: "100px" }}
-          transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
-        >
-          Join{" "}
-          <span className="text-gradient-gold">Spartan Racing</span>
-        </motion.h2>
-        <motion.p
-          className="mx-auto mt-6 max-w-xl text-lg text-muted md:text-xl"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1, margin: "100px" }}
-          transition={{
-            duration: 0.6,
-            ease: [0.25, 0.1, 0.25, 1],
-            delay: 0.15,
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(30px)",
+            transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
           }}
         >
-          Be part of something extraordinary. No experience required — just
-          passion and dedication.
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1, margin: "100px" }}
-          transition={{
-            duration: 0.6,
-            ease: [0.25, 0.1, 0.25, 1],
-            delay: 0.3,
+          Join <span className="text-gradient-gold">Spartan Racing</span>
+        </h2>
+        <p
+          className="mx-auto mt-6 max-w-xl text-lg text-muted md:text-xl"
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(20px)",
+            transition: "opacity 0.6s ease-out 0.15s, transform 0.6s ease-out 0.15s",
+          }}
+        >
+          Be part of something extraordinary. No experience required — just passion and dedication.
+        </p>
+        <div
+          style={{
+            opacity: visible ? 1 : 0,
+            transform: visible ? "translateY(0)" : "translateY(20px)",
+            transition: "opacity 0.6s ease-out 0.3s, transform 0.6s ease-out 0.3s",
           }}
         >
           <a
@@ -52,7 +63,7 @@ export function CTA() {
           >
             Get Involved
           </a>
-        </motion.div>
+        </div>
       </div>
     </Section>
   );

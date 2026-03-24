@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion, useInView } from "motion/react";
+import { useEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Section } from "@/components/layout/section";
@@ -10,9 +9,22 @@ import { RevealText } from "@/components/animation/reveal-text";
 
 gsap.registerPlugin(ScrollTrigger);
 
-function TimelineDot({ index }: { index: number }) {
+function TimelineDot() {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { margin: "-40% 0px -40% 0px" });
+  const [isInView, setIsInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { rootMargin: "-40% 0px -40% 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div ref={ref} className="absolute left-4 top-0 z-10 -translate-x-1/2 md:left-1/2">
@@ -35,8 +47,24 @@ function TimelineNode({
   index: number;
 }) {
   const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const [isInView, setIsInView] = useState(false);
   const isEven = index % 2 === 0;
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsInView(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "-10% 0px" }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div
@@ -46,21 +74,18 @@ function TimelineNode({
       }`}
     >
       {/* Dot */}
-      <TimelineDot index={index} />
+      <TimelineDot />
 
       {/* Content */}
-      <motion.div
+      <div
         className={`ml-12 md:ml-0 md:w-1/2 ${isEven ? "md:pr-16" : "md:pl-16"}`}
-        initial={{
-          opacity: 0,
-          x: isEven ? -40 : 40,
+        style={{
+          opacity: isInView ? 1 : 0,
+          transform: isInView
+            ? "translateX(0)"
+            : `translateX(${isEven ? "-40px" : "40px"})`,
+          transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
         }}
-        animate={
-          isInView
-            ? { opacity: 1, x: 0 }
-            : { opacity: 0, x: isEven ? -40 : 40 }
-        }
-        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
       >
         <RevealText
           as="span"
@@ -70,7 +95,7 @@ function TimelineNode({
         </RevealText>
         <h3 className="mt-1 font-display text-xl uppercase">{event.title}</h3>
         <p className="mt-2 text-sm leading-relaxed text-muted">{event.description}</p>
-      </motion.div>
+      </div>
     </div>
   );
 }

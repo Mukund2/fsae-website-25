@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef, type MouseEvent } from "react";
-import { motion, useMotionValue, useSpring } from "motion/react";
+import { useRef, useCallback, type MouseEvent } from "react";
 import { useMediaQuery } from "@/hooks/use-media-query";
 
 interface MagneticButtonProps {
@@ -20,28 +19,27 @@ export function MagneticButton({
     "(prefers-reduced-motion: reduce)"
   );
 
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
+  const handleMouseMove = useCallback(
+    (e: MouseEvent<HTMLDivElement>) => {
+      if (prefersReducedMotion || !ref.current) return;
 
-  const springConfig = { stiffness: 300, damping: 20, mass: 0.5 };
-  const springX = useSpring(x, springConfig);
-  const springY = useSpring(y, springConfig);
+      const rect = ref.current.getBoundingClientRect();
+      const centerX = rect.left + rect.width / 2;
+      const centerY = rect.top + rect.height / 2;
 
-  function handleMouseMove(e: MouseEvent<HTMLDivElement>) {
-    if (prefersReducedMotion || !ref.current) return;
+      const dx = (e.clientX - centerX) * strength;
+      const dy = (e.clientY - centerY) * strength;
 
-    const rect = ref.current.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
+      ref.current.style.transform = `translate(${dx}px, ${dy}px)`;
+    },
+    [prefersReducedMotion, strength]
+  );
 
-    x.set((e.clientX - centerX) * strength);
-    y.set((e.clientY - centerY) * strength);
-  }
-
-  function handleMouseLeave() {
-    x.set(0);
-    y.set(0);
-  }
+  const handleMouseLeave = useCallback(() => {
+    if (ref.current) {
+      ref.current.style.transform = "translate(0px, 0px)";
+    }
+  }, []);
 
   if (prefersReducedMotion) {
     return (
@@ -52,18 +50,18 @@ export function MagneticButton({
   }
 
   return (
-    <motion.div
+    <div
       ref={ref}
       className={className}
       style={{
         display: "inline-block",
-        x: springX,
-        y: springY,
+        transition: "transform 0.2s cubic-bezier(0.25, 0.1, 0.25, 1)",
+        willChange: "transform",
       }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
     >
       {children}
-    </motion.div>
+    </div>
   );
 }

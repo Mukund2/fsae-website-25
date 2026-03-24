@@ -1,8 +1,7 @@
 "use client";
 
-import { motion } from "motion/react";
+import { useEffect, useRef, useState, Children } from "react";
 import { useMediaQuery } from "@/hooks/use-media-query";
-import { Children } from "react";
 
 interface StaggerChildrenProps {
   children: React.ReactNode;
@@ -10,28 +9,6 @@ interface StaggerChildrenProps {
   staggerDelay?: number;
   delay?: number;
 }
-
-const containerVariants = (delay: number, staggerDelay: number) => ({
-  hidden: {},
-  visible: {
-    transition: {
-      delayChildren: delay,
-      staggerChildren: staggerDelay,
-    },
-  },
-});
-
-const childVariants = {
-  hidden: { opacity: 0, y: 24 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: [0.25, 0.1, 0.25, 1] as [number, number, number, number],
-    },
-  },
-};
 
 export function StaggerChildren({
   children,
@@ -42,22 +19,50 @@ export function StaggerChildren({
   const prefersReducedMotion = useMediaQuery(
     "(prefers-reduced-motion: reduce)"
   );
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    if (prefersReducedMotion) {
+      setVisible(true);
+      return;
+    }
+    const el = containerRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [prefersReducedMotion]);
 
   if (prefersReducedMotion) {
     return <div className={className}>{children}</div>;
   }
 
   return (
-    <motion.div
-      className={className}
-      variants={containerVariants(delay, staggerDelay)}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
-    >
-      {Children.map(children, (child) => (
-        <motion.div variants={childVariants}>{child}</motion.div>
-      ))}
-    </motion.div>
+    <div ref={containerRef} className={className}>
+      {Children.map(children, (child, i) => {
+        const totalDelay = delay + i * staggerDelay;
+        return (
+          <div
+            style={{
+              opacity: visible ? 1 : 0,
+              transform: visible ? "translateY(0)" : "translateY(24px)",
+              transition: `opacity 0.5s ease-out ${totalDelay}s, transform 0.5s ease-out ${totalDelay}s`,
+            }}
+          >
+            {child}
+          </div>
+        );
+      })}
+    </div>
   );
 }

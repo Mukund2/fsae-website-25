@@ -3,7 +3,6 @@
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion, AnimatePresence } from "motion/react";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
@@ -94,41 +93,39 @@ export function Navbar() {
       </nav>
 
       {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            initial={{ x: "100%" }}
-            animate={{ x: 0 }}
-            exit={{ x: "100%" }}
-            transition={{ type: "tween", duration: 0.3, ease: "easeInOut" }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-[#0a0a0a]/95 backdrop-blur-lg md:hidden"
-          >
-            <nav className="flex flex-col items-center gap-8">
-              {NAV_LINKS.map((link, i) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, x: 40 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.05 * i, duration: 0.3 }}
-                >
-                  <Link
-                    href={link.href}
-                    onClick={() => setMobileOpen(false)}
-                    className={cn(
-                      "font-display text-3xl uppercase tracking-widest transition-colors duration-200",
-                      isActive(link.href)
-                        ? "text-[#D4A843]"
-                        : "text-white/70 hover:text-white"
-                    )}
-                  >
-                    {link.label}
-                  </Link>
-                </motion.div>
-              ))}
-            </nav>
-          </motion.div>
+      <div
+        className={cn(
+          "fixed inset-0 z-40 flex flex-col items-center justify-center bg-[#0a0a0a]/95 backdrop-blur-lg transition-transform duration-300 ease-in-out md:hidden",
+          mobileOpen ? "translate-x-0" : "translate-x-full"
         )}
-      </AnimatePresence>
+        aria-hidden={!mobileOpen}
+      >
+        <nav className="flex flex-col items-center gap-8">
+          {NAV_LINKS.map((link, i) => (
+            <div
+              key={link.href}
+              style={{
+                opacity: mobileOpen ? 1 : 0,
+                transform: mobileOpen ? "translateX(0)" : "translateX(40px)",
+                transition: `opacity 0.3s ease-out ${mobileOpen ? 0.05 * i : 0}s, transform 0.3s ease-out ${mobileOpen ? 0.05 * i : 0}s`,
+              }}
+            >
+              <Link
+                href={link.href}
+                onClick={() => setMobileOpen(false)}
+                className={cn(
+                  "font-display text-3xl uppercase tracking-widest transition-colors duration-200",
+                  isActive(link.href)
+                    ? "text-[#D4A843]"
+                    : "text-white/70 hover:text-white"
+                )}
+              >
+                {link.label}
+              </Link>
+            </div>
+          ))}
+        </nav>
+      </div>
     </>
   );
 }

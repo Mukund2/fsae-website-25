@@ -1,43 +1,10 @@
 "use client";
 
-import { Suspense, lazy, useMemo } from "react";
-import { motion } from "motion/react";
+import { Suspense, lazy } from "react";
 import { useMediaQuery } from "@/hooks/use-media-query";
 import { ChevronDown } from "lucide-react";
 
 const HeroScene = lazy(() => import("./hero-scene"));
-
-function LetterReveal({
-  text,
-  className,
-  delay = 0,
-}: {
-  text: string;
-  className?: string;
-  delay?: number;
-}) {
-  const letters = useMemo(() => text.split(""), [text]);
-
-  return (
-    <span className={className} aria-label={text}>
-      {letters.map((letter, i) => (
-        <motion.span
-          key={i}
-          className="inline-block"
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{
-            duration: 0.5,
-            ease: [0.25, 0.1, 0.25, 1],
-            delay: delay + i * 0.04,
-          }}
-        >
-          {letter === " " ? "\u00A0" : letter}
-        </motion.span>
-      ))}
-    </span>
-  );
-}
 
 export function Hero() {
   const isMobile = useMediaQuery("(max-width: 768px)");
@@ -56,7 +23,6 @@ export function Hero() {
           </Suspense>
         ) : (
           <div className="h-full w-full bg-gradient-to-b from-background via-surface to-background">
-            {/* Decorative gold glow on mobile */}
             <div className="absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-gold/5 blur-3xl" />
           </div>
         )}
@@ -65,43 +31,52 @@ export function Hero() {
       {/* Gradient overlay for text legibility */}
       <div className="absolute inset-0 z-[1] bg-gradient-to-t from-background/80 via-transparent to-background/30" />
 
-      {/* Text overlay */}
+      {/* Text overlay — uses CSS keyframes instead of Motion to avoid AnimatePresence conflicts */}
       <div className="relative z-[2] flex h-full flex-col items-center justify-center">
         <div className="text-center">
           <h1 className="font-display text-[clamp(3rem,12vw,10rem)] uppercase leading-[0.9] tracking-tight">
-            <LetterReveal text="SPARTAN" className="text-gold" delay={0.3} />
+            <span aria-label="SPARTAN">
+              {"SPARTAN".split("").map((letter, i) => (
+                <span
+                  key={i}
+                  className="hero-letter inline-block text-gold"
+                  style={{ animationDelay: `${0.3 + i * 0.04}s` }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </span>
             <br />
-            <LetterReveal
-              text="RACING"
-              className="text-foreground"
-              delay={0.6}
-            />
+            <span aria-label="RACING">
+              {"RACING".split("").map((letter, i) => (
+                <span
+                  key={i}
+                  className="hero-letter inline-block text-foreground"
+                  style={{ animationDelay: `${0.6 + i * 0.04}s` }}
+                >
+                  {letter}
+                </span>
+              ))}
+            </span>
           </h1>
-          <motion.p
-            className="mt-4 text-lg text-muted md:text-xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 1.2 }}
+          <p
+            className="hero-fade-in mt-4 text-lg text-muted md:text-xl"
+            style={{ animationDelay: "1.2s" }}
           >
             San Jos&eacute; State University Formula SAE
-          </motion.p>
+          </p>
         </div>
       </div>
 
       {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 z-[2] -translate-x-1/2"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 0.6 }}
+      <div
+        className="hero-fade-in absolute bottom-8 left-1/2 z-[2] -translate-x-1/2"
+        style={{ animationDelay: "1.8s" }}
       >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-        >
+        <div className="animate-bounce">
           <ChevronDown className="h-8 w-8 text-muted/50" />
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
     </section>
   );
 }

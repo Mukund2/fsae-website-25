@@ -92,6 +92,39 @@ html.lenis, html.lenis body {
   to { opacity: 1; transform: translateY(0); }
 }
 
+/* Hero letter reveal animation */
+@keyframes heroLetterReveal {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes heroFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.hero-letter {
+  opacity: 0;
+  animation: heroLetterReveal 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+.hero-fade-in {
+  opacity: 0;
+  animation: heroFadeIn 0.6s ease-out forwards;
+}
+
 /* Skip navigation link */
 .skip-nav {
   position: absolute;

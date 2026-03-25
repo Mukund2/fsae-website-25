@@ -85,7 +85,7 @@ export function Hero() {
         {/* Left Column — 3D Car (square canvas for correct aspect) */}
         <div
           ref={carColRef}
-          className="pointer-events-none absolute left-0 top-1/2 z-0 -translate-y-1/2 md:left-[-5%]"
+          className="pointer-events-none absolute left-0 top-1/2 z-0 md:left-[-5%]"
           style={{ width: "min(55vw, 600px)", height: "min(55vw, 600px)" }}
         >
           {Scene && <Scene />}

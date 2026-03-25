@@ -1,144 +1,151 @@
 "use client";
 
-import { useEffect, useRef, useState, useCallback, type ComponentType } from "react";
-import { ChevronDown } from "lucide-react";
-
-interface HeroSceneProps {
-  containerRef: React.RefObject<HTMLDivElement | null>;
-}
+import { useEffect, useRef, useState, type ComponentType } from "react";
 
 export function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [scrollProgress, setScrollProgress] = useState(0);
-  const [Scene, setScene] = useState<ComponentType<HeroSceneProps> | null>(null);
+  const [Scene, setScene] = useState<ComponentType | null>(null);
 
-  const lettersRef = useRef<(HTMLSpanElement | null)[]>([]);
-  const subtitleRef = useRef<HTMLParagraphElement>(null);
+  // Refs for entrance animations
+  const labelRef = useRef<HTMLDivElement>(null);
+  const headlineRef = useRef<HTMLHeadingElement>(null);
+  const statsRef = useRef<HTMLDivElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const carColRef = useRef<HTMLDivElement>(null);
 
-  const setLetterRef = useCallback(
-    (i: number) => (el: HTMLSpanElement | null) => {
-      lettersRef.current[i] = el;
-    },
-    []
-  );
-
-  // Dynamically import the 3D scene only on the client
+  // Dynamic import of 3D scene
   useEffect(() => {
     import("./hero-scene").then((mod) => {
       setScene(() => mod.default);
     });
   }, []);
 
-  // Track scroll progress for text fade-in
+  // Entrance animations using direct DOM manipulation (no CSS transitions)
   useEffect(() => {
-    function handleScroll() {
-      const container = containerRef.current;
-      if (!container) return;
-      const rect = container.getBoundingClientRect();
-      const scrollable = container.offsetHeight - window.innerHeight;
-      if (scrollable <= 0) return;
-      const progress = Math.min(Math.max(-rect.top / scrollable, 0), 1);
-      setScrollProgress(progress);
-    }
+    const els = [
+      { ref: labelRef, delay: 300, from: "translateY(30px)" },
+      { ref: headlineRef, delay: 500, from: "translateY(40px)" },
+      { ref: statsRef, delay: 700, from: "translateY(20px)" },
+      { ref: badgeRef, delay: 900, from: "translateY(20px)" },
+    ];
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
-  // Stagger letter reveal on mount
-  useEffect(() => {
-    const letters = lettersRef.current.filter(Boolean) as HTMLSpanElement[];
-
-    letters.forEach((el) => {
-      el.style.opacity = "0";
-      el.style.transform = "translateY(40px)";
+    // Set initial state
+    els.forEach(({ ref }) => {
+      if (ref.current) {
+        ref.current.style.opacity = "0";
+        ref.current.style.transform = "translateY(30px)";
+      }
     });
-    if (subtitleRef.current) {
-      subtitleRef.current.style.opacity = "0";
+
+    if (carColRef.current) {
+      carColRef.current.style.opacity = "0";
+      carColRef.current.style.transform = "translate(-40px, -50%)";
     }
 
-    letters.forEach((el, i) => {
-      const delay = i < 7 ? 800 + i * 60 : 1100 + (i - 7) * 60;
+    // Animate car column in
+    setTimeout(() => {
+      if (!carColRef.current) return;
+      const el = carColRef.current;
+      const start = performance.now();
+      const duration = 800;
+      function animateCar(now: number) {
+        const t = Math.min((now - start) / duration, 1);
+        const ease = 1 - Math.pow(1 - t, 3); // ease-out cubic
+        el.style.opacity = String(t > 0.05 ? Math.min(ease * 1.5, 1) : 0);
+        el.style.transform = `translate(${-40 * (1 - ease)}px, -50%)`;
+        if (t < 1) requestAnimationFrame(animateCar);
+      }
+      requestAnimationFrame(animateCar);
+    }, 200);
+
+    // Stagger text elements in
+    els.forEach(({ ref, delay, from }) => {
       setTimeout(() => {
-        el.style.opacity = "1";
-        el.style.transform = "translateY(0)";
+        if (!ref.current) return;
+        const el = ref.current;
+        const start = performance.now();
+        const duration = 700;
+        // Parse initial Y offset
+        const match = from.match(/(-?\d+)/);
+        const fromY = match ? parseInt(match[1]) : 30;
+        function animateEl(now: number) {
+          const t = Math.min((now - start) / duration, 1);
+          const ease = 1 - Math.pow(1 - t, 3);
+          el.style.opacity = String(Math.min(ease * 1.3, 1));
+          el.style.transform = `translateY(${fromY * (1 - ease)}px)`;
+          if (t < 1) requestAnimationFrame(animateEl);
+        }
+        requestAnimationFrame(animateEl);
       }, delay);
     });
-
-    setTimeout(() => {
-      if (subtitleRef.current) {
-        subtitleRef.current.style.opacity = "1";
-      }
-    }, 1800);
   }, []);
 
-  // Text fades out as user scrolls into the rotation zone
-  const textOpacity = Math.max(0, 1 - scrollProgress * 3);
-  // Scroll indicator fades quickly
-  const scrollIndicatorOpacity = Math.max(0, 1 - scrollProgress * 5);
-
   return (
-    <div ref={containerRef} className="relative" style={{ height: "400vh" }}>
-      {/* Sticky viewport — stays fixed while user scrolls through the 400vh */}
-      <div className="sticky top-0 h-svh w-full overflow-hidden bg-[#0a0a0a]">
-        {/* 3D Canvas — fills the sticky container */}
-        <div className="absolute inset-0 z-0">
-          {Scene && <Scene containerRef={containerRef} />}
+    <section className="relative h-svh w-full overflow-hidden bg-[var(--background)]">
+      <div className="mx-auto flex h-full max-w-[1400px] items-center px-6 lg:px-12">
+        {/* Left Column — 3D Car (square canvas for correct aspect) */}
+        <div
+          ref={carColRef}
+          className="pointer-events-none absolute left-0 top-1/2 z-0 -translate-y-1/2 md:left-[-5%]"
+          style={{ width: "min(55vw, 600px)", height: "min(55vw, 600px)" }}
+        >
+          {Scene && <Scene />}
         </div>
 
-        {/* Text overlay — fades out as scroll progresses */}
-        <div
-          className="pointer-events-none relative z-10 flex h-full flex-col items-center justify-center"
-          style={{ opacity: textOpacity }}
-        >
-          <div className="text-center">
-            <h1 className="font-display text-[clamp(3rem,12vw,10rem)] uppercase leading-[0.9] tracking-tight">
-              <span aria-label="SPARTAN">
-                {"SPARTAN".split("").map((letter, i) => (
-                  <span
-                    key={`s${i}`}
-                    ref={setLetterRef(i)}
-                    className="inline-block text-[#D4A843]"
-                    style={{ textShadow: "0 2px 40px rgba(0,0,0,0.5)" }}
-                  >
-                    {letter}
-                  </span>
-                ))}
-              </span>
-              <br />
-              <span aria-label="RACING">
-                {"RACING".split("").map((letter, i) => (
-                  <span
-                    key={`r${i}`}
-                    ref={setLetterRef(7 + i)}
-                    className="inline-block text-white"
-                    style={{ textShadow: "0 2px 40px rgba(0,0,0,0.5)" }}
-                  >
-                    {letter}
-                  </span>
-                ))}
-              </span>
-            </h1>
-            <p
-              ref={subtitleRef}
-              className="mt-4 text-lg text-white/70 md:text-xl"
+        {/* Right Column — Typography */}
+        <div className="relative z-10 ml-auto flex w-full flex-col justify-center md:w-[55%] md:pl-8 lg:pl-16">
+          {/* Label */}
+          <div ref={labelRef} className="mb-6">
+            <span
+              className="font-body text-[14px] font-light uppercase tracking-[8px] text-[var(--muted)]"
             >
-              San Jos&eacute; State University Formula SAE
-            </p>
+              Spartan
+            </span>
+            <br />
+            <span
+              className="font-body text-[32px] font-extralight uppercase tracking-[2px] text-[var(--foreground)]"
+              style={{ lineHeight: 1.1 }}
+            >
+              Racing
+            </span>
           </div>
-        </div>
 
-        {/* Scroll indicator */}
-        <div
-          className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2"
-          style={{ opacity: scrollIndicatorOpacity }}
-        >
-          <div className="animate-bounce">
-            <ChevronDown className="h-8 w-8 text-white/50" />
+          {/* Big Headline */}
+          <h1
+            ref={headlineRef}
+            className="font-display text-[clamp(3rem,7vw,6.5rem)] uppercase leading-[0.95] tracking-tight text-[var(--foreground)]"
+          >
+            Built by
+            <br />
+            Students.
+            <br />
+            <span className="text-[var(--gold)]">Driven</span> to
+            <br />
+            Compete.
+          </h1>
+
+          {/* Stats line */}
+          <div
+            ref={statsRef}
+            className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2"
+          >
+            {["16 Cars Built", "100+ Members", "7 Subteams"].map((stat) => (
+              <span
+                key={stat}
+                className="font-body text-[12px] uppercase tracking-[4px] text-[var(--muted)]"
+              >
+                {stat}
+              </span>
+            ))}
+          </div>
+
+          {/* Est. badge */}
+          <div ref={badgeRef} className="mt-6">
+            <span className="inline-block bg-[var(--foreground)] px-4 py-2 font-display text-[14px] uppercase tracking-[3px] text-[var(--background)]">
+              Est. 1991
+            </span>
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

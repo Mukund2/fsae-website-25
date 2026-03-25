@@ -5,64 +5,48 @@ import * as THREE from "three";
 import { GLTFLoader } from "three/addons/loaders/GLTFLoader.js";
 import { DRACOLoader } from "three/addons/loaders/DRACOLoader.js";
 
-interface HeroSceneProps {
-  containerRef: React.RefObject<HTMLDivElement | null>;
-}
-
-export default function HeroScene({ containerRef }: HeroSceneProps) {
+export default function HeroScene() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const sceneRef = useRef<{
-    renderer: THREE.WebGLRenderer;
-    scene: THREE.Scene;
-    camera: THREE.PerspectiveCamera;
-    model: THREE.Group | null;
-    animId: number;
-  } | null>(null);
+  const rendererRef = useRef<THREE.WebGLRenderer | null>(null);
+  const dracoRef = useRef<DRACOLoader | null>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Renderer
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      antialias: true,
-    });
-    renderer.setClearColor(0x0a0a0a, 1);
+    let disposed = false;
+
+    // Persist renderer/draco across strict-mode remounts
+    if (!rendererRef.current) {
+      rendererRef.current = new THREE.WebGLRenderer({ canvas, antialias: true });
+    }
+    const renderer = rendererRef.current;
+    renderer.setClearColor(0xfafaf8, 1);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.toneMapping = THREE.ACESFilmicToneMapping;
-    renderer.toneMappingExposure = 1.2;
+    renderer.toneMappingExposure = 1.0;
 
-    // Scene
     const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    camera.position.set(0, 3, 3);
+    camera.lookAt(0, 0, 0);
 
-    // Camera
-    const camera = new THREE.PerspectiveCamera(40, 1, 0.1, 100);
+    // Lighting
+    scene.add(new THREE.AmbientLight(0xffffff, 0.5));
+    const keyLight = new THREE.DirectionalLight(0xffffff, 1.5);
+    keyLight.position.set(5, 10, 5);
+    scene.add(keyLight);
+    const fillLight = new THREE.DirectionalLight(0xffffff, 0.6);
+    fillLight.position.set(-5, 5, -3);
+    scene.add(fillLight);
+    scene.add(new THREE.HemisphereLight(0xffffff, 0xdddddd, 0.4));
 
-    // Lights
-    const ambient = new THREE.AmbientLight(0xffffff, 0.8);
-    scene.add(ambient);
-
-    const dirLight1 = new THREE.DirectionalLight(0xffffff, 2);
-    dirLight1.position.set(5, 8, 5);
-    scene.add(dirLight1);
-
-    const dirLight2 = new THREE.DirectionalLight(0xffffff, 0.6);
-    dirLight2.position.set(-3, 4, -5);
-    scene.add(dirLight2);
-
-    const hemi = new THREE.HemisphereLight(0xffffff, 0x444444, 0.5);
-    scene.add(hemi);
-
-    // Store refs
-    sceneRef.current = { renderer, scene, camera, model: null, animId: 0 };
-
-    // Resize handler
     function resize() {
       const parent = canvas!.parentElement;
       if (!parent) return;
       const w = parent.clientWidth;
       const h = parent.clientHeight;
+      if (w === 0 || h === 0) return;
       renderer.setSize(w, h);
       camera.aspect = w / h;
       camera.updateProjectionMatrix();
@@ -70,68 +54,73 @@ export default function HeroScene({ containerRef }: HeroSceneProps) {
     resize();
     window.addEventListener("resize", resize);
 
-    // Scroll tracking
-    let scrollProgress = 0;
-    function handleScroll() {
-      const scrollContainer = containerRef.current;
-      if (!scrollContainer) return;
-      const rect = scrollContainer.getBoundingClientRect();
-      const scrollable = scrollContainer.offsetHeight - window.innerHeight;
-      if (scrollable <= 0) return;
-      scrollProgress = Math.min(Math.max(-rect.top / scrollable, 0), 1);
+    if (!dracoRef.current) {
+      dracoRef.current = new DRACOLoader();
+      dracoRef.current.setDecoderPath("/draco/gltf/");
+      dracoRef.current.preload();
     }
-    window.addEventListener("scroll", handleScroll, { passive: true });
 
-    // Load model
-    const dracoLoader = new DRACOLoader();
-    dracoLoader.setDecoderPath("https://www.gstatic.com/draco/versioned/decoders/1.5.7/");
     const loader = new GLTFLoader();
-    loader.setDRACOLoader(dracoLoader);
-    loader.load("/models/sr17.glb", (gltf) => {
-      const model = gltf.scene;
+    loader.setDRACOLoader(dracoRef.current);
 
-      // Center at origin
-      const box = new THREE.Box3().setFromObject(model);
-      const center = box.getCenter(new THREE.Vector3());
-      const size = box.getSize(new THREE.Vector3());
-      model.position.sub(center);
-      // Lower the car slightly so it sits in the bottom half of the viewport
-      model.position.y -= size.y * 0.3;
+    let model: THREE.Group | null = null;
+    loader.load(
+      "/models/sr17.glb",
+      (gltf) => {
+        if (disposed) return;
+        model = gltf.scene;
 
-      scene.add(model);
-      if (sceneRef.current) sceneRef.current.model = model;
+        // Override all-white materials with dark metallic
+        const mat = new THREE.MeshStandardMaterial({
+          color: 0x1a1a1a,
+          metalness: 0.6,
+          roughness: 0.35,
+          side: THREE.DoubleSide,
+        });
+        model.traverse((child) => {
+          if ((child as THREE.Mesh).isMesh) {
+            (child as THREE.Mesh).material = mat;
+          }
+        });
 
-      // Position camera — 3/4 front view, slightly elevated
-      const maxDim = Math.max(size.x, size.z);
-      const dist = maxDim * 2.2;
-      camera.position.set(dist * 0.6, dist * 0.35, dist * 0.75);
-      camera.lookAt(0, -size.y * 0.15, 0);
+        const box = new THREE.Box3().setFromObject(model);
+        const center = box.getCenter(new THREE.Vector3());
+        const size = box.getSize(new THREE.Vector3());
+        model.position.sub(center);
+        scene.add(model);
 
-    });
-
-    // Animation loop
-    function animate() {
-      const id = requestAnimationFrame(animate);
-      if (sceneRef.current) sceneRef.current.animId = id;
-
-      // Rotate model with scroll
-      if (sceneRef.current?.model) {
-        sceneRef.current.model.rotation.y = scrollProgress * Math.PI * 2;
+        // Top-down elevated camera
+        const maxDim = Math.max(size.x, size.z);
+        const dist = maxDim * 1.8;
+        camera.position.set(-dist * 0.2, dist * 0.85, dist * 0.35);
+        camera.lookAt(0, 0, 0);
+        resize();
+      },
+      undefined,
+      (err) => {
+        if (!disposed) console.error("GLB load error:", err);
       }
+    );
 
+    // Idle rotation
+    const t0 = performance.now();
+    let animId = 0;
+    function animate() {
+      if (disposed) return;
+      animId = requestAnimationFrame(animate);
+      if (model) {
+        model.rotation.y = ((performance.now() - t0) / 1000) * ((Math.PI * 2) / 60);
+      }
       renderer.render(scene, camera);
     }
     animate();
 
     return () => {
+      disposed = true;
       window.removeEventListener("resize", resize);
-      window.removeEventListener("scroll", handleScroll);
-      if (sceneRef.current) {
-        cancelAnimationFrame(sceneRef.current.animId);
-      }
-      renderer.dispose();
+      cancelAnimationFrame(animId);
     };
-  }, [containerRef]);
+  }, []);
 
   return (
     <canvas

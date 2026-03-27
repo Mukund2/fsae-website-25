@@ -1,30 +1,38 @@
+import Image from "next/image";
+
 export function JoinUs() {
   return (
-    <section
-      id="join-us"
-      className="bg-surface px-6 py-16"
-    >
-      <div className="mx-auto flex max-w-5xl flex-col items-start justify-between gap-8 sm:flex-row sm:items-center">
-        <h2 className="font-display text-2xl uppercase tracking-wider text-foreground">
-          Ready to join?
-        </h2>
+    <section id="join-us" className="relative overflow-hidden">
+      <div className="relative flex min-h-[50vh] items-center justify-center px-6 py-24">
+        {/* Background image */}
+        <Image
+          src="/images/team/team-1.jpg"
+          alt="Spartan Racing team"
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-black/50" />
 
-        <div className="flex items-center gap-4">
+        {/* Content */}
+        <div className="relative z-10 text-center">
+          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/50">
+            Get Involved
+          </p>
+          <h2 className="mt-4 font-display text-[clamp(2rem,5vw,3.5rem)] uppercase tracking-wider text-white">
+            Build something extraordinary
+          </h2>
+          <p className="mx-auto mt-4 max-w-md font-body text-sm leading-relaxed text-white/60">
+            Engineers, designers, and builders working on real problems.
+            No experience required — just passion.
+          </p>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
             target="_blank"
             rel="noopener noreferrer"
-            className="border border-foreground/20 px-6 py-2 font-mono text-[13px] uppercase tracking-[0.15em] text-foreground"
+            className="mt-8 inline-block border border-white/50 bg-white px-8 py-3 font-mono text-[13px] uppercase tracking-[0.15em] text-black"
           >
-            Apply Now
-          </a>
-          <a
-            href="https://join.slack.com/t/sjsuspartanracing"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="border border-foreground/20 px-6 py-2 font-mono text-[13px] uppercase tracking-[0.15em] text-foreground"
-          >
-            Join our Slack
+            Join Us
           </a>
         </div>
       </div>

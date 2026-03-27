@@ -1,9 +1,8 @@
 "use client";
 
-import { Suspense, useEffect, useRef, useCallback } from "react";
+import { Suspense, useEffect, useRef } from "react";
 import { Canvas } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Center } from "@react-three/drei";
-import type { OrbitControls as OrbitControlsImpl } from "three-stdlib";
 import * as THREE from "three";
 
 function CarModel() {
@@ -23,7 +22,7 @@ function CarModel() {
         g = mat.color.g,
         b = mat.color.b;
 
-      // Keep orange/gold accent (r > 0.5, g around 0.3-0.5, b < 0.2)
+      // Keep orange/gold accent
       if (r > 0.5 && g > 0.2 && g < 0.6 && b < 0.2) {
         mat.roughness = Math.max(mat.roughness, 0.3);
         mat.metalness = Math.min(mat.metalness, 0.4);
@@ -39,7 +38,7 @@ function CarModel() {
         return;
       }
 
-      // Everything else (white/default) -> dark carbon fiber
+      // Everything else → dark carbon fiber
       mat.color.set(0x2a2a2a);
       mat.roughness = 0.5;
       mat.metalness = 0.15;
@@ -51,58 +50,6 @@ function CarModel() {
     <Center>
       <primitive object={scene} />
     </Center>
-  );
-}
-
-function SmartOrbitControls() {
-  const controlsRef = useRef<OrbitControlsImpl>(null);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  const handleStart = useCallback(() => {
-    // User started interacting — disable auto-rotate
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = null;
-    }
-    if (controlsRef.current) {
-      controlsRef.current.autoRotate = false;
-    }
-  }, []);
-
-  const handleEnd = useCallback(() => {
-    // User stopped interacting — re-enable auto-rotate after 3s
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
-    }
-    timeoutRef.current = setTimeout(() => {
-      if (controlsRef.current) {
-        controlsRef.current.autoRotate = true;
-      }
-    }, 3000);
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      if (timeoutRef.current) {
-        clearTimeout(timeoutRef.current);
-      }
-    };
-  }, []);
-
-  return (
-    <OrbitControls
-      ref={controlsRef}
-      autoRotate
-      autoRotateSpeed={1.5}
-      enableZoom={false}
-      enablePan={false}
-      enableDamping
-      dampingFactor={0.08}
-      minPolarAngle={Math.PI / 4}
-      maxPolarAngle={Math.PI / 2.2}
-      onStart={handleStart}
-      onEnd={handleEnd}
-    />
   );
 }
 
@@ -119,7 +66,16 @@ export default function HeroScene() {
       <Suspense fallback={null}>
         <CarModel />
       </Suspense>
-      <SmartOrbitControls />
+      <OrbitControls
+        autoRotate
+        autoRotateSpeed={1.5}
+        enableZoom={false}
+        enablePan={false}
+        enableDamping
+        dampingFactor={0.08}
+        minPolarAngle={Math.PI / 4}
+        maxPolarAngle={Math.PI / 2.2}
+      />
     </Canvas>
   );
 }

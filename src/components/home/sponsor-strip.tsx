@@ -69,8 +69,8 @@ function SponsorItem({ sponsor }: { sponsor: Sponsor }) {
       alt={sponsor.name}
       width={140}
       height={48}
-      className="h-7 w-auto object-contain opacity-25 hover:opacity-60 sm:h-9"
-      style={{ filter: "grayscale(100%)" }}
+      className="h-7 w-auto object-contain opacity-30 hover:opacity-70 sm:h-9"
+      style={{ filter: "grayscale(100%) brightness(0)" }}
     />
   ) : (
     <span className="whitespace-nowrap font-display text-base uppercase tracking-[0.15em] text-foreground/20 hover:text-foreground/60 sm:text-lg">

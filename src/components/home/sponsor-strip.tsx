@@ -1,73 +1,78 @@
 "use client";
 
+import Image from "next/image";
 import { Marquee } from "@/components/animation/marquee";
 
 interface Sponsor {
   name: string;
   url?: string;
+  logo?: string;
 }
 
 const SPONSORS: Sponsor[] = [
-  // Title
-  { name: "Cadence", url: "https://www.cadence.com" },
+  { name: "Cadence", url: "https://www.cadence.com", logo: "/images/sponsors/cadence.png" },
   { name: "Military Fasteners", url: "https://www.militaryfasteners.com" },
-  { name: "Altium", url: "https://www.altium.com" },
-  { name: "Siemens", url: "https://www.siemens.com" },
-  { name: "Ansys", url: "https://www.ansys.com" },
-  { name: "Toray", url: "https://www.toray.com" },
+  { name: "Altium", url: "https://www.altium.com", logo: "/images/sponsors/altium.png" },
+  { name: "Siemens", url: "https://www.siemens.com", logo: "/images/sponsors/siemens.png" },
+  { name: "Ansys", url: "https://www.ansys.com", logo: "/images/sponsors/ansys.png" },
+  { name: "Toray", url: "https://www.toray.com", logo: "/images/sponsors/toray.png" },
   { name: "Bergman" },
   { name: "Don Beal" },
-  { name: "Roku", url: "https://www.roku.com" },
-  // Platinum
-  { name: "Motec USA", url: "https://www.motec.com.au" },
-  { name: "Levy", url: "https://www.levyrestaurants.com" },
+  { name: "Roku", url: "https://www.roku.com", logo: "/images/sponsors/roku.png" },
+  { name: "Motec USA", url: "https://www.motec.com.au", logo: "/images/sponsors/motec.png" },
+  { name: "Levy", url: "https://www.levyrestaurants.com", logo: "/images/sponsors/levy.png" },
   { name: "BayView Plastics" },
   { name: "Phoenix Contact", url: "https://www.phoenixcontact.com" },
-  // Gold
-  { name: "Vi-grade", url: "https://www.vi-grade.com" },
-  { name: "Cisco", url: "https://www.cisco.com" },
+  { name: "Vi-grade", url: "https://www.vi-grade.com", logo: "/images/sponsors/vi-grade.png" },
+  { name: "Cisco", url: "https://www.cisco.com", logo: "/images/sponsors/cisco.png" },
   { name: "Rapid Harness", url: "https://www.rapidharness.com" },
-  { name: "SFR SCCA", url: "https://www.sfrscca.org" },
+  { name: "SFR SCCA", url: "https://www.sfrscca.org", logo: "/images/sponsors/sfr-scca.png" },
   { name: "Candy Store Foundation" },
-  { name: "Lucid Motors", url: "https://www.lucidmotors.com" },
+  { name: "Lucid Motors", url: "https://www.lucidmotors.com", logo: "/images/sponsors/lucid-motors.png" },
   { name: "Marin Design Works" },
-  // Silver
-  { name: "Mountz Torque", url: "https://www.mountztorque.com" },
-  { name: "Evonik", url: "https://www.evonik.com" },
-  { name: "Futek", url: "https://www.futek.com" },
+  { name: "Mountz Torque", url: "https://www.mountztorque.com", logo: "/images/sponsors/mountz-torque.png" },
+  { name: "Evonik", url: "https://www.evonik.com", logo: "/images/sponsors/evonik.png" },
+  { name: "Futek", url: "https://www.futek.com", logo: "/images/sponsors/futek.png" },
   { name: "About Energy", url: "https://www.aboutenergy.io" },
-  { name: "Rivian", url: "https://www.rivian.com" },
+  { name: "Rivian", url: "https://www.rivian.com", logo: "/images/sponsors/rivian.png" },
   { name: "Volkswagen Group", url: "https://www.volkswagenag.com" },
-  // Bronze
   { name: "Star One Credit Union", url: "https://www.starone.org" },
   { name: "Airtech", url: "https://www.airtechintl.com" },
   { name: "Sabalcore", url: "https://www.sabalcore.com" },
   { name: "LCL Machining" },
-  { name: "KLA", url: "https://www.kla.com" },
-  { name: "Amex", url: "https://www.americanexpress.com" },
-  // Partner
+  { name: "KLA", url: "https://www.kla.com", logo: "/images/sponsors/kla.png" },
+  { name: "Amex", url: "https://www.americanexpress.com", logo: "/images/sponsors/amex.png" },
   { name: "Rexco", url: "https://www.rfrexco.com" },
-  { name: "Chemtrend", url: "https://www.chemtrend.com" },
-  { name: "SMC", url: "https://www.smcusa.com" },
-  { name: "Dremel", url: "https://www.dremel.com" },
+  { name: "Chemtrend", url: "https://www.chemtrend.com", logo: "/images/sponsors/chemtrend.png" },
+  { name: "SMC", url: "https://www.smcusa.com", logo: "/images/sponsors/smc.png" },
+  { name: "Dremel", url: "https://www.dremel.com", logo: "/images/sponsors/dremel.png" },
   { name: "FibreGlast", url: "https://www.fibreglast.com" },
   { name: "XRP", url: "https://www.xrp.com" },
-  { name: "Matter Hackers", url: "https://www.matterhackers.com" },
+  { name: "Matter Hackers", url: "https://www.matterhackers.com", logo: "/images/sponsors/matter-hackers.png" },
   { name: "Bender", url: "https://www.benderinc.com" },
   { name: "VectorNav", url: "https://www.vectornav.com" },
   { name: "Glenrock Builders" },
-  { name: "Bojo Tools", url: "https://www.bojotools.com" },
+  { name: "Bojo Tools", url: "https://www.bojotools.com", logo: "/images/sponsors/bojo-tools.png" },
   { name: "Garner Heat Treat" },
   { name: "Bay Technology Mfg" },
   { name: "Curvilinear Components" },
-  { name: "Shining 3D", url: "https://www.shining3d.com" },
+  { name: "Shining 3D", url: "https://www.shining3d.com", logo: "/images/sponsors/shining-3d.png" },
   { name: "TE Connectivity", url: "https://www.te.com" },
-  { name: "Prismatic Powders", url: "https://www.prismaticpowders.com" },
+  { name: "Prismatic Powders", url: "https://www.prismaticpowders.com", logo: "/images/sponsors/prismatic-powders.png" },
   { name: "Valence Precision" },
 ];
 
 function SponsorItem({ sponsor }: { sponsor: Sponsor }) {
-  const inner = (
+  const inner = sponsor.logo ? (
+    <Image
+      src={sponsor.logo}
+      alt={sponsor.name}
+      width={100}
+      height={40}
+      className="h-6 w-auto object-contain grayscale opacity-40 sm:h-8"
+      style={{ filter: "grayscale(100%)" }}
+    />
+  ) : (
     <span className="whitespace-nowrap font-display text-sm uppercase tracking-wider text-foreground/20 sm:text-base">
       {sponsor.name}
     </span>
@@ -75,18 +80,13 @@ function SponsorItem({ sponsor }: { sponsor: Sponsor }) {
 
   if (sponsor.url) {
     return (
-      <a
-        href={sponsor.url}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="inline-block"
-      >
+      <a href={sponsor.url} target="_blank" rel="noopener noreferrer" className="flex items-center">
         {inner}
       </a>
     );
   }
 
-  return inner;
+  return <span className="flex items-center">{inner}</span>;
 }
 
 export function SponsorStrip() {
@@ -98,14 +98,11 @@ export function SponsorStrip() {
         </h2>
       </div>
 
-      {/* Marquee with fade edges */}
       <div className="relative mt-10">
-        {/* Left fade */}
         <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-surface to-transparent sm:w-40" />
-        {/* Right fade */}
         <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-surface to-transparent sm:w-40" />
 
-        <Marquee speed={120}>
+        <Marquee speed={150}>
           {SPONSORS.map((sponsor) => (
             <SponsorItem key={sponsor.name} sponsor={sponsor} />
           ))}

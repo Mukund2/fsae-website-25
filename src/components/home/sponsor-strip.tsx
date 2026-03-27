@@ -69,11 +69,11 @@ function SponsorItem({ sponsor }: { sponsor: Sponsor }) {
       alt={sponsor.name}
       width={140}
       height={48}
-      className="h-7 w-auto object-contain opacity-30 sm:h-9"
-      style={{ filter: "grayscale(100%) brightness(0.2)" }}
+      className="h-7 w-auto object-contain opacity-25 hover:opacity-60 sm:h-9"
+      style={{ filter: "grayscale(100%)" }}
     />
   ) : (
-    <span className="whitespace-nowrap font-display text-base uppercase tracking-[0.15em] text-foreground/25 sm:text-lg">
+    <span className="whitespace-nowrap font-display text-base uppercase tracking-[0.15em] text-foreground/20 hover:text-foreground/60 sm:text-lg">
       {sponsor.name}
     </span>
   );
@@ -102,7 +102,7 @@ export function SponsorStrip() {
         <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-surface to-transparent sm:w-52" />
         <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-surface to-transparent sm:w-52" />
 
-        <Marquee speed={180} gap="gap-16 sm:gap-20">
+        <Marquee speed={180} gap="gap-20 sm:gap-24">
           {SPONSORS.map((sponsor) => (
             <SponsorItem key={sponsor.name} sponsor={sponsor} />
           ))}

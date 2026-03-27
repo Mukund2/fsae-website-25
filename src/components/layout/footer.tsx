@@ -1,6 +1,5 @@
-import Link from "next/link";
 import { Camera } from "lucide-react";
-import { NAV_LINKS, SOCIAL_LINKS } from "@/lib/constants";
+import { SOCIAL_LINKS } from "@/lib/constants";
 
 const SUBTEAMS = [
   "Chassis",
@@ -81,8 +80,8 @@ const socialIcons = [
 export function Footer() {
   return (
     <footer className="relative border-t border-border bg-background">
-      <div className="mx-auto max-w-7xl px-6 py-20">
-        <div className="grid grid-cols-1 gap-16 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="mx-auto max-w-7xl px-6 py-12">
+        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
           {/* Brand Column */}
           <div className="space-y-5">
             <h3 className="font-display text-2xl tracking-wider">
@@ -101,31 +100,12 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted transition-all duration-200 hover:border-gold/40 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                  className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted hover:border-gold/40 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
                 >
                   <Icon size={18} />
                 </a>
               ))}
             </div>
-          </div>
-
-          {/* Navigation Column */}
-          <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted">
-              Navigation
-            </h4>
-            <ul className="space-y-3">
-              {NAV_LINKS.map((link) => (
-                <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-muted transition-colors duration-200 hover:text-gold"
-                  >
-                    {link.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
           </div>
 
           {/* Subteams Column */}
@@ -157,7 +137,7 @@ export function Footer() {
               </p>
               <a
                 href="mailto:sjsu.fsae@gmail.com"
-                className="inline-block text-sm text-muted transition-colors duration-200 hover:text-gold"
+                className="inline-block text-sm text-muted hover:text-gold"
               >
                 sjsu.fsae@gmail.com
               </a>

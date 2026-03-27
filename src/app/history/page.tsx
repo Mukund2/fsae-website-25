@@ -9,6 +9,30 @@ import { RevealText } from "@/components/animation/reveal-text";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/* Inject keyframe animations for timeline nodes (no CSS transitions) */
+if (typeof document !== "undefined") {
+  const id = "history-keyframes";
+  if (!document.getElementById(id)) {
+    const style = document.createElement("style");
+    style.id = id;
+    style.textContent = `
+      @keyframes slideInLeft {
+        from { opacity: 0; transform: translateX(-40px); }
+        to   { opacity: 1; transform: translateX(0); }
+      }
+      @keyframes slideInRight {
+        from { opacity: 0; transform: translateX(40px); }
+        to   { opacity: 1; transform: translateX(0); }
+      }
+      @keyframes dotPulse {
+        from { transform: scale(0.6); opacity: 0.5; }
+        to   { transform: scale(1); opacity: 1; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
 function TimelineDot() {
   const ref = useRef<HTMLDivElement>(null);
   const [isInView, setIsInView] = useState(false);
@@ -29,9 +53,9 @@ function TimelineDot() {
   return (
     <div ref={ref} className="absolute left-4 top-0 z-10 -translate-x-1/2 md:left-1/2">
       <div
-        className={`h-4 w-4 rounded-full border-2 transition-all duration-500 ${
+        className={`h-4 w-4 rounded-full border-2 ${
           isInView
-            ? "border-gold bg-gold shadow-[0_0_12px_rgba(212,168,67,0.6),_0_0_24px_rgba(212,168,67,0.3)]"
+            ? "border-gold bg-gold shadow-[0_0_12px_rgba(212,168,67,0.6),_0_0_24px_rgba(212,168,67,0.3)] animate-[dotPulse_0.5s_ease-out_forwards]"
             : "border-gold/50 bg-background"
         }`}
       />
@@ -79,13 +103,11 @@ function TimelineNode({
       {/* Content */}
       <div
         className={`ml-12 md:ml-0 md:w-1/2 ${isEven ? "md:pr-16" : "md:pl-16"}`}
-        style={{
-          opacity: isInView ? 1 : 0,
-          transform: isInView
-            ? "translateX(0)"
-            : `translateX(${isEven ? "-40px" : "40px"})`,
-          transition: "opacity 0.6s ease-out, transform 0.6s ease-out",
-        }}
+        style={
+          isInView
+            ? { animation: `${isEven ? "slideInLeft" : "slideInRight"} 0.6s ease-out forwards` }
+            : { opacity: 0 }
+        }
       >
         <RevealText
           as="span"

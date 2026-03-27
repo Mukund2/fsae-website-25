@@ -24,10 +24,13 @@ export default function HeroScene() {
     mv.setAttribute("auto-rotate", "");
     mv.setAttribute("auto-rotate-delay", "0");
     mv.setAttribute("rotation-per-second", "6deg");
-    mv.setAttribute("camera-orbit", "30deg 60deg auto");
+    mv.setAttribute("camera-orbit", "45deg 55deg 2m");
+    mv.setAttribute("min-camera-orbit", "auto auto auto");
+    mv.setAttribute("max-camera-orbit", "auto auto auto");
     mv.setAttribute("field-of-view", "40deg");
     mv.setAttribute("shadow-intensity", "0.4");
-    mv.setAttribute("exposure", "1.0");
+    mv.setAttribute("exposure", "1.5");
+    mv.setAttribute("shadow-softness", "1");
     mv.setAttribute("environment-image", "neutral");
     mv.setAttribute("interaction-prompt", "none");
     mv.style.width = "100%";
@@ -35,10 +38,21 @@ export default function HeroScene() {
     mv.style.display = "block";
     mv.style.setProperty("--poster-color", "transparent");
 
+    const style = document.createElement('style');
+    style.textContent = `
+      model-viewer {
+        --poster-color: transparent;
+      }
+      model-viewer::part(default-progress-bar) {
+        display: none;
+      }
+    `;
+    container.appendChild(style);
     container.appendChild(mv);
 
     return () => {
       container.removeChild(mv);
+      container.removeChild(style);
     };
   }, []);
 

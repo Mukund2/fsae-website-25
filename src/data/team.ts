@@ -53,45 +53,59 @@ export const team: TeamMember[] = [
 
 export const subteams: Subteam[] = [
   {
-    name: "Chassis",
+    name: "Aerodynamics",
+    abbreviation: "AERO",
     description:
-      "Designs and fabricates the vehicle frame, impact attenuator, and structural components. Responsible for torsional rigidity, crashworthiness, and driver ergonomics using steel spaceframe and carbon fiber composite construction.",
-    icon: "Box",
+      "We design parts on the car that create downforce and reduce drag, such as the front and rear wings, canards, and side pods.",
+    image: "/images/cars/car-1.jpg",
   },
   {
     name: "Powertrain",
+    abbreviation: "PWR",
     description:
-      "Develops the electric drivetrain including motor selection, accumulator design, battery management system, inverter integration, and cooling systems. Optimizes power delivery and energy efficiency for competition events.",
-    icon: "Zap",
+      "We design the systems that make the car move, such as the electric motor, accumulator (battery), and final drive.",
+    image: "/images/cars/car-detail.jpg",
+  },
+  {
+    name: "Chassis",
+    abbreviation: "CHAS",
+    description:
+      "We design and create a rigid skeleton for the car so that other subteams can mount parts onto it and so that the car can handle well.",
+    image: "/images/cars/car-workshop.jpg",
   },
   {
     name: "Suspension",
+    abbreviation: "SUSP",
     description:
-      "Engineers the suspension geometry, uprights, hubs, and steering system. Performs vehicle dynamics simulation, tire modeling, and on-track tuning to maximize grip and driver confidence through corners.",
-    icon: "Settings",
-  },
-  {
-    name: "Aerodynamics",
-    description:
-      "Designs and manufactures the aerodynamics package including front wing, rear wing, undertray, and sidepods. Uses CFD simulation and wind tunnel testing to generate downforce while minimizing drag.",
-    icon: "Wind",
+      "We design everything that controls the kinematics of the vehicle, such as the brakes, steering, and suspension.",
+    image: "/images/cars/car-2.jpg",
   },
   {
     name: "Electronics",
+    abbreviation: "ELEC",
     description:
-      "Develops the vehicle's electrical systems including wiring harness, dashboard, data acquisition, telemetry, and control algorithms. Manages the tractive system controller and driver interface systems.",
-    icon: "Cpu",
+      "We are responsible for designing and installing all analog and digital circuits in the car so that the electronics can work and output data properly.",
+    image: "/images/cars/car-3.jpg",
+  },
+  {
+    name: "Software",
+    abbreviation: "SOFT",
+    description:
+      "We program the electronic components so they behave properly in different states. We are also responsible for data collection and logging.",
+    image: "/images/events/comp-1.jpg",
   },
   {
     name: "Business",
+    abbreviation: "BIZ",
     description:
-      "Handles sponsorship acquisition, marketing, social media, graphic design, and the business presentation event. Manages the team's brand and external communications with sponsors and the university.",
-    icon: "Briefcase",
+      "We handle data analytics, marketing, public relations, finances, and logistics for the team.",
+    image: "/images/events/comp-2.jpg",
   },
   {
-    name: "Operations",
+    name: "Research & Development",
+    abbreviation: "R&D",
     description:
-      "Coordinates logistics, event planning, travel, shop management, inventory, and safety compliance. Ensures the team runs smoothly and meets all competition deadlines and requirements.",
-    icon: "ClipboardList",
+      "With a focus on multi-year projects and manufacturing an experimental in-hubs powertrain, R&D is focused on developing and optimizing the future of Spartan Racing.",
+    image: "/images/team/team-group.jpg",
   },
 ];

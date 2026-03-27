@@ -11,7 +11,7 @@ export const faqs: FAQ[] = [
   {
     question: "What is SJSU Spartan Racing?",
     answer:
-      "SJSU Spartan Racing is San José State University's Formula SAE team, founded in 1991. We are a student-run organization that designs, manufactures, and races an electric formula-style race car each year. Our team of over 100 members spans multiple engineering disciplines and business functions.",
+      "SJSU Spartan Racing is San José State University's Formula SAE team, founded in 1989. We are a student-run organization that designs, manufactures, and races an electric formula-style race car each year. Our team of over 100 members spans multiple engineering disciplines and business functions.",
     category: "General",
   },
   {
@@ -43,7 +43,19 @@ export const faqs: FAQ[] = [
   {
     question: "What is the time commitment?",
     answer:
-      "The typical time commitment is 8-12 hours per week, though this varies by role and the time of year. The weeks leading up to competition (typically March through May) require more intensive work. We understand that academics come first and work with members to balance their schedules.",
+      "Depends on what you want out of being in FSAE. Want a job after graduation? Expect 20+ hours a week. Want to just help out with the smaller stuff? Around a few hours a week. The weeks leading up to competition require more intensive work.",
+    category: "Membership",
+  },
+  {
+    question: "Can I drive the car?",
+    answer:
+      "Members who have contributed a significant amount can drive the car on \"Driver Day,\" which is typically held after our competition in June.",
+    category: "Membership",
+  },
+  {
+    question: "Where is the club room?",
+    answer:
+      "In the Engineering Building at San José State University. We have meetings in room 344 and workshops in rooms 123 and 130.",
     category: "Membership",
   },
   {

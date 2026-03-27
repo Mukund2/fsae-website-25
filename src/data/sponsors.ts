@@ -1,119 +1,293 @@
 import type { Sponsor } from "@/types";
 
 export const sponsors: Sponsor[] = [
-  // Platinum
+  // Title
   {
-    name: "SolidWorks",
-    tier: "platinum",
-    logo: "/images/sponsors/solidworks.svg",
-    url: "https://www.solidworks.com/",
-    description:
-      "Provides the team with industry-leading 3D CAD software used for all mechanical design and simulation work.",
+    name: "Cadence",
+    tier: "title",
+    url: "https://www.cadence.com",
+    logo: "/images/sponsors/cadence.png",
   },
+  {
+    name: "Siemens",
+    tier: "title",
+    url: "https://www.siemens.com",
+    logo: "/images/sponsors/siemens.png",
+  },
+
+  // Platinum
   {
     name: "Altium",
     tier: "platinum",
-    logo: "/images/sponsors/altium.svg",
-    url: "https://www.altium.com/",
-    description:
-      "Supplies advanced PCB design software enabling the team to develop custom electronics and control boards.",
+    url: "https://www.altium.com",
+    logo: "/images/sponsors/altium.png",
+  },
+  {
+    name: "Ansys",
+    tier: "platinum",
+    url: "https://www.ansys.com",
+    logo: "/images/sponsors/ansys.png",
+  },
+  {
+    name: "Volkswagen Group",
+    tier: "platinum",
+    url: "https://www.volkswagenag.com",
+    logo: "/images/sponsors/volkswagen.svg",
   },
 
   // Gold
   {
-    name: "Ansys",
+    name: "Rivian",
     tier: "gold",
-    logo: "/images/sponsors/ansys.svg",
-    url: "https://www.ansys.com/",
-    description:
-      "Provides finite element analysis and CFD simulation tools used for structural and aerodynamic optimization.",
+    url: "https://www.rivian.com",
+    logo: "/images/sponsors/rivian.png",
   },
   {
-    name: "MathWorks",
+    name: "Lucid Motors",
     tier: "gold",
-    logo: "/images/sponsors/mathworks.svg",
-    url: "https://www.mathworks.com/",
-    description:
-      "Supplies MATLAB and Simulink licenses for vehicle dynamics modeling, control system design, and data analysis.",
+    url: "https://www.lucidmotors.com",
+    logo: "/images/sponsors/lucid-motors.png",
   },
   {
-    name: "Boeing",
+    name: "Cisco",
     tier: "gold",
-    logo: "/images/sponsors/boeing.svg",
-    url: "https://www.boeing.com/",
-    description:
-      "Supports the team through funding and mentorship from practicing aerospace and manufacturing engineers.",
+    url: "https://www.cisco.com",
+    logo: "/images/sponsors/cisco.png",
+  },
+  {
+    name: "Roku",
+    tier: "gold",
+    url: "https://www.roku.com",
+    logo: "/images/sponsors/roku.png",
+  },
+  {
+    name: "KLA",
+    tier: "gold",
+    url: "https://www.kla.com",
+    logo: "/images/sponsors/kla.png",
   },
 
   // Silver
   {
-    name: "Henkel Loctite",
+    name: "Toray",
     tier: "silver",
-    logo: "/images/sponsors/henkel-loctite.svg",
-    url: "https://www.henkel-adhesives.com/",
-    description:
-      "Provides high-performance adhesives, sealants, and threadlockers essential for vehicle assembly.",
+    url: "https://www.toray.com",
+    logo: "/images/sponsors/toray.png",
   },
   {
-    name: "SKF Bearings",
+    name: "Motec USA",
     tier: "silver",
-    logo: "/images/sponsors/skf-bearings.svg",
-    url: "https://www.skf.com/",
-    description:
-      "Supplies precision bearings and seals for wheel assemblies, drivetrain, and steering components.",
+    url: "https://www.motec.com.au",
+    logo: "/images/sponsors/motec.png",
   },
   {
-    name: "Brembo",
+    name: "TE Connectivity",
     tier: "silver",
-    logo: "/images/sponsors/brembo.svg",
-    url: "https://www.brembo.com/",
-    description:
-      "Provides braking components and technical support for the vehicle's braking system design.",
+    url: "https://www.te.com",
+    logo: "/images/sponsors/te-connectivity.svg",
   },
   {
-    name: "Lincoln Electric",
+    name: "Phoenix Contact",
     tier: "silver",
-    logo: "/images/sponsors/lincoln-electric.svg",
-    url: "https://www.lincolnelectric.com/",
-    description:
-      "Supplies welding equipment and consumables used in chassis and component fabrication.",
+    url: "https://www.phoenixcontact.com",
+    logo: "/images/sponsors/phoenix-contact.png",
+  },
+  {
+    name: "Star One Credit Union",
+    tier: "silver",
+    url: "https://www.starone.org",
+    logo: "/images/sponsors/star-one.svg",
+  },
+  {
+    name: "Amex",
+    tier: "silver",
+    url: "https://www.americanexpress.com",
+    logo: "/images/sponsors/amex.png",
+  },
+  {
+    name: "Evonik",
+    tier: "silver",
+    url: "https://www.evonik.com",
+    logo: "/images/sponsors/evonik.png",
   },
 
   // Bronze
   {
-    name: "McMaster-Carr",
+    name: "Levy",
     tier: "bronze",
-    logo: "/images/sponsors/mcmaster-carr.svg",
-    url: "https://www.mcmaster.com/",
+    url: "https://www.levyrestaurants.com",
+    logo: "/images/sponsors/levy.png",
   },
   {
-    name: "Permatex",
+    name: "Vi-grade",
     tier: "bronze",
-    logo: "/images/sponsors/permatex.svg",
-    url: "https://www.permatex.com/",
+    url: "https://www.vi-grade.com",
+    logo: "/images/sponsors/vi-grade.png",
   },
   {
-    name: "Optimas OE Solutions",
+    name: "SMC",
     tier: "bronze",
-    logo: "/images/sponsors/optimas.svg",
-    url: "https://www.optimas.com/",
+    url: "https://www.smcusa.com",
+    logo: "/images/sponsors/smc.png",
   },
   {
-    name: "SJSU College of Engineering",
+    name: "Chemtrend",
     tier: "bronze",
-    logo: "/images/sponsors/sjsu-coe.svg",
-    url: "https://engineering.sjsu.edu/",
+    url: "https://www.chemtrend.com",
+    logo: "/images/sponsors/chemtrend.png",
   },
   {
-    name: "Xometry",
+    name: "VectorNav",
     tier: "bronze",
-    logo: "/images/sponsors/xometry.svg",
-    url: "https://www.xometry.com/",
+    url: "https://www.vectornav.com",
+    logo: "/images/sponsors/vectornav.svg",
   },
   {
-    name: "SendCutSend",
+    name: "Mountz Torque",
     tier: "bronze",
-    logo: "/images/sponsors/sendcutsend.svg",
-    url: "https://sendcutsend.com/",
+    url: "https://www.mountztorque.com",
+    logo: "/images/sponsors/mountz-torque.png",
+  },
+  {
+    name: "Futek",
+    tier: "bronze",
+    url: "https://www.futek.com",
+    logo: "/images/sponsors/futek.png",
+  },
+  {
+    name: "SFR SCCA",
+    tier: "bronze",
+    url: "https://www.sfrscca.org",
+    logo: "/images/sponsors/sfr-scca.png",
+  },
+  {
+    name: "Dremel",
+    tier: "bronze",
+    url: "https://www.dremel.com",
+    logo: "/images/sponsors/dremel.png",
+  },
+  {
+    name: "Shining 3D",
+    tier: "bronze",
+    url: "https://www.shining3d.com",
+    logo: "/images/sponsors/shining-3d.png",
+  },
+  {
+    name: "Prismatic Powders",
+    tier: "bronze",
+    url: "https://www.prismaticpowders.com",
+    logo: "/images/sponsors/prismatic-powders.png",
+  },
+  {
+    name: "Matter Hackers",
+    tier: "bronze",
+    url: "https://www.matterhackers.com",
+    logo: "/images/sponsors/matter-hackers.png",
+  },
+  {
+    name: "Bojo Tools",
+    tier: "bronze",
+    url: "https://www.bojotools.com",
+    logo: "/images/sponsors/bojo-tools.png",
+  },
+
+  // Partner
+  {
+    name: "Military Fasteners",
+    tier: "partner",
+    url: "https://www.militaryfasteners.com",
+    logo: "/images/sponsors/military-fasteners.png",
+  },
+  {
+    name: "Bergman",
+    tier: "partner",
+  },
+  {
+    name: "Don Beal",
+    tier: "partner",
+  },
+  {
+    name: "BayView Plastics",
+    tier: "partner",
+  },
+  {
+    name: "Rapid Harness",
+    tier: "partner",
+    url: "https://www.rapidharness.com",
+    logo: "/images/sponsors/rapid-harness.png",
+  },
+  {
+    name: "Candy Store Foundation",
+    tier: "partner",
+  },
+  {
+    name: "Marin Design Works",
+    tier: "partner",
+  },
+  {
+    name: "About Energy",
+    tier: "partner",
+    url: "https://www.aboutenergy.io",
+    logo: "/images/sponsors/about-energy.png",
+  },
+  {
+    name: "Airtech",
+    tier: "partner",
+    url: "https://www.airtechintl.com",
+    logo: "/images/sponsors/airtech.png",
+  },
+  {
+    name: "Sabalcore",
+    tier: "partner",
+    url: "https://www.sabalcore.com",
+    logo: "/images/sponsors/sabalcore.png",
+  },
+  {
+    name: "LCL Machining",
+    tier: "partner",
+  },
+  {
+    name: "Rexco",
+    tier: "partner",
+    url: "https://www.rfrexco.com",
+    logo: "/images/sponsors/rexco.png",
+  },
+  {
+    name: "FibreGlast",
+    tier: "partner",
+    url: "https://www.fibreglast.com",
+    logo: "/images/sponsors/fibreglast.png",
+  },
+  {
+    name: "XRP",
+    tier: "partner",
+    url: "https://www.xrp.com",
+    logo: "/images/sponsors/xrp.png",
+  },
+  {
+    name: "Bender",
+    tier: "partner",
+    url: "https://www.benderinc.com",
+    logo: "/images/sponsors/bender.png",
+  },
+  {
+    name: "Glenrock Builders",
+    tier: "partner",
+  },
+  {
+    name: "Garner Heat Treat",
+    tier: "partner",
+  },
+  {
+    name: "Bay Technology Mfg",
+    tier: "partner",
+  },
+  {
+    name: "Curvilinear Components",
+    tier: "partner",
+  },
+  {
+    name: "Valence Precision",
+    tier: "partner",
   },
 ];

@@ -7,6 +7,7 @@ interface MarqueeProps {
   className?: string;
   speed?: number;
   reverse?: boolean;
+  gap?: string;
 }
 
 export function Marquee({
@@ -14,6 +15,7 @@ export function Marquee({
   className,
   speed = 40,
   reverse = false,
+  gap = "${gap}",
 }: MarqueeProps) {
   return (
     <div
@@ -21,13 +23,13 @@ export function Marquee({
       style={{ ["--marquee-speed" as string]: `${speed}s` }}
     >
       <div
-        className="flex w-max gap-12"
+        className="flex w-max ${gap}"
         style={{
           animation: `marquee var(--marquee-speed) linear infinite${reverse ? " reverse" : ""}`,
         }}
       >
-        <div className="flex shrink-0 gap-12">{children}</div>
-        <div className="flex shrink-0 gap-12" aria-hidden="true">
+        <div className="flex shrink-0 ${gap}">{children}</div>
+        <div className="flex shrink-0 ${gap}" aria-hidden="true">
           {children}
         </div>
       </div>

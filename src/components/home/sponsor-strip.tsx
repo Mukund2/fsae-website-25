@@ -67,13 +67,13 @@ function SponsorItem({ sponsor }: { sponsor: Sponsor }) {
     <Image
       src={sponsor.logo}
       alt={sponsor.name}
-      width={100}
-      height={40}
-      className="h-6 w-auto object-contain grayscale opacity-40 sm:h-8"
-      style={{ filter: "grayscale(100%)" }}
+      width={140}
+      height={48}
+      className="h-7 w-auto object-contain opacity-30 sm:h-9"
+      style={{ filter: "grayscale(100%) brightness(0.2)" }}
     />
   ) : (
-    <span className="whitespace-nowrap font-display text-sm uppercase tracking-wider text-foreground/20 sm:text-base">
+    <span className="whitespace-nowrap font-display text-base uppercase tracking-[0.15em] text-foreground/25 sm:text-lg">
       {sponsor.name}
     </span>
   );
@@ -99,10 +99,10 @@ export function SponsorStrip() {
       </div>
 
       <div className="relative mt-10">
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-surface to-transparent sm:w-40" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-surface to-transparent sm:w-40" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-surface to-transparent sm:w-52" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-surface to-transparent sm:w-52" />
 
-        <Marquee speed={150}>
+        <Marquee speed={180} gap="gap-16 sm:gap-20">
           {SPONSORS.map((sponsor) => (
             <SponsorItem key={sponsor.name} sponsor={sponsor} />
           ))}

@@ -28,10 +28,11 @@ export default function HeroScene() {
     mv.setAttribute("min-camera-orbit", "auto auto auto");
     mv.setAttribute("max-camera-orbit", "auto auto auto");
     mv.setAttribute("field-of-view", "40deg");
-    mv.setAttribute("shadow-intensity", "0.4");
-    mv.setAttribute("exposure", "1.5");
+    mv.setAttribute("shadow-intensity", "1");
+    mv.setAttribute("exposure", "2.0");
     mv.setAttribute("shadow-softness", "1");
-    mv.setAttribute("environment-image", "neutral");
+    mv.setAttribute("environment-image", "legacy");
+    mv.setAttribute("skybox-image", "");
     mv.setAttribute("interaction-prompt", "none");
     mv.style.width = "100%";
     mv.style.height = "100%";

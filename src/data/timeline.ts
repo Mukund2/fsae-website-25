@@ -2,96 +2,59 @@ import type { TimelineEvent } from "@/types";
 
 export const timeline: TimelineEvent[] = [
   {
-    year: 2024,
-    title: "SR-16e — New Performance Benchmark",
+    year: "Present",
+    title: "Legacy",
     description:
-      "The SR-16e set new team records for acceleration and energy efficiency, featuring a custom torque-vectoring system, redesigned accumulator, and an advanced carbon fiber monocoque structure.",
-    image: "/images/timeline/2024-sr16e.jpg",
+      "Spartan Racing Electric continues on today, designing, building, testing, and competing in the International Formula SAE Competitions.",
+    image: "/images/hero/car-action.jpg",
   },
   {
-    year: 2023,
-    title: "Formula Hybrid + Electric Debut",
+    year: 2025,
+    title: "SR-16 / Flourish",
     description:
-      "The team competed at Formula Hybrid + Electric at New Hampshire Motor Speedway for the first time, earning a top-20 finish and gaining valuable experience in the electric competition landscape.",
-    image: "/images/timeline/2023-formula-hybrid.jpg",
+      "We competed in the Michigan FSAE competition with our improved car, SR-16. We placed 1st in Endurance, 5th in Autocross, and 2nd Overall. We also received the James Crook Unofficial Best Aero Vehicle award.",
+    image: "/images/cars/car-1.jpg",
+  },
+  {
+    year: 2024,
+    title: "SR-15 / Success",
+    description:
+      "With full focus on our electric race car, SR-15 competed in SoCal Shootout FSAE twice placing 1st EV each time. At Michigan FSAE: 1st Cummins Innovation Award, 2nd Cost Report, 3rd Endurance, 4th Design, 5th Overall.",
+    image: "/images/cars/car-2.jpg",
   },
   {
     year: 2022,
-    title: "Electric Transition",
+    title: "SR-13 / Memento Mori",
     description:
-      "SJSU Spartan Racing made the historic transition from internal combustion to electric power with the SR-14e, designing the entire high-voltage powertrain and accumulator from scratch.",
-    image: "/images/timeline/2022-electric.jpg",
+      "After over a decade of podium finishes, we retired our internal combustion platform with SR-13 as our last. Our Honda F4i and Triumph 675 platforms left us a wealth of knowledge, but we looked forward to a greener future.",
+    image: "/images/cars/car-3.jpg",
   },
   {
-    year: 2020,
-    title: "Pandemic Resilience",
+    year: 2021,
+    title: "SRE-5 / Breakthrough",
     description:
-      "Despite campus shutdowns and limited shop access due to COVID-19, the team maintained operations through virtual design reviews, remote collaboration, and innovative at-home prototyping.",
+      "During the pandemic, Spartan Racing Electric manufactured the first ever running SRE race car. SRE-5 competed at Michigan FSAE placing 1st in Endurance and 2nd Overall.",
+    image: "/images/cars/car-1.jpg",
   },
   {
-    year: 2019,
-    title: "Strongest Combustion Season",
+    year: 2015,
+    title: "SR-7 / Triumph",
     description:
-      "The SR-11 delivered the team's best competition results in the combustion era, with strong showings in both static and dynamic events at FSAE Lincoln.",
-    image: "/images/timeline/2019-sr11.jpg",
-  },
-  {
-    year: 2016,
-    title: "Program Rebuild",
-    description:
-      "After a brief period of reduced activity, a dedicated group of students revitalized the team, rebuilding the engineering pipeline, recruiting new members, and re-establishing competitive participation with the SR-8.",
-  },
-  {
-    year: 2013,
-    title: "Aero Package Introduction",
-    description:
-      "A full aerodynamics package — front wing, rear wing, and undertray — was designed and manufactured for the first time, producing measurable downforce validated through on-track testing.",
-    image: "/images/timeline/2013-aero.jpg",
-  },
-  {
-    year: 2010,
-    title: "Data Acquisition Revolution",
-    description:
-      "The team implemented its first comprehensive data acquisition system, enabling real-time telemetry and post-session analysis that transformed the approach to vehicle setup and driver development.",
+      "Placed 1st in the 2015 FSAE Competition. Also initiated Spartan Racing Electric, designing the first all-electric iteration in the organization's history.",
+    image: "/images/cars/car-2.jpg",
   },
   {
     year: 2008,
-    title: "Best Overall Finish",
+    title: "SR-1 / Rebirth",
     description:
-      "The team achieved its highest overall placement at FSAE West, demonstrating the cumulative effect of years of knowledge transfer and engineering discipline.",
-    image: "/images/timeline/2008-best-finish.jpg",
+      "A group of motivated engineering students revived Spartan Racing by creating SR-1. Won Rookie of the Year. Since then, the team has annually designed, manufactured, and competed.",
+    image: "/images/cars/car-3.jpg",
   },
   {
-    year: 2005,
-    title: "Carbon Fiber Adoption",
+    year: 1989,
+    title: "SR-0 / The First Spartan Racer",
     description:
-      "Spartan Racing began incorporating carbon fiber composite components into the vehicle, starting with body panels and later expanding to structural aero elements, reducing weight significantly.",
-  },
-  {
-    year: 2002,
-    title: "New Workshop Facility",
-    description:
-      "The team secured a dedicated workshop space in the SJSU Engineering Building, providing year-round access to fabrication equipment and a permanent home for vehicle development.",
-    image: "/images/timeline/2002-workshop.jpg",
-  },
-  {
-    year: 1997,
-    title: "First Top-50 Finish",
-    description:
-      "After several years of iterative design improvements, the team achieved its first top-50 overall finish at FSAE Michigan, marking a turning point in the program's competitiveness.",
-  },
-  {
-    year: 1993,
-    title: "First Competition Entry",
-    description:
-      "The team entered its first Formula SAE competition in Detroit, Michigan, successfully passing all technical inspections and completing dynamic events.",
-    image: "/images/timeline/1993-first-comp.jpg",
-  },
-  {
-    year: 1991,
-    title: "Team Founded",
-    description:
-      "SJSU Spartan Racing was established by a group of Mechanical Engineering students at San José State University, becoming one of the earliest FSAE teams on the West Coast.",
-    image: "/images/timeline/1991-founding.jpg",
+      "Spartan Racing was first founded at SJSU in 1989 with the introduction of SR-0, a senior project developed by students. After SR-0, Spartan Racing remained inactive until 2008.",
+    image: "/images/hero/car-action.jpg",
   },
 ];

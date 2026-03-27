@@ -23,15 +23,17 @@ export interface TeamMember {
 
 export interface Subteam {
   name: string;
+  abbreviation: string;
   description: string;
-  icon: string;
+  image: string;
+  icon?: string;
   members?: TeamMember[];
 }
 
 export interface Sponsor {
   name: string;
-  tier: "platinum" | "gold" | "silver" | "bronze";
-  logo: string;
+  tier: "title" | "platinum" | "gold" | "silver" | "bronze" | "partner";
+  logo?: string;
   url?: string;
   description?: string;
 }
@@ -52,7 +54,7 @@ export interface EventResult {
 }
 
 export interface TimelineEvent {
-  year: number;
+  year: number | string;
   title: string;
   description: string;
   image?: string;

@@ -90,7 +90,7 @@ export function CarShowcase() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full bg-[#0A0A0A]">
+    <section ref={sectionRef} className="w-full bg-background">
       <div className="mx-auto max-w-7xl px-6 py-28 lg:px-12 lg:py-32">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           {/* LEFT COLUMN — 3D Car Model */}
@@ -98,7 +98,14 @@ export function CarShowcase() {
             ref={leftRef}
             className="flex items-center justify-center"
           >
-            <div className="aspect-square w-full max-w-[500px]">
+            <div className="relative aspect-square w-full max-w-[500px]">
+              {/* Subtle radial glow behind the model */}
+              <div
+                className="absolute inset-0 rounded-full"
+                style={{
+                  background: "radial-gradient(circle, rgba(0,0,0,0.04) 0%, transparent 70%)",
+                }}
+              />
               {HeroScene && <HeroScene />}
             </div>
           </div>
@@ -107,21 +114,21 @@ export function CarShowcase() {
           <div className="flex flex-col justify-center">
             <span
               ref={labelRef}
-              className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/40"
+              className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted"
             >
               SR-17 / 2024 SEASON
             </span>
 
             <h2
               ref={headingRef}
-              className="mt-4 font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[1.1] tracking-tight text-white"
+              className="mt-4 font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[1.1] tracking-tight text-foreground"
             >
               The Fastest Formula SAE Car in the World
             </h2>
 
             <p
               ref={descRef}
-              className="mt-6 font-body text-base leading-relaxed text-white/60"
+              className="mt-6 font-body text-base leading-relaxed text-muted"
             >
               Engineered from the ground up by San José State University
               students. The SR-17 pushes the boundaries of what a student-built
@@ -137,12 +144,12 @@ export function CarShowcase() {
               {STATS.map((stat) => (
                 <div
                   key={stat.label}
-                  className="border border-white/10 p-6"
+                  className="border border-border p-6"
                 >
-                  <div className="font-mono text-[clamp(1.5rem,3vw,2.5rem)] font-light text-white">
+                  <div className="font-mono text-[clamp(1.5rem,3vw,2.5rem)] font-light text-foreground">
                     {stat.value}
                   </div>
-                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-white/40">
+                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
                     {stat.label}
                   </div>
                 </div>
@@ -154,9 +161,9 @@ export function CarShowcase() {
               {Array.from({ length: 3 }).map((_, i) => (
                 <div
                   key={i}
-                  className="flex aspect-[3/2] flex-1 items-center justify-center border border-white/10 bg-white/5"
+                  className="flex aspect-[3/2] flex-1 items-center justify-center border border-border bg-surface"
                 >
-                  <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-white/20">
+                  <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted/40">
                     SKETCH
                   </span>
                 </div>

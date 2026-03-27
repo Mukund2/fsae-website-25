@@ -1,4 +1,4 @@
-import { Bebas_Neue, DM_Sans } from "next/font/google";
+import { Bebas_Neue, DM_Sans, JetBrains_Mono } from "next/font/google";
 
 export const bebasNeue = Bebas_Neue({
   weight: "400",
@@ -10,5 +10,11 @@ export const bebasNeue = Bebas_Neue({
 export const dmSans = DM_Sans({
   subsets: ["latin"],
   variable: "--font-body",
+  display: "swap",
+});
+
+export const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
   display: "swap",
 });

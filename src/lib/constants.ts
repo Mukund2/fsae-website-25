@@ -16,7 +16,7 @@ export const NAV_LINKS = [
   { label: "History", href: "/history" },
   { label: "Racing", href: "/racing" },
   { label: "Sponsors", href: "/sponsors" },
-  { label: "Join", href: "/join" },
+  { label: "Join Us", href: "/#join-us" },
   { label: "FAQ", href: "/faq" },
 ] as const;
 

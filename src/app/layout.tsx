@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { bebasNeue, dmSans } from "@/lib/fonts";
+import { bebasNeue, dmSans, jetbrainsMono } from "@/lib/fonts";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { NoiseOverlay } from "@/components/shared/noise-overlay";
@@ -31,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${bebasNeue.variable} ${dmSans.variable} h-full antialiased`}
+      className={`${bebasNeue.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
       <body className="min-h-full bg-background text-foreground">
         <SmoothScrollProvider>

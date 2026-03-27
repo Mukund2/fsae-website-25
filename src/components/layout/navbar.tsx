@@ -7,8 +7,9 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
-  { label: "Subteams", href: "/about" },
   { label: "Cars", href: "/cars" },
+  { label: "Team", href: "/about" },
+  { label: "Racing", href: "/racing" },
   { label: "Sponsors", href: "/sponsors" },
   { label: "Join Us", href: "/#join-us" },
 ] as const;
@@ -44,15 +45,24 @@ export function Navbar() {
     <>
       <nav
         style={{
-          opacity: scrolled ? 1 : 0,
-          pointerEvents: scrolled ? "auto" : "none",
-          transform: scrolled ? "translateY(0)" : "translateY(-100%)",
+          opacity: pathname === "/" && !scrolled ? 0 : 1,
+          pointerEvents: pathname === "/" && !scrolled ? "none" : "auto",
+          transform: pathname === "/" && !scrolled ? "translateY(-100%)" : "translateY(0)",
         }}
         className="fixed top-0 left-0 z-50 w-full border-b border-border bg-white/80 backdrop-blur-md"
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           {/* Brand */}
-          <Link href="/" className="group flex items-center gap-1">
+          <Link
+            href="/"
+            onClick={(e) => {
+              if (pathname === "/") {
+                e.preventDefault();
+                window.scrollTo({ top: 0 });
+              }
+            }}
+            className="group flex items-center gap-1"
+          >
             <span className="font-display text-2xl tracking-wider md:text-[1.7rem]">
               <span className="text-gold group-hover:text-[#e4bc63]">
                 SPARTAN

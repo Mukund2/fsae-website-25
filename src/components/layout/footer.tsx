@@ -1,16 +1,6 @@
 import { Camera } from "lucide-react";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
-const SUBTEAMS = [
-  "Chassis",
-  "Powertrain",
-  "Suspension",
-  "Aerodynamics",
-  "Electronics",
-  "Business",
-  "Operations",
-] as const;
-
 function InstagramIcon({ size = 16 }: { size?: number }) {
   return (
     <svg
@@ -79,78 +69,41 @@ const socialIcons = [
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-border bg-background">
-      <div className="mx-auto max-w-7xl px-6 py-12">
-        <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {/* Brand Column */}
-          <div className="space-y-5">
+    <footer className="bg-background">
+      <div className="mx-auto max-w-7xl px-6 py-8">
+        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
+          {/* Brand */}
+          <div>
             <h3 className="font-display text-2xl tracking-wider">
               <span className="text-gold">SPARTAN</span>{" "}
               <span className="text-foreground">RACING</span>
             </h3>
-            <p className="text-sm leading-relaxed text-muted">
-              Engineering excellence since 1991. Designing, building, and racing
-              formula-style vehicles at San&nbsp;Jos&eacute; State University.
+            <p className="mt-1 text-sm text-muted">
+              Design. Build. Test. Compete.
             </p>
-            <div className="flex items-center gap-4">
-              {socialIcons.map(({ href, icon: Icon, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted hover:border-gold/40 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-                >
-                  <Icon size={18} />
-                </a>
-              ))}
-            </div>
           </div>
 
-          {/* Subteams Column */}
-          <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted">
-              Subteams
-            </h4>
-            <ul className="space-y-3">
-              {SUBTEAMS.map((team) => (
-                <li key={team}>
-                  <span className="text-sm text-muted">{team}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          {/* Contact Column */}
-          <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-widest text-muted">
-              Contact
-            </h4>
-            <address className="space-y-3 not-italic">
-              <p className="text-sm leading-relaxed text-muted">
-                San Jos&eacute; State University
-                <br />
-                One Washington Square
-                <br />
-                San Jos&eacute;, CA 95192
-              </p>
+          {/* Social Icons */}
+          <div className="flex items-center gap-4">
+            {socialIcons.map(({ href, icon: Icon, label }) => (
               <a
-                href="mailto:sjsu.fsae@gmail.com"
-                className="inline-block text-sm text-muted hover:text-gold"
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted hover:border-gold/40 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
-                sjsu.fsae@gmail.com
+                <Icon size={18} />
               </a>
-            </address>
+            ))}
           </div>
         </div>
-      </div>
 
-      {/* Bottom Bar */}
-      <div className="border-t border-border">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-6 text-xs text-muted sm:flex-row">
-          <span>&copy; 2024 SJSU Spartan Racing. All rights reserved.</span>
-          <span>Built with passion by Spartan Racing</span>
+        {/* Copyright */}
+        <div className="mt-6 border-t border-border pt-4 text-center text-xs text-muted">
+          &copy; {new Date().getFullYear()} SJSU Spartan Racing. All rights
+          reserved.
         </div>
       </div>
     </footer>

@@ -1,7 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState, type ComponentType } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
+import dynamic from "next/dynamic";
+
+const HeroScene = dynamic(() => import("./hero-scene"), { ssr: false });
 
 const FEATURES = [
   "Carbon fiber monocoque",
@@ -20,19 +23,12 @@ const PHOTOS = [
 
 export function CarShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
-  const leftRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLSpanElement>(null);
   const headingRef = useRef<HTMLHeadingElement>(null);
   const descRef = useRef<HTMLParagraphElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
   const sketchRef = useRef<HTMLDivElement>(null);
 
-  const [HeroScene, setHeroScene] = useState<ComponentType | null>(null);
-
-  // Dynamically import the 3D model component
-  useEffect(() => {
-    import("./hero-scene").then((mod) => setHeroScene(() => mod.default));
-  }, []);
 
   // Scroll-reveal animation via IntersectionObserver
   useEffect(() => {
@@ -40,11 +36,10 @@ export function CarShowcase() {
     if (!section) return;
 
     const targets = [
-      { el: leftRef.current, delay: 0 },
-      { el: labelRef.current, delay: 200 },
-      { el: headingRef.current, delay: 300 },
-      { el: descRef.current, delay: 400 },
-      { el: statsRef.current, delay: 500 },
+      { el: labelRef.current, delay: 0 },
+      { el: headingRef.current, delay: 150 },
+      { el: descRef.current, delay: 300 },
+      { el: statsRef.current, delay: 450 },
       { el: sketchRef.current, delay: 600 },
     ];
 
@@ -103,19 +98,9 @@ export function CarShowcase() {
       <div className="mx-auto max-w-7xl px-6 py-28 lg:px-12 lg:py-32">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
           {/* LEFT COLUMN — 3D Car Model */}
-          <div
-            ref={leftRef}
-            className="flex items-center justify-center"
-          >
-            <div className="relative aspect-square w-full max-w-[500px]">
-              {/* Subtle radial glow behind the model */}
-              <div
-                className="absolute inset-0 rounded-full"
-                style={{
-                  background: "radial-gradient(circle, rgba(0,0,0,0.04) 0%, transparent 70%)",
-                }}
-              />
-              {HeroScene && <HeroScene />}
+          <div className="flex items-center justify-center">
+            <div className="relative aspect-square w-full max-w-[500px] overflow-hidden">
+              <HeroScene />
             </div>
           </div>
 
@@ -174,6 +159,7 @@ export function CarShowcase() {
                     src={src}
                     alt="SR-16 race car"
                     fill
+                    loading="eager"
                     className="object-cover"
                     sizes="(max-width: 768px) 33vw, 200px"
                   />

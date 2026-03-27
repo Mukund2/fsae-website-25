@@ -1,85 +1,58 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { Suspense, useEffect, useRef } from "react";
+import { Canvas } from "@react-three/fiber";
+import { OrbitControls, useGLTF, Center } from "@react-three/drei";
+import * as THREE from "three";
 
-export default function HeroScene() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const mounted = useRef(false);
+function CarModel() {
+  const { scene } = useGLTF("/models/sr17.glb");
+  const fixed = useRef(false);
 
   useEffect(() => {
-    if (mounted.current) return;
-    mounted.current = true;
+    if (fixed.current) return;
+    fixed.current = true;
 
-    const container = containerRef.current;
-    if (!container) return;
+    scene.traverse((child) => {
+      if (!(child instanceof THREE.Mesh)) return;
 
-    // Import model-viewer FIRST, then create the element
-    // This avoids a race condition where the element is created
-    // before the custom element is registered
-    import("@google/model-viewer").then(() => {
-      if (!container.isConnected) return;
-
-      const mv = document.createElement("model-viewer");
-      mv.setAttribute("src", "/models/sr17.glb");
-      mv.setAttribute("auto-rotate", "");
-      mv.setAttribute("auto-rotate-delay", "0");
-      mv.setAttribute("rotation-per-second", "6deg");
-      mv.setAttribute("camera-orbit", "45deg 55deg 2m");
-      mv.setAttribute("field-of-view", "40deg");
-      mv.setAttribute("shadow-intensity", "1");
-      mv.setAttribute("exposure", "1.8");
-      mv.setAttribute("shadow-softness", "1");
-      mv.setAttribute("environment-image", "legacy");
-      mv.setAttribute("interaction-prompt", "none");
-      mv.setAttribute("tone-mapping", "commerce");
-      mv.style.width = "100%";
-      mv.style.height = "100%";
-      mv.style.display = "block";
-      mv.style.setProperty("--poster-color", "transparent");
-
-      // Fix the invisible model: override mirror materials at runtime
-      // The GLB has roughness=0 (perfect mirror) + no base color (white)
-      // which makes it invisible on light backgrounds
-      mv.addEventListener("load", () => {
-        try {
-          const model = (mv as any).model;
-          if (!model?.materials) return;
-
-          for (const mat of model.materials) {
-            const pbr = mat.pbrMetallicRoughness;
-            if (!pbr) continue;
-
-            const [r, g, b] = pbr.baseColorFactor;
-
-            // White/unset materials → dark carbon fiber gray
-            if (r > 0.9 && g > 0.9 && b > 0.9) {
-              pbr.setBaseColorFactor([0.06, 0.06, 0.06, 1]);
-            }
-
-            // Fix mirror surfaces — add roughness
-            if (pbr.roughnessFactor < 0.1) {
-              pbr.setRoughnessFactor(0.35);
-            }
-          }
-        } catch {
-          // model API may not be available in all versions
-        }
+      // Dark carbon fiber look — visible on white background
+      child.material = new THREE.MeshStandardMaterial({
+        color: 0x2a2a2a,
+        roughness: 0.5,
+        metalness: 0.15,
       });
-
-      const style = document.createElement("style");
-      style.textContent = `
-        model-viewer { --poster-color: transparent; }
-        model-viewer::part(default-progress-bar) { display: none; }
-      `;
-      container.appendChild(style);
-      container.appendChild(mv);
     });
-  }, []);
+  }, [scene]);
 
   return (
-    <div
-      ref={containerRef}
-      style={{ width: "100%", height: "100%", background: "transparent" }}
-    />
+    <Center>
+      <primitive object={scene} />
+    </Center>
+  );
+}
+
+export default function HeroScene() {
+  return (
+    <Canvas
+      camera={{ position: [2.5, 1.5, 3], fov: 45 }}
+      gl={{ alpha: true }}
+      style={{ background: "transparent" }}
+    >
+      <ambientLight intensity={0.4} />
+      <directionalLight position={[5, 5, 5]} intensity={1.2} />
+      <directionalLight position={[-3, 2, -2]} intensity={0.3} />
+      <Suspense fallback={null}>
+        <CarModel />
+      </Suspense>
+      <OrbitControls
+        autoRotate
+        autoRotateSpeed={1.5}
+        enableZoom={false}
+        enablePan={false}
+        minPolarAngle={Math.PI / 4}
+        maxPolarAngle={Math.PI / 2.2}
+      />
+    </Canvas>
   );
 }

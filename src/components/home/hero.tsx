@@ -37,26 +37,6 @@ export function Hero() {
         </p>
       </div>
 
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
-        <div
-          className="flex flex-col items-center gap-2"
-          style={{
-            opacity: 0,
-            animation: "heroFadeIn 0.8s ease-out 2.8s forwards",
-          }}
-        >
-          <span className="font-mono text-[9px] uppercase tracking-[0.3em] text-white/30">
-            Scroll
-          </span>
-          <div
-            className="h-8 w-px bg-white/30"
-            style={{
-              animation: "heroScrollLine 1.8s ease-in-out infinite",
-            }}
-          />
-        </div>
-      </div>
     </section>
   );
 }

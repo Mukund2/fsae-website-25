@@ -1,12 +1,13 @@
 export interface Car {
   slug: string;
   name: string;
-  year: number;
-  type: "electric" | "combustion";
-  image: string;
-  description: string;
-  specs: CarSpec[];
-  gallery?: string[];
+  years: string;
+  image?: string;
+  motor?: string;
+  power?: string;
+  torque?: string;
+  battery?: string;
+  description?: string;
 }
 
 export interface CarSpec {

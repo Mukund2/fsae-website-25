@@ -1,12 +1,21 @@
 "use client";
 
 import { useEffect, useRef, useState, type ComponentType } from "react";
+import Image from "next/image";
 
-const STATS = [
-  { value: "3.2s", label: "0-60 MPH" },
-  { value: "375 lb", label: "CURB WEIGHT" },
-  { value: "80 hp", label: "PEAK POWER" },
-  { value: "85 mph", label: "TOP SPEED" },
+const FEATURES = [
+  "Carbon fiber monocoque",
+  "Custom aero package",
+  "Student-designed ECU",
+  "CNC-machined uprights",
+  "In-house wiring harness",
+  "3D-printed intake manifold",
+] as const;
+
+const PHOTOS = [
+  "/images/sr16/car-action-1.jpg",
+  "/images/sr16/car-action-2.jpg",
+  "/images/sr16/car-action-3.jpg",
 ] as const;
 
 export function CarShowcase() {
@@ -116,56 +125,58 @@ export function CarShowcase() {
               ref={labelRef}
               className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted"
             >
-              SR-17 / 2024 SEASON
+              SR-16 / CURRENT BUILD
             </span>
 
             <h2
               ref={headingRef}
               className="mt-4 font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[1.1] tracking-tight text-foreground"
             >
-              The Fastest Formula SAE Car in the World
+              Built to Win
             </h2>
 
             <p
               ref={descRef}
               className="mt-6 font-body text-base leading-relaxed text-muted"
             >
-              Engineered from the ground up by San José State University
-              students. The SR-17 pushes the boundaries of what a student-built
-              race car can achieve — lighter, faster, and more refined than
-              ever.
+              Every component engineered with purpose. From the carbon fiber
+              monocoque to the custom-machined uprights, our cars represent
+              thousands of hours of student-led design, analysis, and
+              fabrication.
             </p>
 
-            {/* STATS GRID */}
+            {/* FEATURE LIST */}
             <div
               ref={statsRef}
-              className="mt-10 grid grid-cols-2 gap-6"
+              className="mt-10 grid grid-cols-2 gap-x-8 gap-y-3"
             >
-              {STATS.map((stat) => (
+              {FEATURES.map((feature) => (
                 <div
-                  key={stat.label}
-                  className="border border-border p-6"
+                  key={feature}
+                  className="flex items-center gap-3"
                 >
-                  <div className="font-mono text-[clamp(1.5rem,3vw,2.5rem)] font-light text-foreground">
-                    {stat.value}
-                  </div>
-                  <div className="mt-2 font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
-                    {stat.label}
-                  </div>
+                  <span className="block h-1 w-1 rounded-full bg-muted" />
+                  <span className="font-mono text-[12px] uppercase tracking-[0.15em] text-muted">
+                    {feature}
+                  </span>
                 </div>
               ))}
             </div>
 
-            {/* SKETCH PLACEHOLDERS */}
+            {/* SR16 PHOTOS */}
             <div ref={sketchRef} className="mt-10 flex gap-4">
-              {Array.from({ length: 3 }).map((_, i) => (
+              {PHOTOS.map((src) => (
                 <div
-                  key={i}
-                  className="flex aspect-[3/2] flex-1 items-center justify-center border border-border bg-surface"
+                  key={src}
+                  className="relative aspect-[3/2] flex-1 overflow-hidden border border-border"
                 >
-                  <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted/40">
-                    SKETCH
-                  </span>
+                  <Image
+                    src={src}
+                    alt="SR-16 race car"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 33vw, 200px"
+                  />
                 </div>
               ))}
             </div>

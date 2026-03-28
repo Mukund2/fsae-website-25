@@ -13,10 +13,13 @@ export const COLORS = {
 export const NAV_LINKS = [
   { label: "About", href: "/about" },
   { label: "Cars", href: "/cars" },
+  { label: "Leads", href: "/team" },
   { label: "History", href: "/history" },
   { label: "Racing", href: "/racing" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Sponsors", href: "/sponsors" },
-  { label: "Join Us", href: "/#join-us" },
+  { label: "Support", href: "/support" },
+  { label: "Contact", href: "/contact" },
   { label: "FAQ", href: "/faq" },
 ] as const;
 

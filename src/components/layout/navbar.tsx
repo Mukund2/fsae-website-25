@@ -9,9 +9,12 @@ import { cn } from "@/lib/utils";
 const NAV_ITEMS = [
   { label: "Cars", href: "/cars" },
   { label: "Team", href: "/about" },
+  { label: "Leads", href: "/team" },
   { label: "Racing", href: "/racing" },
+  { label: "Gallery", href: "/gallery" },
   { label: "Sponsors", href: "/sponsors" },
-  { label: "Join Us", href: "/#join-us" },
+  { label: "Support", href: "/support" },
+  { label: "Contact", href: "/contact" },
 ] as const;
 
 export function Navbar() {

@@ -225,26 +225,25 @@ export default function CarsPage() {
             className="mt-3 font-display text-[clamp(3rem,7vw,6rem)] uppercase leading-[0.95] text-white"
             style={{ opacity: 0, animation: "heroFadeIn 0.8s ease-out 0.3s forwards" }}
           >
-            The Garage
+            Our History
           </h1>
           <p
             className="mt-4 max-w-lg font-body text-lg text-white/60"
             style={{ opacity: 0, animation: "heroFadeIn 0.8s ease-out 0.6s forwards" }}
           >
-            21 cars. Three decades of engineering. From a senior project to
-            championship-winning electric racecars.
+            Every car we&apos;ve ever built — from SR-0 to SR-16.
           </p>
         </div>
       </section>
 
-      <section className="relative bg-background py-20 overflow-hidden">
+      <section className="relative bg-background py-12 overflow-hidden">
         <RacetrackCar />
         <RacetrackSurface />
 
         <div className="mx-auto max-w-5xl px-6">
           <CheckeredLine label="start" />
 
-          <div className="mt-12 flex flex-col gap-8 md:gap-4">
+          <div className="mt-12 flex flex-col gap-4 md:gap-0">
             {cars.map((car, i) => (
               <TimelineEntry key={car.slug} car={car} isLeft={i % 2 === 0} />
             ))}

@@ -11,7 +11,7 @@ const NAV_ITEMS = [
   { label: "Team", href: "/about" },
   { label: "Leads", href: "/team" },
   { label: "Racing", href: "/racing" },
-  { label: "Gallery", href: "/gallery" },
+
   { label: "Sponsors", href: "/sponsors" },
   { label: "Support", href: "/support" },
   { label: "Contact", href: "/contact" },

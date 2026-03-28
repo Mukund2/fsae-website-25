@@ -49,7 +49,7 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
 
         <div className="relative mx-auto w-full max-w-7xl px-6">
-          <span className="inline-block rounded-full bg-gold/10 px-4 py-1.5 text-sm uppercase tracking-widest text-gold">
+          <span className="inline-block bg-gold/10 px-4 py-1.5 text-sm uppercase tracking-widest text-gold">
             {car.years}
           </span>
           <RevealText
@@ -64,7 +64,7 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
       {/* Car image if available */}
       {car.image && (
         <Section>
-          <div className="relative aspect-video w-full overflow-hidden rounded-lg bg-surface">
+          <div className="relative aspect-video w-full overflow-hidden bg-surface">
             <Image
               src={car.image}
               alt={car.name}
@@ -90,7 +90,7 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
             {specs.map((spec) => (
               <div
                 key={spec.label}
-                className="rounded-lg border border-surface bg-surface p-5"
+                className="border border-surface bg-surface p-5"
               >
                 <span className="text-xs uppercase tracking-widest text-muted/70">
                   {spec.label}

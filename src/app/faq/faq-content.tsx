@@ -28,7 +28,7 @@ function FAQItem({
 
   return (
     <div
-      className={`rounded-lg border bg-surface transition-colors duration-300 ${
+      className={`border bg-surface ${
         isOpen ? "border-gold/40" : "border-border"
       }`}
     >

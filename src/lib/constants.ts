@@ -16,7 +16,7 @@ export const NAV_LINKS = [
   { label: "Leads", href: "/team" },
   { label: "History", href: "/history" },
   { label: "Racing", href: "/racing" },
-  { label: "Gallery", href: "/gallery" },
+
   { label: "Sponsors", href: "/sponsors" },
   { label: "Support", href: "/support" },
   { label: "Contact", href: "/contact" },

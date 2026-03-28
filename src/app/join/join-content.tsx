@@ -124,9 +124,9 @@ export function JoinContent() {
             return (
               <div
                 key={item.title}
-                className="group rounded-lg border border-border bg-surface p-8 transition-all duration-300 hover:border-gold/30 hover:shadow-lg hover:shadow-gold/5"
+                className="group border border-border bg-surface p-8 hover:border-gold/30 hover:shadow-lg hover:shadow-gold/5"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-lg bg-gold/10 transition-colors duration-300 group-hover:bg-gold/20">
+                <div className="mb-4 flex h-12 w-12 items-center justify-center bg-gold/10 group-hover:bg-gold/20">
                   <Icon className="h-6 w-6 text-gold" />
                 </div>
                 <h3 className="font-display text-xl uppercase">{item.title}</h3>

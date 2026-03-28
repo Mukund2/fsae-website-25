@@ -85,6 +85,14 @@ export function Footer() {
 
           {/* Social Icons */}
           <div className="flex items-center gap-4">
+            <a
+              href="https://www.flickr.com/photos/89473850@N02/albums/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mr-2 font-mono text-xs uppercase tracking-widest text-muted hover:text-gold"
+            >
+              View our gallery on Flickr
+            </a>
             {socialIcons.map(({ href, icon: Icon, label }) => (
               <a
                 key={label}

@@ -1,36 +1,170 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { cars } from "@/data/cars";
 
+// The SVG path that defines the curving racetrack
+// Sways left/right with varying amplitude for organic feel
+const TRACK_PATH = `
+  M 100 0
+  C 100 40, 145 80, 145 120
+  C 145 160, 55 200, 55 240
+  C 55 280, 150 320, 150 360
+  C 150 400, 45 440, 45 480
+  C 45 520, 155 560, 155 600
+  C 155 640, 50 680, 50 720
+  C 50 760, 148 800, 148 840
+  C 148 880, 52 920, 52 960
+  C 52 1000, 145 1040, 145 1080
+  C 145 1120, 55 1160, 55 1200
+  C 55 1240, 150 1280, 150 1320
+  C 150 1360, 48 1400, 48 1440
+  C 48 1480, 152 1520, 152 1560
+  C 152 1600, 50 1640, 50 1680
+  C 50 1720, 148 1760, 148 1800
+  C 148 1840, 55 1880, 55 1920
+  C 55 1960, 100 1980, 100 2000
+`;
+
+function RacetrackSurface() {
+  return (
+    <svg
+      className="absolute left-1/2 top-0 hidden h-full -translate-x-1/2 md:block"
+      width="200"
+      preserveAspectRatio="none"
+      viewBox="0 0 200 2000"
+      style={{ height: "100%" }}
+    >
+      <defs>
+        <path id="track-path" d={TRACK_PATH} />
+      </defs>
+
+      {/* Layer 1: White edge lines (widest) */}
+      <use
+        href="#track-path"
+        stroke="#e0e0e0"
+        strokeWidth="42"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+
+      {/* Layer 2: Asphalt surface */}
+      <use
+        href="#track-path"
+        stroke="#2a2a2a"
+        strokeWidth="36"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        fill="none"
+      />
+
+      {/* Layer 3: Subtle gray texture on asphalt */}
+      <use
+        href="#track-path"
+        stroke="#333"
+        strokeWidth="34"
+        strokeLinecap="round"
+        fill="none"
+        opacity="0.3"
+      />
+
+      {/* Layer 4: White dashed center line */}
+      <use
+        href="#track-path"
+        stroke="#fff"
+        strokeWidth="1.5"
+        strokeDasharray="10 16"
+        strokeLinecap="round"
+        fill="none"
+        opacity="0.6"
+      />
+    </svg>
+  );
+}
+
 function RacetrackCar() {
   const carRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<SVGPathElement | null>(null);
+  const trackLengthRef = useRef(0);
 
   useEffect(() => {
     const car = carRef.current;
     if (!car) return;
 
+    // Get the SVG path element
+    const pathEl = document.querySelector("#track-path") as SVGPathElement | null;
+    if (!pathEl) return;
+    trackRef.current = pathEl;
+    trackLengthRef.current = pathEl.getTotalLength();
+
+    // Get the SVG element to map coordinates
+    const svgEl = pathEl.closest("svg");
+    if (!svgEl) return;
+
     let lastScrollY = window.scrollY;
-    let currentRotation = 0;
+    let facingDown = true;
+    let currentAngle = 180;
     let raf: number;
 
     const tick = () => {
       const scrollY = window.scrollY;
-      const direction = scrollY > lastScrollY ? 1 : -1; // 1 = down, -1 = up
-      const speed = Math.abs(scrollY - lastScrollY);
+      const delta = scrollY - lastScrollY;
+
+      if (Math.abs(delta) > 1) {
+        facingDown = delta > 0;
+      }
       lastScrollY = scrollY;
 
-      // Car stays fixed in center of viewport — track moves past it
-      // Rotate car based on scroll direction (180 = pointing down, 0 = pointing up)
-      const targetRotation = direction > 0 ? 180 : 0;
-      currentRotation += (targetRotation - currentRotation) * 0.15;
+      const path = trackRef.current;
+      const totalLen = trackLengthRef.current;
+      if (!path || !totalLen) {
+        raf = requestAnimationFrame(tick);
+        return;
+      }
 
-      // Add slight wobble based on speed
-      const wobble = Math.sin(scrollY * 0.02) * 3;
+      // Calculate scroll progress through the timeline section
+      const timelineSection = svgEl.closest("section");
+      if (!timelineSection) {
+        raf = requestAnimationFrame(tick);
+        return;
+      }
 
-      car.style.transform = `translateX(-50%) rotate(${currentRotation + wobble}deg)`;
-      car.style.opacity = speed > 0 ? "1" : "0.6";
+      const rect = timelineSection.getBoundingClientRect();
+      const sectionTop = rect.top;
+      const sectionHeight = rect.height;
+      const viewH = window.innerHeight;
+
+      // Progress: 0 at section top, 1 at section bottom
+      let progress = -sectionTop / (sectionHeight - viewH);
+      progress = Math.max(0, Math.min(1, progress));
+
+      // Get point on path
+      const point = path.getPointAtLength(progress * totalLen);
+
+      // Convert SVG coordinates to screen coordinates
+      const svgRect = svgEl.getBoundingClientRect();
+      const svgViewBox = svgEl.viewBox.baseVal;
+      const scaleX = svgRect.width / svgViewBox.width;
+      const scaleY = svgRect.height / svgViewBox.height;
+
+      const screenX = svgRect.left + point.x * scaleX;
+      const screenY = svgRect.top + point.y * scaleY;
+
+      // Calculate path angle for steering
+      const nextPoint = path.getPointAtLength(Math.min(progress * totalLen + 5, totalLen));
+      const pathAngle = Math.atan2(nextPoint.y - point.y, nextPoint.x - point.x) * (180 / Math.PI);
+
+      // Flip 180 if scrolling up
+      const directionOffset = facingDown ? 90 : -90;
+      const targetAngle = pathAngle + directionOffset;
+      currentAngle += (targetAngle - currentAngle) * 0.15;
+
+      car.style.position = "fixed";
+      car.style.left = `${screenX}px`;
+      car.style.top = `${screenY}px`;
+      car.style.transform = `translate(-50%, -50%) rotate(${currentAngle}deg)`;
 
       raf = requestAnimationFrame(tick);
     };
@@ -40,43 +174,36 @@ function RacetrackCar() {
   }, []);
 
   return (
-    <div
-      ref={carRef}
-      className="fixed left-1/2 top-1/2 z-30 hidden -translate-y-1/2 md:block"
-      style={{ opacity: 0.6 }}
-    >
-      <svg viewBox="0 0 28 48" width="28" height="48">
-        {/* Car body */}
-        <rect x="5" y="6" width="18" height="34" rx="9" fill="#D4A843" />
-        {/* Nose cone */}
-        <path d="M9 6 L14 0 L19 6" fill="#D4A843" />
-        {/* Wheels */}
-        <rect x="1" y="12" width="5" height="9" rx="2" fill="#1A1A1A" />
-        <rect x="22" y="12" width="5" height="9" rx="2" fill="#1A1A1A" />
-        <rect x="1" y="29" width="5" height="9" rx="2" fill="#1A1A1A" />
-        <rect x="22" y="29" width="5" height="9" rx="2" fill="#1A1A1A" />
-        {/* Cockpit */}
-        <ellipse cx="14" cy="20" rx="5" ry="6" fill="#111" />
-        {/* Rear wing */}
-        <rect x="3" y="38" width="22" height="3" rx="1" fill="#333" />
+    <div ref={carRef} className="z-30 hidden md:block" style={{ position: "fixed" }}>
+      <svg viewBox="0 0 28 48" width="20" height="34">
+        <rect x="5" y="6" width="18" height="34" rx="9" fill="#111" />
+        <path d="M9 6 L14 0 L19 6" fill="#111" />
+        <rect x="1" y="12" width="5" height="9" rx="2" fill="#000" />
+        <rect x="22" y="12" width="5" height="9" rx="2" fill="#000" />
+        <rect x="1" y="29" width="5" height="9" rx="2" fill="#000" />
+        <rect x="22" y="29" width="5" height="9" rx="2" fill="#000" />
+        <ellipse cx="14" cy="20" rx="4" ry="5" fill="#333" />
+        <rect x="3" y="38" width="22" height="3" rx="1" fill="#000" />
       </svg>
     </div>
   );
 }
 
-function StartFinishLine({ type }: { type: "start" | "finish" }) {
+function CheckeredLine({ label }: { label: string }) {
   return (
-    <div className="relative mx-auto hidden w-16 md:block">
-      <div className="mx-auto flex h-8 w-12 flex-wrap overflow-hidden border border-foreground/20">
-        {Array.from({ length: 16 }).map((_, i) => (
+    <div className="relative mx-auto hidden w-full max-w-[60px] md:block">
+      <div className="mx-auto flex h-4 w-14 flex-wrap overflow-hidden">
+        {Array.from({ length: 28 }).map((_, i) => (
           <div
             key={i}
-            className={`h-2 w-3 ${(Math.floor(i / 4) + (i % 4)) % 2 === 0 ? "bg-foreground" : "bg-white"}`}
+            className={`h-2 w-2 ${
+              (Math.floor(i / 7) + (i % 7)) % 2 === 0 ? "bg-black" : "bg-white"
+            }`}
           />
         ))}
       </div>
-      <p className="mt-2 text-center font-mono text-[9px] uppercase tracking-[0.2em] text-muted">
-        {type}
+      <p className="mt-2 text-center font-mono text-[8px] uppercase tracking-[0.3em] text-foreground/40">
+        {label}
       </p>
     </div>
   );
@@ -85,7 +212,6 @@ function StartFinishLine({ type }: { type: "start" | "finish" }) {
 export default function CarsPage() {
   return (
     <>
-      {/* Hero */}
       <section className="relative flex min-h-[40vh] items-center overflow-hidden bg-[#0A0A0A] pt-24">
         <div className="relative mx-auto max-w-7xl px-6">
           <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/40">
@@ -101,48 +227,27 @@ export default function CarsPage() {
             className="mt-4 max-w-lg font-body text-lg text-white/60"
             style={{ opacity: 0, animation: "heroFadeIn 0.8s ease-out 0.6s forwards" }}
           >
-            21 cars. Three decades of engineering. From a senior project to championship-winning electric racecars.
+            21 cars. Three decades of engineering. From a senior project to
+            championship-winning electric racecars.
           </p>
         </div>
       </section>
 
-      {/* Timeline */}
-      <section className="relative bg-background py-20">
+      <section className="relative bg-background py-20 overflow-hidden">
         <RacetrackCar />
-
-        {/* Track line with curves */}
-        <div className="absolute left-1/2 top-0 hidden h-full w-0.5 -translate-x-1/2 md:block">
-          {/* Track surface — dark asphalt stripe */}
-          <div className="absolute inset-0 bg-foreground/10" />
-          {/* Center dashes — white lane markings */}
-          <div
-            className="absolute inset-0"
-            style={{
-              background: "repeating-linear-gradient(to bottom, transparent 0px, transparent 12px, #D4A843 12px, #D4A843 24px)",
-              opacity: 0.4,
-            }}
-          />
-          {/* Track edge lines */}
-          <div className="absolute -left-2 top-0 h-full w-px bg-foreground/5" />
-          <div className="absolute -right-2 top-0 h-full w-px bg-foreground/5" />
-        </div>
+        <RacetrackSurface />
 
         <div className="mx-auto max-w-5xl px-6">
-          {/* Start line */}
-          <StartFinishLine type="start" />
+          <CheckeredLine label="start" />
 
           <div className="mt-12 flex flex-col gap-8 md:gap-4">
-            {cars.map((car, i) => {
-              const isLeft = i % 2 === 0;
-              return (
-                <TimelineEntry key={car.slug} car={car} isLeft={isLeft} index={i} />
-              );
-            })}
+            {cars.map((car, i) => (
+              <TimelineEntry key={car.slug} car={car} isLeft={i % 2 === 0} />
+            ))}
           </div>
 
-          {/* Finish line */}
           <div className="mt-12">
-            <StartFinishLine type="finish" />
+            <CheckeredLine label="finish" />
           </div>
         </div>
       </section>
@@ -157,18 +262,23 @@ export default function CarsPage() {
   );
 }
 
-function TimelineEntry({ car, isLeft, index }: { car: typeof cars[number]; isLeft: boolean; index: number }) {
+function TimelineEntry({
+  car,
+  isLeft,
+}: {
+  car: (typeof cars)[number];
+  isLeft: boolean;
+}) {
   const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     el.style.opacity = "0";
-
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
-          el.style.animation = `timelineCardIn 0.5s ease-out forwards`;
+          el.style.animation = "timelineCardIn 0.5s ease-out forwards";
           observer.disconnect();
         }
       },
@@ -180,19 +290,15 @@ function TimelineEntry({ car, isLeft, index }: { car: typeof cars[number]; isLef
 
   return (
     <div ref={ref} className="relative">
-      {/* Center dot */}
-      <div className="absolute left-1/2 top-8 z-10 hidden -translate-x-1/2 md:block">
-        <div className="h-3 w-3 rounded-full border-2 border-gold bg-background" />
-      </div>
-
-      {/* Card — positioned left or right */}
       <div
-        className={`md:w-[calc(50%-2rem)] ${isLeft ? "md:mr-auto md:pr-8" : "md:ml-auto md:pl-8"}`}
+        className={`md:w-[calc(50%-3rem)] ${
+          isLeft ? "md:mr-auto md:pr-10" : "md:ml-auto md:pl-10"
+        }`}
       >
         <div className="border border-border bg-elevated p-5">
           <div className="flex items-baseline justify-between gap-4">
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-gold">
+              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/40">
                 {car.years}
               </p>
               <h2 className="mt-1 font-display text-2xl uppercase tracking-tight md:text-3xl">
@@ -200,8 +306,8 @@ function TimelineEntry({ car, isLeft, index }: { car: typeof cars[number]; isLef
               </h2>
             </div>
             {car.battery && (
-              <span className="hidden whitespace-nowrap font-mono text-[10px] uppercase tracking-wider text-gold/60 sm:inline">
-                Electric
+              <span className="hidden whitespace-nowrap font-mono text-[10px] uppercase tracking-wider text-muted sm:inline">
+                EV
               </span>
             )}
           </div>

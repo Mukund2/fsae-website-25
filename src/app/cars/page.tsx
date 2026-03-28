@@ -48,6 +48,7 @@ function RacetrackSurface() {
         strokeLinecap="round"
         strokeLinejoin="round"
         fill="none"
+        vectorEffect="non-scaling-stroke"
       />
 
       {/* Layer 2: Asphalt surface */}
@@ -58,6 +59,7 @@ function RacetrackSurface() {
         strokeLinecap="round"
         strokeLinejoin="round"
         fill="none"
+        vectorEffect="non-scaling-stroke"
       />
 
       {/* Layer 3: Subtle gray texture on asphalt */}
@@ -68,6 +70,7 @@ function RacetrackSurface() {
         strokeLinecap="round"
         fill="none"
         opacity="0.3"
+        vectorEffect="non-scaling-stroke"
       />
 
       {/* Layer 4: White dashed center line */}
@@ -79,6 +82,7 @@ function RacetrackSurface() {
         strokeLinecap="round"
         fill="none"
         opacity="0.6"
+        vectorEffect="non-scaling-stroke"
       />
     </svg>
   );

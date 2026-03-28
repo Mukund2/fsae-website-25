@@ -8,7 +8,7 @@ export const cars: Car[] = [
     motor: "Emrax 228",
     torque: "162 ft-lbs",
     battery: "8.3 kWh",
-    image: "/images/history/sr16-2025.jpg",
+    image: "/images/cars/sr-16.jpg",
   },
   {
     slug: "sr-15",
@@ -17,7 +17,7 @@ export const cars: Car[] = [
     motor: "Emrax 228",
     torque: "162 ft-lbs",
     battery: "7.6 kWh",
-    image: "/images/history/sr15-2024.jpg",
+    image: "/images/cars/sr-15.jpg",
   },
   {
     slug: "sr-14",
@@ -26,6 +26,7 @@ export const cars: Car[] = [
     motor: "Emrax 228",
     torque: "162 ft-lbs",
     battery: "7.6 kWh",
+    image: "/images/cars/sr-14.png",
   },
   {
     slug: "sr-13",
@@ -34,7 +35,7 @@ export const cars: Car[] = [
     motor: "Triumph Daytona 675R",
     power: "95 HP",
     torque: "56 ft-lbs",
-    image: "/images/history/sr13-2022.jpg",
+    image: "/images/cars/sr-13.jpg",
   },
   {
     slug: "sre-6",
@@ -43,6 +44,7 @@ export const cars: Car[] = [
     motor: "Emrax 228",
     torque: "162 ft-lbs",
     battery: "7.6 kWh",
+    image: "/images/cars/sre-6.jpg",
   },
   {
     slug: "sr-12b",
@@ -51,6 +53,7 @@ export const cars: Car[] = [
     motor: "Triumph Daytona 675",
     power: "95 HP",
     torque: "162 ft-lbs",
+    image: "/images/cars/sr-12b.png",
   },
   {
     slug: "sre-5",
@@ -59,7 +62,7 @@ export const cars: Car[] = [
     motor: "Emrax 228",
     torque: "162 ft-lbs",
     battery: "8.1 kWh",
-    image: "/images/history/sre5-2021.jpg",
+    image: "/images/cars/sre-5.png",
   },
   {
     slug: "sr-11",
@@ -68,6 +71,7 @@ export const cars: Car[] = [
     motor: "Triumph Street Triple",
     power: "85 HP",
     torque: "54 ft-lbs",
+    image: "/images/cars/sr-11.png",
   },
   {
     slug: "sre-4",
@@ -76,6 +80,7 @@ export const cars: Car[] = [
     motor: "Emrax 228",
     torque: "162 ft-lbs",
     battery: "7.2 kWh",
+    image: "/images/cars/sre-4.png",
   },
   {
     slug: "sr-10",
@@ -84,12 +89,14 @@ export const cars: Car[] = [
     motor: "Triumph Street Triple",
     power: "85 HP",
     torque: "54 ft-lbs",
+    image: "/images/cars/sr-10.png",
   },
   {
     slug: "sre-3",
     name: "SRE-3",
     years: "2018-2017",
     motor: "Electric",
+    image: "/images/cars/sre-3.jpg",
   },
   {
     slug: "sr-9",
@@ -98,6 +105,7 @@ export const cars: Car[] = [
     motor: "Honda CBR600 F4i",
     power: "73 HP",
     torque: "37 ft-lbs",
+    image: "/images/cars/sr-9.png",
   },
   {
     slug: "sr-8",

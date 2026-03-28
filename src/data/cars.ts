@@ -114,6 +114,7 @@ export const cars: Car[] = [
     motor: "Honda CBR600 F4i",
     power: "73 HP",
     torque: "37 ft-lbs",
+    image: "/images/cars/sr-8.png",
   },
   {
     slug: "sr-7",
@@ -131,6 +132,7 @@ export const cars: Car[] = [
     motor: "Honda CBR600 F4i",
     power: "80 HP",
     torque: "45 ft-lbs",
+    image: "/images/cars/sr-6.png",
   },
   {
     slug: "sr-5",
@@ -139,6 +141,7 @@ export const cars: Car[] = [
     motor: "Honda CBR600 F4i",
     power: "76 HP",
     torque: "45 ft-lbs",
+    image: "/images/cars/sr-5.png",
   },
   {
     slug: "sr-4",
@@ -147,6 +150,7 @@ export const cars: Car[] = [
     motor: "Honda CBR600 F4i",
     power: "82 HP",
     torque: "45 ft-lbs",
+    image: "/images/cars/sr-4.png",
   },
   {
     slug: "sr-3",
@@ -155,6 +159,7 @@ export const cars: Car[] = [
     motor: "Honda CBR600 F4i",
     power: "75 HP",
     torque: "40 ft-lbs",
+    image: "/images/cars/sr-3.png",
   },
   {
     slug: "sr-2",
@@ -163,6 +168,7 @@ export const cars: Car[] = [
     motor: "Honda CBR600 F4i",
     power: "75 HP",
     torque: "37 ft-lbs",
+    image: "/images/cars/sr-2.png",
   },
   {
     slug: "sr-1",

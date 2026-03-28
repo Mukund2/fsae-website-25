@@ -19,7 +19,7 @@ export default function SubteamsPage() {
 
         <div className="relative mx-auto max-w-7xl px-6">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold hero-fade-in">
-            8 Subteams &middot; One Mission
+            8 Subteams
           </p>
           <h1
             className="mt-3 font-display text-5xl uppercase tracking-tight md:text-7xl hero-fade-in"

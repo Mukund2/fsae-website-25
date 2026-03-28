@@ -46,7 +46,7 @@ export function SubteamGrid({ subteams }: SubteamGridProps) {
         <div
           key={sub.abbreviation}
           data-index={i}
-          className="subteam-card group relative aspect-[4/3] overflow-hidden rounded-lg"
+          className="subteam-card group relative aspect-[4/3] overflow-hidden"
         >
           {/* Background image */}
           <Image
@@ -65,10 +65,7 @@ export function SubteamGrid({ subteams }: SubteamGridProps) {
 
           {/* Content overlay */}
           <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
-            <span className="font-mono text-xs tracking-widest text-gold/90 uppercase">
-              [{sub.abbreviation}]
-            </span>
-            <h3 className="mt-1 font-display text-2xl uppercase tracking-tight text-white md:text-3xl">
+            <h3 className="font-display text-2xl uppercase tracking-tight text-white md:text-3xl">
               {sub.name}
             </h3>
             <p className="mt-2 text-sm leading-relaxed text-white/70 max-w-md">

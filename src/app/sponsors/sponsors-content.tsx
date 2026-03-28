@@ -120,7 +120,8 @@ function SponsorCard({
       alt={sponsor.name}
       width={240}
       height={80}
-      className={`${tierMeta.logoH} w-auto object-contain grayscale hover:grayscale-0`}
+      className={`${tierMeta.logoH} w-auto object-contain group-hover:scale-110`}
+      style={{ willChange: "transform" }}
     />
   ) : (
     <span className="font-display text-base uppercase tracking-[0.12em] text-foreground/30 hover:text-foreground/80 sm:text-lg">
@@ -132,7 +133,7 @@ function SponsorCard({
     <div
       data-reveal
       data-reveal-delay={index * 60}
-      className={`group flex flex-col items-center justify-center rounded-lg border border-border/50 bg-surface ${tierMeta.cardSize} hover:border-gold/40 hover:shadow-[0_0_24px_rgba(212,168,67,0.08)]`}
+      className={`group flex flex-col items-center justify-center border border-border/50 bg-surface ${tierMeta.cardSize} hover:border-gold/40 hover:shadow-[0_0_24px_rgba(212,168,67,0.08)]`}
     >
       {inner}
     </div>

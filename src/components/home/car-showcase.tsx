@@ -1,15 +1,24 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import dynamic from "next/dynamic";
 
 const HeroScene = dynamic(() => import("./hero-scene"), { ssr: false });
 
-const STATS = [
-  { value: "3.2s", label: "0-60 mph" },
-  { value: "485", label: "lbs curb weight" },
-  { value: "80kW", label: "peak power" },
-  { value: "85", label: "mph top speed" },
+function ArrowIcon() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gold">
+      <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+const CARDS = [
+  { title: "Racing", href: "/racing", image: "/images/events/comp-1.jpg" },
+  { title: "Our Cars", href: "/cars", image: "/images/sr16/car-action-2.jpg" },
+  { title: "The Team", href: "/about", image: "/images/team/team-1.jpg" },
 ] as const;
 
 function animateElement(
@@ -34,15 +43,10 @@ function animateElement(
     const tick = (now: number) => {
       const elapsed = now - start;
       const progress = Math.min(elapsed / duration, 1);
-      // cubic ease-out
       const eased = 1 - Math.pow(1 - progress, 3);
 
-      const currentX = startX + (endX - startX) * eased;
-      const currentY = startY + (endY - startY) * eased;
-      const currentO = startO + (endO - startO) * eased;
-
-      el.style.opacity = String(currentO);
-      el.style.transform = `translate(${currentX}px, ${currentY}px)`;
+      el.style.opacity = String(startO + (endO - startO) * eased);
+      el.style.transform = `translate(${startX + (endX - startX) * eased}px, ${startY + (endY - startY) * eased}px)`;
 
       if (progress < 1) requestAnimationFrame(tick);
     };
@@ -60,13 +64,13 @@ export function CarShowcase() {
     const animEls = section.querySelectorAll<HTMLElement>("[data-anim]");
     animEls.forEach((el) => {
       el.style.opacity = "0";
-      el.style.transform = "translateX(-40px)";
+      el.style.transform = "translate(-40px, 0px)";
     });
 
-    const statEls = section.querySelectorAll<HTMLElement>("[data-stat]");
-    statEls.forEach((el) => {
+    const cardEls = section.querySelectorAll<HTMLElement>("[data-card]");
+    cardEls.forEach((el) => {
       el.style.opacity = "0";
-      el.style.transform = "translate(0px, 30px)";
+      el.style.transform = "translate(0px, 40px)";
     });
 
     const observer = new IntersectionObserver(
@@ -74,30 +78,16 @@ export function CarShowcase() {
         for (const entry of entries) {
           if (entry.isIntersecting) {
             animEls.forEach((el, i) => {
-              animateElement(
-                el,
-                { x: -40, opacity: 0 },
-                { x: 0, opacity: 1 },
-                600,
-                i * 100
-              );
+              animateElement(el, { x: -40, opacity: 0 }, { x: 0, opacity: 1 }, 600, i * 100);
             });
-
-            statEls.forEach((el, i) => {
-              animateElement(
-                el,
-                { y: 30, opacity: 0 },
-                { y: 0, opacity: 1 },
-                600,
-                300 + i * 100
-              );
+            cardEls.forEach((el, i) => {
+              animateElement(el, { y: 40, opacity: 0 }, { y: 0, opacity: 1 }, 600, 400 + i * 120);
             });
-
             observer.disconnect();
           }
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
 
     observer.observe(section);
@@ -127,23 +117,36 @@ export function CarShowcase() {
         </div>
 
         {/* 3D Car Model */}
-        <div data-anim className="mt-12">
+        <div data-anim className="mt-14">
           <div className="relative aspect-[16/9] w-full overflow-hidden">
             <HeroScene />
           </div>
         </div>
 
-        {/* Stats row */}
-        <div className="mt-12 grid grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-12">
-          {STATS.map((stat) => (
-            <div key={stat.label} data-stat>
-              <span className="block font-display text-[clamp(2rem,4vw,3.2rem)] leading-none tracking-tight text-gold">
-                {stat.value}
-              </span>
-              <span className="mt-2 block font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
-                {stat.label}
-              </span>
-            </div>
+        {/* McLaren-style image cards - like their F1/IndyCar/Endurance grid */}
+        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-3">
+          {CARDS.map((card) => (
+            <Link
+              key={card.title}
+              href={card.href}
+              data-card
+              className="group relative aspect-[4/3] overflow-hidden"
+            >
+              <Image
+                src={card.image}
+                alt={card.title}
+                fill
+                className="object-cover"
+                sizes="(max-width: 640px) 100vw, 33vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 flex w-full items-end justify-between p-5">
+                <span className="font-display text-xl font-bold uppercase tracking-tight text-white">
+                  {card.title}
+                </span>
+                <ArrowIcon />
+              </div>
+            </Link>
           ))}
         </div>
       </div>

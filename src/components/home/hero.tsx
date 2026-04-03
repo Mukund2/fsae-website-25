@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export function Hero() {
   return (
-    <section className="relative flex h-svh w-full items-end overflow-hidden bg-[#1A1A1A]">
+    <section className="relative flex h-[88vh] w-full items-end overflow-hidden bg-[#1A1A1A]">
       {/* Full-bleed car action photo */}
       <Image
         src="/images/sr16/car-action-1.jpg"

@@ -29,9 +29,11 @@
 - Uppercase labels/nav: tracking-[0.15em] to tracking-[0.3em]
 - Light font weight on large headings (400, not 700)
 
-## 5. Monochromatic Base, Accent by Exception
-- Palette: near-black (#0A0A0A), dark-gray (#262626), mid-gray (#737373), light-gray (#E5E5E5), white
-- Brand colors only on hover states or small accent elements
+## 5. Dark-First with Electric Blue Accent
+- Background: #0A0A0A (near-black), Surface: #141414, Elevated: #1E1E1E
+- Text: #EDEDED primary, rgba(255,255,255,0.5) muted, rgba(255,255,255,0.1) borders
+- Primary accent: Electric blue #0EA5E9 (labels, stats, CTAs, interactive elements)
+- Secondary accent: Gold #D4A843 (branding, "SPARTAN" in navbar, achievement highlights)
 - Text hierarchy through opacity: text-white, text-white/70, text-white/50
 
 ## 6. Images Get Gradient Overlays, Not Raw Display
@@ -50,9 +52,9 @@
 - Hover = subtle background shift or border color change
 - Outline/ghost variants for secondary actions. No gradients.
 
-## 9. Navbar: Transparent → Frosted Glass on Scroll
-- Start transparent on hero pages
-- On scroll: bg-white/80 backdrop-blur-md border-b border-light-gray
+## 9. Navbar: Transparent → Dark Frosted Glass on Scroll
+- Start transparent/hidden on homepage hero
+- On scroll: bg-[#0A0A0A]/80 backdrop-blur-md border-b border-white/10
 - Nav links: small, uppercase, tracked, text-[13px]
 
 ## 10. Animation Is Scroll-Triggered and Subtle

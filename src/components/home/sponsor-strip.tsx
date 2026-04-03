@@ -91,18 +91,19 @@ function SponsorItem({ sponsor }: { sponsor: Sponsor }) {
 
 export function SponsorStrip() {
   return (
-    <section className="w-full bg-surface py-20">
+    <section className="w-full bg-background py-20">
+      {/* Top fade from background into this section */}
       <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-center font-display text-[clamp(1rem,2vw,1.2rem)] uppercase tracking-[0.2em] text-muted">
+        <h2 className="text-center font-mono text-[11px] uppercase tracking-[0.3em] text-muted">
           Trusted by Our Sponsors
         </h2>
       </div>
 
       <div className="relative mt-10">
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-surface to-transparent sm:w-52" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-surface to-transparent sm:w-52" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-background to-transparent sm:w-52" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-background to-transparent sm:w-52" />
 
-        <Marquee speed={180} gap="gap-20 sm:gap-24">
+        <Marquee speed={120} gap="gap-16 sm:gap-20">
           {SPONSORS.map((sponsor) => (
             <SponsorItem key={sponsor.name} sponsor={sponsor} />
           ))}

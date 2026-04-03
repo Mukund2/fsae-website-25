@@ -3,10 +3,10 @@
 import { Counter } from "@/components/animation/counter";
 
 const specs = [
-  { value: 3.2, label: "0 to 60 mph", suffix: "s", decimals: true },
-  { value: 485, label: "Curb weight", suffix: " lbs", decimals: false },
-  { value: 80, label: "Peak power", suffix: "kW", decimals: false },
-  { value: 85, label: "Top speed", suffix: " mph", decimals: false },
+  { value: 3, suffix: ".2s", label: "0 to 60 mph" },
+  { value: 485, suffix: " lbs", label: "Curb weight" },
+  { value: 80, suffix: "kW", label: "Peak power" },
+  { value: 85, suffix: " mph", label: "Top speed" },
 ];
 
 export function Highlights() {
@@ -20,23 +20,17 @@ export function Highlights() {
           {specs.map((spec, i) => (
             <div
               key={spec.label}
-              className={`${
-                i > 0 ? "md:border-l md:border-border md:pl-10" : ""
-              }`}
+              className={i > 0 ? "md:border-l md:border-border md:pl-10" : ""}
             >
               <div className="font-display text-5xl tracking-tight text-foreground md:text-6xl lg:text-7xl">
                 <Counter
-                  value={spec.decimals ? Math.round(spec.value * 10) : spec.value}
-                  suffix=""
-                  className=""
+                  value={spec.value}
+                  suffix={spec.suffix}
                   duration={2}
                 />
-                {spec.decimals ? null : null}
               </div>
-              <div className="mt-1 font-display text-5xl tracking-tight text-foreground md:text-6xl lg:text-7xl" style={{ display: "none" }} />
               <div className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
-                {spec.suffix && <span className="text-foreground/60">{spec.suffix}</span>}
-                {" "}{spec.label}
+                {spec.label}
               </div>
             </div>
           ))}

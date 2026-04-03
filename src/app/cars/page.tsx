@@ -216,7 +216,7 @@ function CheckeredLine({ label }: { label: string }) {
 export default function CarsPage() {
   return (
     <>
-      <section className="relative flex h-[75vh] items-center overflow-hidden bg-[#0A0A0A] pt-24">
+      <section className="relative flex min-h-[50vh] items-center overflow-hidden bg-[#0A0A0A] pt-32 pb-16">
         <div className="relative mx-auto max-w-7xl px-6">
           <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold">
             1989 - Present

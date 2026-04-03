@@ -130,7 +130,7 @@ export function RacingContent() {
   return (
     <div ref={ref}>
       {/* ── Hero ───────────────────────────────────────────── */}
-      <section className="relative flex h-[75vh] items-end overflow-hidden pb-16 pt-32">
+      <section className="relative flex min-h-[50vh] items-center overflow-hidden pt-32 pb-16">
         <Image
           src="/images/flickr/comp-action-1.jpg"
           alt="Spartan Racing competing at Formula SAE"

@@ -115,7 +115,7 @@ export function JoinContent() {
   return (
     <div ref={ref}>
       {/* Hero */}
-      <section className="flex h-[75vh] items-center bg-surface pt-24">
+      <section className="flex min-h-[50vh] items-center bg-surface pt-32 pb-16">
         <div className="mx-auto max-w-7xl px-6">
           <p className="sr-reveal font-mono text-xs uppercase tracking-[0.3em] text-gold">
             Recruitment

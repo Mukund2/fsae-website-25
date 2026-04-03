@@ -60,7 +60,7 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero section with team photo background */}
-      <section className="relative flex h-[75vh] items-center justify-center overflow-hidden">
+      <section className="relative flex min-h-[50vh] items-center justify-center overflow-hidden pt-32 pb-16">
         <Image
           src="/images/team/team-1.jpg"
           alt="SJSU Spartan Racing team"

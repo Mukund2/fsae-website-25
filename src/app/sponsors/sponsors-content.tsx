@@ -218,7 +218,7 @@ export function SponsorsContent() {
   return (
     <div ref={revealRef}>
       {/* Hero */}
-      <section className="relative flex h-[75vh] items-center overflow-hidden bg-surface pt-24">
+      <section className="relative flex min-h-[50vh] items-center overflow-hidden bg-surface pt-32 pb-16">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,128,0,0.06)_0%,_transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-6">
           <p

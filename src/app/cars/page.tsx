@@ -43,7 +43,7 @@ function RacetrackSurface() {
       {/* Layer 1: White edge lines (widest) */}
       <use
         href="#track-path"
-        stroke="#e0e0e0"
+        stroke="rgba(255,255,255,0.15)"
         strokeWidth="42"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -54,7 +54,7 @@ function RacetrackSurface() {
       {/* Layer 2: Asphalt surface */}
       <use
         href="#track-path"
-        stroke="#2a2a2a"
+        stroke="#1a1a1a"
         strokeWidth="36"
         strokeLinecap="round"
         strokeLinejoin="round"

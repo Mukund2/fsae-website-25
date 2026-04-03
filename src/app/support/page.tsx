@@ -13,10 +13,10 @@ export default function SupportPage() {
       {/* Hero banner */}
       <section className="relative flex min-h-[45vh] items-end pb-16 pt-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface/80 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,168,67,0.08)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(14,165,233,0.08)_0%,_transparent_60%)]" />
 
         <div className="relative mx-auto max-w-7xl px-6">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold hero-fade-in">
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#0EA5E9] hero-fade-in">
             Make an Impact
           </p>
           <h1

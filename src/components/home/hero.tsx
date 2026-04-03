@@ -36,12 +36,8 @@ export function Hero() {
           <span className="block text-[clamp(2.5rem,7vw,5.5rem)] font-bold text-white">
             Home of
           </span>
-          <span className="flex items-end gap-4 text-[clamp(2.5rem,7vw,5.5rem)] font-light text-white/70">
+          <span className="text-[clamp(2.5rem,7vw,5.5rem)] font-light text-white/70">
             Spartan Racing
-            {/* Orange arrow - McLaren signature */}
-            <svg width="40" height="40" viewBox="0 0 20 20" fill="none" className="mb-2 shrink-0 text-gold lg:mb-4">
-              <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
           </span>
         </h1>
       </div>

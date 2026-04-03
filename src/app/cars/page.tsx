@@ -27,14 +27,6 @@ const TRACK_PATH = `
   C 55 1960, 100 1980, 100 2000
 `;
 
-function OrangeArrow() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gold">
-      <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 function RacetrackSurface() {
   return (
     <svg
@@ -318,14 +310,11 @@ function TimelineEntry({
                 {car.name}
               </h2>
             </div>
-            <div className="flex items-center gap-2">
-              {car.battery && (
-                <span className="hidden whitespace-nowrap font-mono text-[10px] uppercase tracking-wider text-muted sm:inline">
-                  EV
-                </span>
-              )}
-              <OrangeArrow />
-            </div>
+            {car.battery && (
+              <span className="hidden whitespace-nowrap font-mono text-[10px] uppercase tracking-wider text-muted sm:inline">
+                EV
+              </span>
+            )}
           </div>
 
           {car.image && (

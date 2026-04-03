@@ -26,22 +26,11 @@ const subteamLeads = [
   { name: "Shaun Gilmore", role: "Research & Development Lead" },
 ];
 
-function OrangeArrow() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gold">
-      <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 function LeadCard({ name, role }: { name: string; role: string }) {
   return (
-    <div className="border border-border bg-elevated p-6 flex items-start justify-between">
-      <div>
-        <p className="font-display text-xl uppercase tracking-tight">{name}</p>
-        <p className="mt-1 font-mono text-sm text-muted">{role}</p>
-      </div>
-      <OrangeArrow />
+    <div className="border border-border bg-elevated p-6">
+      <p className="font-display text-xl uppercase tracking-tight">{name}</p>
+      <p className="mt-1 font-mono text-sm text-muted">{role}</p>
     </div>
   );
 }

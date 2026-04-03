@@ -37,16 +37,6 @@ function useScrollReveal() {
   return containerRef;
 }
 
-/* ── Orange arrow component ── */
-
-function OrangeArrow() {
-  return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gold">
-      <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 /* ── Event data ────────────────────────────────────────────────────────── */
 
 const staticEvents = [
@@ -230,9 +220,6 @@ export function RacingContent() {
             <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
               {staticEvents[0].description}
             </p>
-            <div className="sr-reveal" data-delay="0.2">
-              <OrangeArrow />
-            </div>
           </div>
           <div className="sr-reveal relative aspect-[4/3] overflow-hidden" data-delay="0.1">
             <Image
@@ -269,9 +256,6 @@ export function RacingContent() {
             <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
               {staticEvents[1].description}
             </p>
-            <div className="sr-reveal" data-delay="0.2">
-              <OrangeArrow />
-            </div>
           </div>
         </div>
       </section>
@@ -338,9 +322,6 @@ export function RacingContent() {
                     <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
                       {event.description}
                     </p>
-                    <div className="sr-reveal" data-delay="0.2">
-                      <OrangeArrow />
-                    </div>
                   </div>
                 </>
               ) : (
@@ -358,9 +339,6 @@ export function RacingContent() {
                     <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
                       {event.description}
                     </p>
-                    <div className="sr-reveal" data-delay="0.2">
-                      <OrangeArrow />
-                    </div>
                   </div>
                   <div className="sr-reveal relative aspect-[4/3] overflow-hidden" data-delay="0.1">
                     <Image

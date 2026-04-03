@@ -44,11 +44,13 @@ function RacetrackCar({ timelineRef }: { timelineRef: React.RefObject<HTMLDivEle
   const currentTop = useRef(0);
   const targetTop = useRef(0);
 
+  const updateFnRef = useRef<() => void>(() => {});
+
   const updateCarPosition = useCallback(() => {
     const car = carRef.current;
     const tl = timelineRef.current;
     if (!car || !tl) {
-      rafRef.current = requestAnimationFrame(updateCarPosition);
+      rafRef.current = requestAnimationFrame(() => updateFnRef.current());
       return;
     }
 
@@ -88,11 +90,12 @@ function RacetrackCar({ timelineRef }: { timelineRef: React.RefObject<HTMLDivEle
     const opacity = progress <= 0.01 || progress >= 0.99 ? 0 : 1;
     car.style.opacity = String(opacity);
 
-    rafRef.current = requestAnimationFrame(updateCarPosition);
+    rafRef.current = requestAnimationFrame(() => updateFnRef.current());
   }, [timelineRef]);
 
   useEffect(() => {
-    rafRef.current = requestAnimationFrame(updateCarPosition);
+    updateFnRef.current = updateCarPosition;
+    rafRef.current = requestAnimationFrame(() => updateFnRef.current());
     return () => cancelAnimationFrame(rafRef.current);
   }, [updateCarPosition]);
 

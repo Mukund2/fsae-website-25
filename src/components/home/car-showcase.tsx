@@ -70,7 +70,7 @@ export function CarShowcase() {
     const cardEls = section.querySelectorAll<HTMLElement>("[data-card]");
     cardEls.forEach((el) => {
       el.style.opacity = "0";
-      el.style.transform = "translate(0px, 40px)";
+      el.style.transform = "translate(40px, 0px)";
     });
 
     const observer = new IntersectionObserver(
@@ -81,7 +81,7 @@ export function CarShowcase() {
               animateElement(el, { x: -40, opacity: 0 }, { x: 0, opacity: 1 }, 600, i * 100);
             });
             cardEls.forEach((el, i) => {
-              animateElement(el, { y: 40, opacity: 0 }, { y: 0, opacity: 1 }, 600, 400 + i * 120);
+              animateElement(el, { x: 40, opacity: 0 }, { x: 0, opacity: 1 }, 600, 200 + i * 120);
             });
             observer.disconnect();
           }
@@ -96,58 +96,46 @@ export function CarShowcase() {
 
   return (
     <section ref={sectionRef} className="w-full bg-white">
-      <div className="mx-auto max-w-7xl px-6 pt-24 pb-20 lg:px-12 lg:pt-32 lg:pb-28">
-        {/* Top: heading left, description right */}
-        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
-          <div data-anim>
-            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold">
-              Formula SAE
-            </span>
-            <h2 className="mt-3 font-display text-[clamp(2.5rem,5vw,4.5rem)] uppercase leading-[0.95] tracking-tight">
-              <span className="font-bold text-foreground">Spartan Racing</span>
-              <br />
-              <span className="font-light text-foreground/40">Built to Win</span>
-            </h2>
-          </div>
-          <p data-anim className="max-w-md font-body text-base leading-relaxed text-muted lg:pb-2">
-            San Jos&eacute; State University&apos;s Formula SAE team designs,
-            builds, and races high-performance electric vehicles. Over 100
-            members push the boundaries of engineering every season.
-          </p>
-        </div>
+      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-12 lg:py-32">
+        {/* Heading */}
+        <h2 data-anim className="font-display text-[clamp(2.5rem,5vw,4.5rem)] uppercase leading-[0.95] tracking-tight">
+          <span className="font-bold text-foreground">Built</span>{" "}
+          <span className="font-light text-foreground/40">to Win</span>
+        </h2>
 
-        {/* 3D Car Model */}
-        <div data-anim className="mt-14">
-          <div className="relative aspect-[16/9] w-full overflow-hidden">
+        {/* Two-column: Car LEFT, Image cards RIGHT */}
+        <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-2">
+          {/* LEFT: 3D Car Model */}
+          <div data-anim className="relative aspect-square w-full overflow-hidden lg:aspect-auto lg:min-h-[500px]">
             <HeroScene />
           </div>
-        </div>
 
-        {/* McLaren-style image cards - like their F1/IndyCar/Endurance grid */}
-        <div className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-3">
-          {CARDS.map((card) => (
-            <Link
-              key={card.title}
-              href={card.href}
-              data-card
-              className="group relative aspect-[4/3] overflow-hidden"
-            >
-              <Image
-                src={card.image}
-                alt={card.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 640px) 100vw, 33vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              <div className="absolute bottom-0 left-0 flex w-full items-end justify-between p-5">
-                <span className="font-display text-xl font-bold uppercase tracking-tight text-white">
-                  {card.title}
-                </span>
-                <ArrowIcon />
-              </div>
-            </Link>
-          ))}
+          {/* RIGHT: Stacked image cards */}
+          <div className="flex flex-col gap-4">
+            {CARDS.map((card) => (
+              <Link
+                key={card.title}
+                href={card.href}
+                data-card
+                className="group relative aspect-[3/1] overflow-hidden"
+              >
+                <Image
+                  src={card.image}
+                  alt={card.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
+                <div className="absolute bottom-0 left-0 flex w-full items-end justify-between p-5">
+                  <span className="font-display text-lg font-bold uppercase tracking-tight text-white">
+                    {card.title}
+                  </span>
+                  <ArrowIcon />
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </div>
     </section>

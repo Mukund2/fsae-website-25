@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -16,19 +17,8 @@ const NAV_ITEMS = [
 ] as const;
 
 export function Navbar() {
-  const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
-
-  const handleScroll = useCallback(() => {
-    setScrolled(window.scrollY > 50);
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -42,23 +32,14 @@ export function Navbar() {
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
-  const isHome = pathname === "/";
-
   return (
     <>
-      {/* Orange top line - McLaren style */}
+      {/* Orange top line */}
       <div className="fixed top-0 left-0 z-[60] h-1 w-full bg-gold" />
 
-      <nav
-        className={cn(
-          "fixed top-1 left-0 z-50 w-full",
-          isHome && !scrolled
-            ? "bg-transparent"
-            : "bg-white border-b border-border"
-        )}
-      >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          {/* Brand - McLaren style: bold/light two-weight */}
+      <nav className="fixed top-1 left-0 z-50 w-full border-b border-border bg-white">
+        <div className="flex w-full items-center justify-between px-4 py-3 lg:px-6">
+          {/* Left: Logo + Brand */}
           <Link
             href="/"
             onClick={(e) => {
@@ -67,33 +48,33 @@ export function Navbar() {
                 window.scrollTo({ top: 0 });
               }
             }}
-            className="group flex items-center"
+            className="flex items-center gap-3"
           >
-            <span className={cn(
-              "font-display text-xl tracking-wider md:text-2xl",
-              isHome && !scrolled ? "text-white" : "text-foreground"
-            )}>
-              <span className="font-bold">SPARTAN</span>{" "}
-              <span className="font-light opacity-60">RACING</span>
+            <Image
+              src="/images/sr-logo.png"
+              alt="Spartan Racing"
+              width={48}
+              height={27}
+              className="h-7 w-auto"
+            />
+            <span className="font-display text-lg tracking-wider md:text-xl">
+              <span className="font-bold text-foreground">SPARTAN</span>{" "}
+              <span className="font-light text-foreground/40">RACING</span>
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden items-center gap-8 md:flex">
-            <ul className="flex items-center gap-6">
+          {/* Right: Nav links + Join Us button */}
+          <div className="hidden items-center gap-6 md:flex lg:gap-8">
+            <ul className="flex items-center gap-5 lg:gap-6">
               {NAV_ITEMS.map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     className={cn(
                       "text-[13px] font-medium uppercase tracking-wider",
-                      isHome && !scrolled
-                        ? isActive(link.href)
-                          ? "text-gold"
-                          : "text-white/80 hover:text-white"
-                        : isActive(link.href)
-                          ? "text-gold"
-                          : "text-foreground/70 hover:text-foreground"
+                      isActive(link.href)
+                        ? "text-gold"
+                        : "text-foreground/70 hover:text-foreground"
                     )}
                   >
                     {link.label}
@@ -102,12 +83,11 @@ export function Navbar() {
               ))}
             </ul>
 
-            {/* Orange accent button - McLaren "Racing Club" style */}
             <Link
               href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 bg-gold px-5 py-2 font-display text-[13px] font-bold uppercase tracking-wider text-white"
+              className="bg-gold px-5 py-2 font-display text-[13px] font-bold uppercase tracking-wider text-white"
             >
               Join Us
             </Link>
@@ -117,10 +97,7 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setMobileOpen((prev) => !prev)}
-            className={cn(
-              "relative z-50 flex h-10 w-10 items-center justify-center md:hidden",
-              isHome && !scrolled && !mobileOpen ? "text-white" : "text-foreground"
-            )}
+            className="relative z-50 flex h-10 w-10 items-center justify-center text-foreground md:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
           >

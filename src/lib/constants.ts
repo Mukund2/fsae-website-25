@@ -1,5 +1,5 @@
 export const SITE_NAME = "SJSU Spartan Racing";
-export const SITE_DESCRIPTION = "San José State University Formula SAE Racing Team — Engineering excellence since 1991.";
+export const SITE_DESCRIPTION = "San José State University Formula SAE Racing Team. Engineering excellence since 1991.";
 export const SITE_URL = "https://sjsuformulasae.com";
 
 export const COLORS = {

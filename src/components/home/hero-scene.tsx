@@ -22,15 +22,7 @@ function CarModel() {
         g = mat.color.g,
         b = mat.color.b;
 
-      // Keep orange/gold accent
-      if (r > 0.5 && g > 0.2 && g < 0.6 && b < 0.2) {
-        mat.roughness = Math.max(mat.roughness, 0.3);
-        mat.metalness = Math.min(mat.metalness, 0.4);
-        mat.needsUpdate = true;
-        return;
-      }
-
-      // Keep near-black materials
+      // Keep near-black materials (tires, chassis frame)
       if (r < 0.1 && g < 0.1 && b < 0.1) {
         mat.roughness = Math.max(mat.roughness, 0.4);
         mat.metalness = 0;
@@ -38,10 +30,10 @@ function CarModel() {
         return;
       }
 
-      // Everything else → dark carbon fiber
-      mat.color.set(0x2a2a2a);
-      mat.roughness = 0.5;
-      mat.metalness = 0.15;
+      // Body panels and main surfaces -> orange (matching real SR-16)
+      mat.color.set(0xD4700A);
+      mat.roughness = 0.35;
+      mat.metalness = 0.1;
       mat.needsUpdate = true;
     });
   }, [scene]);
@@ -60,7 +52,7 @@ export default function HeroScene() {
       gl={{ alpha: true }}
       style={{ background: "transparent" }}
     >
-      <ambientLight intensity={0.4} />
+      <ambientLight intensity={0.6} />
       <directionalLight position={[5, 5, 5]} intensity={1.2} />
       <directionalLight position={[-3, 2, -2]} intensity={0.3} />
       <Suspense fallback={null}>

@@ -24,13 +24,13 @@ export function JoinUs() {
           </h2>
           <p className="mx-auto mt-4 max-w-md font-body text-sm leading-relaxed text-white/60">
             Engineers, designers, and builders working on real problems.
-            No experience required — just passion.
+            No experience required. Just passion.
           </p>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-block border border-[#0EA5E9] bg-[#0EA5E9] px-8 py-3 font-mono text-[13px] uppercase tracking-[0.15em] text-white"
+            className="mt-8 inline-block border border-[#C8952E] bg-[#C8952E] px-8 py-3 font-mono text-[13px] uppercase tracking-[0.15em] text-white"
           >
             Join Us
           </a>

@@ -31,7 +31,7 @@ export const faqs: FAQ[] = [
   {
     question: "Who can join the team?",
     answer:
-      "Any currently enrolled SJSU student can join regardless of major, year, or prior experience. While many members study engineering, we welcome students from business, design, communications, and other fields. No prior automotive or racing experience is required — we provide training for all skill levels.",
+      "Any currently enrolled SJSU student can join regardless of major, year, or prior experience. While many members study engineering, we welcome students from business, design, communications, and other fields. No prior automotive or racing experience is required. We provide training for all skill levels.",
     category: "Membership",
   },
   {
@@ -61,7 +61,7 @@ export const faqs: FAQ[] = [
   {
     question: "Do I need to pay dues?",
     answer:
-      "There is a modest semesterly membership fee that helps cover consumable materials and operational costs. The exact amount is announced at the start of each semester. Financial assistance is available — no one is turned away due to inability to pay.",
+      "There is a modest semesterly membership fee that helps cover consumable materials and operational costs. The exact amount is announced at the start of each semester. Financial assistance is available, and no one is turned away due to inability to pay.",
     category: "Membership",
   },
 

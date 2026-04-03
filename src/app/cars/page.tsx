@@ -219,7 +219,7 @@ export default function CarsPage() {
       <section className="relative flex min-h-[40vh] items-center overflow-hidden bg-[#0A0A0A] pt-24">
         <div className="relative mx-auto max-w-7xl px-6">
           <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/40">
-            1989 — Present
+            1989 - Present
           </p>
           <h1
             className="mt-3 font-display text-[clamp(3rem,7vw,6rem)] uppercase leading-[0.95] text-white"
@@ -231,7 +231,7 @@ export default function CarsPage() {
             className="mt-4 max-w-lg font-body text-lg text-white/60"
             style={{ opacity: 0, animation: "heroFadeIn 0.8s ease-out 0.6s forwards" }}
           >
-            Every car we&apos;ve ever built — from SR-0 to SR-16.
+            Every car we&apos;ve ever built, from SR-0 to SR-16.
           </p>
         </div>
       </section>

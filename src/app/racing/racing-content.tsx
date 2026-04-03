@@ -44,7 +44,7 @@ const staticEvents = [
     name: "Design",
     tagline: "Defend every decision.",
     description:
-      "Present your car's engineering to a panel of industry judges who have decades of motorsport and automotive experience. Teams must justify every design choice — from suspension geometry to aerodynamic philosophy — proving that their vehicle represents the best solution to the design brief.",
+      "Present your car's engineering to a panel of industry judges who have decades of motorsport and automotive experience. Teams must justify every design choice, from suspension geometry to aerodynamic philosophy, proving that their vehicle represents the best solution to the design brief.",
     image: "/images/sr16/car-action-2.jpg",
     imageAlt: "Spartan Racing car showing design details",
   },
@@ -63,7 +63,7 @@ const dynamicEvents = [
     name: "Acceleration",
     tagline: "75 meters. Full send.",
     description:
-      "A 75-meter straight-line sprint from a standing start, testing raw power delivery, traction control, and launch strategy. The difference between first and last is often less than a second. Every detail matters — gear ratios, tire compound, driver reaction time.",
+      "A 75-meter straight-line sprint from a standing start, testing raw power delivery, traction control, and launch strategy. The difference between first and last is often less than a second. Every detail matters: gear ratios, tire compound, driver reaction time.",
     image: "/images/sr16/car-action-1.jpg",
     imageAlt: "Spartan Racing car launching off the line",
   },
@@ -79,7 +79,7 @@ const dynamicEvents = [
     name: "Autocross",
     tagline: "One lap. One chance.",
     description:
-      "A single-lap timed run through a tight road course defined by cones. Autocross tests the full dynamic package — acceleration, braking, cornering, and driver skill — in one concentrated effort. The fastest autocross time also sets the starting order for Endurance.",
+      "A single-lap timed run through a tight road course defined by cones. Autocross tests the full dynamic package: acceleration, braking, cornering, and driver skill, all in one concentrated effort. The fastest autocross time also sets the starting order for Endurance.",
     image: "/images/sr16/car-action-4.jpg",
     imageAlt: "Car navigating the autocross cone course",
   },
@@ -87,7 +87,7 @@ const dynamicEvents = [
     name: "Endurance",
     tagline: "22 kilometers. No margin for error.",
     description:
-      "The defining event of Formula SAE — a 22-kilometer extended race that tests reliability, speed, fuel efficiency, and driver endurance. Cars must survive a mandatory driver change at the halfway point. Mechanical failures here are season-ending. This is where championships are won and lost.",
+      "The defining event of Formula SAE. A 22-kilometer extended race that tests reliability, speed, fuel efficiency, and driver endurance. Cars must survive a mandatory driver change at the halfway point. Mechanical failures here are season-ending. This is where championships are won and lost.",
     image: "/images/cars/car-1.jpg",
     imageAlt: "Spartan Racing car during endurance race",
   },
@@ -141,7 +141,7 @@ export function RacingContent() {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
 
         <div className="relative mx-auto max-w-7xl px-6">
-          <span className="sr-reveal mb-4 inline-block font-mono text-xs uppercase tracking-[0.25em] text-[#0EA5E9]">
+          <span className="sr-reveal mb-4 inline-block font-mono text-xs uppercase tracking-[0.25em] text-[#C8952E]">
             Formula SAE
           </span>
           <h1 className="sr-reveal font-display text-5xl uppercase tracking-tight md:text-7xl lg:text-8xl" data-delay="0.1">

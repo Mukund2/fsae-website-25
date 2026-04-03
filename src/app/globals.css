@@ -5,9 +5,9 @@
   --foreground: #EDEDED;
   --surface: #141414;
   --elevated: #1E1E1E;
-  --gold: #D4A843;
-  --blue: #0EA5E9;
-  --accent: #0EA5E9;
+  --gold: #C8952E;
+  --blue: #0055A2;
+  --accent: #C8952E;
   --muted: rgba(255,255,255,0.5);
   --border: rgba(255,255,255,0.10);
 }
@@ -47,17 +47,17 @@ body {
   box-shadow: 0 0 40px rgba(212, 168, 67, 0.2);
 }
 
-/* Blue gradient text utility */
-.text-gradient-blue {
-  background: linear-gradient(135deg, #0EA5E9, #38BDF8, #0EA5E9);
+/* Amber gradient text utility */
+.text-gradient-amber {
+  background: linear-gradient(135deg, #C8952E, #E0B44A, #C8952E);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Blue glow utility */
-.glow-blue {
-  box-shadow: 0 0 40px rgba(14, 165, 233, 0.15);
+/* Amber glow utility */
+.glow-amber {
+  box-shadow: 0 0 40px rgba(200, 149, 46, 0.15);
 }
 
 /* Smooth scroll */
@@ -67,7 +67,7 @@ html {
 
 /* Selection color */
 ::selection {
-  background-color: rgba(14, 165, 233, 0.3);
+  background-color: rgba(200, 149, 46, 0.3);
   color: #EDEDED;
 }
 

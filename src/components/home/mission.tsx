@@ -92,7 +92,7 @@ export function Mission() {
           <div>
             <span
               ref={labelRef}
-              className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#0EA5E9]"
+              className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#C8952E]"
             >
               About Us
             </span>

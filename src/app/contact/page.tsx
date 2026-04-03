@@ -6,7 +6,7 @@ import { SOCIAL_LINKS } from "@/lib/constants";
 export const metadata: Metadata = {
   title: "Contact | SJSU Spartan Racing",
   description:
-    "Get in touch with SJSU Spartan Racing — email, address, and social media.",
+    "Get in touch with SJSU Spartan Racing. Email, address, and social media.",
 };
 
 const socialItems = [
@@ -63,7 +63,7 @@ export default function ContactPage() {
         />
         <div className="absolute inset-0 bg-black/65" />
         <div className="relative z-10 text-center px-6 pt-24 pb-16">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#0EA5E9] hero-fade-in">
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#C8952E] hero-fade-in">
             Get In Touch
           </p>
           <h1

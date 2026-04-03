@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     template: "%s | SJSU Spartan Racing",
   },
   description:
-    "San José State University Formula SAE Racing Team — Engineering excellence since 1991.",
+    "San José State University Formula SAE Racing Team. Engineering excellence since 1991.",
   metadataBase: new URL("https://sjsuformulasae.com"),
   openGraph: {
     title: "SJSU Spartan Racing",

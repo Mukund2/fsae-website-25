@@ -285,7 +285,7 @@ export default function HistoryPage() {
             className="mt-4 max-w-2xl text-lg text-muted"
             delay={0.3}
           >
-            From 1989 to today — decades of innovation, competition, and Spartan spirit.
+            From 1989 to today. Decades of innovation, competition, and Spartan spirit.
           </RevealText>
         </div>
       </section>

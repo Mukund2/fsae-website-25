@@ -49,7 +49,7 @@ const whyCards: WhyCard[] = [
   {
     title: "All Majors Welcome",
     description:
-      "Engineering, business, design — we need diverse skills to build a winning team.",
+      "Engineering, business, design. We need diverse skills to build a winning team.",
     icon: Palette,
   },
   {
@@ -152,7 +152,7 @@ export function JoinContent() {
           className="mx-auto mt-4 max-w-xl text-muted"
           delay={0.2}
         >
-          Fill out our interest form and we&apos;ll reach out with next steps. Recruitment is ongoing — apply anytime.
+          Fill out our interest form and we&apos;ll reach out with next steps. Recruitment is ongoing. Apply anytime.
         </RevealText>
         <div className="mt-8">
           <MagneticButton>

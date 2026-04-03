@@ -41,10 +41,10 @@ export default function TeamPage() {
       {/* Hero banner */}
       <section className="relative flex min-h-[45vh] items-end pb-16 pt-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface/80 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(14,165,233,0.08)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(200,149,46,0.08)_0%,_transparent_60%)]" />
 
         <div className="relative mx-auto max-w-7xl px-6">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#0EA5E9] hero-fade-in">
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-[#C8952E] hero-fade-in">
             Leadership
           </p>
           <h1
@@ -57,7 +57,7 @@ export default function TeamPage() {
             className="mt-4 max-w-xl text-lg leading-relaxed text-muted hero-fade-in"
             style={{ animationDelay: "0.25s" }}
           >
-            The people steering Spartan Racing forward — from strategy and
+            The people steering Spartan Racing forward, from strategy and
             operations to every subteam on the shop floor.
           </p>
         </div>

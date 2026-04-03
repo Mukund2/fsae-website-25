@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: CarDetailPageProps): Promise<
   if (!car) return { title: "Car Not Found" };
   return {
     title: `${car.name} | SJSU Spartan Racing`,
-    description: `${car.name} (${car.years})${car.motor ? ` — ${car.motor}` : ""}`,
+    description: `${car.name} (${car.years})${car.motor ? ` - ${car.motor}` : ""}`,
   };
 }
 

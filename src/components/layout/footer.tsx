@@ -78,9 +78,6 @@ export function Footer() {
               <span className="text-gold">SPARTAN</span>{" "}
               <span className="text-foreground">RACING</span>
             </h3>
-            <p className="mt-1 text-sm text-muted">
-              Design. Build. Test. Compete.
-            </p>
           </div>
 
           {/* Social Icons */}
@@ -100,7 +97,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted hover:border-gold/40 hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="flex items-center justify-center text-muted hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               >
                 <Icon size={18} />
               </a>

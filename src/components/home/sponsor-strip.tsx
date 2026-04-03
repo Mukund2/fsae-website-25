@@ -1,6 +1,8 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Marquee } from "@/components/animation/marquee";
 
 interface Sponsor {
@@ -69,11 +71,11 @@ function SponsorItem({ sponsor }: { sponsor: Sponsor }) {
       alt={sponsor.name}
       width={140}
       height={48}
-      className="h-7 w-auto object-contain opacity-40 hover:opacity-80 sm:h-9"
+      className="h-7 w-auto object-contain opacity-40 sm:h-9"
       style={{ filter: "grayscale(100%)" }}
     />
   ) : (
-    <span className="whitespace-nowrap font-display text-base uppercase tracking-[0.15em] text-foreground/30 hover:text-foreground/70 sm:text-lg">
+    <span className="whitespace-nowrap font-display text-base uppercase tracking-[0.15em] text-foreground/30 sm:text-lg">
       {sponsor.name}
     </span>
   );
@@ -89,19 +91,107 @@ function SponsorItem({ sponsor }: { sponsor: Sponsor }) {
   return <span className="flex items-center">{inner}</span>;
 }
 
+function animateElement(
+  el: HTMLElement,
+  from: { x?: number; y?: number; opacity?: number },
+  to: { x?: number; y?: number; opacity?: number },
+  duration: number,
+  delay: number
+) {
+  const startX = from.x ?? 0;
+  const startY = from.y ?? 0;
+  const startO = from.opacity ?? 0;
+  const endX = to.x ?? 0;
+  const endY = to.y ?? 0;
+  const endO = to.opacity ?? 1;
+
+  el.style.opacity = String(startO);
+  el.style.transform = `translate(${startX}px, ${startY}px)`;
+
+  setTimeout(() => {
+    const start = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+
+      const currentX = startX + (endX - startX) * eased;
+      const currentY = startY + (endY - startY) * eased;
+      const currentO = startO + (endO - startO) * eased;
+
+      el.style.opacity = String(currentO);
+      el.style.transform = `translate(${currentX}px, ${currentY}px)`;
+
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, delay);
+}
+
 export function SponsorStrip() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const animEls = section.querySelectorAll<HTMLElement>("[data-anim]");
+    animEls.forEach((el) => {
+      el.style.opacity = "0";
+      el.style.transform = "translateX(-40px)";
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            animEls.forEach((el, i) => {
+              animateElement(
+                el,
+                { x: -40, opacity: 0 },
+                { x: 0, opacity: 1 },
+                600,
+                i * 100
+              );
+            });
+            observer.disconnect();
+          }
+        }
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="w-full bg-background py-20">
-      {/* Top fade from background into this section */}
-      <div className="mx-auto max-w-6xl px-6">
-        <h2 className="text-center font-mono text-[11px] uppercase tracking-[0.3em] text-muted">
-          Trusted by Our Sponsors
-        </h2>
+    <section ref={sectionRef} className="w-full bg-white py-20">
+      <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
+          <div data-anim>
+            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[0.95] tracking-tight">
+              <span className="font-bold text-foreground">Trusted by</span>
+              <br />
+              <span className="font-light text-foreground/40">Our Sponsors</span>
+            </h2>
+          </div>
+          <Link
+            href="/sponsors"
+            data-anim
+            className="inline-flex items-center gap-2 font-mono text-[13px] uppercase tracking-[0.15em] text-gold"
+          >
+            View All Sponsors
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gold">
+              <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </Link>
+        </div>
       </div>
 
       <div className="relative mt-10">
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-background to-transparent sm:w-52" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-background to-transparent sm:w-52" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-white to-transparent sm:w-52" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-white to-transparent sm:w-52" />
 
         <Marquee speed={120} gap="gap-16 sm:gap-20">
           {SPONSORS.map((sponsor) => (

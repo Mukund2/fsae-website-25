@@ -12,92 +12,85 @@ const STATS = [
   { value: "85", label: "mph top speed" },
 ] as const;
 
+function animateElement(
+  el: HTMLElement,
+  from: { x?: number; y?: number; opacity?: number },
+  to: { x?: number; y?: number; opacity?: number },
+  duration: number,
+  delay: number
+) {
+  const startX = from.x ?? 0;
+  const startY = from.y ?? 0;
+  const startO = from.opacity ?? 0;
+  const endX = to.x ?? 0;
+  const endY = to.y ?? 0;
+  const endO = to.opacity ?? 1;
+
+  el.style.opacity = String(startO);
+  el.style.transform = `translate(${startX}px, ${startY}px)`;
+
+  setTimeout(() => {
+    const start = performance.now();
+    const tick = (now: number) => {
+      const elapsed = now - start;
+      const progress = Math.min(elapsed / duration, 1);
+      // cubic ease-out
+      const eased = 1 - Math.pow(1 - progress, 3);
+
+      const currentX = startX + (endX - startX) * eased;
+      const currentY = startY + (endY - startY) * eased;
+      const currentO = startO + (endO - startO) * eased;
+
+      el.style.opacity = String(currentO);
+      el.style.transform = `translate(${currentX}px, ${currentY}px)`;
+
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }, delay);
+}
+
 export function CarShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const statsRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
-    const content = contentRef.current;
-    const stats = statsRef.current;
-    if (!section || !content || !stats) return;
+    if (!section) return;
 
-    // Initial state: content off-screen right
-    content.style.opacity = "0";
-    content.style.transform = "translateX(120px)";
-
-    // Stats hidden, scaled down
-    const statEls = stats.querySelectorAll<HTMLElement>(".stat-item");
-    statEls.forEach((el) => {
+    const animEls = section.querySelectorAll<HTMLElement>("[data-anim]");
+    animEls.forEach((el) => {
       el.style.opacity = "0";
-      el.style.transform = "scale(0.3) translateY(40px)";
+      el.style.transform = "translateX(-40px)";
     });
 
-    // Slide in animation using rAF
-    const animateSlideIn = (
-      el: HTMLElement,
-      delay: number,
-      fromX: number,
-      duration = 500
-    ) => {
-      setTimeout(() => {
-        const start = performance.now();
-        const tick = (now: number) => {
-          const elapsed = now - start;
-          const progress = Math.min(elapsed / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 4);
-
-          el.style.opacity = String(eased);
-          el.style.transform = `translateX(${fromX * (1 - eased)}px)`;
-
-          if (progress < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      }, delay);
-    };
-
-    // Slam animation: fast scale + overshoot for a snap/drop feel
-    const animateSlam = (el: HTMLElement, delay: number) => {
-      setTimeout(() => {
-        const start = performance.now();
-        const duration = 300;
-        const tick = (now: number) => {
-          const elapsed = now - start;
-          const t = Math.min(elapsed / duration, 1);
-
-          // Back-ease-out: overshoots to ~1.08 then settles to 1.0
-          const c1 = 1.7;
-          const c3 = c1 + 1;
-          const eased = 1 + c3 * Math.pow(t - 1, 3) + c1 * Math.pow(t - 1, 2);
-
-          const opacity = Math.min(t * 4, 1); // fast fade in
-          const scaleVal = 0.3 + 0.7 * eased;
-          const yOffset = 40 * (1 - eased);
-
-          el.style.opacity = String(opacity);
-          el.style.transform = `scale(${scaleVal}) translateY(${yOffset}px)`;
-
-          if (t < 1) requestAnimationFrame(tick);
-          else {
-            el.style.opacity = "1";
-            el.style.transform = "scale(1) translateY(0)";
-          }
-        };
-        requestAnimationFrame(tick);
-      }, delay);
-    };
+    const statEls = section.querySelectorAll<HTMLElement>("[data-stat]");
+    statEls.forEach((el) => {
+      el.style.opacity = "0";
+      el.style.transform = "translate(0px, 30px)";
+    });
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            // Slide in right column
-            animateSlideIn(content, 0, 120);
+            animEls.forEach((el, i) => {
+              animateElement(
+                el,
+                { x: -40, opacity: 0 },
+                { x: 0, opacity: 1 },
+                600,
+                i * 100
+              );
+            });
 
-            // Slam in stats with stagger
             statEls.forEach((el, i) => {
-              animateSlam(el, 200 + i * 100);
+              animateElement(
+                el,
+                { y: 30, opacity: 0 },
+                { y: 0, opacity: 1 },
+                600,
+                300 + i * 100
+              );
             });
 
             observer.disconnect();
@@ -112,40 +105,46 @@ export function CarShowcase() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full bg-background">
-      <div className="mx-auto max-w-7xl px-6 py-32 lg:px-12 lg:py-40">
-        <div className="grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-20">
-          {/* LEFT: 3D Car Model, no box, naturally integrated */}
-          <div className="flex items-center justify-center">
-            <div className="relative aspect-square w-full max-w-[520px]">
-              <HeroScene />
-            </div>
-          </div>
-
-          {/* RIGHT: Text content */}
-          <div ref={contentRef} className="flex flex-col justify-center">
-            <h2 className="font-display text-[clamp(3rem,6vw,5.5rem)] uppercase leading-[0.95] tracking-tight text-foreground">
-              Built to Win
+    <section ref={sectionRef} className="w-full bg-white">
+      <div className="mx-auto max-w-7xl px-6 pt-24 pb-20 lg:px-12 lg:pt-32 lg:pb-28">
+        {/* Top: heading left, description right */}
+        <div className="flex flex-col justify-between gap-8 lg:flex-row lg:items-end">
+          <div data-anim>
+            <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold">
+              Formula SAE
+            </span>
+            <h2 className="mt-3 font-display text-[clamp(2.5rem,5vw,4.5rem)] uppercase leading-[0.95] tracking-tight">
+              <span className="font-bold text-foreground">Spartan Racing</span>
+              <br />
+              <span className="font-light text-foreground/40">Built to Win</span>
             </h2>
-
-            {/* Stats grid - slams in */}
-            <div
-              ref={statsRef}
-              className="mt-14 grid grid-cols-2 gap-x-12 gap-y-10"
-            >
-              {STATS.map((stat) => (
-                <div key={stat.label} className="stat-item">
-                  <span className="block font-display text-[clamp(2rem,4vw,3.2rem)] leading-none tracking-tight text-gold">
-                    {stat.value}
-                  </span>
-                  <span className="mt-2 block font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
-            </div>
-
           </div>
+          <p data-anim className="max-w-md font-body text-base leading-relaxed text-muted lg:pb-2">
+            San Jos&eacute; State University&apos;s Formula SAE team designs,
+            builds, and races high-performance electric vehicles. Over 100
+            members push the boundaries of engineering every season.
+          </p>
+        </div>
+
+        {/* 3D Car Model */}
+        <div data-anim className="mt-12">
+          <div className="relative aspect-[16/9] w-full overflow-hidden">
+            <HeroScene />
+          </div>
+        </div>
+
+        {/* Stats row */}
+        <div className="mt-12 grid grid-cols-2 gap-8 sm:grid-cols-4 sm:gap-12">
+          {STATS.map((stat) => (
+            <div key={stat.label} data-stat>
+              <span className="block font-display text-[clamp(2rem,4vw,3.2rem)] leading-none tracking-tight text-gold">
+                {stat.value}
+              </span>
+              <span className="mt-2 block font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
+                {stat.label}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </section>

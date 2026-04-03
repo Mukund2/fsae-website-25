@@ -1,7 +1,7 @@
-import { Camera } from "lucide-react";
-import { SOCIAL_LINKS } from "@/lib/constants";
+import Link from "next/link";
+import { NAV_LINKS, SOCIAL_LINKS } from "@/lib/constants";
 
-function InstagramIcon({ size = 16 }: { size?: number }) {
+function InstagramIcon({ size = 18 }: { size?: number }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -21,7 +21,7 @@ function InstagramIcon({ size = 16 }: { size?: number }) {
   );
 }
 
-function LinkedinIcon({ size = 16 }: { size?: number }) {
+function LinkedinIcon({ size = 18 }: { size?: number }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +41,7 @@ function LinkedinIcon({ size = 16 }: { size?: number }) {
   );
 }
 
-function YoutubeIcon({ size = 16 }: { size?: number }) {
+function YoutubeIcon({ size = 18 }: { size?: number }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -60,36 +60,60 @@ function YoutubeIcon({ size = 16 }: { size?: number }) {
   );
 }
 
+function FlickrIcon({ size = 18 }: { size?: number }) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <circle cx="7" cy="12" r="4" />
+      <circle cx="17" cy="12" r="4" />
+    </svg>
+  );
+}
+
 const socialIcons = [
   { href: SOCIAL_LINKS.instagram, icon: InstagramIcon, label: "Instagram" },
   { href: SOCIAL_LINKS.linkedin, icon: LinkedinIcon, label: "LinkedIn" },
-  { href: SOCIAL_LINKS.flickr, icon: Camera, label: "Flickr" },
+  { href: SOCIAL_LINKS.flickr, icon: FlickrIcon, label: "Flickr" },
   { href: SOCIAL_LINKS.youtube, icon: YoutubeIcon, label: "YouTube" },
 ] as const;
 
 export function Footer() {
   return (
-    <footer className="bg-background">
-      <div className="mx-auto max-w-7xl px-6 py-8">
-        <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-          {/* Brand */}
-          <div>
-            <h3 className="font-display text-2xl tracking-wider">
-              <span className="text-gold">SPARTAN</span>{" "}
-              <span className="text-foreground">RACING</span>
+    <footer className="border-t-2 border-gold bg-white">
+      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-12">
+        <div className="flex flex-col items-center gap-10 lg:flex-row lg:justify-between">
+          {/* Left: Logo treatment */}
+          <div className="shrink-0">
+            <h3 className="font-display text-3xl uppercase tracking-tight">
+              <span className="font-bold text-foreground">Spartan</span>{" "}
+              <span className="font-light text-foreground/40">Racing</span>
             </h3>
           </div>
 
-          {/* Social Icons */}
-          <div className="flex items-center gap-4">
-            <a
-              href="https://www.flickr.com/photos/89473850@N02/albums/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mr-2 font-mono text-xs uppercase tracking-widest text-muted hover:text-gold"
-            >
-              View our gallery on Flickr
-            </a>
+          {/* Center: Page links */}
+          <nav className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+            {NAV_LINKS.map(({ label, href }) => (
+              <Link
+                key={href}
+                href={href}
+                className="font-mono text-[12px] uppercase tracking-[0.15em] text-muted"
+              >
+                {label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Right: Social icons (no circles) */}
+          <div className="flex items-center gap-5">
             {socialIcons.map(({ href, icon: Icon, label }) => (
               <a
                 key={label}
@@ -97,7 +121,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="flex items-center justify-center text-muted hover:text-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+                className="text-muted"
               >
                 <Icon size={18} />
               </a>
@@ -106,9 +130,8 @@ export function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="mt-6 border-t border-border pt-4 text-center text-xs text-muted">
-          &copy; {new Date().getFullYear()} SJSU Spartan Racing. All rights
-          reserved.
+        <div className="mt-10 border-t border-border pt-6 text-center font-mono text-[11px] uppercase tracking-[0.15em] text-muted">
+          &copy; {new Date().getFullYear()} SJSU Spartan Racing. All rights reserved.
         </div>
       </div>
     </footer>

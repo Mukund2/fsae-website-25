@@ -13,23 +13,23 @@ interface Lead {
 }
 
 const executiveBoard: Lead[] = [
-  { name: "Hiren Patel", role: "Chief Engineer", linkedin: "" },
-  { name: "Will Kittinger", role: "President", linkedin: "" },
-  { name: "Ally Almiranez", role: "Treasurer", linkedin: "" },
-  { name: "Angel Lopez", role: "Project Manager", linkedin: "" },
-  { name: "Aidan Garcia", role: "Safety Officer", linkedin: "" },
+  { name: "Hiren Patel", role: "Chief Engineer", linkedin: "https://www.linkedin.com/in/hirenspatel1" },
+  { name: "Will Kittinger", role: "President", linkedin: "https://www.linkedin.com/in/william-kittinger/" },
+  { name: "Ally Almiranez", role: "Treasurer", linkedin: "https://www.linkedin.com/in/ally-almiranez" },
+  { name: "Angel Lopez", role: "Project Manager", linkedin: "https://www.linkedin.com/in/angel-lopez200" },
+  { name: "Aidan Garcia", role: "Safety Officer", linkedin: "https://www.linkedin.com/in/aidan-garcia-000b1832a/" },
 ];
 
 const subteamLeads: Lead[] = [
-  { name: "Damon Haberman", role: "Aerodynamics Lead", linkedin: "" },
-  { name: "Hayat Dlala", role: "Business Lead", linkedin: "" },
-  { name: "Emmett Miura", role: "Chassis Lead", linkedin: "" },
-  { name: "William La Poll", role: "Electronics Lead", linkedin: "" },
-  { name: "Harleen Sandhu", role: "Software Lead", linkedin: "" },
-  { name: "Nicholas Ng", role: "Suspension Lead", linkedin: "" },
-  { name: "Aidan Garcia", role: "Powertrain Co-Lead", linkedin: "" },
-  { name: "Kevin Hong", role: "Powertrain Co-Lead", linkedin: "" },
-  { name: "Shaun Gilmore", role: "Research & Development Lead", linkedin: "" },
+  { name: "Damon Haberman", role: "Aerodynamics Lead", linkedin: "https://www.linkedin.com/in/damon-haberman" },
+  { name: "Hayat Dlala", role: "Business Lead", linkedin: "https://www.linkedin.com/in/hayat-dlala" },
+  { name: "Emmett Miura", role: "Chassis Lead", linkedin: "https://www.linkedin.com/in/emmett-miura-6b0416284/" },
+  { name: "William La Poll", role: "Electronics Lead", linkedin: "https://www.linkedin.com/in/william-la-poll-69428633b" },
+  { name: "Harleen Sandhu", role: "Software Lead" },
+  { name: "Nicholas Ng", role: "Suspension Lead", linkedin: "https://www.linkedin.com/in/nicholasng762/" },
+  { name: "Aidan Garcia", role: "Powertrain Co-Lead", linkedin: "https://www.linkedin.com/in/aidan-garcia-000b1832a/" },
+  { name: "Kevin Hong", role: "Powertrain Co-Lead", linkedin: "https://www.linkedin.com/in/kevinh0ng" },
+  { name: "Shaun Gilmore", role: "Research & Development Lead", linkedin: "https://www.linkedin.com/in/shaun-gilmore-32g" },
 ];
 
 function LinkedInIcon() {

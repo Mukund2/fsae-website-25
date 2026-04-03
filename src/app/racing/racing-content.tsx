@@ -53,7 +53,7 @@ const staticEvents = [
     tagline: "Every dollar justified.",
     description:
       "Demonstrate cost-effective manufacturing and material choices with a comprehensive Bill of Materials. Teams document every component, process, and assembly step, proving they can build a competitive vehicle within real-world budget constraints. Judges evaluate both accuracy and the team's understanding of manufacturing economics.",
-    image: "/images/events/comp-2.jpg",
+    image: "/images/flickr/driver-day-1.jpg",
     imageAlt: "Team working on cost analysis and car assembly",
   },
 ];
@@ -132,7 +132,7 @@ export function RacingContent() {
       {/* ── Hero ───────────────────────────────────────────── */}
       <section className="relative flex h-[75vh] items-end overflow-hidden pb-16 pt-32">
         <Image
-          src="/images/events/comp-1.jpg"
+          src="/images/flickr/comp-action-1.jpg"
           alt="Spartan Racing competing at Formula SAE"
           fill
           priority
@@ -185,7 +185,7 @@ export function RacingContent() {
 
           <div className="sr-reveal relative aspect-[4/3] overflow-hidden" data-delay="0.15">
             <Image
-              src="/images/events/comp-2.jpg"
+              src="/images/flickr/comp-action-4.jpg"
               alt="Spartan Racing car on track at Formula SAE competition"
               fill
               className="object-cover"
@@ -356,40 +356,38 @@ export function RacingContent() {
       })}
 
       {/* ── Results section ─────────────────────────────────── */}
-      <section className="bg-surface py-20 md:py-32">
+      <section className="py-20 md:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <span className="sr-slide-left font-mono text-xs uppercase tracking-[0.25em] text-gold">
-            Key Achievements
+            Results
           </span>
           <h2 className="sr-slide-left mt-2 font-display text-3xl uppercase tracking-tight md:text-4xl" data-delay="0.1">
             <span className="font-bold">Our</span>{" "}
-            <span className="font-light text-foreground/40">Results</span>
+            <span className="font-light text-foreground/40">Record</span>
           </h2>
 
-          <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mt-12 divide-y divide-border">
             {keyResults.map((result, idx) => (
               <div
                 key={result.context}
-                className="sr-reveal flex flex-col border-t-2 border-gold pt-6"
-                data-delay={String(idx * 0.1)}
+                className="sr-reveal flex flex-col gap-1 py-6 sm:flex-row sm:items-baseline sm:gap-6"
+                data-delay={String(idx * 0.08)}
               >
-                <div className="flex items-baseline gap-2">
-                  <span className="font-display text-6xl tracking-tight md:text-7xl">
-                    {result.stat}
-                  </span>
-                  <span className="font-display text-2xl uppercase text-muted md:text-3xl">
-                    {result.label}
-                  </span>
-                </div>
-                <p className="mt-3 font-mono text-xs uppercase tracking-[0.2em] text-muted">
+                <span className="font-display text-4xl tracking-tight md:text-5xl">
+                  {result.stat}
+                </span>
+                <span className="font-display text-lg uppercase text-foreground/70">
+                  {result.label}
+                </span>
+                <span className="font-mono text-xs uppercase tracking-[0.2em] text-muted sm:ml-auto">
                   {result.context}
-                </p>
+                </span>
                 {result.sub.length > 0 && (
-                  <div className="mt-4 flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-3">
                     {result.sub.map((s) => (
                       <span
                         key={s}
-                        className="bg-gold/10 px-3 py-1 font-mono text-[11px] uppercase tracking-wider text-gold"
+                        className="font-mono text-[11px] uppercase tracking-wider text-gold"
                       >
                         {s}
                       </span>

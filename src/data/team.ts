@@ -64,14 +64,14 @@ export const subteams: Subteam[] = [
     abbreviation: "PWR",
     description:
       "We design the systems that make the car move, such as the electric motor, accumulator (battery), and final drive.",
-    image: "/images/cars/car-detail.jpg",
+    image: "/images/flickr/driver-day-3.jpg",
   },
   {
     name: "Chassis",
     abbreviation: "CHAS",
     description:
       "We design and create a rigid skeleton for the car so that other subteams can mount parts onto it and so that the car can handle well.",
-    image: "/images/cars/car-workshop.jpg",
+    image: "/images/flickr/driver-day-5.jpg",
   },
   {
     name: "Suspension",
@@ -92,14 +92,14 @@ export const subteams: Subteam[] = [
     abbreviation: "SOFT",
     description:
       "We program the electronic components so they behave properly in different states. We are also responsible for data collection and logging.",
-    image: "/images/events/comp-1.jpg",
+    image: "/images/flickr/comp-action-2.jpg",
   },
   {
     name: "Business",
     abbreviation: "BIZ",
     description:
       "We handle data analytics, marketing, public relations, finances, and logistics for the team.",
-    image: "/images/events/comp-2.jpg",
+    image: "/images/flickr/comp-action-3.jpg",
   },
   {
     name: "Research & Development",

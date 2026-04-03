@@ -157,7 +157,7 @@ export default function ContactPage() {
           {/* Right -- image */}
           <div className="relative aspect-[4/3] overflow-hidden">
             <Image
-              src="/images/events/comp-1.jpg"
+              src="/images/flickr/comp-action-1.jpg"
               alt="SJSU Spartan Racing at competition"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -198,10 +198,10 @@ export default function ContactPage() {
           </p>
           <div className="mt-8">
             <Link
-              href="mailto:sjsu.fsae@gmail.com"
+              href="/join"
               className="inline-flex items-center gap-2 bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-background hover:bg-gold/90"
             >
-              Reach Out
+              Join Us
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-background">
                 <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>

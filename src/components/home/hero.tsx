@@ -1,14 +1,22 @@
 "use client";
 
+import Image from "next/image";
+
 export function Hero() {
   return (
     <section className="relative flex h-svh w-full items-center justify-center overflow-hidden bg-[#0A0A0A]">
-      {/* Video Placeholder — full background */}
-      <div className="absolute inset-0 flex items-center justify-center bg-[#1A1A1A] border border-white/5">
-        <span className="font-mono text-[13px] text-white/20 tracking-wide text-center px-6">
-          VIDEO PLACEHOLDER — Car approaching camera at speed
-        </span>
-      </div>
+      {/* Background image */}
+      <Image
+        src="/images/sr16/car-action-1.jpg"
+        alt="Spartan Racing car in action"
+        fill
+        className="object-cover"
+        sizes="100vw"
+        priority
+      />
+
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-[#0A0A0A]/60 to-transparent" />
 
       {/* Center content overlay */}
       <div className="relative z-10 flex flex-col items-center text-center">
@@ -35,8 +43,21 @@ export function Hero() {
         >
           Formula SAE — San José State University
         </p>
+
+        {/* Stats ticker */}
+        <p
+          className="mt-6 font-mono text-[11px] uppercase tracking-[0.3em] text-white/40"
+          style={{
+            opacity: 0,
+            animation: "heroFadeIn 0.8s ease-out 2.4s forwards",
+          }}
+        >
+          35+ Years · 16 Cars Built · 100+ Members · 2nd Overall 2025
+        </p>
       </div>
 
+      {/* Bottom scan line */}
+      <div className="absolute bottom-0 left-0 z-10 h-px w-full bg-[#0EA5E9]/30" />
     </section>
   );
 }

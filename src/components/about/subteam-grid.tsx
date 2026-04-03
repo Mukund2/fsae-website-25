@@ -63,6 +63,13 @@ export function SubteamGrid({ subteams }: SubteamGridProps) {
           {/* Gold accent line at top — animated via CSS keyframes when .revealed */}
           <div className="gold-accent-line absolute top-0 left-0 h-[2px] w-full origin-left scale-x-0 bg-gold" />
 
+          {/* Orange arrow */}
+          <div className="absolute top-4 right-4">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gold">
+              <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+
           {/* Content overlay */}
           <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
             <h3 className="font-display text-2xl uppercase tracking-tight text-white md:text-3xl">

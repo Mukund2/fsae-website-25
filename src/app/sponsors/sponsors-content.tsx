@@ -5,7 +5,7 @@ import Image from "next/image";
 import { sponsors } from "@/data/sponsors";
 import type { Sponsor } from "@/types";
 
-/* ─── Tier config ─── */
+/* --- Tier config --- */
 const TIER_ORDER = ["title", "platinum", "gold", "silver", "bronze", "partner"] as const;
 
 const TIER_META: Record<
@@ -50,7 +50,7 @@ const TIER_META: Record<
   },
 };
 
-/* ─── Scroll-reveal hook using IntersectionObserver + RAF ─── */
+/* --- Scroll-reveal hook using IntersectionObserver + RAF --- */
 function useScrollReveal() {
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -58,10 +58,14 @@ function useScrollReveal() {
     const container = containerRef.current;
     if (!container) return;
 
-    const elements = container.querySelectorAll<HTMLElement>("[data-reveal]");
+    const elements = container.querySelectorAll<HTMLElement>("[data-reveal], .sr-slide-left");
 
     // Set initial hidden state via direct DOM manipulation (no CSS transitions)
     elements.forEach((el) => {
+      if (el.classList.contains("sr-slide-left")) {
+        // sr-slide-left is handled by CSS classes
+        return;
+      }
       el.style.opacity = "0";
       el.style.transform = "translateY(32px)";
     });
@@ -71,6 +75,13 @@ function useScrollReveal() {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
           const el = entry.target as HTMLElement;
+
+          if (el.classList.contains("sr-slide-left")) {
+            el.classList.add("sr-revealed");
+            observer.unobserve(el);
+            return;
+          }
+
           const delay = parseInt(el.dataset.revealDelay || "0", 10);
 
           setTimeout(() => {
@@ -104,7 +115,16 @@ function useScrollReveal() {
   return containerRef;
 }
 
-/* ─── Sponsor card ─── */
+/* --- Orange arrow --- */
+function OrangeArrow({ className = "" }: { className?: string }) {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className={`text-gold ${className}`}>
+      <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/* --- Sponsor card --- */
 function SponsorCard({
   sponsor,
   tierMeta,
@@ -133,9 +153,13 @@ function SponsorCard({
     <div
       data-reveal
       data-reveal-delay={index * 60}
-      className={`group flex flex-col items-center justify-center border border-border/50 bg-surface ${tierMeta.cardSize} hover:border-gold/40 hover:shadow-[0_0_24px_rgba(255,128,0,0.08)]`}
+      className={`group relative flex flex-col items-center justify-center border border-border/50 bg-surface ${tierMeta.cardSize} hover:border-gold/40 hover:shadow-[0_0_24px_rgba(255,128,0,0.08)]`}
     >
       {inner}
+      {/* Orange arrow on hover */}
+      <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100" style={{ willChange: "opacity" }}>
+        <OrangeArrow />
+      </div>
     </div>
   );
 
@@ -155,7 +179,7 @@ function SponsorCard({
   return card;
 }
 
-/* ─── Tier section ─── */
+/* --- Tier section --- */
 function TierSection({ tier }: { tier: string }) {
   const tierSponsors = sponsors.filter((s) => s.tier === tier);
   if (tierSponsors.length === 0) return null;
@@ -187,21 +211,30 @@ function TierSection({ tier }: { tier: string }) {
   );
 }
 
-/* ─── Main content ─── */
+/* --- Main content --- */
 export function SponsorsContent() {
   const revealRef = useScrollReveal();
 
   return (
     <div ref={revealRef}>
       {/* Hero */}
-      <section className="relative flex min-h-[50vh] items-center overflow-hidden bg-surface pt-24">
+      <section className="relative flex h-[75vh] items-center overflow-hidden bg-surface pt-24">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,128,0,0.06)_0%,_transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-6">
+          <p
+            data-reveal
+            className="font-mono text-xs uppercase tracking-[0.3em] text-gold"
+          >
+            Partners & Supporters
+          </p>
           <h1
             data-reveal
-            className="font-display text-5xl uppercase tracking-tight md:text-7xl"
+            data-reveal-delay="100"
+            className="mt-3 font-display text-5xl uppercase tracking-tight md:text-7xl"
           >
-            Our Sponsors
+            <span className="font-bold">Our</span>
+            <br />
+            <span className="font-light text-foreground/40">Sponsors</span>
           </h1>
           <p
             data-reveal
@@ -226,7 +259,9 @@ export function SponsorsContent() {
             data-reveal
             className="font-display text-3xl uppercase tracking-tight md:text-5xl"
           >
-            Become a Sponsor
+            <span className="font-bold">Become a</span>
+            <br />
+            <span className="font-light text-foreground/40">Sponsor</span>
           </h2>
           <p
             data-reveal
@@ -239,9 +274,12 @@ export function SponsorsContent() {
           <div data-reveal data-reveal-delay="300" className="mt-10">
             <a
               href="mailto:sjsu.fsae@gmail.com"
-              className="inline-block bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-background hover:bg-gold/90"
+              className="inline-flex items-center gap-2 bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-background hover:bg-gold/90"
             >
               Contact Us
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-background">
+                <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </a>
           </div>
         </div>

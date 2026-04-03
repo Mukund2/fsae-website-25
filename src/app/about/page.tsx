@@ -12,7 +12,7 @@ export default function SubteamsPage() {
   return (
     <>
       {/* Hero banner */}
-      <section className="relative flex min-h-[45vh] items-end pb-16 pt-32 overflow-hidden">
+      <section className="relative flex h-[75vh] items-end pb-16 pt-32 overflow-hidden">
         {/* Gradient background */}
         <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface/80 to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,128,0,0.06)_0%,_transparent_60%)]" />
@@ -25,7 +25,9 @@ export default function SubteamsPage() {
             className="mt-3 font-display text-5xl uppercase tracking-tight md:text-7xl hero-fade-in"
             style={{ animationDelay: "0.1s" }}
           >
-            Our Team
+            <span className="font-bold">Our</span>
+            <br />
+            <span className="font-light text-foreground/40">Team</span>
           </h1>
           <p
             className="mt-4 max-w-xl text-lg leading-relaxed text-muted hero-fade-in"

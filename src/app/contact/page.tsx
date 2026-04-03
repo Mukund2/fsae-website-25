@@ -48,11 +48,19 @@ const socialItems = [
   },
 ];
 
+function OrangeArrow() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gold">
+      <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export default function ContactPage() {
   return (
     <>
       {/* Hero section with team photo background */}
-      <section className="relative flex min-h-[50vh] items-center justify-center overflow-hidden">
+      <section className="relative flex h-[75vh] items-center justify-center overflow-hidden">
         <Image
           src="/images/team/team-1.jpg"
           alt="SJSU Spartan Racing team"
@@ -70,27 +78,32 @@ export default function ContactPage() {
             className="mt-3 font-display text-5xl uppercase tracking-tight text-white md:text-7xl hero-fade-in"
             style={{ animationDelay: "0.1s" }}
           >
-            Contact Us
+            <span className="font-bold">Contact</span>
+            <br />
+            <span className="font-light text-white/40">Us</span>
           </h1>
         </div>
       </section>
 
       {/* Two-column info section */}
-      <section className="mx-auto max-w-7xl px-6 py-20 md:py-28">
+      <section className="bg-white mx-auto max-w-7xl px-6 py-20 md:py-28">
         <div className="grid gap-12 md:grid-cols-2 items-start">
-          {/* Left — contact info card */}
+          {/* Left -- contact info card */}
           <div className="border border-border bg-surface p-8 md:p-10 space-y-8">
             {/* Email */}
-            <div>
-              <h2 className="font-display text-xl uppercase tracking-tight">
-                Email
-              </h2>
-              <Link
-                href="mailto:sjsu.fsae@gmail.com"
-                className="mt-2 block font-mono text-sm text-gold hover:underline"
-              >
-                sjsu.fsae@gmail.com
-              </Link>
+            <div className="flex items-start justify-between">
+              <div>
+                <h2 className="font-display text-xl uppercase tracking-tight">
+                  Email
+                </h2>
+                <Link
+                  href="mailto:sjsu.fsae@gmail.com"
+                  className="mt-2 block font-mono text-sm text-gold hover:underline"
+                >
+                  sjsu.fsae@gmail.com
+                </Link>
+              </div>
+              <OrangeArrow />
             </div>
 
             {/* Address */}
@@ -141,7 +154,7 @@ export default function ContactPage() {
             </div>
           </div>
 
-          {/* Right — image */}
+          {/* Right -- image */}
           <div className="relative aspect-[4/3] overflow-hidden">
             <Image
               src="/images/events/comp-1.jpg"
@@ -175,7 +188,9 @@ export default function ContactPage() {
       <section className="bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-3xl px-6 text-center">
           <h2 className="font-display text-3xl uppercase tracking-tight md:text-4xl">
-            Want to Join?
+            <span className="font-bold">Want to</span>
+            <br />
+            <span className="font-light text-foreground/40">Join?</span>
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-muted">
             We&apos;re always looking for passionate engineers, designers, and
@@ -184,9 +199,12 @@ export default function ContactPage() {
           <div className="mt-8">
             <Link
               href="mailto:sjsu.fsae@gmail.com"
-              className="inline-block bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-background hover:bg-gold/90"
+              className="inline-flex items-center gap-2 bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-background hover:bg-gold/90"
             >
               Reach Out
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-background">
+                <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </Link>
           </div>
         </div>

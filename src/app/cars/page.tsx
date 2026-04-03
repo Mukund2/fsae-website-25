@@ -27,6 +27,14 @@ const TRACK_PATH = `
   C 55 1960, 100 1980, 100 2000
 `;
 
+function OrangeArrow() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gold">
+      <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 function RacetrackSurface() {
   return (
     <svg
@@ -216,16 +224,18 @@ function CheckeredLine({ label }: { label: string }) {
 export default function CarsPage() {
   return (
     <>
-      <section className="relative flex min-h-[40vh] items-center overflow-hidden bg-[#0A0A0A] pt-24">
+      <section className="relative flex h-[75vh] items-center overflow-hidden bg-[#0A0A0A] pt-24">
         <div className="relative mx-auto max-w-7xl px-6">
-          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/40">
+          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold">
             1989 - Present
           </p>
           <h1
             className="mt-3 font-display text-[clamp(3rem,7vw,6rem)] uppercase leading-[0.95] text-white"
             style={{ opacity: 0, animation: "heroFadeIn 0.8s ease-out 0.3s forwards" }}
           >
-            Our History
+            <span className="font-bold">Our</span>
+            <br />
+            <span className="font-light text-white/40">History</span>
           </h1>
           <p
             className="mt-4 max-w-lg font-body text-lg text-white/60"
@@ -308,11 +318,14 @@ function TimelineEntry({
                 {car.name}
               </h2>
             </div>
-            {car.battery && (
-              <span className="hidden whitespace-nowrap font-mono text-[10px] uppercase tracking-wider text-muted sm:inline">
-                EV
-              </span>
-            )}
+            <div className="flex items-center gap-2">
+              {car.battery && (
+                <span className="hidden whitespace-nowrap font-mono text-[10px] uppercase tracking-wider text-muted sm:inline">
+                  EV
+                </span>
+              )}
+              <OrangeArrow />
+            </div>
           </div>
 
           {car.image && (

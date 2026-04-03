@@ -12,7 +12,7 @@ function useScrollReveal() {
     const container = containerRef.current;
     if (!container) return;
 
-    const elements = container.querySelectorAll(".sr-reveal");
+    const elements = container.querySelectorAll(".sr-reveal, .sr-slide-left");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -35,6 +35,16 @@ function useScrollReveal() {
   }, []);
 
   return containerRef;
+}
+
+/* ── Orange arrow component ── */
+
+function OrangeArrow() {
+  return (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gold">
+      <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
 }
 
 /* ── Event data ────────────────────────────────────────────────────────── */
@@ -130,7 +140,7 @@ export function RacingContent() {
   return (
     <div ref={ref}>
       {/* ── Hero ───────────────────────────────────────────── */}
-      <section className="relative flex min-h-[60vh] items-end overflow-hidden pb-16 pt-32">
+      <section className="relative flex h-[75vh] items-end overflow-hidden pb-16 pt-32">
         <Image
           src="/images/events/comp-1.jpg"
           alt="Spartan Racing competing at Formula SAE"
@@ -145,7 +155,9 @@ export function RacingContent() {
             Formula SAE
           </span>
           <h1 className="sr-reveal font-display text-5xl uppercase tracking-tight md:text-7xl lg:text-8xl" data-delay="0.1">
-            Competition
+            <span className="font-bold">The</span>
+            <br />
+            <span className="font-light text-foreground/40">Competition</span>
           </h1>
           <p className="sr-reveal mt-4 max-w-2xl text-lg text-muted md:text-xl" data-delay="0.25">
             Designing, building, and racing formula-style cars against the best
@@ -155,14 +167,16 @@ export function RacingContent() {
       </section>
 
       {/* ── What is Formula SAE? ───────────────────────────── */}
-      <section className="mx-auto max-w-7xl px-6 py-20 md:py-32">
+      <section className="bg-white mx-auto max-w-7xl px-6 py-20 md:py-32">
         <div className="grid items-center gap-12 md:grid-cols-2">
           <div className="flex flex-col gap-6">
-            <span className="sr-reveal font-mono text-xs uppercase tracking-[0.25em] text-gold">
+            <span className="sr-slide-left font-mono text-xs uppercase tracking-[0.25em] text-gold">
               The Competition
             </span>
-            <h2 className="sr-reveal font-display text-3xl uppercase tracking-tight md:text-4xl" data-delay="0.1">
-              What is Formula SAE?
+            <h2 className="sr-slide-left font-display text-3xl uppercase tracking-tight md:text-4xl" data-delay="0.1">
+              <span className="font-bold">What is</span>
+              <br />
+              <span className="font-light text-foreground/40">Formula SAE?</span>
             </h2>
             <p className="sr-reveal leading-relaxed text-muted" data-delay="0.2">
               Formula SAE is the world&apos;s premier student engineering
@@ -193,7 +207,7 @@ export function RacingContent() {
       {/* ── STATIC EVENTS heading ──────────────────────────── */}
       <section className="mx-auto max-w-7xl px-6 pb-8">
         <div className="flex items-center gap-6">
-          <span className="sr-reveal font-mono text-xs uppercase tracking-[0.25em] text-gold">
+          <span className="sr-slide-left font-mono text-xs uppercase tracking-[0.25em] text-gold">
             Static Events
           </span>
           <div className="sr-reveal h-px flex-1 bg-border" data-delay="0.1" />
@@ -207,7 +221,7 @@ export function RacingContent() {
             <span className="sr-reveal font-mono text-[11px] uppercase tracking-[0.3em] text-muted">
               01
             </span>
-            <h2 className="sr-reveal font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
+            <h2 className="sr-slide-left font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
               {staticEvents[0].name}
             </h2>
             <p className="sr-reveal font-display text-lg text-gold md:text-xl" data-delay="0.1">
@@ -216,6 +230,9 @@ export function RacingContent() {
             <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
               {staticEvents[0].description}
             </p>
+            <div className="sr-reveal" data-delay="0.2">
+              <OrangeArrow />
+            </div>
           </div>
           <div className="sr-reveal relative aspect-[4/3] overflow-hidden" data-delay="0.1">
             <Image
@@ -243,7 +260,7 @@ export function RacingContent() {
             <span className="sr-reveal font-mono text-[11px] uppercase tracking-[0.3em] text-muted">
               02
             </span>
-            <h2 className="sr-reveal font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
+            <h2 className="sr-slide-left font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
               {staticEvents[1].name}
             </h2>
             <p className="sr-reveal font-display text-lg text-gold md:text-xl" data-delay="0.1">
@@ -252,6 +269,9 @@ export function RacingContent() {
             <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
               {staticEvents[1].description}
             </p>
+            <div className="sr-reveal" data-delay="0.2">
+              <OrangeArrow />
+            </div>
           </div>
         </div>
       </section>
@@ -280,7 +300,7 @@ export function RacingContent() {
       {/* ── DYNAMIC EVENTS heading ─────────────────────────── */}
       <section className="mx-auto max-w-7xl px-6 pb-8 pt-20 md:pt-32">
         <div className="flex items-center gap-6">
-          <span className="sr-reveal font-mono text-xs uppercase tracking-[0.25em] text-gold">
+          <span className="sr-slide-left font-mono text-xs uppercase tracking-[0.25em] text-gold">
             Dynamic Events
           </span>
           <div className="sr-reveal h-px flex-1 bg-border" data-delay="0.1" />
@@ -309,7 +329,7 @@ export function RacingContent() {
                     <span className="sr-reveal font-mono text-[11px] uppercase tracking-[0.3em] text-muted">
                       {number}
                     </span>
-                    <h2 className="sr-reveal font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
+                    <h2 className="sr-slide-left font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
                       {event.name}
                     </h2>
                     <p className="sr-reveal font-display text-lg text-gold md:text-xl" data-delay="0.1">
@@ -318,6 +338,9 @@ export function RacingContent() {
                     <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
                       {event.description}
                     </p>
+                    <div className="sr-reveal" data-delay="0.2">
+                      <OrangeArrow />
+                    </div>
                   </div>
                 </>
               ) : (
@@ -326,7 +349,7 @@ export function RacingContent() {
                     <span className="sr-reveal font-mono text-[11px] uppercase tracking-[0.3em] text-muted">
                       {number}
                     </span>
-                    <h2 className="sr-reveal font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
+                    <h2 className="sr-slide-left font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
                       {event.name}
                     </h2>
                     <p className="sr-reveal font-display text-lg text-gold md:text-xl" data-delay="0.1">
@@ -335,6 +358,9 @@ export function RacingContent() {
                     <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
                       {event.description}
                     </p>
+                    <div className="sr-reveal" data-delay="0.2">
+                      <OrangeArrow />
+                    </div>
                   </div>
                   <div className="sr-reveal relative aspect-[4/3] overflow-hidden" data-delay="0.1">
                     <Image
@@ -354,11 +380,12 @@ export function RacingContent() {
       {/* ── Results section ─────────────────────────────────── */}
       <section className="bg-surface py-20 md:py-32">
         <div className="mx-auto max-w-7xl px-6">
-          <span className="sr-reveal font-mono text-xs uppercase tracking-[0.25em] text-gold">
+          <span className="sr-slide-left font-mono text-xs uppercase tracking-[0.25em] text-gold">
             Key Achievements
           </span>
-          <h2 className="sr-reveal mt-2 font-display text-3xl uppercase tracking-tight md:text-4xl" data-delay="0.1">
-            Our Results
+          <h2 className="sr-slide-left mt-2 font-display text-3xl uppercase tracking-tight md:text-4xl" data-delay="0.1">
+            <span className="font-bold">Our</span>{" "}
+            <span className="font-light text-foreground/40">Results</span>
           </h2>
 
           <div className="mt-16 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">

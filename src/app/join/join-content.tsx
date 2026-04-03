@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import { Section } from "@/components/layout/section";
 import { RevealText } from "@/components/animation/reveal-text";
 import { StaggerChildren } from "@/components/animation/stagger-children";
@@ -67,25 +68,66 @@ const stats = [
   { value: 6, suffix: "", label: "Engineering Subteams" },
 ];
 
-export function JoinContent() {
+function OrangeArrow() {
   return (
-    <>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gold">
+      <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+/* ── Scroll reveal hook ── */
+function useScrollReveal() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const elements = container.querySelectorAll(".sr-reveal, .sr-slide-left");
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const el = entry.target as HTMLElement;
+            const delay = parseFloat(el.dataset.delay || "0") * 1000;
+            setTimeout(() => {
+              el.classList.add("sr-revealed");
+            }, delay);
+            observer.unobserve(el);
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: "0px 0px -40px 0px" }
+    );
+
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
+  return containerRef;
+}
+
+export function JoinContent() {
+  const ref = useScrollReveal();
+
+  return (
+    <div ref={ref}>
       {/* Hero */}
-      <section className="flex min-h-[50vh] items-center bg-surface pt-24">
+      <section className="flex h-[75vh] items-center bg-surface pt-24">
         <div className="mx-auto max-w-7xl px-6">
-          <RevealText
-            as="h1"
-            className="font-display text-5xl uppercase tracking-tight md:text-7xl"
-          >
-            Join Us
-          </RevealText>
-          <RevealText
-            as="p"
-            className="mt-4 max-w-2xl text-lg text-muted"
-            delay={0.3}
-          >
+          <p className="sr-reveal font-mono text-xs uppercase tracking-[0.3em] text-gold">
+            Recruitment
+          </p>
+          <h1 className="sr-reveal mt-3 font-display text-5xl uppercase tracking-tight md:text-7xl" data-delay="0.1">
+            <span className="font-bold">Join</span>
+            <br />
+            <span className="font-light text-foreground/40">Us</span>
+          </h1>
+          <p className="sr-reveal mt-4 max-w-2xl text-lg text-muted" data-delay="0.2">
             Be part of something bigger. Build a race car. Launch your career.
-          </RevealText>
+          </p>
         </div>
       </section>
 
@@ -109,12 +151,10 @@ export function JoinContent() {
 
       {/* Why Join */}
       <Section>
-        <RevealText
-          as="h2"
-          className="font-display text-3xl uppercase tracking-tight md:text-4xl"
-        >
-          Why Spartan Racing?
-        </RevealText>
+        <h2 className="sr-slide-left font-display text-3xl uppercase tracking-tight md:text-4xl">
+          <span className="font-bold">Why</span>{" "}
+          <span className="font-light text-foreground/40">Spartan Racing?</span>
+        </h2>
         <StaggerChildren
           className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
           staggerDelay={0.08}
@@ -124,10 +164,13 @@ export function JoinContent() {
             return (
               <div
                 key={item.title}
-                className="group border border-border bg-surface p-8 hover:border-gold/30 hover:shadow-lg hover:shadow-gold/5"
+                className="sr-reveal group border border-border bg-surface p-8 hover:border-gold/30 hover:shadow-lg hover:shadow-gold/5"
               >
-                <div className="mb-4 flex h-12 w-12 items-center justify-center bg-gold/10 group-hover:bg-gold/20">
-                  <Icon className="h-6 w-6 text-gold" />
+                <div className="flex items-start justify-between">
+                  <div className="mb-4 flex h-12 w-12 items-center justify-center bg-gold/10 group-hover:bg-gold/20">
+                    <Icon className="h-6 w-6 text-gold" />
+                  </div>
+                  <OrangeArrow />
                 </div>
                 <h3 className="font-display text-xl uppercase">{item.title}</h3>
                 <p className="mt-3 text-sm leading-relaxed text-muted">
@@ -141,28 +184,26 @@ export function JoinContent() {
 
       {/* Apply CTA */}
       <Section className="bg-surface text-center">
-        <RevealText
-          as="h2"
-          className="font-display text-3xl uppercase tracking-tight md:text-5xl"
-        >
-          Ready to Apply?
-        </RevealText>
-        <RevealText
-          as="p"
-          className="mx-auto mt-4 max-w-xl text-muted"
-          delay={0.2}
-        >
+        <h2 className="sr-slide-left font-display text-3xl uppercase tracking-tight md:text-5xl">
+          <span className="font-bold">Ready to</span>
+          <br />
+          <span className="font-light text-foreground/40">Apply?</span>
+        </h2>
+        <p className="sr-reveal mx-auto mt-4 max-w-xl text-muted" data-delay="0.2">
           Fill out our interest form and we&apos;ll reach out with next steps. Recruitment is ongoing. Apply anytime.
-        </RevealText>
+        </p>
         <div className="mt-8">
           <MagneticButton>
             <a
               href="https://forms.gle/placeholder"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-background transition-colors hover:bg-gold/90"
+              className="inline-flex items-center gap-2 bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-background hover:bg-gold/90"
             >
               Apply Now
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-background">
+                <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </a>
           </MagneticButton>
         </div>
@@ -170,25 +211,24 @@ export function JoinContent() {
 
       {/* Contact */}
       <Section>
-        <RevealText
-          as="h2"
-          className="font-display text-3xl uppercase tracking-tight md:text-4xl"
-        >
-          Get in Touch
-        </RevealText>
+        <h2 className="sr-slide-left font-display text-3xl uppercase tracking-tight md:text-4xl">
+          <span className="font-bold">Get in</span>{" "}
+          <span className="font-light text-foreground/40">Touch</span>
+        </h2>
         <div className="mt-8 grid gap-8 sm:grid-cols-2">
-          <div>
+          <div className="sr-reveal">
             <h3 className="font-display text-lg uppercase text-muted">
               Email
             </h3>
             <a
               href="mailto:sjsu.fsae@gmail.com"
-              className="text-gold hover:underline"
+              className="inline-flex items-center gap-2 text-gold hover:underline"
             >
               sjsu.fsae@gmail.com
+              <OrangeArrow />
             </a>
           </div>
-          <div>
+          <div className="sr-reveal" data-delay="0.1">
             <h3 className="font-display text-lg uppercase text-muted">
               Location
             </h3>
@@ -199,6 +239,6 @@ export function JoinContent() {
           </div>
         </div>
       </Section>
-    </>
+    </div>
   );
 }

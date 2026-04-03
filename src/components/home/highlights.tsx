@@ -25,7 +25,7 @@ export function Highlights() {
 
       {/* Specs strip */}
       <div className="mx-auto max-w-7xl px-6 py-16 md:py-20">
-        <p className="mb-10 text-xs uppercase tracking-[0.3em] text-muted">
+        <p className="mb-10 text-xs uppercase tracking-[0.3em] text-[#0EA5E9]">
           SR-16e Performance
         </p>
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4 md:gap-0">

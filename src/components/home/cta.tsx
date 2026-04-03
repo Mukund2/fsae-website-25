@@ -12,7 +12,7 @@ export function JoinUs() {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/70" />
 
         {/* Content */}
         <div className="relative z-10 text-center">
@@ -30,7 +30,7 @@ export function JoinUs() {
             href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-8 inline-block border border-white/50 bg-white px-8 py-3 font-mono text-[13px] uppercase tracking-[0.15em] text-black"
+            className="mt-8 inline-block border border-[#0EA5E9] bg-[#0EA5E9] px-8 py-3 font-mono text-[13px] uppercase tracking-[0.15em] text-white"
           >
             Join Us
           </a>

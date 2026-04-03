@@ -148,7 +148,7 @@ export function CarShowcase() {
         }
         .typewriter-cursor {
           animation: blink 0.7s step-end infinite;
-          color: #b8860b;
+          color: #0EA5E9;
           font-weight: 300;
           margin-left: 2px;
         }
@@ -158,7 +158,7 @@ export function CarShowcase() {
         }
         .heading-underline {
           height: 3px;
-          background: linear-gradient(90deg, #b8860b, #d4a843);
+          background: linear-gradient(90deg, #0EA5E9, #38BDF8);
           margin-top: 8px;
           transform-origin: left;
           animation: grow-underline 0.6s ease-out forwards;
@@ -172,7 +172,7 @@ export function CarShowcase() {
           <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
             {/* LEFT COLUMN — 3D Car Model */}
             <div className="flex items-center justify-center">
-              <div className="relative aspect-square w-full max-w-[500px] overflow-hidden">
+              <div className="relative aspect-square w-full max-w-[500px] overflow-hidden bg-[#0A0A0A] border border-white/5">
                 <HeroScene />
               </div>
             </div>
@@ -181,7 +181,7 @@ export function CarShowcase() {
             <div className="flex flex-col justify-center">
               <span
                 ref={labelRef}
-                className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted"
+                className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#0EA5E9]"
               >
                 SR-16 / CURRENT BUILD
               </span>

@@ -22,18 +22,27 @@ function CarModel() {
         g = mat.color.g,
         b = mat.color.b;
 
-      // Keep near-black materials (tires, chassis frame)
-      if (r < 0.1 && g < 0.1 && b < 0.1) {
+      // Keep near-black materials (tires, chassis, frame, dark parts)
+      if (r < 0.15 && g < 0.15 && b < 0.15) {
         mat.roughness = Math.max(mat.roughness, 0.4);
         mat.metalness = 0;
         mat.needsUpdate = true;
         return;
       }
 
-      // Body panels and main surfaces -> orange (matching real SR-16)
-      mat.color.set(0xD4700A);
-      mat.roughness = 0.35;
-      mat.metalness = 0.1;
+      // Keep existing orange/gold accents from the model
+      if (r > 0.5 && g > 0.2 && g < 0.6 && b < 0.2) {
+        mat.color.set(0xD4700A);
+        mat.roughness = 0.3;
+        mat.metalness = 0.1;
+        mat.needsUpdate = true;
+        return;
+      }
+
+      // Mid-tone grays and other colors -> dark carbon fiber
+      mat.color.set(0x1a1a1a);
+      mat.roughness = 0.5;
+      mat.metalness = 0.15;
       mat.needsUpdate = true;
     });
   }, [scene]);

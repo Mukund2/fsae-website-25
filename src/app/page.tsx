@@ -1,6 +1,5 @@
 import { Hero } from "@/components/home/hero";
 import { CarShowcase } from "@/components/home/car-showcase";
-import { ImageBreak } from "@/components/home/image-break";
 import { Mission } from "@/components/home/mission";
 import { SponsorStrip } from "@/components/home/sponsor-strip";
 import { Newsletter } from "@/components/home/newsletter";
@@ -11,7 +10,6 @@ export default function HomePage() {
     <>
       <Hero />
       <CarShowcase />
-      <ImageBreak />
       <Mission />
       <SponsorStrip />
       <Newsletter />

@@ -12,27 +12,16 @@ const STATS = [
   { value: "85", label: "mph top speed" },
 ] as const;
 
-const FEATURES = [
-  "Carbon fiber monocoque",
-  "Custom aero package",
-  "Student-designed ECU",
-  "CNC-machined uprights",
-  "In-house wiring harness",
-  "3D-printed intake manifold",
-] as const;
-
 export function CarShowcase() {
   const sectionRef = useRef<HTMLElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const statsRef = useRef<HTMLDivElement>(null);
-  const featuresRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
     const content = contentRef.current;
     const stats = statsRef.current;
-    const features = featuresRef.current;
-    if (!section || !content || !stats || !features) return;
+    if (!section || !content || !stats) return;
 
     // Initial state: content off-screen right
     content.style.opacity = "0";
@@ -43,13 +32,6 @@ export function CarShowcase() {
     statEls.forEach((el) => {
       el.style.opacity = "0";
       el.style.transform = "scale(0.3) translateY(40px)";
-    });
-
-    // Feature lines hidden
-    const featureEls = features.querySelectorAll<HTMLElement>(".feature-line");
-    featureEls.forEach((el) => {
-      el.style.opacity = "0";
-      el.style.transform = "translateX(60px)";
     });
 
     // Slide in animation using rAF
@@ -118,11 +100,6 @@ export function CarShowcase() {
               animateSlam(el, 200 + i * 100);
             });
 
-            // Fade in feature lines with stagger
-            featureEls.forEach((el, i) => {
-              animateSlideIn(el, 700 + i * 80, 60, 400);
-            });
-
             observer.disconnect();
           }
         }
@@ -168,19 +145,6 @@ export function CarShowcase() {
               ))}
             </div>
 
-            {/* Feature lines */}
-            <div ref={featuresRef} className="mt-16 flex flex-col gap-5">
-              {FEATURES.map((feature) => (
-                <div
-                  key={feature}
-                  className="feature-line border-b border-border/40 pb-4"
-                >
-                  <span className="font-mono text-[12px] uppercase tracking-[0.15em] text-foreground/60">
-                    {feature}
-                  </span>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>

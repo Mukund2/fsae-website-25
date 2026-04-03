@@ -2,11 +2,22 @@
 
 import { useState, useCallback } from "react";
 
-const pages = [
-  { issue: "Issue #1", season: "Spring 2025", color: "#C8A850" },
-  { issue: "Issue #2", season: "Fall 2024", color: "#A0C4FF" },
-  { issue: "Issue #3", season: "Spring 2024", color: "#BDB2FF" },
-  { issue: "Issue #4", season: "Fall 2023", color: "#FFD6A5" },
+const newsletters = [
+  {
+    date: "March 2026",
+    headlines: ["System Spotlights", "What's Next?", "Sponsor Recognition"],
+    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_234414049a954679966f200b229aee64.pdf",
+  },
+  {
+    date: "February 2026",
+    headlines: ["Ready to Build", "Alumni Driver Day", "Subteam Spotlight"],
+    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_96fb6ce5ecbf4feab0491278f70f07e0.pdf",
+  },
+  {
+    date: "Winter 2026",
+    headlines: ["2026 Team Resolutions", "Support Manufacturing Season"],
+    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_23a0bf9e19ea4f34abb5746375101d73.pdf",
+  },
 ];
 
 const keyframesStyle = `
@@ -18,18 +29,11 @@ const keyframesStyle = `
   from { transform: perspective(1200px) rotateY(90deg); opacity: 0; }
   to { transform: perspective(1200px) rotateY(0deg); opacity: 1; }
 }
-@keyframes dotPulse {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.3); }
-}
 .flip-out {
   animation: flipOut 0.35s ease-in forwards;
 }
 .flip-in {
   animation: flipIn 0.35s ease-out forwards;
-}
-.dot-active {
-  animation: dotPulse 0.4s ease-in-out;
 }
 `;
 
@@ -62,106 +66,102 @@ export function Newsletter() {
   };
 
   const next = () => {
-    if (currentPage < pages.length - 1) goToPage(currentPage + 1);
+    if (currentPage < newsletters.length - 1) goToPage(currentPage + 1);
   };
 
-  const page = pages[currentPage];
+  const issue = newsletters[currentPage];
 
   return (
-    <section className="relative w-full bg-[#0A0A0A] py-24">
+    <section className="relative w-full bg-background py-28 md:py-36">
       <style dangerouslySetInnerHTML={{ __html: keyframesStyle }} />
 
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        {/* Section label */}
         <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-gold">
-          Our Newsletter
+          Newsletters
         </span>
 
-        <h2 className="mt-4 font-display text-[clamp(1.5rem,3vw,2.5rem)] uppercase leading-[1.1] tracking-tight text-white">
-          The Spartan Standard
-        </h2>
-
         {/* Flipbook container */}
-        <div className="mt-12 flex items-center justify-center gap-6">
+        <div className="mt-12 flex items-center justify-center gap-8">
           {/* Left arrow */}
           <button
             onClick={prev}
             disabled={currentPage === 0 || isAnimating}
-            aria-label="Previous page"
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 text-white/60 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed"
+            aria-label="Previous newsletter"
+            className="flex h-10 w-10 shrink-0 items-center justify-center text-white/40 hover:text-white disabled:opacity-10 disabled:cursor-not-allowed"
           >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
 
-          {/* Page card */}
+          {/* Newsletter card */}
           <div
-            className={`relative flex h-[420px] w-[300px] flex-col items-center justify-center rounded-none border border-white/10 bg-[#1E1E1E] sm:h-[480px] sm:w-[340px] ${animClass}`}
+            className={`relative flex h-[460px] w-[320px] flex-col justify-between border border-white/10 bg-elevated p-10 sm:h-[520px] sm:w-[380px] ${animClass}`}
             style={{ transformOrigin: "center center" }}
           >
-            {/* Decorative top rule */}
-            <div
-              className="mb-6 h-px w-16"
-              style={{ backgroundColor: page.color }}
-            />
+            {/* Top section */}
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.25em] text-gold">
+                {issue.date}
+              </p>
 
-            {/* Issue number */}
-            <span
-              className="font-mono text-[11px] uppercase tracking-[0.25em]"
-              style={{ color: page.color }}
-            >
-              {page.issue}
-            </span>
+              <h3 className="mt-8 font-display text-3xl uppercase leading-tight tracking-tight text-foreground sm:text-4xl">
+                Spartan Racing
+                <br />
+                Newsletter
+              </h3>
+            </div>
 
-            {/* Title */}
-            <h3 className="mt-4 text-center font-display text-2xl uppercase leading-tight tracking-tight text-white sm:text-3xl">
-              The Spartan
-              <br />
-              Standard
-            </h3>
+            {/* Headlines */}
+            <div className="flex flex-col gap-3">
+              {issue.headlines.map((headline) => (
+                <p
+                  key={headline}
+                  className="font-mono text-[12px] uppercase tracking-[0.15em] text-foreground/50"
+                >
+                  {headline}
+                </p>
+              ))}
+            </div>
 
-            {/* Season */}
-            <p className="mt-3 font-mono text-[12px] uppercase tracking-[0.15em] text-white/40">
-              {page.season}
-            </p>
-
-            {/* Decorative bottom rule */}
-            <div
-              className="mt-6 h-px w-16"
-              style={{ backgroundColor: page.color }}
-            />
-
-            {/* Bottom corner page number */}
-            <span className="absolute bottom-5 right-6 font-mono text-[10px] text-white/20">
-              {currentPage + 1} / {pages.length}
-            </span>
+            {/* Bottom: Read link + page number */}
+            <div className="flex items-end justify-between">
+              <a
+                href={issue.pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-mono text-[12px] uppercase tracking-[0.15em] text-gold hover:text-foreground"
+              >
+                Read More
+              </a>
+              <span className="font-mono text-[10px] text-white/20">
+                {currentPage + 1} / {newsletters.length}
+              </span>
+            </div>
           </div>
 
           {/* Right arrow */}
           <button
             onClick={next}
-            disabled={currentPage === pages.length - 1 || isAnimating}
-            aria-label="Next page"
-            className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/10 text-white/60 hover:text-white disabled:opacity-20 disabled:cursor-not-allowed"
+            disabled={currentPage === newsletters.length - 1 || isAnimating}
+            aria-label="Next newsletter"
+            className="flex h-10 w-10 shrink-0 items-center justify-center text-white/40 hover:text-white disabled:opacity-10 disabled:cursor-not-allowed"
           >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-              <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+              <path d="M9 6L15 12L9 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
         </div>
 
         {/* Page indicators */}
         <div className="mt-8 flex items-center justify-center gap-3">
-          {pages.map((_, i) => (
+          {newsletters.map((_, i) => (
             <button
               key={i}
               onClick={() => goToPage(i)}
-              aria-label={`Go to page ${i + 1}`}
-              className={`h-2 w-2 rounded-full ${
-                i === currentPage
-                  ? `bg-gold ${animClass === "" ? "dot-active" : ""}`
-                  : "bg-white/20"
+              aria-label={`Go to newsletter ${i + 1}`}
+              className={`h-1.5 w-1.5 rounded-full ${
+                i === currentPage ? "bg-gold" : "bg-white/20"
               }`}
             />
           ))}

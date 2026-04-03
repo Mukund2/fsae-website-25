@@ -6,31 +6,67 @@ export const metadata: Metadata = {
     "Meet the executive board and subteam leads of SJSU Spartan Racing.",
 };
 
-const executiveBoard = [
-  { name: "Hiren Patel", role: "Chief Engineer" },
-  { name: "Will Kittinger", role: "President" },
-  { name: "Ally Almiranez", role: "Treasurer" },
-  { name: "Angel Lopez", role: "Project Manager" },
-  { name: "Aidan Garcia", role: "Safety Officer" },
+interface Lead {
+  name: string;
+  role: string;
+  linkedin?: string;
+}
+
+const executiveBoard: Lead[] = [
+  { name: "Hiren Patel", role: "Chief Engineer", linkedin: "" },
+  { name: "Will Kittinger", role: "President", linkedin: "" },
+  { name: "Ally Almiranez", role: "Treasurer", linkedin: "" },
+  { name: "Angel Lopez", role: "Project Manager", linkedin: "" },
+  { name: "Aidan Garcia", role: "Safety Officer", linkedin: "" },
 ];
 
-const subteamLeads = [
-  { name: "Damon Haberman", role: "Aerodynamics Lead" },
-  { name: "Hayat Dlala", role: "Business Lead" },
-  { name: "Emmett Miura", role: "Chassis Lead" },
-  { name: "William La Poll", role: "Electronics Lead" },
-  { name: "Harleen Sandhu", role: "Software Lead" },
-  { name: "Nicholas Ng", role: "Suspension Lead" },
-  { name: "Aidan Garcia", role: "Powertrain Co-Lead" },
-  { name: "Kevin Hong", role: "Powertrain Co-Lead" },
-  { name: "Shaun Gilmore", role: "Research & Development Lead" },
+const subteamLeads: Lead[] = [
+  { name: "Damon Haberman", role: "Aerodynamics Lead", linkedin: "" },
+  { name: "Hayat Dlala", role: "Business Lead", linkedin: "" },
+  { name: "Emmett Miura", role: "Chassis Lead", linkedin: "" },
+  { name: "William La Poll", role: "Electronics Lead", linkedin: "" },
+  { name: "Harleen Sandhu", role: "Software Lead", linkedin: "" },
+  { name: "Nicholas Ng", role: "Suspension Lead", linkedin: "" },
+  { name: "Aidan Garcia", role: "Powertrain Co-Lead", linkedin: "" },
+  { name: "Kevin Hong", role: "Powertrain Co-Lead", linkedin: "" },
+  { name: "Shaun Gilmore", role: "Research & Development Lead", linkedin: "" },
 ];
 
-function LeadCard({ name, role }: { name: string; role: string }) {
+function LinkedInIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className="inline-block"
+    >
+      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+    </svg>
+  );
+}
+
+function LeadCard({ name, role, linkedin }: Lead) {
   return (
     <div className="border border-border bg-elevated p-6">
-      <p className="font-display text-xl uppercase tracking-tight">{name}</p>
-      <p className="mt-1 font-mono text-sm text-muted">{role}</p>
+      <div className="flex items-start justify-between gap-2">
+        <div>
+          <p className="font-display text-xl uppercase tracking-tight">{name}</p>
+          <p className="mt-1 font-mono text-sm text-muted">{role}</p>
+        </div>
+        {linkedin && (
+          <a
+            href={linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-1 text-muted transition-colors hover:text-gold"
+            aria-label={`${name} on LinkedIn`}
+          >
+            <LinkedInIcon />
+          </a>
+        )}
+      </div>
     </div>
   );
 }
@@ -72,7 +108,7 @@ export default function TeamPage() {
         </h2>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {executiveBoard.map((member) => (
-            <LeadCard key={member.name + member.role} name={member.name} role={member.role} />
+            <LeadCard key={member.name + member.role} {...member} />
           ))}
         </div>
       </section>
@@ -84,7 +120,7 @@ export default function TeamPage() {
         </h2>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {subteamLeads.map((member) => (
-            <LeadCard key={member.name + member.role} name={member.name} role={member.role} />
+            <LeadCard key={member.name + member.role} {...member} />
           ))}
         </div>
       </section>

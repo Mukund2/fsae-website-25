@@ -30,11 +30,11 @@ function CarModel() {
         return;
       }
 
-      // Keep existing orange/gold accents from the model
+      // Keep existing orange/gold accents from the model -> warm gold to match real car
       if (r > 0.5 && g > 0.2 && g < 0.6 && b < 0.2) {
-        mat.color.set(0xD4700A);
+        mat.color.set(0xC8A020);
         mat.roughness = 0.3;
-        mat.metalness = 0.1;
+        mat.metalness = 0.15;
         mat.needsUpdate = true;
         return;
       }

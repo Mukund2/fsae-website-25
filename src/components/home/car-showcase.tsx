@@ -16,9 +16,9 @@ function ArrowIcon() {
 }
 
 const CARDS = [
-  { title: "Racing", href: "/racing", image: "/images/events/comp-1.jpg" },
-  { title: "Our Cars", href: "/cars", image: "/images/sr16/car-action-2.jpg" },
-  { title: "The Team", href: "/about", image: "/images/team/team-1.jpg" },
+  { title: "Racing", href: "/racing", image: "/images/flickr/driver-day-6.jpg" },
+  { title: "Our Cars", href: "/cars", image: "/images/flickr/driver-day-1.jpg" },
+  { title: "The Team", href: "/about", image: "/images/flickr/driver-day-2.jpg" },
 ] as const;
 
 function animateElement(

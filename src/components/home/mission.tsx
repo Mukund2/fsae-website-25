@@ -85,7 +85,7 @@ export function Mission() {
     >
       {/* Background image */}
       <Image
-        src="/images/team/team-1.jpg"
+        src="/images/flickr/driver-day-4.jpg"
         alt="SJSU Spartan Racing team"
         fill
         className="object-cover"

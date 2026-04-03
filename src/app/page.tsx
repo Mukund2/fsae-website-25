@@ -1,8 +1,9 @@
 import { Hero } from "@/components/home/hero";
 import { CarShowcase } from "@/components/home/car-showcase";
-import { Highlights } from "@/components/home/highlights";
+import { ImageBreak } from "@/components/home/image-break";
 import { Mission } from "@/components/home/mission";
 import { SponsorStrip } from "@/components/home/sponsor-strip";
+import { Newsletter } from "@/components/home/newsletter";
 import { JoinUs } from "@/components/home/cta";
 
 export default function HomePage() {
@@ -10,9 +11,10 @@ export default function HomePage() {
     <>
       <Hero />
       <CarShowcase />
-      <Highlights />
+      <ImageBreak />
       <Mission />
       <SponsorStrip />
+      <Newsletter />
       <JoinUs />
     </>
   );

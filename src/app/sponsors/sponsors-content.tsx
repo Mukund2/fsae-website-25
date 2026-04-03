@@ -133,7 +133,7 @@ function SponsorCard({
     <div
       data-reveal
       data-reveal-delay={index * 60}
-      className={`group flex flex-col items-center justify-center border border-border/50 bg-surface ${tierMeta.cardSize} hover:border-[#C8952E]/40 hover:shadow-[0_0_24px_rgba(200,149,46,0.08)]`}
+      className={`group flex flex-col items-center justify-center border border-border/50 bg-surface ${tierMeta.cardSize} hover:border-gold/40 hover:shadow-[0_0_24px_rgba(255,128,0,0.08)]`}
     >
       {inner}
     </div>
@@ -166,10 +166,10 @@ function TierSection({ tier }: { tier: string }) {
     <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
       {/* Tier heading */}
       <div data-reveal>
-        <h2 className="font-mono text-sm uppercase tracking-[0.25em] text-[#C8952E] md:text-base">
+        <h2 className="font-mono text-sm uppercase tracking-[0.25em] text-gold md:text-base">
           {meta.label}
         </h2>
-        <div className="mt-3 h-px w-full bg-[#C8952E]/30" />
+        <div className="mt-3 h-px w-full bg-gold/30" />
       </div>
 
       {/* Sponsor grid */}
@@ -195,7 +195,7 @@ export function SponsorsContent() {
     <div ref={revealRef}>
       {/* Hero */}
       <section className="relative flex min-h-[50vh] items-center overflow-hidden bg-surface pt-24">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(200,149,46,0.06)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,128,0,0.06)_0%,_transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-6">
           <h1
             data-reveal

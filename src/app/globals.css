@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 :root {
-  --background: #0A0A0A;
-  --foreground: #EDEDED;
-  --surface: #141414;
-  --elevated: #1E1E1E;
-  --gold: #C8952E;
+  --background: #FFFFFF;
+  --foreground: #1A1A1A;
+  --surface: #F5F5F5;
+  --elevated: #FFFFFF;
+  --gold: #FF8000;
   --blue: #0055A2;
-  --accent: #C8952E;
-  --muted: rgba(255,255,255,0.5);
-  --border: rgba(255,255,255,0.10);
+  --accent: #FF8000;
+  --muted: #6B6B6B;
+  --border: #E5E5E5;
 }
 
 @theme inline {
@@ -34,30 +34,17 @@ body {
   font-family: var(--font-body), system-ui, sans-serif;
 }
 
-/* Gold gradient text utility */
-.text-gradient-gold {
-  background: linear-gradient(135deg, #D4A843, #f0d78c, #D4A843);
+/* Orange gradient text utility */
+.text-gradient-orange {
+  background: linear-gradient(135deg, #FF8000, #FFa040, #FF8000);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
 
-/* Gold glow utility */
-.glow-gold {
-  box-shadow: 0 0 40px rgba(212, 168, 67, 0.2);
-}
-
-/* Amber gradient text utility */
-.text-gradient-amber {
-  background: linear-gradient(135deg, #C8952E, #E0B44A, #C8952E);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Amber glow utility */
-.glow-amber {
-  box-shadow: 0 0 40px rgba(200, 149, 46, 0.15);
+/* Orange glow utility */
+.glow-orange {
+  box-shadow: 0 0 40px rgba(255, 128, 0, 0.15);
 }
 
 /* Smooth scroll */
@@ -67,7 +54,7 @@ html {
 
 /* Selection color */
 ::selection {
-  background-color: rgba(200, 149, 46, 0.3);
+  background-color: rgba(255, 128, 0, 0.2);
   color: #EDEDED;
 }
 

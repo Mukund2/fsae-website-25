@@ -87,7 +87,7 @@ export function Newsletter() {
             onClick={prev}
             disabled={currentPage === 0 || isAnimating}
             aria-label="Previous newsletter"
-            className="flex h-10 w-10 shrink-0 items-center justify-center text-white/40 hover:text-white disabled:opacity-10 disabled:cursor-not-allowed"
+            className="flex h-10 w-10 shrink-0 items-center justify-center text-foreground/40 hover:text-foreground disabled:opacity-10 disabled:cursor-not-allowed"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path d="M15 18L9 12L15 6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -96,7 +96,7 @@ export function Newsletter() {
 
           {/* Newsletter card */}
           <div
-            className={`relative flex h-[460px] w-[320px] flex-col justify-between border border-white/10 bg-elevated p-10 sm:h-[520px] sm:w-[380px] ${animClass}`}
+            className={`relative flex h-[460px] w-[320px] flex-col justify-between border border-border bg-surface p-10 sm:h-[520px] sm:w-[380px] ${animClass}`}
             style={{ transformOrigin: "center center" }}
           >
             {/* Top section */}
@@ -134,7 +134,7 @@ export function Newsletter() {
               >
                 Read More
               </a>
-              <span className="font-mono text-[10px] text-white/20">
+              <span className="font-mono text-[10px] text-foreground/30">
                 {currentPage + 1} / {newsletters.length}
               </span>
             </div>
@@ -145,7 +145,7 @@ export function Newsletter() {
             onClick={next}
             disabled={currentPage === newsletters.length - 1 || isAnimating}
             aria-label="Next newsletter"
-            className="flex h-10 w-10 shrink-0 items-center justify-center text-white/40 hover:text-white disabled:opacity-10 disabled:cursor-not-allowed"
+            className="flex h-10 w-10 shrink-0 items-center justify-center text-foreground/40 hover:text-foreground disabled:opacity-10 disabled:cursor-not-allowed"
           >
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
               <path d="M9 6L15 12L9 18" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -161,7 +161,7 @@ export function Newsletter() {
               onClick={() => goToPage(i)}
               aria-label={`Go to newsletter ${i + 1}`}
               className={`h-1.5 w-1.5 rounded-full ${
-                i === currentPage ? "bg-gold" : "bg-white/20"
+                i === currentPage ? "bg-gold" : "bg-border"
               }`}
             />
           ))}

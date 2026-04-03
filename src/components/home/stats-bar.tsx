@@ -18,7 +18,7 @@ export function StatsBar() {
             <Counter
               value={stat.value}
               suffix={stat.suffix}
-              className="font-display text-4xl text-[#C8952E] md:text-5xl"
+              className="font-display text-4xl text-gold md:text-5xl"
             />
             <div className="mt-2 text-sm uppercase tracking-widest text-foreground">
               {stat.label}

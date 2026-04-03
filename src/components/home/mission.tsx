@@ -52,7 +52,7 @@ export function Mission() {
         className="object-cover"
         sizes="100vw"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0A0A0A]/90 via-[#0A0A0A]/70 to-[#0A0A0A]/40" />
+      <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/70 to-white/40" />
 
       {/* Content overlaid on left */}
       <div ref={contentRef} className="relative z-10 flex min-h-[60vh] items-center">
@@ -62,11 +62,11 @@ export function Mission() {
               Who We Are
             </span>
 
-            <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[1.1] tracking-tight text-white">
+            <h2 className="mt-4 font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[1.1] tracking-tight text-foreground">
               100+ students building race cars since 1989
             </h2>
 
-            <p className="mt-6 font-body text-base leading-relaxed text-white/60">
+            <p className="mt-6 font-body text-base leading-relaxed text-muted">
               Spartan Racing is the Formula SAE team at San Jos&eacute; State
               University. We design, build, and race formula-style electric
               vehicles. Over 100 members across 8 subteams turn classroom
@@ -75,7 +75,7 @@ export function Mission() {
 
             <Link
               href="/about"
-              className="mt-8 inline-block font-mono text-[13px] uppercase tracking-[0.15em] text-white hover:text-gold"
+              className="mt-8 inline-block font-mono text-[13px] uppercase tracking-[0.15em] text-foreground hover:text-gold"
             >
               Meet the team &rarr;
             </Link>

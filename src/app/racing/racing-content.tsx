@@ -141,7 +141,7 @@ export function RacingContent() {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
 
         <div className="relative mx-auto max-w-7xl px-6">
-          <span className="sr-reveal mb-4 inline-block font-mono text-xs uppercase tracking-[0.25em] text-[#C8952E]">
+          <span className="sr-reveal mb-4 inline-block font-mono text-xs uppercase tracking-[0.25em] text-gold">
             Formula SAE
           </span>
           <h1 className="sr-reveal font-display text-5xl uppercase tracking-tight md:text-7xl lg:text-8xl" data-delay="0.1">

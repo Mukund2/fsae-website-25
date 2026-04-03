@@ -52,7 +52,7 @@ export function Navbar() {
           pointerEvents: pathname === "/" && !scrolled ? "none" : "auto",
           transform: pathname === "/" && !scrolled ? "translateY(-100%)" : "translateY(0)",
         }}
-        className="fixed top-0 left-0 z-50 w-full border-b border-border bg-[#0A0A0A]/80 backdrop-blur-md"
+        className="fixed top-0 left-0 z-50 w-full border-b border-border bg-white/80 backdrop-blur-md"
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
           {/* Brand */}
@@ -112,7 +112,7 @@ export function Navbar() {
       {/* Mobile Menu Overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-40 flex flex-col items-center justify-center bg-[#0A0A0A]/95 backdrop-blur-lg md:hidden",
+          "fixed inset-0 z-40 flex flex-col items-center justify-center bg-white/95 backdrop-blur-lg md:hidden",
           mobileOpen ? "translate-x-0" : "translate-x-full"
         )}
         aria-hidden={!mobileOpen}

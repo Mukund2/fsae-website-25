@@ -152,7 +152,7 @@ export const sponsors: Sponsor[] = [
     name: "Futek",
     tier: "bronze",
     url: "https://www.futek.com",
-    logo: "/images/sponsors/futek.png",
+    logo: "/images/sponsors/futek.svg",
   },
   {
     name: "SFR SCCA",
@@ -196,6 +196,7 @@ export const sponsors: Sponsor[] = [
     name: "Military Fasteners",
     tier: "partner",
     url: "https://www.militaryfasteners.com",
+    logo: "/images/sponsors/military-fasteners.png",
   },
   {
     name: "Bergman",
@@ -213,6 +214,7 @@ export const sponsors: Sponsor[] = [
     name: "Rapid Harness",
     tier: "partner",
     url: "https://www.rapidharness.com",
+    logo: "/images/sponsors/rapid-harness.png",
   },
   {
     name: "Candy Store Foundation",
@@ -232,6 +234,7 @@ export const sponsors: Sponsor[] = [
     name: "Airtech",
     tier: "partner",
     url: "https://www.airtechintl.com",
+    logo: "/images/sponsors/airtech.png",
   },
   {
     name: "Sabalcore",
@@ -252,17 +255,19 @@ export const sponsors: Sponsor[] = [
     name: "FibreGlast",
     tier: "partner",
     url: "https://www.fibreglast.com",
-    logo: "/images/sponsors/fibreglast.png",
+    logo: "/images/sponsors/fibreglast.svg",
   },
   {
     name: "XRP",
     tier: "partner",
     url: "https://www.xrp.com",
+    logo: "/images/sponsors/xrp.png",
   },
   {
     name: "Bender",
     tier: "partner",
     url: "https://www.benderinc.com",
+    logo: "/images/sponsors/bender.svg",
   },
   {
     name: "Glenrock Builders",

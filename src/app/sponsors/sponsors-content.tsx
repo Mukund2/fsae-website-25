@@ -153,7 +153,7 @@ function SponsorCard({
     <div
       data-reveal
       data-reveal-delay={index * 60}
-      className={`group relative flex flex-col items-center justify-center border border-border/50 bg-surface ${tierMeta.cardSize} hover:border-gold/40 hover:shadow-[0_0_24px_rgba(255,128,0,0.08)]`}
+      className={`group relative flex flex-col items-center justify-center border border-border/50 bg-surface ${tierMeta.cardSize} hover:border-gold/40 hover:shadow-[0_0_24px_rgba(0,85,162,0.08)]`}
     >
       {inner}
       {/* Orange arrow on hover */}
@@ -219,7 +219,7 @@ export function SponsorsContent() {
     <div ref={revealRef}>
       {/* Hero */}
       <section className="relative flex min-h-[50vh] items-center overflow-hidden bg-surface pt-32 pb-16">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,128,0,0.06)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,85,162,0.06)_0%,_transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-6">
           <p
             data-reveal

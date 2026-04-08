@@ -10,5 +10,5 @@
     <line x1="70" y1="-30" x2="50" y2="-80"/>
   </g>
   <!-- Orange accent: small logo on chest -->
-  <circle cx="300" cy="260" r="12" fill="#FF8000" opacity="0.9"/>
+  <circle cx="300" cy="260" r="12" fill="#0055A2" opacity="0.9"/>
 </svg>

@@ -21,7 +21,7 @@ export default function SupportPage() {
       {/* Hero banner */}
       <section className="relative flex min-h-[50vh] items-center pt-32 pb-16 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface/80 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,128,0,0.06)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,85,162,0.06)_0%,_transparent_60%)]" />
 
         <div className="relative mx-auto max-w-7xl px-6">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold hero-fade-in">

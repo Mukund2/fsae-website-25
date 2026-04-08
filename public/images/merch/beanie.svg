@@ -13,5 +13,5 @@
     <circle cx="0" cy="-125" r="18" stroke-width="6"/>
   </g>
   <!-- Orange accent: small tag on brim -->
-  <rect x="310" y="305" width="14" height="8" rx="2" fill="#FF8000" opacity="0.9"/>
+  <rect x="310" y="305" width="14" height="8" rx="2" fill="#0055A2" opacity="0.9"/>
 </svg>

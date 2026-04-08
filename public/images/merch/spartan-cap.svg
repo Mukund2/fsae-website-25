@@ -13,5 +13,5 @@
     <circle cx="0" cy="-115" r="5" stroke-width="4"/>
   </g>
   <!-- Orange accent: front logo -->
-  <path d="M290,265 L300,255 L310,265" stroke="#FF8000" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M290,265 L300,255 L310,265" stroke="#0055A2" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

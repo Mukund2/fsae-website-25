@@ -29,8 +29,8 @@ if (typeof document !== "undefined") {
         to   { transform: scale(1); opacity: 1; }
       }
       @keyframes carIdle {
-        0%, 100% { filter: drop-shadow(0 0 6px rgba(212,168,67,0.4)); }
-        50% { filter: drop-shadow(0 0 12px rgba(212,168,67,0.7)); }
+        0%, 100% { filter: drop-shadow(0 0 6px rgba(0,85,162,0.4)); }
+        50% { filter: drop-shadow(0 0 12px rgba(0,85,162,0.7)); }
       }
     `;
     document.head.appendChild(style);
@@ -114,9 +114,9 @@ function RacetrackCar({ timelineRef }: { timelineRef: React.RefObject<HTMLDivEle
       {/* Top-down race car silhouette */}
       <svg viewBox="0 0 20 40" width="20" height="40">
         {/* Body */}
-        <rect x="2" y="5" width="16" height="30" rx="8" fill="#D4A843" />
+        <rect x="2" y="5" width="16" height="30" rx="8" fill="#0055A2" />
         {/* Nose */}
-        <rect x="5" y="0" width="10" height="8" rx="3" fill="#D4A843" />
+        <rect x="5" y="0" width="10" height="8" rx="3" fill="#0055A2" />
         {/* Front-left wheel */}
         <rect x="0" y="10" width="4" height="8" rx="1" fill="#333" />
         {/* Front-right wheel */}
@@ -173,7 +173,7 @@ function TimelineDot() {
       <div
         className={`h-4 w-4 rounded-full border-2 ${
           isInView
-            ? "border-gold bg-gold shadow-[0_0_12px_rgba(212,168,67,0.6),_0_0_24px_rgba(212,168,67,0.3)] animate-[dotPulse_0.5s_ease-out_forwards]"
+            ? "border-gold bg-gold shadow-[0_0_12px_rgba(0,85,162,0.6),_0_0_24px_rgba(0,85,162,0.3)] animate-[dotPulse_0.5s_ease-out_forwards]"
             : "border-gold/50 bg-background"
         }`}
       />
@@ -275,7 +275,7 @@ export default function HistoryPage() {
       {/* Hero */}
       <section className="relative flex min-h-[50vh] items-center overflow-hidden pt-24">
         <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface/80 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,168,67,0.08)_0%,_transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,85,162,0.08)_0%,_transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-6">
           <RevealText
             as="h1"
@@ -303,7 +303,7 @@ export default function HistoryPage() {
             style={{
               width: "1px",
               backgroundImage:
-                "repeating-linear-gradient(to bottom, rgba(212,168,67,0.15) 0px, rgba(212,168,67,0.15) 8px, transparent 8px, transparent 16px)",
+                "repeating-linear-gradient(to bottom, rgba(0,85,162,0.15) 0px, rgba(0,85,162,0.15) 8px, transparent 8px, transparent 16px)",
             }}
           />
 

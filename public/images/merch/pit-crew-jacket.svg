@@ -19,5 +19,5 @@
     <line x1="75" y1="-5" x2="55" y2="-75"/>
   </g>
   <!-- Orange accent: chest patch -->
-  <rect x="320" y="240" width="22" height="16" rx="3" fill="#FF8000" opacity="0.9"/>
+  <rect x="320" y="240" width="22" height="16" rx="3" fill="#0055A2" opacity="0.9"/>
 </svg>

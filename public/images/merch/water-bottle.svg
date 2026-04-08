@@ -14,5 +14,5 @@
     <line x1="-35" y1="40" x2="35" y2="40" stroke-width="4"/>
   </g>
   <!-- Orange accent: logo mark on body -->
-  <circle cx="300" cy="260" r="10" fill="#FF8000" opacity="0.9"/>
+  <circle cx="300" cy="260" r="10" fill="#0055A2" opacity="0.9"/>
 </svg>

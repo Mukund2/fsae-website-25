@@ -35,8 +35,8 @@ export function Navbar() {
 
   return (
     <>
-      {/* Orange top line */}
-      <div className="fixed top-0 left-0 z-[60] h-1 w-full bg-gold" />
+      {/* Yellow top line */}
+      <div className="fixed top-0 left-0 z-[60] h-1 w-full bg-yellow" />
 
       <nav className="fixed top-1 left-0 z-50 w-full border-b border-border bg-white">
         <div className="flex w-full items-center justify-between px-4 py-3 lg:px-6">

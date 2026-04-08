@@ -45,7 +45,7 @@ export default async function CarDetailPage({ params }: CarDetailPageProps) {
       {/* Hero */}
       <section className="relative flex min-h-[50vh] items-end overflow-hidden pb-12 pt-24">
         <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface/90 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(212,168,67,0.06)_0%,_transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_rgba(0,85,162,0.06)_0%,_transparent_50%)]" />
         <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
 
         <div className="relative mx-auto w-full max-w-7xl px-6">

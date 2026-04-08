@@ -14,5 +14,5 @@
     <line x1="75" y1="-10" x2="60" y2="-70"/>
   </g>
   <!-- Orange accent: small tag on hood -->
-  <rect x="295" y="165" width="10" height="18" rx="2" fill="#FF8000" opacity="0.9"/>
+  <rect x="295" y="165" width="10" height="18" rx="2" fill="#0055A2" opacity="0.9"/>
 </svg>

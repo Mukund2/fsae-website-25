@@ -10,6 +10,6 @@
   </g>
   <!-- Orange accent: small star on front sticker -->
   <g transform="translate(300,320)">
-    <polygon points="0,-12 3,-4 12,-4 5,2 7,10 0,6 -7,10 -5,2 -12,-4 -3,-4" fill="#FF8000" opacity="0.9"/>
+    <polygon points="0,-12 3,-4 12,-4 5,2 7,10 0,6 -7,10 -5,2 -12,-4 -3,-4" fill="#0055A2" opacity="0.9"/>
   </g>
 </svg>

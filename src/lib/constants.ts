@@ -3,7 +3,7 @@ export const SITE_DESCRIPTION = "San José State University Formula SAE Racing T
 export const SITE_URL = "https://sjsuformulasae.com";
 
 export const COLORS = {
-  gold: "#D4A843",
+  gold: "#0055A2",
   blue: "#0055A2",
   base: "#FAFAF8",
   surface: "#F0F0EC",

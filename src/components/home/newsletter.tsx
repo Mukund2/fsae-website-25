@@ -1,7 +1,13 @@
 "use client";
 
 import { useState, useCallback, useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
+
+const PdfFlipbook = dynamic(
+  () => import("./pdf-flipbook").then((m) => m.PdfFlipbook),
+  { ssr: false }
+);
 
 const newsletters = [
   {
@@ -74,6 +80,7 @@ function animateElement(
 
 export function Newsletter() {
   const [featured, setFeatured] = useState(0);
+  const [flipbookPdf, setFlipbookPdf] = useState<{ url: string; title: string } | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   const prev = useCallback(() => {
@@ -82,6 +89,10 @@ export function Newsletter() {
 
   const next = useCallback(() => {
     setFeatured((c) => (c < newsletters.length - 1 ? c + 1 : c));
+  }, []);
+
+  const openFlipbook = useCallback((pdf: string, title: string) => {
+    setFlipbookPdf({ url: pdf, title });
   }, []);
 
   useEffect(() => {
@@ -120,122 +131,129 @@ export function Newsletter() {
   const sideIssues = newsletters.filter((_, i) => i !== featured);
 
   return (
-    <section ref={sectionRef} className="w-full bg-white py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        {/* Header row */}
-        <div className="flex items-end justify-between">
-          <div data-anim="left">
-            <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[0.95] tracking-tight">
-              <span className="font-bold text-foreground">Latest</span>
-              <br />
-              <span className="font-light text-foreground/40">Newsletters</span>
-            </h2>
+    <>
+      <section ref={sectionRef} className="w-full bg-white py-24 md:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+          {/* Header row */}
+          <div className="flex items-end justify-between">
+            <div data-anim="left">
+              <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[0.95] tracking-tight">
+                <span className="font-bold text-foreground">Latest</span>
+                <br />
+                <span className="font-light text-foreground/40">Newsletters</span>
+              </h2>
+            </div>
+
+            {/* Arrows */}
+            <div data-anim="up" className="flex items-center gap-3">
+              <button
+                onClick={prev}
+                disabled={featured === 0}
+                aria-label="Previous newsletter"
+                className="flex h-12 w-12 items-center justify-center border border-gold text-gold disabled:opacity-30 disabled:cursor-not-allowed"
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M12 15L7 10L12 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+              <button
+                onClick={next}
+                disabled={featured === newsletters.length - 1}
+                aria-label="Next newsletter"
+                className="flex h-12 w-12 items-center justify-center border border-gold text-gold disabled:opacity-30 disabled:cursor-not-allowed"
+              >
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <path d="M8 5L13 10L8 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
           </div>
 
-          {/* Arrows */}
-          <div data-anim="up" className="flex items-center gap-3">
+          {/* Cards layout */}
+          <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-5">
+            {/* Featured (left, large) */}
             <button
-              onClick={prev}
-              disabled={featured === 0}
-              aria-label="Previous newsletter"
-              className="flex h-12 w-12 items-center justify-center border border-gold text-gold disabled:opacity-30 disabled:cursor-not-allowed"
+              onClick={() => openFlipbook(issue.pdf, issue.title)}
+              data-anim="up"
+              className="group relative col-span-1 flex flex-col overflow-hidden bg-[#1A1A1A] text-left lg:col-span-3"
             >
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M12 15L7 10L12 5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-            <button
-              onClick={next}
-              disabled={featured === newsletters.length - 1}
-              aria-label="Next newsletter"
-              className="flex h-12 w-12 items-center justify-center border border-gold text-gold disabled:opacity-30 disabled:cursor-not-allowed"
-            >
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                <path d="M8 5L13 10L8 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </button>
-          </div>
-        </div>
-
-        {/* Cards layout */}
-        <div className="mt-12 grid grid-cols-1 gap-6 lg:grid-cols-5">
-          {/* Featured (left, large) */}
-          <a
-            href={issue.pdf}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-anim="up"
-            className="group relative col-span-1 flex flex-col overflow-hidden bg-[#1A1A1A] lg:col-span-3"
-          >
-            <div className="relative aspect-[4/3] w-full overflow-hidden">
-              <Image
-                src={issue.image}
-                alt={issue.title}
-                fill
-                className="object-cover"
-                sizes="(max-width: 1024px) 100vw, 60vw"
-              />
-            </div>
-            <div className="flex flex-1 flex-col justify-between p-8">
-              <div>
-                <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold">
-                  {issue.date}
-                </span>
-                <h3 className="mt-3 font-display text-2xl uppercase tracking-tight text-white sm:text-3xl">
-                  {issue.title}
-                </h3>
+              <div className="relative aspect-[4/3] w-full overflow-hidden">
+                <Image
+                  src={issue.image}
+                  alt={issue.title}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                />
               </div>
-              <div className="mt-6 flex items-center gap-2 font-mono text-[13px] uppercase tracking-[0.15em] text-gold">
-                Read More
-                <ArrowIcon />
+              <div className="flex flex-1 flex-col justify-between p-8">
+                <div>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold">
+                    {issue.date}
+                  </span>
+                  <h3 className="mt-3 font-display text-2xl uppercase tracking-tight text-white sm:text-3xl">
+                    {issue.title}
+                  </h3>
+                </div>
+                <div className="mt-6 flex items-center gap-2 font-mono text-[13px] uppercase tracking-[0.15em] text-gold">
+                  Read Newsletter
+                  <ArrowIcon />
+                </div>
               </div>
-            </div>
-          </a>
+            </button>
 
-          {/* Side cards (right, stacked) */}
-          <div className="col-span-1 flex flex-col gap-6 lg:col-span-2">
-            {sideIssues.map((nl, idx) => (
+            {/* Side cards (right, stacked) */}
+            <div className="col-span-1 flex flex-col gap-6 lg:col-span-2">
+              {sideIssues.map((nl) => (
+                <button
+                  key={nl.date}
+                  onClick={() => openFlipbook(nl.pdf, nl.title)}
+                  data-anim="up"
+                  className="group flex flex-1 flex-col justify-between border border-border p-6 text-left"
+                >
+                  <div>
+                    <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold">
+                      {nl.date}
+                    </span>
+                    <h4 className="mt-2 font-display text-xl uppercase tracking-tight text-foreground">
+                      {nl.title}
+                    </h4>
+                    <p className="mt-2 font-body text-sm leading-relaxed text-muted">
+                      {nl.headlines.join(" / ")}
+                    </p>
+                  </div>
+                  <div className="mt-4 flex items-center justify-end">
+                    <ArrowIcon />
+                  </div>
+                </button>
+              ))}
+
+              {/* Third card: view all */}
               <a
-                key={nl.date}
-                href={nl.pdf}
+                href="https://www.sjsuformulasae.com/newsletters"
                 target="_blank"
                 rel="noopener noreferrer"
                 data-anim="up"
-                className="group flex flex-1 flex-col justify-between border border-border p-6"
+                className="flex flex-1 items-center justify-between border border-border p-6"
               >
-                <div>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold">
-                    {nl.date}
-                  </span>
-                  <h4 className="mt-2 font-display text-xl uppercase tracking-tight text-foreground">
-                    {nl.title}
-                  </h4>
-                  <p className="mt-2 font-body text-sm leading-relaxed text-muted">
-                    {nl.headlines.join(" / ")}
-                  </p>
-                </div>
-                <div className="mt-4 flex items-center justify-end">
-                  <ArrowIcon />
-                </div>
+                <span className="font-mono text-[13px] uppercase tracking-[0.15em] text-foreground">
+                  View All Newsletters
+                </span>
+                <ArrowIcon />
               </a>
-            ))}
-
-            {/* Third card: view all */}
-            <a
-              href="https://www.sjsuformulasae.com/newsletters"
-              target="_blank"
-              rel="noopener noreferrer"
-              data-anim="up"
-              className="flex flex-1 items-center justify-between border border-border p-6"
-            >
-              <span className="font-mono text-[13px] uppercase tracking-[0.15em] text-foreground">
-                View All Newsletters
-              </span>
-              <ArrowIcon />
-            </a>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      {/* Flipbook modal */}
+      {flipbookPdf && (
+        <PdfFlipbook
+          pdfUrl={flipbookPdf.url}
+          title={flipbookPdf.title}
+          onClose={() => setFlipbookPdf(null)}
+        />
+      )}
+    </>
   );
 }

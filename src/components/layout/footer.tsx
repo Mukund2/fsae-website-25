@@ -1,5 +1,4 @@
-import Link from "next/link";
-import { NAV_LINKS, SOCIAL_LINKS } from "@/lib/constants";
+import { SOCIAL_LINKS } from "@/lib/constants";
 
 function InstagramIcon({ size = 18 }: { size?: number }) {
   return (
@@ -89,30 +88,15 @@ const socialIcons = [
 export function Footer() {
   return (
     <footer className="border-t-2 border-gold bg-white">
-      <div className="mx-auto max-w-7xl px-6 py-12 lg:px-12">
-        <div className="flex flex-col items-center gap-10 lg:flex-row lg:justify-between">
-          {/* Left: Logo treatment */}
-          <div className="shrink-0">
-            <h3 className="font-display text-3xl uppercase tracking-tight">
-              <span className="font-bold text-foreground">Spartan</span>{" "}
-              <span className="font-light text-foreground/40">Racing</span>
-            </h3>
-          </div>
+      <div className="mx-auto max-w-7xl px-6 py-8 lg:px-12">
+        <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
+          {/* Logo treatment */}
+          <h3 className="font-display text-3xl uppercase tracking-tight">
+            <span className="font-bold text-foreground">Spartan</span>{" "}
+            <span className="font-light text-foreground/40">Racing</span>
+          </h3>
 
-          {/* Center: Page links */}
-          <nav className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
-            {NAV_LINKS.map(({ label, href }) => (
-              <Link
-                key={href}
-                href={href}
-                className="font-mono text-[12px] uppercase tracking-[0.15em] text-muted"
-              >
-                {label}
-              </Link>
-            ))}
-          </nav>
-
-          {/* Right: Social icons (no circles) */}
+          {/* Social icons */}
           <div className="flex items-center gap-5">
             {socialIcons.map(({ href, icon: Icon, label }) => (
               <a
@@ -127,11 +111,6 @@ export function Footer() {
               </a>
             ))}
           </div>
-        </div>
-
-        {/* Copyright */}
-        <div className="mt-10 border-t border-border pt-6 text-center font-mono text-[11px] uppercase tracking-[0.15em] text-muted">
-          &copy; {new Date().getFullYear()} SJSU Spartan Racing. All rights reserved.
         </div>
       </div>
     </footer>

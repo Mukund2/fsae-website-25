@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { merch, CATEGORIES } from "@/data/merch";
 import type { MerchItem } from "@/data/merch";
 import { cn } from "@/lib/utils";
@@ -71,27 +72,39 @@ function MerchCard({ item, index }: { item: MerchItem; index: number }) {
       data-reveal-delay={index * 80}
       className="group border border-border bg-elevated"
     >
-      {/* Placeholder image area */}
-      <div className="relative flex aspect-square items-center justify-center bg-surface">
-        <div className="flex flex-col items-center gap-3 text-foreground/15">
-          <svg
-            width="48"
-            height="48"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="1"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
-            <line x1="3" y1="6" x2="21" y2="6" />
-            <path d="M16 10a4 4 0 01-8 0" />
-          </svg>
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em]">
-            Coming Soon
-          </span>
-        </div>
+      {/* Product image */}
+      <div className="relative aspect-square bg-surface">
+        {item.image ? (
+          <Image
+            src={item.image}
+            alt={item.name}
+            fill
+            className="object-cover"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <div className="flex flex-col items-center gap-3 text-foreground/15">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 01-8 0" />
+              </svg>
+              <span className="font-mono text-[10px] uppercase tracking-[0.2em]">
+                Coming Soon
+              </span>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Info */}

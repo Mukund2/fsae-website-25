@@ -24,9 +24,9 @@ export const NAV_LINKS = [
 ] as const;
 
 export const SOCIAL_LINKS = {
-  instagram: "https://www.instagram.com/sjsu_fsae/",
-  linkedin: "https://www.linkedin.com/company/sjsu-spartan-racing/",
-  youtube: "https://www.youtube.com/@SJSUSpartanRacing",
+  instagram: "https://www.instagram.com/sjsuformulasae/",
+  linkedin: "https://www.linkedin.com/school/sjsufsae/",
+  facebook: "https://www.facebook.com/SpartanRacingSJSU/",
 } as const;
 
 export const STATS = [

@@ -40,7 +40,7 @@ function LinkedinIcon({ size = 18 }: { size?: number }) {
   );
 }
 
-function YoutubeIcon({ size = 18 }: { size?: number }) {
+function FacebookIcon({ size = 18 }: { size?: number }) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -53,8 +53,7 @@ function YoutubeIcon({ size = 18 }: { size?: number }) {
       strokeLinecap="round"
       strokeLinejoin="round"
     >
-      <path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" />
-      <path d="m10 15 5-3-5-3z" />
+      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
     </svg>
   );
 }
@@ -62,7 +61,7 @@ function YoutubeIcon({ size = 18 }: { size?: number }) {
 const socialIcons = [
   { href: SOCIAL_LINKS.instagram, icon: InstagramIcon, label: "Instagram" },
   { href: SOCIAL_LINKS.linkedin, icon: LinkedinIcon, label: "LinkedIn" },
-  { href: SOCIAL_LINKS.youtube, icon: YoutubeIcon, label: "YouTube" },
+  { href: SOCIAL_LINKS.facebook, icon: FacebookIcon, label: "Facebook" },
 ] as const;
 
 export function Footer() {

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#F0F0EC"/>
+  <g transform="translate(300,300)" fill="none" stroke="#D0D0CC" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Hoodie body -->
+    <path d="M-60,-90 L-60,-70 L-105,-50 L-105,0 L-75,-10 L-75,110 L75,110 L75,-10 L105,0 L105,-50 L60,-70 L60,-90"/>
+    <!-- Hood -->
+    <path d="M-60,-90 Q-55,-130 -20,-135 Q0,-138 20,-135 Q55,-130 60,-90"/>
+    <!-- Hood inner line -->
+    <path d="M-45,-90 Q-35,-115 0,-120 Q35,-115 45,-90"/>
+    <!-- Kangaroo pocket -->
+    <path d="M-40,40 Q-40,60 -20,60 L20,60 Q40,60 40,40" stroke-width="5"/>
+    <!-- Sleeve seams -->
+    <line x1="-75" y1="-10" x2="-60" y2="-70"/>
+    <line x1="75" y1="-10" x2="60" y2="-70"/>
+  </g>
+  <!-- Orange accent: small tag on hood -->
+  <rect x="295" y="165" width="10" height="18" rx="2" fill="#FF8000" opacity="0.9"/>
+</svg>

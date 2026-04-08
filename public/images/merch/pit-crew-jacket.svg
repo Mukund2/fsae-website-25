@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#F0F0EC"/>
+  <g transform="translate(300,300)" fill="none" stroke="#D0D0CC" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Jacket body -->
+    <path d="M-55,-95 L-55,-75 L-105,-55 L-105,5 L-75,-5 L-75,110 L75,110 L75,-5 L105,5 L105,-55 L55,-75 L55,-95"/>
+    <!-- Collar -->
+    <path d="M-55,-95 L-35,-85 L-15,-100 Q0,-105 15,-100 L35,-85 L55,-95"/>
+    <!-- Center zip -->
+    <line x1="0" y1="-100" x2="0" y2="110"/>
+    <!-- Zip teeth marks -->
+    <line x1="-4" y1="-70" x2="4" y2="-70" stroke-width="4"/>
+    <line x1="-4" y1="-40" x2="4" y2="-40" stroke-width="4"/>
+    <line x1="-4" y1="-10" x2="4" y2="-10" stroke-width="4"/>
+    <line x1="-4" y1="20" x2="4" y2="20" stroke-width="4"/>
+    <line x1="-4" y1="50" x2="4" y2="50" stroke-width="4"/>
+    <line x1="-4" y1="80" x2="4" y2="80" stroke-width="4"/>
+    <!-- Sleeve seams -->
+    <line x1="-75" y1="-5" x2="-55" y2="-75"/>
+    <line x1="75" y1="-5" x2="55" y2="-75"/>
+  </g>
+  <!-- Orange accent: chest patch -->
+  <rect x="320" y="240" width="22" height="16" rx="3" fill="#FF8000" opacity="0.9"/>
+</svg>

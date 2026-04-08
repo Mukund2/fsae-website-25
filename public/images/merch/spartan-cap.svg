@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#F0F0EC"/>
+  <g transform="translate(300,310)" fill="none" stroke="#D0D0CC" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Cap crown -->
+    <path d="M-90,0 Q-95,-40 -80,-70 Q-50,-110 0,-115 Q50,-110 80,-70 Q95,-40 90,0"/>
+    <!-- Brim -->
+    <path d="M-90,0 Q-80,8 -60,10 L60,10 Q100,8 130,-10 Q135,-15 125,-20 Q90,-8 60,0 L-60,0"/>
+    <!-- Cap band line -->
+    <path d="M-90,0 Q-50,15 0,18 Q50,15 60,10" stroke-width="5"/>
+    <!-- Panel seam -->
+    <line x1="0" y1="-115" x2="0" y2="0" stroke-width="4" stroke-dasharray="8,6"/>
+    <!-- Button on top -->
+    <circle cx="0" cy="-115" r="5" stroke-width="4"/>
+  </g>
+  <!-- Orange accent: front logo -->
+  <path d="M290,265 L300,255 L310,265" stroke="#FF8000" stroke-width="5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

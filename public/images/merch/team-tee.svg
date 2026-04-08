@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+  <rect width="600" height="600" fill="#F0F0EC"/>
+  <g transform="translate(300,300)" fill="none" stroke="#D0D0CC" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <!-- T-shirt body -->
+    <path d="M-50,-100 L-50,-80 L-100,-60 L-100,-20 L-70,-30 L-70,100 L70,100 L70,-30 L100,-20 L100,-60 L50,-80 L50,-100"/>
+    <!-- Neckline -->
+    <path d="M-50,-100 Q-30,-120 0,-110 Q30,-120 50,-100"/>
+    <!-- Sleeves seam -->
+    <line x1="-70" y1="-30" x2="-50" y2="-80"/>
+    <line x1="70" y1="-30" x2="50" y2="-80"/>
+  </g>
+  <!-- Orange accent: small logo on chest -->
+  <circle cx="300" cy="260" r="12" fill="#FF8000" opacity="0.9"/>
+</svg>

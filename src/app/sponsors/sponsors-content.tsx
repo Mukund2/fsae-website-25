@@ -220,30 +220,63 @@ export function SponsorsContent() {
       {/* Hero */}
       <section className="relative flex min-h-[50vh] items-center overflow-hidden bg-surface pt-32 pb-16">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,85,162,0.06)_0%,_transparent_60%)]" />
-        <div className="relative mx-auto max-w-7xl px-6">
-          <p
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 md:grid-cols-2">
+          {/* Left — Our Sponsors */}
+          <div>
+            <p
+              data-reveal
+              className="font-mono text-xs uppercase tracking-[0.3em] text-gold"
+            >
+              Partners & Supporters
+            </p>
+            <h1
+              data-reveal
+              data-reveal-delay="100"
+              className="mt-3 font-display text-5xl uppercase tracking-tight md:text-7xl"
+            >
+              <span className="font-bold">Our</span>
+              <br />
+              <span className="font-light text-foreground/40">Sponsors</span>
+            </h1>
+            <p
+              data-reveal
+              data-reveal-delay="200"
+              className="mt-5 max-w-lg text-lg leading-relaxed text-muted"
+            >
+              We&apos;re grateful for the support of industry leaders who make
+              our racing program possible.
+            </p>
+          </div>
+
+          {/* Right — How to Become a Sponsor */}
+          <div
             data-reveal
-            className="font-mono text-xs uppercase tracking-[0.3em] text-gold"
+            data-reveal-delay="300"
+            className="flex flex-col items-start gap-5 border-l-0 pl-0 md:border-l md:border-gold/30 md:pl-12"
           >
-            Partners & Supporters
-          </p>
-          <h1
-            data-reveal
-            data-reveal-delay="100"
-            className="mt-3 font-display text-5xl uppercase tracking-tight md:text-7xl"
-          >
-            <span className="font-bold">Our</span>
-            <br />
-            <span className="font-light text-foreground/40">Sponsors</span>
-          </h1>
-          <p
-            data-reveal
-            data-reveal-delay="200"
-            className="mt-5 max-w-2xl text-lg leading-relaxed text-muted"
-          >
-            We&apos;re grateful for the support of industry leaders who make our
-            racing program possible.
-          </p>
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold">
+              Support the Team
+            </p>
+            <h2 className="font-display text-3xl uppercase tracking-tight md:text-4xl">
+              <span className="font-bold">How to Become</span>
+              <br />
+              <span className="font-light text-foreground/40">a Sponsor</span>
+            </h2>
+            <p className="max-w-md text-base leading-relaxed text-muted">
+              Partner with the next generation of engineers. View our
+              sponsorship tiers, benefits, and download the full sponsor
+              packet.
+            </p>
+            <a
+              href="/sponsors/become-a-sponsor"
+              className="inline-flex items-center gap-2 bg-gold px-6 py-3 font-display text-base uppercase tracking-wider text-background hover:bg-gold/90"
+            >
+              View Sponsor Packet
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-background">
+                <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </a>
+          </div>
         </div>
       </section>
 
@@ -271,15 +304,21 @@ export function SponsorsContent() {
             Partner with the next generation of engineers. Your support fuels
             innovation and helps us compete on the world stage.
           </p>
-          <div data-reveal data-reveal-delay="300" className="mt-10">
+          <div data-reveal data-reveal-delay="300" className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
             <a
-              href="mailto:sjsu.fsae@gmail.com"
+              href="/sponsors/become-a-sponsor"
               className="inline-flex items-center gap-2 bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-background hover:bg-gold/90"
             >
-              Contact Us
+              View Sponsor Packet
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-background">
                 <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
+            </a>
+            <a
+              href="mailto:sjsu.fsae@gmail.com"
+              className="inline-flex items-center gap-2 border border-gold/40 px-8 py-4 font-display text-lg uppercase tracking-wider text-gold hover:bg-gold/10"
+            >
+              Contact Us
             </a>
           </div>
         </div>

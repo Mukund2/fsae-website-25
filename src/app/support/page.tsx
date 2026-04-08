@@ -72,7 +72,7 @@ export default function SupportPage() {
             <OrangeArrow />
           </Link>
           <Link
-            href="mailto:sjsu.fsae@gmail.com"
+            href="mailto:sjsuformulasae@gmail.com"
             className="inline-flex items-center gap-2 border border-gold bg-gold/10 px-8 py-3 font-mono text-sm uppercase tracking-widest text-gold hover:bg-gold/20"
           >
             Become a Sponsor

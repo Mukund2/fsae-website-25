@@ -88,10 +88,10 @@ export default function ContactPage() {
                   Email
                 </h2>
                 <Link
-                  href="mailto:sjsu.fsae@gmail.com"
+                  href="mailto:sjsuformulasae@gmail.com"
                   className="mt-2 block font-mono text-sm text-gold hover:underline"
                 >
-                  sjsu.fsae@gmail.com
+                  sjsuformulasae@gmail.com
                 </Link>
               </div>
               <OrangeArrow />

@@ -236,7 +236,7 @@ export function MerchContent() {
           </p>
           <div data-reveal data-reveal-delay="300" className="mt-10">
             <a
-              href="mailto:sjsu.fsae@gmail.com"
+              href="mailto:sjsuformulasae@gmail.com"
               className="inline-flex items-center gap-2 bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-background hover:bg-gold/90"
             >
               Contact Us

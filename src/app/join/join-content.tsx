@@ -221,10 +221,10 @@ export function JoinContent() {
               Email
             </h3>
             <a
-              href="mailto:sjsu.fsae@gmail.com"
+              href="mailto:sjsuformulasae@gmail.com"
               className="inline-flex items-center gap-2 text-gold hover:underline"
             >
-              sjsu.fsae@gmail.com
+              sjsuformulasae@gmail.com
               <OrangeArrow />
             </a>
           </div>

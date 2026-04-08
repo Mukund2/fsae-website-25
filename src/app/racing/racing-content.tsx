@@ -97,27 +97,33 @@ const dynamicEvents = [
 
 const keyResults = [
   {
-    stat: "2nd",
+    stat: "1st",
     label: "Overall",
-    context: "Michigan FSAE 2025",
-    sub: ["1st Endurance", "Best Aero Vehicle"],
-  },
-  {
-    stat: "5th",
-    label: "Overall",
-    context: "Michigan FSAE 2024",
-    sub: ["1st Cummins Innovation"],
-  },
-  {
-    stat: "2nd",
-    label: "Overall",
-    context: "Michigan FSAE 2021",
-    sub: ["1st Endurance"],
+    context: "FSAE Lincoln 2015",
+    sub: [],
   },
   {
     stat: "1st",
-    label: "Overall",
-    context: "FSAE Competition 2015",
+    label: "Endurance Event",
+    context: "Michigan FSAE 2025",
+    sub: ["2nd Overall", "Best Aerodynamics Vehicle Award"],
+  },
+  {
+    stat: "1st",
+    label: "Endurance Event",
+    context: "Michigan FSAE 2021",
+    sub: ["2nd Overall"],
+  },
+  {
+    stat: "1st",
+    label: "Cummins Innovation Award",
+    context: "Michigan FSAE 2024",
+    sub: ["5th Overall"],
+  },
+  {
+    stat: "1st",
+    label: "EV — SoCal Shootout",
+    context: "2024 (x2)",
     sub: [],
   },
 ];

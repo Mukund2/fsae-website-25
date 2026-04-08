@@ -1,6 +1,12 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import dynamic from "next/dynamic";
+
+const InlineFlipbook = dynamic(
+  () => import("@/components/home/inline-flipbook").then((m) => m.InlineFlipbook),
+  { ssr: false }
+);
 
 /* --- Scroll-reveal hook using IntersectionObserver + Web Animations API --- */
 function useScrollReveal() {
@@ -285,13 +291,11 @@ export function BecomeASponsorContent() {
               <ArrowIcon className="text-background" />
             </a>
             <a
-              href="/Spartan-Racing-Sponsor-Packet-2025-26.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#packet"
               className="inline-flex items-center gap-2 border border-gold/50 px-8 py-4 font-display text-lg uppercase tracking-wider text-gold hover:bg-gold/10"
             >
               Sponsor Packet
-              <DownloadIcon className="text-gold" />
+              <ArrowIcon className="text-gold" />
             </a>
           </div>
         </div>
@@ -425,7 +429,7 @@ export function BecomeASponsorContent() {
             </p>
             <div className="mt-6">
               <a
-                href="mailto:sjsu.fsae@gmail.com"
+                href="mailto:sjsuformulasae@gmail.com"
                 className="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-wider text-gold hover:text-gold/80"
               >
                 Contact us for online donation link
@@ -436,35 +440,29 @@ export function BecomeASponsorContent() {
         </div>
       </section>
 
-      {/* Download Sponsor Packet */}
-      <section className="bg-surface py-20 md:py-28">
-        <div className="mx-auto max-w-4xl px-6 text-center">
-          <h2
-            data-reveal
-            className="font-display text-3xl uppercase tracking-tight md:text-5xl"
-          >
-            <span className="font-bold">Download the</span>
-            <br />
-            <span className="font-light text-foreground/40">Sponsor Packet</span>
-          </h2>
-          <p
-            data-reveal
-            data-reveal-delay="150"
-            className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted"
-          >
-            Get the full details on sponsorship tiers, team achievements, and how
-            your support makes a difference.
-          </p>
-          <div data-reveal data-reveal-delay="300" className="mt-10">
-            <a
-              href="/Spartan-Racing-Sponsor-Packet-2025-26.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-gold px-10 py-5 font-display text-xl uppercase tracking-wider text-background hover:bg-gold/90"
+      {/* Sponsor Packet Flipbook */}
+      <section id="packet" className="bg-surface py-20 md:py-28">
+        <div className="mx-auto max-w-7xl px-6">
+          <div className="text-center">
+            <h2
+              data-reveal
+              className="font-display text-3xl uppercase tracking-tight md:text-5xl"
             >
-              Download PDF
-              <DownloadIcon className="text-background" />
-            </a>
+              <span className="font-bold">Sponsor</span>
+              <br />
+              <span className="font-light text-foreground/40">Packet</span>
+            </h2>
+            <p
+              data-reveal
+              data-reveal-delay="150"
+              className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted"
+            >
+              Browse the full sponsorship packet below — team achievements, tiers,
+              and how your support makes a difference.
+            </p>
+          </div>
+          <div data-reveal data-reveal-delay="300" className="mt-12">
+            <InlineFlipbook pdfUrl="/Spartan-Racing-Sponsor-Packet-2025-26.pdf" />
           </div>
         </div>
       </section>
@@ -490,7 +488,7 @@ export function BecomeASponsorContent() {
           </p>
           <div data-reveal data-reveal-delay="300" className="mt-10">
             <a
-              href="mailto:sjsu.fsae@gmail.com"
+              href="mailto:sjsuformulasae@gmail.com"
               className="inline-flex items-center gap-2 bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-background hover:bg-gold/90"
             >
               Contact Us
@@ -502,7 +500,7 @@ export function BecomeASponsorContent() {
             data-reveal-delay="400"
             className="mt-6 font-mono text-sm text-muted"
           >
-            sjsu.fsae@gmail.com
+            sjsuformulasae@gmail.com
           </p>
         </div>
       </section>

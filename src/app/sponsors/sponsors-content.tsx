@@ -315,7 +315,7 @@ export function SponsorsContent() {
               </svg>
             </a>
             <a
-              href="mailto:sjsu.fsae@gmail.com"
+              href="mailto:sjsuformulasae@gmail.com"
               className="inline-flex items-center gap-2 border border-gold/40 px-8 py-4 font-display text-lg uppercase tracking-wider text-gold hover:bg-gold/10"
             >
               Contact Us

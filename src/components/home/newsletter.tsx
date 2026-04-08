@@ -10,20 +10,81 @@ const InlineFlipbook = dynamic(
 );
 
 const newsletters = [
+  // 2026
   {
     date: "March 2026",
-    title: "System Spotlights",
+    title: "Into the Electric",
     pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_234414049a954679966f200b229aee64.pdf",
   },
   {
     date: "February 2026",
-    title: "Ready to Build",
+    title: "Design to Reality",
     pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_96fb6ce5ecbf4feab0491278f70f07e0.pdf",
   },
   {
     date: "New Year 2026",
     title: "2026 Team Resolutions",
     pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_23a0bf9e19ea4f34abb5746375101d73.pdf",
+  },
+  // 2025
+  {
+    date: "Fall 2025",
+    title: "November Update",
+    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_22de078a7a1c4559bbc9a270aafac172.pdf",
+  },
+  {
+    date: "Summer 2025",
+    title: "Competition Recap",
+    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_60b226acddbe413ea91fa95a9902aaf8.pdf",
+  },
+  {
+    date: "Spring 2025",
+    title: "March Update",
+    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_989138bdf1b340248759424b3ba49d62.pdf",
+  },
+  {
+    date: "Winter 2025",
+    title: "February Update",
+    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_d3576df32e2b430bb50838aa571d41c7.pdf",
+  },
+  // 2024
+  {
+    date: "Winter 2024",
+    title: "December Update",
+    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_814e7aff58694194af605109541a320c.pdf",
+  },
+  {
+    date: "Fall 2024",
+    title: "November Update",
+    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_eef97411dfc64ad0be10f122537649a6.pdf",
+  },
+  {
+    date: "March 2024",
+    title: "Spring Update",
+    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_dfb20c3c8d334851a785a4e3841833dc.pdf",
+  },
+  // 2023
+  {
+    date: "February 2023",
+    title: "Winter Update",
+    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_b484c3b3d7e34c8cacc1061a74791660.pdf",
+  },
+  // 2022–23
+  {
+    date: "March–June 2023",
+    title: "Season Recap",
+    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_b8f2c6d86e4942cf9f8f46eac23f80c0.pdf",
+  },
+  // 2021–22
+  {
+    date: "Nov 2021–Feb 2022",
+    title: "Winter Recap",
+    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_a76ccd1b40ae48a9a4ed5d29d73b1267.pdf",
+  },
+  {
+    date: "October 2021",
+    title: "Inaugural Issue",
+    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_be2da463627d4fdf9d63a8fcf717baaa.pdf",
   },
 ];
 
@@ -111,20 +172,21 @@ export function Newsletter() {
             Newsletter
           </p>
           <h2 className="mt-2 font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[0.95] tracking-tight">
-            <span className="font-bold text-foreground">Up to</span>
+            <span className="font-bold text-foreground">Up 2</span>
             <br />
             <span className="font-light text-foreground/40">Speed</span>
           </h2>
         </div>
 
         {/* Newsletter tabs */}
-        <div data-anim="up" className="mt-8 flex flex-wrap gap-3">
+        <div data-anim="up" className="mt-8 -mx-6 px-6 overflow-x-auto scrollbar-hide">
+          <div className="flex gap-2 pb-2" style={{ minWidth: "max-content" }}>
           {newsletters.map((nl, i) => (
             <button
               key={nl.date}
               onClick={() => setActive(i)}
               className={cn(
-                "flex flex-col items-start border px-5 py-3 text-left",
+                "flex shrink-0 flex-col items-start border px-4 py-2.5 text-left",
                 active === i
                   ? "border-gold bg-gold/5"
                   : "border-border hover:border-foreground/20"
@@ -148,6 +210,7 @@ export function Newsletter() {
               </span>
             </button>
           ))}
+          </div>
         </div>
 
         <div className="mt-2 h-px w-full bg-border/50" />

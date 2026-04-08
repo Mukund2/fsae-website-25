@@ -26,7 +26,6 @@ export const NAV_LINKS = [
 export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/sjsu_fsae/",
   linkedin: "https://www.linkedin.com/company/sjsu-spartan-racing/",
-  flickr: "https://www.flickr.com/photos/sjsufsae/",
   youtube: "https://www.youtube.com/@SJSUSpartanRacing",
 } as const;
 

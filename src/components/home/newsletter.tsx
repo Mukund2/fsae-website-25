@@ -21,7 +21,7 @@ const newsletters = [
     pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_96fb6ce5ecbf4feab0491278f70f07e0.pdf",
   },
   {
-    date: "Winter 2026",
+    date: "New Year 2026",
     title: "2026 Team Resolutions",
     pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_23a0bf9e19ea4f34abb5746375101d73.pdf",
   },
@@ -107,10 +107,13 @@ export function Newsletter() {
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Header */}
         <div data-anim="left">
-          <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[0.95] tracking-tight">
-            <span className="font-bold text-foreground">Latest</span>
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold">
+            Newsletter
+          </p>
+          <h2 className="mt-2 font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[0.95] tracking-tight">
+            <span className="font-bold text-foreground">Up to</span>
             <br />
-            <span className="font-light text-foreground/40">Newsletters</span>
+            <span className="font-light text-foreground/40">Speed</span>
           </h2>
         </div>
 

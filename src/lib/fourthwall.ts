@@ -92,7 +92,10 @@ export interface MerchProduct {
   id: string;
   slug: string;
   name: string;
+  /** HTML description from Fourthwall admin (may contain <p>, <strong>, <em>, <ul>, etc.) */
   description: string;
+  /** Plain-text description for card previews and metadata (tags stripped). */
+  descriptionText: string;
   images: string[];
   image: string | null;
   price: number;
@@ -216,6 +219,19 @@ function mapVariant(v: FourthwallVariant): MerchVariant {
   };
 }
 
+function stripHtml(html: string): string {
+  return html
+    .replace(/<[^>]+>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#39;/g, "'")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 function mapProduct(p: FourthwallProduct): MerchProduct {
   const variants = p.variants.map(mapVariant);
   const firstVariant = variants[0];
@@ -236,11 +252,13 @@ function mapProduct(p: FourthwallProduct): MerchProduct {
   const available =
     p.state?.type === "AVAILABLE" && variants.some((v) => v.inStock);
 
+  const description = p.description || "";
   return {
     id: p.id,
     slug: p.slug,
     name: p.name,
-    description: p.description || "",
+    description,
+    descriptionText: stripHtml(description),
     images,
     image,
     price,

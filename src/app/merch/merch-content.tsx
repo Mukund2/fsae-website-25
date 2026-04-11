@@ -123,9 +123,9 @@ function MerchCard({ item, index }: { item: MerchProduct; index: number }) {
         <p className="font-display text-lg uppercase tracking-tight">
           {item.name}
         </p>
-        {item.description && (
+        {item.descriptionText && (
           <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted">
-            {item.description}
+            {item.descriptionText}
           </p>
         )}
 

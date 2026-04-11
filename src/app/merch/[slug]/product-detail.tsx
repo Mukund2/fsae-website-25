@@ -156,9 +156,10 @@ export function ProductDetail({ product }: { product: MerchProduct }) {
             </div>
 
             {product.description && (
-              <p className="mt-6 whitespace-pre-line text-base leading-relaxed text-muted">
-                {product.description}
-              </p>
+              <div
+                className="prose-merch mt-6 text-base leading-relaxed text-muted"
+                dangerouslySetInnerHTML={{ __html: product.description }}
+              />
             )}
 
             {/* Color selector */}

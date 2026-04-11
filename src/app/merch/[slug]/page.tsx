@@ -16,10 +16,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 
   return {
     title: `${product.name} | Merch`,
-    description: product.description || `${product.name} — SJSU Spartan Racing`,
+    description:
+      product.descriptionText || `${product.name} — SJSU Spartan Racing`,
     openGraph: {
       title: product.name,
-      description: product.description,
+      description: product.descriptionText,
       images: product.image ? [product.image] : undefined,
     },
   };

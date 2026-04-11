@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { CartButton } from "@/components/merch/cart-button";
 
 const NAV_ITEMS = [
   { label: "Cars", href: "/cars" },
@@ -92,18 +93,23 @@ export function Navbar() {
             >
               Join Us
             </Link>
+
+            <CartButton />
           </div>
 
-          {/* Mobile Hamburger */}
-          <button
-            type="button"
-            onClick={() => setMobileOpen((prev) => !prev)}
-            className="relative z-50 flex h-10 w-10 items-center justify-center text-foreground md:hidden"
-            aria-label={mobileOpen ? "Close menu" : "Open menu"}
-            aria-expanded={mobileOpen}
-          >
-            {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          {/* Mobile right: cart + hamburger */}
+          <div className="flex items-center gap-1 md:hidden">
+            <CartButton />
+            <button
+              type="button"
+              onClick={() => setMobileOpen((prev) => !prev)}
+              className="relative z-50 flex h-10 w-10 items-center justify-center text-foreground"
+              aria-label={mobileOpen ? "Close menu" : "Open menu"}
+              aria-expanded={mobileOpen}
+            >
+              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
       </nav>
 

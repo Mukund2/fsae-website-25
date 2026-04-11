@@ -1,10 +1,9 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { merch, CATEGORIES } from "@/data/merch";
-import type { MerchItem } from "@/data/merch";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
+import type { MerchProduct } from "@/lib/fourthwall";
 
 /* --- Scroll-reveal hook (same pattern as sponsors) --- */
 function useScrollReveal() {
@@ -57,20 +56,27 @@ function useScrollReveal() {
   return containerRef;
 }
 
-/* --- Category label map --- */
-const CATEGORY_LABELS: Record<string, string> = {
-  apparel: "Apparel",
-  headwear: "Headwear",
-  accessories: "Accessories",
-};
+/* --- Price formatting --- */
+function formatPrice(value: number, currency: string): string {
+  try {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency,
+      maximumFractionDigits: value % 1 === 0 ? 0 : 2,
+    }).format(value);
+  } catch {
+    return `$${value}`;
+  }
+}
 
 /* --- Merch card --- */
-function MerchCard({ item, index }: { item: MerchItem; index: number }) {
+function MerchCard({ item, index }: { item: MerchProduct; index: number }) {
   return (
-    <div
+    <Link
+      href={`/merch/${item.slug}`}
       data-reveal
       data-reveal-delay={index * 80}
-      className="group border border-border bg-elevated"
+      className="group block border border-border bg-elevated hover:border-gold/60"
     >
       {/* Product image */}
       <div className="relative aspect-square bg-surface">
@@ -105,6 +111,11 @@ function MerchCard({ item, index }: { item: MerchItem; index: number }) {
             </div>
           </div>
         )}
+        {!item.available && (
+          <div className="absolute right-3 top-3 bg-background/90 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/60">
+            Sold Out
+          </div>
+        )}
       </div>
 
       {/* Info */}
@@ -112,33 +123,37 @@ function MerchCard({ item, index }: { item: MerchItem; index: number }) {
         <p className="font-display text-lg uppercase tracking-tight">
           {item.name}
         </p>
-        <p className="mt-1 text-sm leading-relaxed text-muted">
-          {item.description}
-        </p>
+        {item.description && (
+          <p className="mt-1 line-clamp-2 text-sm leading-relaxed text-muted">
+            {item.description}
+          </p>
+        )}
 
         <div className="mt-4 flex items-center justify-between">
-          <span className="font-mono text-lg text-gold">
-            ${item.price}
-          </span>
-          {item.sizes && (
+          <div className="flex items-baseline gap-2">
+            <span className="font-mono text-lg text-gold">
+              {formatPrice(item.price, item.currency)}
+            </span>
+            {item.compareAtPrice && item.compareAtPrice > item.price && (
+              <span className="font-mono text-xs text-foreground/30 line-through">
+                {formatPrice(item.compareAtPrice, item.currency)}
+              </span>
+            )}
+          </div>
+          {item.sizes.length > 0 && (
             <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/30">
               {item.sizes.join(" / ")}
             </span>
           )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
 /* --- Main content --- */
-export function MerchContent() {
+export function MerchContent({ products }: { products: MerchProduct[] }) {
   const revealRef = useScrollReveal();
-  const [activeCategory, setActiveCategory] = useState<string | null>(null);
-
-  const filtered = activeCategory
-    ? merch.filter((m) => m.category === activeCategory)
-    : merch;
 
   return (
     <div ref={revealRef}>
@@ -172,47 +187,28 @@ export function MerchContent() {
         </div>
       </section>
 
-      {/* Filter + Grid */}
+      {/* Grid or empty state */}
       <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
-        {/* Category filters */}
-        <div data-reveal className="flex flex-wrap gap-3">
-          <button
-            onClick={() => setActiveCategory(null)}
-            className={cn(
-              "font-mono text-[11px] uppercase tracking-[0.2em] px-4 py-2 border",
-              activeCategory === null
-                ? "border-gold bg-gold text-white"
-                : "border-border text-foreground/50 hover:border-foreground/30"
-            )}
+        {products.length > 0 ? (
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {products.map((item, i) => (
+              <MerchCard key={item.id} item={item} index={i} />
+            ))}
+          </div>
+        ) : (
+          <div
+            data-reveal
+            className="border border-border bg-elevated px-8 py-16 text-center"
           >
-            All
-          </button>
-          {CATEGORIES.map((cat) => (
-            <button
-              key={cat}
-              onClick={() =>
-                setActiveCategory(activeCategory === cat ? null : cat)
-              }
-              className={cn(
-                "font-mono text-[11px] uppercase tracking-[0.2em] px-4 py-2 border",
-                activeCategory === cat
-                  ? "border-gold bg-gold text-white"
-                  : "border-border text-foreground/50 hover:border-foreground/30"
-              )}
-            >
-              {CATEGORY_LABELS[cat]}
-            </button>
-          ))}
-        </div>
-
-        <div className="mt-3 h-px w-full bg-border/50" />
-
-        {/* Product grid */}
-        <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {filtered.map((item, i) => (
-            <MerchCard key={item.slug} item={item} index={i} />
-          ))}
-        </div>
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold">
+              Stocking the shelves
+            </p>
+            <p className="mx-auto mt-4 max-w-lg text-lg leading-relaxed text-muted">
+              Our shop is being prepared. Check back soon, or reach out below
+              to ask about availability.
+            </p>
+          </div>
+        )}
       </section>
 
       {/* Contact CTA */}

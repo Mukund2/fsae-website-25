@@ -4,6 +4,8 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { NoiseOverlay } from "@/components/shared/noise-overlay";
 import { SmoothScrollProvider } from "@/providers/smooth-scroll-provider";
+import { CartProvider } from "@/context/cart-context";
+import { CartDrawer } from "@/components/merch/cart-drawer";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -35,13 +37,16 @@ export default function RootLayout({
     >
       <body className="min-h-full bg-background text-foreground">
         <SmoothScrollProvider>
-          <a href="#main-content" className="skip-nav">
-            Skip to main content
-          </a>
-          <NoiseOverlay />
-          <Navbar />
-          <main id="main-content" className="flex-1">{children}</main>
-          <Footer />
+          <CartProvider>
+            <a href="#main-content" className="skip-nav">
+              Skip to main content
+            </a>
+            <NoiseOverlay />
+            <Navbar />
+            <main id="main-content" className="flex-1">{children}</main>
+            <Footer />
+            <CartDrawer />
+          </CartProvider>
         </SmoothScrollProvider>
       </body>
     </html>

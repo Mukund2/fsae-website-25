@@ -1,6 +1,7 @@
 "use client";
 
 import { ShoppingBag } from "lucide-react";
+import { usePathname } from "next/navigation";
 import { useCart } from "@/context/cart-context";
 import { cn } from "@/lib/utils";
 
@@ -10,7 +11,13 @@ interface CartButtonProps {
 
 export function CartButton({ className }: CartButtonProps) {
   const { cart, openDrawer } = useCart();
+  const pathname = usePathname();
   const count = cart?.itemCount ?? 0;
+
+  // Only show the cart button in the merch section, or anywhere if the
+  // user already has items in their cart.
+  const onMerch = pathname?.startsWith("/merch") ?? false;
+  if (!onMerch && count === 0) return null;
 
   return (
     <button

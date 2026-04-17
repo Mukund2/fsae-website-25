@@ -18,9 +18,6 @@ export default function SubteamsPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,85,162,0.06)_0%,_transparent_60%)]" />
 
         <div className="relative mx-auto max-w-7xl px-6">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold hero-fade-in">
-            8 Subteams
-          </p>
           <h1
             className="mt-3 font-display text-5xl uppercase tracking-tight md:text-7xl hero-fade-in"
             style={{ animationDelay: "0.1s" }}
@@ -29,13 +26,6 @@ export default function SubteamsPage() {
             <br />
             <span className="font-light text-foreground/40">Team</span>
           </h1>
-          <p
-            className="mt-4 max-w-xl text-lg leading-relaxed text-muted hero-fade-in"
-            style={{ animationDelay: "0.25s" }}
-          >
-            A multidisciplinary group of engineers, designers, and business
-            minds united by a single goal: build a faster car every year.
-          </p>
         </div>
       </section>
 

@@ -168,10 +168,7 @@ export function Newsletter() {
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Header */}
         <div data-anim="left">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold">
-            Newsletter
-          </p>
-          <h2 className="mt-2 font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[0.95] tracking-tight">
+          <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[0.95] tracking-tight">
             <span className="font-bold text-foreground">Up 2</span>
             <br />
             <span className="font-light text-foreground/40">Speed</span>

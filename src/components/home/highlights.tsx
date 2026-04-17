@@ -13,9 +13,6 @@ export function Highlights() {
   return (
     <section className="w-full bg-background">
       <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
-        <p className="mb-12 font-mono text-xs uppercase tracking-[0.3em] text-gold">
-          SR-16e Performance
-        </p>
         <div className="grid grid-cols-2 gap-12 md:grid-cols-4 md:gap-0">
           {specs.map((spec, i) => (
             <div

@@ -92,10 +92,6 @@ export function JoinUs() {
           <h3 data-anim className="font-display text-[clamp(2rem,4vw,3rem)] uppercase leading-[0.95] tracking-tight text-white">
             Join the Team
           </h3>
-          <p data-anim className="mt-3 max-w-sm font-body text-sm leading-relaxed text-white/60">
-            Engineers, designers, and builders working on real problems.
-            No experience required. Just passion.
-          </p>
           <a
             href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
             target="_blank"
@@ -103,7 +99,7 @@ export function JoinUs() {
             data-anim
             className="mt-8 inline-flex items-center gap-3 bg-gold px-8 py-4 font-mono text-[13px] uppercase tracking-[0.15em] text-white"
           >
-            Apply Now
+            Join Us
             <ArrowIcon />
           </a>
         </div>
@@ -123,10 +119,6 @@ export function JoinUs() {
           <h3 data-anim className="font-display text-[clamp(2rem,4vw,3rem)] uppercase leading-[0.95] tracking-tight text-white">
             Support Us
           </h3>
-          <p data-anim className="mt-3 max-w-sm font-body text-sm leading-relaxed text-white/60">
-            Your sponsorship fuels innovation and helps the next generation of
-            engineers bring their designs to life.
-          </p>
           <a
             href="/support"
             data-anim

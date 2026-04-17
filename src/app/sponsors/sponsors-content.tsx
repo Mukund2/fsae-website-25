@@ -223,12 +223,6 @@ export function SponsorsContent() {
         <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 md:grid-cols-2">
           {/* Left — Our Sponsors */}
           <div>
-            <p
-              data-reveal
-              className="font-mono text-xs uppercase tracking-[0.3em] text-gold"
-            >
-              Partners & Supporters
-            </p>
             <h1
               data-reveal
               data-reveal-delay="100"
@@ -254,9 +248,6 @@ export function SponsorsContent() {
             data-reveal-delay="300"
             className="flex flex-col items-start gap-5 border-l-0 pl-0 md:border-l md:border-gold/30 md:pl-12"
           >
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold">
-              Support the Team
-            </p>
             <h2 className="font-display text-3xl uppercase tracking-tight md:text-4xl">
               <span className="font-bold">How to Become</span>
               <br />

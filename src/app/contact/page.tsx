@@ -62,9 +62,6 @@ export default function ContactPage() {
         />
         <div className="absolute inset-0 bg-black/65" />
         <div className="relative z-10 text-center px-6 pt-24 pb-16">
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold hero-fade-in">
-            Get In Touch
-          </p>
           <h1
             className="mt-3 font-display text-5xl uppercase tracking-tight text-white md:text-7xl hero-fade-in"
             style={{ animationDelay: "0.1s" }}

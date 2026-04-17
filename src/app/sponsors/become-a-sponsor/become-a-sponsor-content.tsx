@@ -259,12 +259,6 @@ export function BecomeASponsorContent() {
       <section className="relative flex min-h-[50vh] items-center overflow-hidden bg-surface pt-32 pb-16">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,85,162,0.06)_0%,_transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-6">
-          <p
-            data-reveal
-            className="font-mono text-xs uppercase tracking-[0.3em] text-gold"
-          >
-            Support Our Team
-          </p>
           <h1
             data-reveal
             data-reveal-delay="100"

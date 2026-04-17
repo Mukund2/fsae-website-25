@@ -113,13 +113,6 @@ export function Mission() {
       className="relative min-h-[70vh] w-full overflow-hidden bg-[#1A1A1A]"
       style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.12)" }}
     >
-      {/* Image caption */}
-      <div className="absolute left-6 top-4 z-20 lg:left-12">
-        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
-          SJSU Engineering Building
-        </span>
-      </div>
-
       {/* Background image with parallax */}
       <div ref={imageRef} className="absolute inset-[-30px]" style={{ willChange: "transform" }}>
         <Image

@@ -32,7 +32,7 @@ function RacetrackSurface() {
     <svg
       className="absolute left-1/2 top-0 hidden h-full -translate-x-1/2 md:block"
       width="200"
-      preserveAspectRatio="xMidYMid meet"
+      preserveAspectRatio="none"
       viewBox="0 0 200 2000"
       style={{ height: "100%" }}
     >

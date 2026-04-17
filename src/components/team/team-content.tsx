@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 
 interface Lead {
@@ -123,21 +123,6 @@ const subteamLeads: Lead[] = [
   },
 ];
 
-function LinkedInIcon({ size = 16 }: { size?: number }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width={size}
-      height={size}
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      className="inline-block"
-    >
-      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-    </svg>
-  );
-}
-
 type CardVariant = "medium" | "horizontal";
 
 function LeadCard({
@@ -148,9 +133,14 @@ function LeadCard({
   image,
   variant = "medium",
 }: Lead & { variant?: CardVariant }) {
+  const Tag = linkedin ? "a" : "div";
+  const linkProps = linkedin
+    ? { href: linkedin, target: "_blank" as const, rel: "noopener noreferrer" }
+    : {};
+
   if (variant === "horizontal") {
     return (
-      <div className="lead-card group relative overflow-hidden border border-border bg-elevated cursor-pointer">
+      <Tag {...linkProps} className="lead-card group relative block overflow-hidden border border-border bg-elevated cursor-pointer">
         <div className="flex h-full">
           {/* Photo area - left side */}
           <div className="relative w-1/2 min-h-[220px] bg-surface">
@@ -178,47 +168,22 @@ function LeadCard({
                 {name}
               </p>
               <p className="mt-0.5 font-mono text-xs text-muted">{role}</p>
-              {linkedin && (
-                <a
-                  href={linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 inline-flex items-center gap-1.5 text-xs text-gold lead-card-linkedin"
-                  aria-label={`${name} on LinkedIn`}
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <LinkedInIcon size={12} />
-                  <span className="font-mono uppercase tracking-widest">LinkedIn</span>
-                </a>
-              )}
             </div>
           </div>
 
           {/* Hover description overlay */}
           {description && (
             <div className="lead-card-desc absolute inset-0 flex items-center bg-foreground/90 p-5 md:p-6 opacity-0 pointer-events-none">
-              <div>
+              <div className="overflow-y-auto max-h-full">
                 <p className="font-display text-sm uppercase tracking-tight text-gold">
                   {name}
                 </p>
                 <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-white/50">
                   {role}
                 </p>
-                <p className="mt-3 text-xs leading-relaxed text-white/80 md:text-sm">
+                <p className="mt-3 text-[11px] leading-relaxed text-white/80">
                   {description}
                 </p>
-                {linkedin && (
-                  <a
-                    href={linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mt-3 inline-flex items-center gap-1.5 text-xs text-gold lead-card-linkedin"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <LinkedInIcon size={12} />
-                    <span className="font-mono uppercase tracking-widest">LinkedIn</span>
-                  </a>
-                )}
               </div>
             </div>
           )}
@@ -226,12 +191,12 @@ function LeadCard({
 
         {/* Gold accent line at bottom */}
         <div className="lead-card-accent absolute bottom-0 left-0 h-[2px] w-full origin-left scale-x-0 bg-gold" />
-      </div>
+      </Tag>
     );
   }
 
   return (
-    <div className="lead-card group relative overflow-hidden border border-border bg-elevated cursor-pointer">
+    <Tag {...linkProps} className="lead-card group relative block overflow-hidden border border-border bg-elevated cursor-pointer">
       {/* Photo area */}
       <div className="relative aspect-[3/4] w-full bg-surface">
         {image ? (
@@ -255,51 +220,25 @@ function LeadCard({
 
         {/* Name + role overlay at bottom */}
         <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">
-          <div className="flex items-end justify-between gap-2">
-            <div>
-              <p className="font-display text-lg uppercase tracking-tight text-white md:text-xl">{name}</p>
-              <p className="mt-0.5 font-mono text-xs text-white/70">{role}</p>
-            </div>
-            {linkedin && (
-              <a
-                href={linkedin}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-white/60 lead-card-linkedin mb-1"
-                aria-label={`${name} on LinkedIn`}
-                onClick={(e) => e.stopPropagation()}
-              >
-                <LinkedInIcon />
-              </a>
-            )}
+          <div>
+            <p className="font-display text-lg uppercase tracking-tight text-white md:text-xl">{name}</p>
+            <p className="mt-0.5 font-mono text-xs text-white/70">{role}</p>
           </div>
         </div>
 
         {/* Hover description overlay */}
         {description && (
           <div className="lead-card-desc absolute inset-0 flex items-center bg-foreground/90 p-5 md:p-6 opacity-0 pointer-events-none">
-            <div>
+            <div className="overflow-y-auto max-h-full">
               <p className="font-display text-sm uppercase tracking-tight text-gold">
                 {name}
               </p>
               <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-white/50">
                 {role}
               </p>
-              <p className="mt-3 text-xs leading-relaxed text-white/80 md:text-sm">
+              <p className="mt-3 text-[11px] leading-relaxed text-white/80">
                 {description}
               </p>
-              {linkedin && (
-                <a
-                  href={linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-3 inline-flex items-center gap-1.5 text-xs text-gold lead-card-linkedin"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <LinkedInIcon size={12} />
-                  <span className="font-mono uppercase tracking-widest">LinkedIn</span>
-                </a>
-              )}
             </div>
           </div>
         )}
@@ -307,7 +246,7 @@ function LeadCard({
 
       {/* Gold accent line at bottom */}
       <div className="lead-card-accent absolute bottom-0 left-0 h-[2px] w-full origin-left scale-x-0 bg-gold" />
-    </div>
+    </Tag>
   );
 }
 

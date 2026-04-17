@@ -457,7 +457,7 @@ export function BecomeASponsorContent() {
               data-reveal-delay="150"
               className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted"
             >
-              Browse the full sponsorship packet below — team achievements, tiers,
+              Browse the full sponsorship packet below - team achievements, tiers,
               and how your support makes a difference.
             </p>
           </div>

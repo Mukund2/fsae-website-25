@@ -77,10 +77,10 @@ export default function ContactPage() {
       </section>
 
       {/* Two-column info section */}
-      <section className="bg-white mx-auto max-w-7xl px-6 py-20 md:py-28">
+      <section className="bg-background mx-auto max-w-7xl px-6 py-20 md:py-28">
         <div className="grid gap-12 md:grid-cols-2 items-start">
           {/* Left -- contact info card */}
-          <div className="border border-border bg-surface p-8 md:p-10 space-y-8">
+          <div className="border border-border bg-surface p-8 md:p-10 space-y-8 hero-fade-in" style={{ animationDelay: "0.2s" }}>
             {/* Email */}
             <div className="flex items-start justify-between">
               <div>
@@ -118,10 +118,10 @@ export default function ContactPage() {
               </h2>
               <div className="mt-2 space-y-2">
                 <p className="font-mono text-sm leading-relaxed text-muted">
-                  <span className="text-foreground">Room 344</span> — Design & engineering workspace
+                  <span className="text-foreground">Room 344</span> - Design & engineering workspace
                 </p>
                 <p className="font-mono text-sm leading-relaxed text-muted">
-                  <span className="text-foreground">Rooms 123 & 130</span> — Hands-on fabrication & manufacturing
+                  <span className="text-foreground">Rooms 123 & 130</span> - Hands-on fabrication & manufacturing
                 </p>
               </div>
               <p className="mt-2 font-mono text-xs text-muted/60">
@@ -152,7 +152,7 @@ export default function ContactPage() {
           </div>
 
           {/* Right -- image */}
-          <div className="relative aspect-[4/3] overflow-hidden">
+          <div className="relative aspect-[4/3] overflow-hidden hero-fade-in" style={{ animationDelay: "0.4s" }}>
             <Image
               src="/images/flickr/comp-action-1.jpg"
               alt="SJSU Spartan Racing at competition"

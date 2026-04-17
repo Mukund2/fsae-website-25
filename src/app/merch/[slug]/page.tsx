@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   return {
     title: `${product.name} | Merch`,
     description:
-      product.descriptionText || `${product.name} — SJSU Spartan Racing`,
+      product.descriptionText || `${product.name} - SJSU Spartan Racing`,
     openGraph: {
       title: product.name,
       description: product.descriptionText,

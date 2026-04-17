@@ -32,7 +32,7 @@ function RacetrackSurface() {
     <svg
       className="absolute left-1/2 top-0 hidden h-full -translate-x-1/2 md:block"
       width="200"
-      preserveAspectRatio="none"
+      preserveAspectRatio="xMidYMid meet"
       viewBox="0 0 200 2000"
       style={{ height: "100%" }}
     >
@@ -48,7 +48,6 @@ function RacetrackSurface() {
         strokeLinecap="round"
         strokeLinejoin="round"
         fill="none"
-        vectorEffect="non-scaling-stroke"
       />
 
       {/* Layer 2: Asphalt surface */}
@@ -59,7 +58,6 @@ function RacetrackSurface() {
         strokeLinecap="round"
         strokeLinejoin="round"
         fill="none"
-        vectorEffect="non-scaling-stroke"
       />
 
       {/* Layer 3: Subtle gray texture on asphalt */}
@@ -70,7 +68,6 @@ function RacetrackSurface() {
         strokeLinecap="round"
         fill="none"
         opacity="0.3"
-        vectorEffect="non-scaling-stroke"
       />
 
       {/* Layer 4: White dashed center line */}
@@ -82,7 +79,6 @@ function RacetrackSurface() {
         strokeLinecap="round"
         fill="none"
         opacity="0.6"
-        vectorEffect="non-scaling-stroke"
       />
     </svg>
   );
@@ -238,14 +234,14 @@ export default function CarsPage() {
         </div>
       </section>
 
-      <section className="relative bg-background py-12 overflow-hidden">
+      <section className="relative bg-surface py-12 overflow-hidden">
         <RacetrackCar />
         <RacetrackSurface />
 
         <div className="mx-auto max-w-5xl px-6">
           <CheckeredLine label="start" />
 
-          <div className="mt-12 flex flex-col gap-4 md:gap-0">
+          <div className="mt-12 flex flex-col gap-0">
             {cars.map((car, i) => (
               <TimelineEntry key={car.slug} car={car} isLeft={i % 2 === 0} />
             ))}
@@ -300,7 +296,7 @@ function TimelineEntry({
           isLeft ? "md:mr-auto md:pr-10" : "md:ml-auto md:pl-10"
         }`}
       >
-        <div className="border border-border bg-elevated p-5">
+        <div className="border border-border/60 bg-elevated p-4 shadow-sm" style={{ borderColor: 'rgba(200, 168, 78, 0.1)' }}>
           <div className="flex items-baseline justify-between gap-4">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/40">

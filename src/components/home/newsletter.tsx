@@ -164,7 +164,7 @@ export function Newsletter() {
   const current = newsletters[active];
 
   return (
-    <section ref={sectionRef} className="w-full bg-white py-24 md:py-32">
+    <section ref={sectionRef} className="w-full bg-background py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Header */}
         <div data-anim="left">

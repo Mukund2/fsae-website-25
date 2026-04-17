@@ -166,7 +166,7 @@ export function SponsorStrip() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full bg-white py-20">
+    <section ref={sectionRef} className="w-full bg-background py-20">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div data-anim>
@@ -190,8 +190,8 @@ export function SponsorStrip() {
       </div>
 
       <div className="relative mt-10">
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-white to-transparent sm:w-52" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-white to-transparent sm:w-52" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-background to-transparent sm:w-52" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-background to-transparent sm:w-52" />
 
         <Marquee speed={120} gap="gap-16 sm:gap-20">
           {SPONSORS.map((sponsor) => (

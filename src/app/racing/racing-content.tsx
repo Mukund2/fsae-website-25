@@ -122,7 +122,7 @@ const keyResults = [
   },
   {
     stat: "1st",
-    label: "EV — SoCal Shootout",
+    label: "EV - SoCal Shootout",
     context: "2024 (x2)",
     sub: [],
   },
@@ -163,7 +163,7 @@ export function RacingContent() {
       </section>
 
       {/* ── What is Formula SAE? ───────────────────────────── */}
-      <section className="bg-white mx-auto max-w-7xl px-6 py-20 md:py-32">
+      <section className="bg-background mx-auto max-w-7xl px-6 py-20 md:py-32">
         <div className="grid items-center gap-12 md:grid-cols-2">
           <div className="flex flex-col gap-6">
             <span className="sr-slide-left font-mono text-xs uppercase tracking-[0.25em] text-gold">

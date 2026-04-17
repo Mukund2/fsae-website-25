@@ -39,7 +39,7 @@ export function Navbar() {
       {/* Yellow top line */}
       <div className="fixed top-0 left-0 z-[60] h-1 w-full bg-yellow" />
 
-      <nav className="fixed top-1 left-0 z-50 w-full border-b border-border bg-white">
+      <nav className="fixed top-1 left-0 z-50 w-full border-b border-border bg-elevated">
         <div className="flex w-full items-center justify-between px-4 py-3 lg:px-6">
           {/* Left: Logo + Brand */}
           <Link
@@ -116,7 +116,7 @@ export function Navbar() {
       {/* Mobile Menu Overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-40 flex flex-col items-center justify-center bg-white/95 backdrop-blur-lg md:hidden",
+          "fixed inset-0 z-40 flex flex-col items-center justify-center bg-elevated/95 backdrop-blur-lg md:hidden",
           mobileOpen ? "translate-x-0" : "translate-x-full"
         )}
         aria-hidden={!mobileOpen}

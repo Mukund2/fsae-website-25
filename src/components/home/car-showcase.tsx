@@ -95,16 +95,10 @@ export function CarShowcase() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full bg-white">
-      <div className="mx-auto max-w-7xl px-6 py-24 lg:px-12 lg:py-32">
-        {/* Heading */}
-        <h2 data-anim className="font-display text-[clamp(2.5rem,5vw,4.5rem)] uppercase leading-[0.95] tracking-tight">
-          <span className="font-bold text-foreground">Built</span>{" "}
-          <span className="font-light text-foreground/40">to Win</span>
-        </h2>
-
+    <section ref={sectionRef} className="w-full bg-background">
+      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-20">
         {/* Two-column: Car LEFT, Image cards RIGHT */}
-        <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           {/* LEFT: 3D Car Model */}
           <div data-anim className="relative aspect-square w-full overflow-hidden lg:aspect-auto lg:min-h-[500px]">
             <HeroScene />

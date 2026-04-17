@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FFFFFF;
+  --background: #FAFAF8;
   --foreground: #1A1A1A;
-  --surface: #F5F5F5;
+  --surface: #F3F2EE;
   --elevated: #FFFFFF;
-  --gold: #0055A2;
+  --gold: #C8A84E;
+  --gold-light: #D4AF37;
   --blue: #0055A2;
   --accent: #0055A2;
   --yellow: #FFD000;
@@ -19,6 +20,7 @@
   --color-surface: var(--surface);
   --color-elevated: var(--elevated);
   --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
   --color-blue: var(--blue);
   --color-yellow: var(--yellow);
   --color-muted: var(--muted);
@@ -31,7 +33,9 @@
 
 /* Base styles */
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image: radial-gradient(circle, rgba(0, 0, 0, 0.04) 1px, transparent 1px);
+  background-size: 24px 24px;
   color: var(--foreground);
   font-family: var(--font-body), system-ui, sans-serif;
 }
@@ -44,9 +48,21 @@ body {
   background-clip: text;
 }
 
+.text-gradient-gold {
+  background: linear-gradient(135deg, #C8A84E, #D4AF37, #C8A84E);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* Blue glow utility */
 .glow-blue {
   box-shadow: 0 0 40px rgba(0, 85, 162, 0.15);
+}
+
+/* Gold glow utility */
+.glow-gold {
+  box-shadow: 0 0 40px rgba(200, 168, 78, 0.2);
 }
 
 /* Smooth scroll */
@@ -56,8 +72,8 @@ html {
 
 /* Selection color */
 ::selection {
-  background-color: rgba(0, 85, 162, 0.2);
-  color: #EDEDED;
+  background-color: rgba(200, 168, 78, 0.25);
+  color: #1A1A1A;
 }
 
 /* Scrollbar */
@@ -468,6 +484,139 @@ html {
 
 .alumni-modal {
   animation: modalSlideUp 0.3s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+/* Additional scroll-reveal animations */
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(60px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes countUp {
+  from { opacity: 0; transform: translateY(20px) scale(0.9); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Section divider angles */
+.angle-top {
+  clip-path: polygon(0 4rem, 100% 0, 100% 100%, 0 100%);
+}
+
+/* Image pop-out shadow */
+.image-pop {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* Gold underline accent */
+.gold-underline::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--gold);
+  margin-top: 12px;
+}
+
+/* Stagger reveal for list items */
+@keyframes staggerReveal {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Subtle float animation for idle elements */
+@keyframes subtleFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+/* Glow pulse for gold accents */
+@keyframes goldPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* Border reveal */
+@keyframes borderReveal {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+
+.stagger-item {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+.stagger-item.revealed {
+  animation: staggerReveal 0.5s ease-out forwards;
+}
+
+/* Universal card hover glow */
+@keyframes cardHoverGlow {
+  from { box-shadow: 0 0 0 rgba(200, 168, 78, 0); }
+  to { box-shadow: 0 4px 20px rgba(200, 168, 78, 0.1), 0 0 0 1px rgba(200, 168, 78, 0.15); }
+}
+
+/* Subtle lift on hover */
+@keyframes cardHoverLift {
+  from { transform: translateY(0); }
+  to { transform: translateY(-2px); }
+}
+
+/* Link arrow nudge on hover */
+@keyframes arrowNudge {
+  from { transform: translateX(0); }
+  to { transform: translateX(4px); }
+}
+
+/* Image zoom on hover */
+@keyframes imageZoom {
+  from { transform: scale(1); }
+  to { transform: scale(1.03); }
+}
+
+/* Footer social icon hover */
+@keyframes socialIconHover {
+  from { color: var(--muted); transform: translateY(0); }
+  to { color: var(--gold); transform: translateY(-2px); }
+}
+
+/* Hover effect classes */
+.footer-social:hover {
+  animation: socialIconHover 0.3s ease-out forwards;
+}
+
+.join-btn:hover {
+  animation: cardHoverGlow 0.3s ease-out forwards;
+}
+
+.showcase-card:hover .showcase-card-img {
+  animation: imageZoom 0.3s ease-out forwards;
+}
+
+.showcase-card:hover .showcase-card-arrow {
+  animation: arrowNudge 0.3s ease-out forwards;
+}
+
+.contact-social:hover {
+  animation: cardHoverGlow 0.3s ease-out forwards;
+}
+
+.timeline-card:hover {
+  animation: cardHoverGlow 0.3s ease-out forwards;
+}
+
+.newsletter-tab:hover {
+  animation: cardHoverGlow 0.3s ease-out forwards;
 }
 
 /* Reduced motion */

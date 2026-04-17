@@ -111,13 +111,13 @@ export function CarShowcase() {
                 key={card.title}
                 href={card.href}
                 data-card
-                className="group relative aspect-[3/1] overflow-hidden"
+                className="showcase-card group relative aspect-[3/1] overflow-hidden"
               >
                 <Image
                   src={card.image}
                   alt={card.title}
                   fill
-                  className="object-cover"
+                  className="showcase-card-img object-cover"
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
@@ -125,7 +125,7 @@ export function CarShowcase() {
                   <span className="font-display text-lg font-bold uppercase tracking-tight text-white">
                     {card.title}
                   </span>
-                  <ArrowIcon />
+                  <span className="showcase-card-arrow"><ArrowIcon /></span>
                 </div>
               </Link>
             ))}

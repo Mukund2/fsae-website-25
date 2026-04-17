@@ -6,6 +6,7 @@ import { RevealText } from "@/components/animation/reveal-text";
 import { StaggerChildren } from "@/components/animation/stagger-children";
 import { faqs } from "@/data/faq";
 import { ChevronDown } from "lucide-react";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const categories = [...new Set(faqs.map((f) => f.category))];
 
@@ -70,6 +71,8 @@ export function FAQContent() {
   const [activeCategory, setActiveCategory] = useState<string>(categories[0]);
   const [fadeKey, setFadeKey] = useState(0);
   const [visible, setVisible] = useState(true);
+  const heroRef = useScrollReveal();
+  const tabsRef = useScrollReveal();
 
   function handleCategoryChange(category: string) {
     if (category === activeCategory) return;
@@ -84,32 +87,32 @@ export function FAQContent() {
   return (
     <>
       {/* Hero */}
-      <section className="flex min-h-[40vh] items-center bg-surface pt-24">
+      <section ref={heroRef as React.RefObject<HTMLElement>} className="flex min-h-[40vh] items-center bg-surface pt-24">
         <div className="mx-auto max-w-7xl px-6">
-          <RevealText
-            as="h1"
+          <h1
+            data-anim="up"
             className="font-display text-5xl uppercase tracking-tight md:text-7xl"
           >
             FAQ
-          </RevealText>
-          <RevealText
-            as="p"
+          </h1>
+          <p
+            data-anim="up"
             className="mt-4 max-w-2xl text-lg text-muted"
-            delay={0.3}
           >
             Got questions? We&apos;ve got answers.
-          </RevealText>
+          </p>
         </div>
       </section>
 
       {/* Category Tabs */}
       <Section>
-        <div className="mb-12 flex flex-wrap gap-2">
-          {categories.map((category) => (
+        <div ref={tabsRef as React.RefObject<HTMLDivElement>} className="mb-12 flex flex-wrap gap-2">
+          {categories.map((category, i) => (
             <button
               key={category}
+              data-anim="up"
               onClick={() => handleCategoryChange(category)}
-              className={`rounded-full px-5 py-2 font-display text-sm uppercase tracking-widest transition-all duration-300 ${
+              className={`rounded-full px-5 py-2 font-display text-sm uppercase tracking-widest ${
                 activeCategory === category
                   ? "bg-gold text-background"
                   : "border border-border bg-surface text-muted hover:border-gold/30 hover:text-foreground"
@@ -126,26 +129,30 @@ export function FAQContent() {
           style={{
             opacity: visible ? 1 : 0,
             transform: visible ? "translateY(0)" : "translateY(12px)",
-            transition: "opacity 0.2s ease-out, transform 0.2s ease-out",
           }}
+          className={visible ? "hero-fade-in" : ""}
         >
-          <RevealText
-            as="h2"
+          <h2
             className="font-display text-2xl uppercase tracking-tight md:text-3xl"
           >
             {activeCategory}
-          </RevealText>
-          <StaggerChildren className="mt-8 space-y-4" staggerDelay={0.08}>
+          </h2>
+          <div className="mt-8 space-y-4">
             {faqs
               .filter((f) => f.category === activeCategory)
-              .map((faq) => (
-                <FAQItem
+              .map((faq, i) => (
+                <div
                   key={faq.question}
-                  question={faq.question}
-                  answer={faq.answer}
-                />
+                  className="stagger-item revealed"
+                  style={{ animationDelay: `${i * 0.08}s` }}
+                >
+                  <FAQItem
+                    question={faq.question}
+                    answer={faq.answer}
+                  />
+                </div>
               ))}
-          </StaggerChildren>
+          </div>
         </div>
       </Section>
     </>

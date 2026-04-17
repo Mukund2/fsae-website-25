@@ -66,13 +66,13 @@ const socialIcons = [
 
 export function Footer() {
   return (
-    <footer className="border-t-2 border-gold bg-white">
+    <footer className="border-t-2 border-gold bg-[#FAFAF5]">
       <div className="mx-auto max-w-7xl px-6 py-8 lg:px-12">
         <div className="flex flex-col items-center gap-6 sm:flex-row sm:justify-between">
           {/* Logo treatment */}
-          <h3 className="font-display text-3xl uppercase tracking-tight">
-            <span className="font-bold text-foreground">Spartan</span>{" "}
-            <span className="font-light text-foreground/40">Racing</span>
+          <h3 className="font-display text-4xl uppercase tracking-tight">
+            <span className="font-bold text-gold">Spartan</span>{" "}
+            <span className="font-bold text-blue">Racing</span>
           </h3>
 
           {/* Social icons */}
@@ -84,7 +84,7 @@ export function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label={label}
-                className="text-muted"
+                className="text-muted footer-social"
               >
                 <Icon size={18} />
               </a>

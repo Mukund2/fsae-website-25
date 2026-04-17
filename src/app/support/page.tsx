@@ -41,17 +41,17 @@ export default function SupportPage() {
       {/* Why donate */}
       <section className="mx-auto max-w-7xl px-6 pb-16 md:pb-24">
         <div className="max-w-2xl">
-          <h2 className="font-display text-3xl uppercase tracking-tight md:text-4xl">
+          <h2 className="font-display text-3xl uppercase tracking-tight md:text-4xl hero-fade-in" style={{ animationDelay: "0.2s" }}>
             <span className="font-bold">Why</span>{" "}
             <span className="font-light text-foreground/40">Donate</span>
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-muted">
+          <p className="mt-6 text-lg leading-relaxed text-muted hero-fade-in" style={{ animationDelay: "0.3s" }}>
             Every dollar directly funds the design, manufacturing, and testing
             of our next competition car. Your support helps us purchase raw
             materials, machining time, electronics, and cover travel expenses
             to Formula SAE events across the country.
           </p>
-          <p className="mt-4 text-lg leading-relaxed text-muted">
+          <p className="mt-4 text-lg leading-relaxed text-muted hero-fade-in" style={{ animationDelay: "0.4s" }}>
             Spartan Racing is entirely student-run. We rely on the generosity
             of alumni, local businesses, and the engineering community to keep
             building faster, lighter, and more innovative cars each season.
@@ -61,7 +61,7 @@ export default function SupportPage() {
 
       {/* CTA buttons */}
       <section className="mx-auto max-w-7xl px-6 pb-24 md:pb-32">
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-4 hero-fade-in" style={{ animationDelay: "0.5s" }}>
           <Link
             href="https://www.givecampus.com/campaigns/67453/donations/new?designation=spartanracingformulasae"
             target="_blank"

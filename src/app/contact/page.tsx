@@ -142,7 +142,7 @@ export default function ContactPage() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={item.label}
-                    className="flex h-11 w-11 items-center justify-center border border-border text-foreground/60 hover:border-gold hover:text-gold"
+                    className="contact-social flex h-11 w-11 items-center justify-center border border-border text-foreground/60"
                   >
                     {item.icon}
                   </Link>
@@ -165,7 +165,7 @@ export default function ContactPage() {
       </section>
 
       {/* Full-width image divider */}
-      <section className="relative h-[40vh] min-h-[300px] overflow-hidden">
+      <section className="relative h-[40vh] min-h-[300px] overflow-hidden hero-fade-in" style={{ animationDelay: "0.5s" }}>
         <Image
           src="/images/team/team-2.jpg"
           alt="SJSU Spartan Racing workshop"
@@ -175,7 +175,7 @@ export default function ContactPage() {
         />
         <div className="absolute inset-0 bg-black/40" />
         <div className="absolute inset-0 flex items-center justify-center px-6">
-          <p className="max-w-2xl text-center font-display text-3xl uppercase tracking-tight text-white md:text-4xl">
+          <p className="max-w-2xl text-center font-display text-3xl uppercase tracking-tight text-white md:text-4xl hero-fade-in" style={{ animationDelay: "0.7s" }}>
             Engineering Excellence Since 1991
           </p>
         </div>
@@ -184,16 +184,16 @@ export default function ContactPage() {
       {/* Bottom CTA */}
       <section className="bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="font-display text-3xl uppercase tracking-tight md:text-4xl">
+          <h2 className="font-display text-3xl uppercase tracking-tight md:text-4xl hero-fade-in" style={{ animationDelay: "0.8s" }}>
             <span className="font-bold">Want to</span>
             <br />
             <span className="font-light text-foreground/40">Join?</span>
           </h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-muted">
+          <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-muted hero-fade-in" style={{ animationDelay: "0.9s" }}>
             We&apos;re always looking for passionate engineers, designers, and
             business minds to join our team.
           </p>
-          <div className="mt-8">
+          <div className="mt-8 hero-fade-in" style={{ animationDelay: "1.0s" }}>
             <Link
               href="/join"
               className="inline-flex items-center gap-2 bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-background hover:bg-gold/90"

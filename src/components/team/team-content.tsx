@@ -138,11 +138,32 @@ function LinkedInIcon({ size = 16 }: { size?: number }) {
   );
 }
 
-function LeadCard({ name, role, description, linkedin, image }: Lead) {
+type CardVariant = "hero" | "large" | "medium";
+
+function LeadCard({
+  name,
+  role,
+  description,
+  linkedin,
+  image,
+  variant = "medium",
+}: Lead & { variant?: CardVariant }) {
+  const aspectClass =
+    variant === "hero"
+      ? "aspect-[2/3]"
+      : variant === "large"
+        ? "aspect-[3/4]"
+        : "aspect-[3/4]";
+
+  const nameTextClass =
+    variant === "hero"
+      ? "font-display text-xl uppercase tracking-tight text-white md:text-2xl"
+      : "font-display text-lg uppercase tracking-tight text-white md:text-xl";
+
   return (
     <div className="lead-card group relative overflow-hidden border border-border bg-elevated cursor-pointer">
       {/* Photo area */}
-      <div className="relative aspect-[3/4] w-full bg-surface">
+      <div className={`relative ${aspectClass} w-full bg-surface`}>
         {image ? (
           <Image
             src={image}
@@ -160,15 +181,13 @@ function LeadCard({ name, role, description, linkedin, image }: Lead) {
         )}
 
         {/* Gradient overlay at bottom for text readability */}
-        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/70 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/80 to-transparent" />
 
         {/* Name + role overlay at bottom */}
         <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">
           <div className="flex items-end justify-between gap-2">
             <div>
-              <p className="font-display text-lg uppercase tracking-tight text-white md:text-xl">
-                {name}
-              </p>
+              <p className={nameTextClass}>{name}</p>
               <p className="mt-0.5 font-mono text-xs text-white/70">{role}</p>
             </div>
             {linkedin && (
@@ -222,14 +241,14 @@ function LeadCard({ name, role, description, linkedin, image }: Lead) {
   );
 }
 
-function LeadGrid({ leads, gridId }: { leads: Lead[]; gridId: string }) {
-  const gridRef = useRef<HTMLDivElement>(null);
+function useScrollReveal() {
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const grid = gridRef.current;
-    if (!grid) return;
+    const container = ref.current;
+    if (!container) return;
 
-    const cards = grid.querySelectorAll<HTMLElement>(".lead-card");
+    const cards = container.querySelectorAll<HTMLElement>(".lead-card");
 
     const observer = new IntersectionObserver(
       (entries) => {
@@ -252,13 +271,101 @@ function LeadGrid({ leads, gridId }: { leads: Lead[]; gridId: string }) {
     return () => observer.disconnect();
   }, []);
 
+  return ref;
+}
+
+function ExecBoard() {
+  const ref = useScrollReveal();
+
+  const heroLeads = executiveBoard.slice(0, 2);
+  const restLeads = executiveBoard.slice(2);
+
   return (
-    <div ref={gridRef} className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-      {leads.map((member, i) => (
-        <div key={`${gridId}-${member.name}-${member.role}`} data-index={i}>
-          <LeadCard {...member} />
-        </div>
-      ))}
+    <div ref={ref} className="mt-8 space-y-4">
+      {/* Hero row: Chief Engineer + President */}
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
+        {heroLeads.map((member, i) => (
+          <div key={`exec-hero-${member.name}`} data-index={i}>
+            <LeadCard {...member} variant="hero" />
+          </div>
+        ))}
+      </div>
+
+      {/* Second row: remaining 3 */}
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {restLeads.map((member, i) => (
+          <div key={`exec-rest-${member.name}`} data-index={i + 2}>
+            <LeadCard {...member} variant="medium" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SubteamLeadsGrid() {
+  const ref = useScrollReveal();
+
+  // Row 1: 2 large cards (indices 0-1)
+  const row1 = subteamLeads.slice(0, 2);
+  // Row 2: 3 medium cards (indices 2-4)
+  const row2 = subteamLeads.slice(2, 5);
+  // Row 3: 2 large cards (indices 5-6)
+  const row3 = subteamLeads.slice(5, 7);
+  // Row 4: 2 medium cards (indices 7-8)
+  const row4 = subteamLeads.slice(7, 9);
+
+  let idx = 0;
+
+  return (
+    <div ref={ref} className="mt-8 space-y-4">
+      {/* Row 1: 2 large */}
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
+        {row1.map((member) => {
+          const i = idx++;
+          return (
+            <div key={`sub-${member.name}-${member.role}`} data-index={i}>
+              <LeadCard {...member} variant="large" />
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Row 2: 3 medium */}
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {row2.map((member) => {
+          const i = idx++;
+          return (
+            <div key={`sub-${member.name}-${member.role}`} data-index={i}>
+              <LeadCard {...member} variant="medium" />
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Row 3: 2 large */}
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
+        {row3.map((member) => {
+          const i = idx++;
+          return (
+            <div key={`sub-${member.name}-${member.role}`} data-index={i}>
+              <LeadCard {...member} variant="large" />
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Row 4: 2 medium */}
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        {row4.map((member) => {
+          const i = idx++;
+          return (
+            <div key={`sub-${member.name}-${member.role}`} data-index={i}>
+              <LeadCard {...member} variant="medium" />
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -271,7 +378,7 @@ export function TeamContent() {
         <h2 className="font-display text-3xl uppercase tracking-tight md:text-4xl">
           Executive Board
         </h2>
-        <LeadGrid leads={executiveBoard} gridId="exec" />
+        <ExecBoard />
       </section>
 
       {/* Subteam Leads */}
@@ -279,7 +386,7 @@ export function TeamContent() {
         <h2 className="font-display text-3xl uppercase tracking-tight md:text-4xl">
           Subteam Leads
         </h2>
-        <LeadGrid leads={subteamLeads} gridId="sub" />
+        <SubteamLeadsGrid />
       </section>
     </>
   );

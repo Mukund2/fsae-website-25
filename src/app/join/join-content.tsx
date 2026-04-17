@@ -134,8 +134,8 @@ export function JoinContent() {
       {/* Stats Row */}
       <Section className="border-b border-border">
         <div className="grid grid-cols-2 gap-8 md:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
+          {stats.map((stat, i) => (
+            <div key={stat.label} className="sr-reveal text-center" data-delay={String(i * 0.1)}>
               <Counter
                 value={stat.value}
                 suffix={stat.suffix}
@@ -192,7 +192,7 @@ export function JoinContent() {
         <p className="sr-reveal mx-auto mt-4 max-w-xl text-muted" data-delay="0.2">
           Fill out our interest form and we&apos;ll reach out with next steps. Recruitment is ongoing. Apply anytime.
         </p>
-        <div className="mt-8">
+        <div className="sr-reveal mt-8" data-delay="0.3">
           <MagneticButton>
             <a
               href="https://forms.gle/placeholder"

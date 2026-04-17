@@ -296,7 +296,7 @@ function TimelineEntry({
           isLeft ? "md:mr-auto md:pr-10" : "md:ml-auto md:pl-10"
         }`}
       >
-        <div className="border border-border/60 bg-elevated p-4 shadow-sm" style={{ borderColor: 'rgba(200, 168, 78, 0.1)' }}>
+        <div className="timeline-card border border-border/60 bg-elevated p-4 shadow-sm" style={{ borderColor: 'rgba(200, 168, 78, 0.1)' }}>
           <div className="flex items-baseline justify-between gap-4">
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/40">

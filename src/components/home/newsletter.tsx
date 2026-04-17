@@ -179,17 +179,18 @@ export function Newsletter() {
         </div>
 
         {/* Newsletter tabs */}
-        <div data-anim="up" className="mt-8 -mx-6 px-6 overflow-x-auto scrollbar-hide">
+        <div className="mt-8 -mx-6 px-6 overflow-x-auto scrollbar-hide">
           <div className="flex gap-2 pb-2" style={{ minWidth: "max-content" }}>
           {newsletters.map((nl, i) => (
             <button
               key={nl.date}
+              data-anim="up"
               onClick={() => setActive(i)}
               className={cn(
-                "flex shrink-0 flex-col items-start border px-4 py-2.5 text-left",
+                "newsletter-tab flex shrink-0 flex-col items-start border px-4 py-2.5 text-left",
                 active === i
                   ? "border-gold bg-gold/5"
-                  : "border-border hover:border-foreground/20"
+                  : "border-border"
               )}
             >
               <span

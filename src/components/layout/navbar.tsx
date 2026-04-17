@@ -89,7 +89,7 @@ export function Navbar() {
               href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-gold px-5 py-2 font-display text-[13px] font-bold uppercase tracking-wider text-white"
+              className="join-btn bg-gold px-5 py-2 font-display text-[13px] font-bold uppercase tracking-wider text-white"
             >
               Join Us
             </Link>

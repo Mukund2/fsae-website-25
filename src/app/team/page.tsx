@@ -12,7 +12,7 @@ export default function TeamPage() {
   return (
     <>
       {/* Hero banner */}
-      <section className="relative flex min-h-[50vh] items-center pt-32 pb-16 overflow-hidden">
+      <section className="relative flex min-h-[40vh] items-center pt-32 pb-10 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface/80 to-background" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,85,162,0.06)_0%,_transparent_60%)]" />
 

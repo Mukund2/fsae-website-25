@@ -127,7 +127,16 @@ function animateElement(
 
 export function Newsletter() {
   const [active, setActive] = useState(0);
+  const [loaded, setLoaded] = useState<Set<number>>(() => new Set([0]));
   const sectionRef = useRef<HTMLElement>(null);
+
+  const handleTabClick = (i: number) => {
+    setActive(i);
+    setLoaded((prev) => {
+      if (prev.has(i)) return prev;
+      return new Set(prev).add(i);
+    });
+  };
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -161,8 +170,6 @@ export function Newsletter() {
     return () => observer.disconnect();
   }, []);
 
-  const current = newsletters[active];
-
   return (
     <section ref={sectionRef} className="w-full bg-background py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
@@ -182,7 +189,7 @@ export function Newsletter() {
             <button
               key={nl.date}
               data-anim="up"
-              onClick={() => setActive(i)}
+              onClick={() => handleTabClick(i)}
               className={cn(
                 "newsletter-tab flex shrink-0 flex-col items-start border px-4 py-2.5 text-left",
                 active === i
@@ -215,7 +222,13 @@ export function Newsletter() {
 
         {/* Inline flipbook */}
         <div data-anim="up" className="mt-10">
-          <InlineFlipbook key={current.pdf} pdfUrl={current.pdf} />
+          {newsletters.map((nl, i) =>
+            loaded.has(i) ? (
+              <div key={nl.pdf} style={{ display: active === i ? "block" : "none" }}>
+                <InlineFlipbook pdfUrl={nl.pdf} />
+              </div>
+            ) : null
+          )}
         </div>
       </div>
     </section>

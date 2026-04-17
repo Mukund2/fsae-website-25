@@ -22,8 +22,9 @@ export function Hero() {
         }}
       >
         <h1 className="font-display uppercase leading-[0.92] tracking-tight">
-          <span className="block text-[clamp(2.5rem,7vw,5.5rem)] font-bold text-white">
-            Spartan Racing
+          <span className="block text-[clamp(2.5rem,7vw,5.5rem)] font-bold">
+            <span className="text-gold">Spartan</span>{" "}
+            <span className="text-blue">Racing</span>
           </span>
           <span className="block text-[clamp(2.5rem,7vw,5.5rem)] font-bold text-white">
             Formula SAE

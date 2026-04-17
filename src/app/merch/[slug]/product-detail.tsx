@@ -137,8 +137,9 @@ export function ProductDetail({ product }: { product: MerchProduct }) {
 
           {/* Info */}
           <div>
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold">
-              Spartan Racing
+            <p className="font-mono text-xs uppercase tracking-[0.3em]">
+              <span className="text-gold">Spartan</span>{" "}
+              <span className="text-blue">Racing</span>
             </p>
             <h1 className="mt-3 font-display text-4xl uppercase tracking-tight md:text-5xl">
               {product.name}

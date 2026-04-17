@@ -60,8 +60,8 @@ export function Navbar() {
               className="h-7 w-auto"
             />
             <span className="font-display text-lg tracking-wider md:text-xl">
-              <span className="font-bold text-foreground">SPARTAN</span>{" "}
-              <span className="font-light text-foreground/40">RACING</span>
+              <span className="font-bold text-gold">SPARTAN</span>{" "}
+              <span className="font-bold text-blue">RACING</span>
             </span>
           </Link>
 

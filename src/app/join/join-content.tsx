@@ -117,10 +117,7 @@ export function JoinContent() {
       {/* Hero */}
       <section className="flex min-h-[50vh] items-center bg-surface pt-32 pb-16">
         <div className="mx-auto max-w-7xl px-6">
-          <p className="sr-reveal font-mono text-xs uppercase tracking-[0.3em] text-gold">
-            Recruitment
-          </p>
-          <h1 className="sr-reveal mt-3 font-display text-5xl uppercase tracking-tight md:text-7xl" data-delay="0.1">
+          <h1 className="sr-reveal font-display text-5xl uppercase tracking-tight md:text-7xl" data-delay="0.1">
             <span className="font-bold">Join</span>
             <br />
             <span className="font-light text-foreground/40">Us</span>
@@ -153,7 +150,8 @@ export function JoinContent() {
       <Section>
         <h2 className="sr-slide-left font-display text-3xl uppercase tracking-tight md:text-4xl">
           <span className="font-bold">Why</span>{" "}
-          <span className="font-light text-foreground/40">Spartan Racing?</span>
+          <span className="font-bold text-gold">Spartan</span>{" "}
+          <span className="font-bold text-blue">Racing?</span>
         </h2>
         <StaggerChildren
           className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"

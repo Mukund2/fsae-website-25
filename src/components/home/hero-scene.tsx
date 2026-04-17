@@ -1,19 +1,33 @@
 "use client";
 
 import { Suspense, useEffect, useRef } from "react";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, useGLTF, Center } from "@react-three/drei";
 import * as THREE from "three";
 
 function CarModel() {
   const { scene } = useGLTF("/models/sr17.glb");
   const fixed = useRef(false);
+  const wheelRefs = useRef<THREE.Object3D[]>([]);
 
   useEffect(() => {
     if (fixed.current) return;
     fixed.current = true;
 
+    const wheels: THREE.Object3D[] = [];
+
     scene.traverse((child) => {
+      // Collect wheel objects by name (case-insensitive match)
+      const name = child.name.toLowerCase();
+      if (
+        name.includes("wheel") ||
+        name.includes("tire") ||
+        name.includes("rim") ||
+        name.includes("tyre")
+      ) {
+        wheels.push(child);
+      }
+
       if (!(child instanceof THREE.Mesh)) return;
       const mat = child.material as THREE.MeshStandardMaterial;
       if (!mat?.color) return;
@@ -45,7 +59,20 @@ function CarModel() {
       mat.metalness = 0.15;
       mat.needsUpdate = true;
     });
+
+    // De-duplicate: keep only top-level wheel objects (skip children of already-collected parents)
+    const topWheels = wheels.filter(
+      (w) => !wheels.some((other) => other !== w && other.children.includes(w))
+    );
+    wheelRefs.current = topWheels.length > 0 ? topWheels : wheels;
   }, [scene]);
+
+  // Rotate wheels each frame using requestAnimationFrame via R3F's useFrame
+  useFrame((_state, delta) => {
+    for (const wheel of wheelRefs.current) {
+      wheel.rotation.x += delta * 3;
+    }
+  });
 
   return (
     <Center>

@@ -8,7 +8,14 @@ import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { CartButton } from "@/components/merch/cart-button";
 
-const NAV_ITEMS = [
+const SIMPLE_NAV_ITEMS = [
+  { label: "Cars", href: "/cars" },
+  { label: "Sponsors", href: "/sponsors" },
+  { label: "Merch", href: "/merch" },
+  { label: "Contact", href: "/contact" },
+] as const;
+
+const MOBILE_NAV_ITEMS = [
   { label: "Cars", href: "/cars" },
   { label: "Team", href: "/about" },
   { label: "Leads", href: "/team" },
@@ -17,6 +24,112 @@ const NAV_ITEMS = [
   { label: "Merch", href: "/merch" },
   { label: "Contact", href: "/contact" },
 ] as const;
+
+function RacingDropdown() {
+  return (
+    <div className="dropdown-reveal absolute left-1/2 top-full z-50 hidden w-[720px] -translate-x-1/2 border border-border bg-elevated pt-6 pb-8 px-8 shadow-lg group-hover:block">
+      {/* Caret / connector strip so there's no hover gap */}
+      <div className="absolute -top-2 left-0 h-2 w-full" />
+
+      <div className="grid grid-cols-3 gap-8">
+        {/* Column 1 */}
+        <div>
+          <h4 className="font-display text-xs font-bold uppercase tracking-widest text-gold">
+            What is Formula SAE?
+          </h4>
+          <p className="mt-3 text-[13px] leading-relaxed text-foreground/70">
+            Formula SAE is the world&apos;s largest collegiate engineering
+            competition. Student teams design, build, and race open-wheel cars
+            judged on engineering excellence.
+          </p>
+          <Link
+            href="/racing"
+            className="mt-4 inline-block text-[12px] font-semibold uppercase tracking-wider text-blue hover:text-gold"
+          >
+            Learn more
+          </Link>
+        </div>
+
+        {/* Column 2 */}
+        <div>
+          <h4 className="font-display text-xs font-bold uppercase tracking-widest text-gold">
+            Dynamic Events
+          </h4>
+          <ul className="mt-3 flex flex-col gap-2">
+            {["Acceleration", "Skidpad", "Autocross", "Endurance"].map(
+              (event) => (
+                <li key={event}>
+                  <Link
+                    href="/racing"
+                    className="text-[13px] text-foreground/70 hover:text-foreground"
+                  >
+                    {event}
+                  </Link>
+                </li>
+              )
+            )}
+          </ul>
+        </div>
+
+        {/* Column 3 */}
+        <div>
+          <h4 className="font-display text-xs font-bold uppercase tracking-widest text-gold">
+            Static Events
+          </h4>
+          <ul className="mt-3 flex flex-col gap-2">
+            {["Design", "Cost", "Business Presentation"].map((event) => (
+              <li key={event}>
+                <Link
+                  href="/racing"
+                  className="text-[13px] text-foreground/70 hover:text-foreground"
+                >
+                  {event}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TeamDropdown() {
+  return (
+    <div className="dropdown-reveal absolute left-1/2 top-full z-50 hidden w-[320px] -translate-x-1/2 border border-border bg-elevated pt-6 pb-6 px-8 shadow-lg group-hover:block">
+      {/* Hover bridge */}
+      <div className="absolute -top-2 left-0 h-2 w-full" />
+
+      <div className="flex flex-col gap-4">
+        <Link
+          href="/about"
+          className="group/item flex flex-col"
+        >
+          <span className="font-display text-xs font-bold uppercase tracking-widest text-gold">
+            Subteams
+          </span>
+          <span className="mt-1 text-[13px] text-foreground/70 group-hover/item:text-foreground">
+            Meet the departments that build the car
+          </span>
+        </Link>
+
+        <div className="h-px bg-border" />
+
+        <Link
+          href="/team"
+          className="group/item flex flex-col"
+        >
+          <span className="font-display text-xs font-bold uppercase tracking-widest text-gold">
+            Leads
+          </span>
+          <span className="mt-1 text-[13px] text-foreground/70 group-hover/item:text-foreground">
+            Executive board and subteam leads
+          </span>
+        </Link>
+      </div>
+    </div>
+  );
+}
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -36,6 +149,22 @@ export function Navbar() {
 
   return (
     <>
+      <style jsx global>{`
+        @keyframes dropdownReveal {
+          from {
+            opacity: 0;
+            transform: translateY(-8px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .dropdown-reveal {
+          animation: dropdownReveal 0.2s ease-out both;
+        }
+      `}</style>
+
       {/* Yellow top line */}
       <div className="fixed top-0 left-0 z-[60] h-1 w-full bg-yellow" />
 
@@ -68,7 +197,57 @@ export function Navbar() {
           {/* Right: Nav links + Join Us button */}
           <div className="hidden items-center gap-6 md:flex lg:gap-8">
             <ul className="flex items-center gap-5 lg:gap-6">
-              {NAV_ITEMS.map((link) => (
+              {/* Cars - simple link */}
+              <li>
+                <Link
+                  href="/cars"
+                  className={cn(
+                    "text-[13px] font-medium uppercase tracking-wider",
+                    isActive("/cars")
+                      ? "text-gold"
+                      : "text-foreground/70 hover:text-foreground"
+                  )}
+                >
+                  Cars
+                </Link>
+              </li>
+
+              {/* Team - dropdown */}
+              <li className="group relative">
+                <Link
+                  href="/about"
+                  className={cn(
+                    "text-[13px] font-medium uppercase tracking-wider",
+                    isActive("/about") || isActive("/team")
+                      ? "text-gold"
+                      : "text-foreground/70 hover:text-foreground"
+                  )}
+                >
+                  Team
+                </Link>
+                <TeamDropdown />
+              </li>
+
+              {/* Racing - dropdown */}
+              <li className="group relative">
+                <Link
+                  href="/racing"
+                  className={cn(
+                    "text-[13px] font-medium uppercase tracking-wider",
+                    isActive("/racing")
+                      ? "text-gold"
+                      : "text-foreground/70 hover:text-foreground"
+                  )}
+                >
+                  Racing
+                </Link>
+                <RacingDropdown />
+              </li>
+
+              {/* Simple nav items */}
+              {SIMPLE_NAV_ITEMS.filter(
+                (item) => item.label !== "Cars"
+              ).map((link) => (
                 <li key={link.href}>
                   <Link
                     href={link.href}
@@ -122,7 +301,7 @@ export function Navbar() {
         aria-hidden={!mobileOpen}
       >
         <nav className="flex flex-col items-center gap-8">
-          {NAV_ITEMS.map((link) => (
+          {MOBILE_NAV_ITEMS.map((link) => (
             <Link
               key={link.href}
               href={link.href}

@@ -166,8 +166,19 @@ export function SponsorStrip() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="w-full bg-background py-20">
-      <div className="mx-auto max-w-7xl px-6 lg:px-12">
+    <section ref={sectionRef} className="relative w-full py-20">
+      {/* Background image */}
+      <Image
+        src="/images/flickr/driver-day-3.jpg"
+        alt=""
+        fill
+        sizes="100vw"
+        className="object-cover"
+        priority={false}
+      />
+      <div className="absolute inset-0 bg-[#1C1917]/85" />
+
+      <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
         <div className="flex flex-col justify-between gap-6 sm:flex-row sm:items-end">
           <div data-anim>
             <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[0.95] tracking-tight">
@@ -190,8 +201,8 @@ export function SponsorStrip() {
       </div>
 
       <div className="relative mt-10">
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-background to-transparent sm:w-52" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-background to-transparent sm:w-52" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-[#1C1917]/85 to-transparent sm:w-52" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-[#1C1917]/85 to-transparent sm:w-52" />
 
         <Marquee speed={120} gap="gap-16 sm:gap-20">
           {SPONSORS.map((sponsor) => (

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import { Section } from "@/components/layout/section";
 import { RevealText } from "@/components/animation/reveal-text";
 import { StaggerChildren } from "@/components/animation/stagger-children";
@@ -87,8 +88,17 @@ export function FAQContent() {
   return (
     <>
       {/* Hero */}
-      <section ref={heroRef as React.RefObject<HTMLElement>} className="flex min-h-[40vh] items-center bg-surface pt-24">
-        <div className="mx-auto max-w-7xl px-6">
+      <section ref={heroRef as React.RefObject<HTMLElement>} className="relative flex min-h-[40vh] items-center pt-24 overflow-hidden">
+        <Image
+          src="/images/flickr/comp-action-3.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-background/80" />
+        <div className="relative mx-auto max-w-7xl px-6">
           <h1
             data-anim="up"
             className="font-display text-5xl uppercase tracking-tight md:text-7xl"
@@ -102,7 +112,7 @@ export function FAQContent() {
             Got questions? We&apos;ve got answers.
           </p>
         </div>
-      </section>
+        </section>
 
       {/* Category Tabs */}
       <Section>

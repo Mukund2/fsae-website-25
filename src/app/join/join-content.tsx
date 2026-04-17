@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import { Section } from "@/components/layout/section";
 import { RevealText } from "@/components/animation/reveal-text";
 import { StaggerChildren } from "@/components/animation/stagger-children";
@@ -145,6 +146,19 @@ export function JoinContent() {
           ))}
         </div>
       </Section>
+
+      {/* Team photo */}
+      <section className="relative w-full">
+        <div className="relative aspect-[21/9] w-full overflow-hidden">
+          <Image
+            src="/images/team/team-group.jpg"
+            alt="Spartan Racing team"
+            fill
+            sizes="100vw"
+            className="object-cover"
+          />
+        </div>
+      </section>
 
       {/* Why Join */}
       <Section>

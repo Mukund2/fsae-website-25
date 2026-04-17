@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
@@ -20,8 +21,15 @@ export default function SupportPage() {
     <>
       {/* Hero banner */}
       <section className="relative flex min-h-[50vh] items-center pt-32 pb-16 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-surface via-surface/80 to-background" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,85,162,0.06)_0%,_transparent_60%)]" />
+        <Image
+          src="/images/sr16/car-action-2.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover"
+          priority
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/80 via-background/70 to-background" />
 
         <div className="relative mx-auto max-w-7xl px-6">
           <h1
@@ -54,6 +62,19 @@ export default function SupportPage() {
             of alumni, local businesses, and the engineering community to keep
             building faster, lighter, and more innovative cars each season.
           </p>
+        </div>
+      </section>
+
+      {/* Photo break */}
+      <section className="relative mx-auto max-w-7xl px-6 pb-16 md:pb-24">
+        <div className="relative aspect-[21/9] w-full overflow-hidden">
+          <Image
+            src="/images/flickr/comp-action-1.jpg"
+            alt="Spartan Racing at competition"
+            fill
+            sizes="(max-width: 1280px) 100vw, 1280px"
+            className="object-cover"
+          />
         </div>
       </section>
 

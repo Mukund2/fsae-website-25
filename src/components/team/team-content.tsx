@@ -138,7 +138,7 @@ function LinkedInIcon({ size = 16 }: { size?: number }) {
   );
 }
 
-type CardVariant = "hero" | "large" | "medium";
+type CardVariant = "medium" | "horizontal";
 
 function LeadCard({
   name,
@@ -148,22 +148,92 @@ function LeadCard({
   image,
   variant = "medium",
 }: Lead & { variant?: CardVariant }) {
-  const aspectClass =
-    variant === "hero"
-      ? "aspect-[2/3]"
-      : variant === "large"
-        ? "aspect-[3/4]"
-        : "aspect-[3/4]";
+  if (variant === "horizontal") {
+    return (
+      <div className="lead-card group relative overflow-hidden border border-border bg-elevated cursor-pointer">
+        <div className="flex h-full">
+          {/* Photo area - left side */}
+          <div className="relative w-1/2 min-h-[220px] bg-surface">
+            {image ? (
+              <Image
+                src={image}
+                alt={name}
+                fill
+                sizes="(max-width: 640px) 100vw, 50vw"
+                className="object-cover"
+              />
+            ) : (
+              <div className="absolute inset-0 flex items-center justify-center bg-surface">
+                <span className="font-display text-4xl uppercase tracking-tight text-muted/40">
+                  {getInitials(name)}
+                </span>
+              </div>
+            )}
+          </div>
 
-  const nameTextClass =
-    variant === "hero"
-      ? "font-display text-xl uppercase tracking-tight text-white md:text-2xl"
-      : "font-display text-lg uppercase tracking-tight text-white md:text-xl";
+          {/* Info area - right side */}
+          <div className="flex w-1/2 flex-col justify-end p-5 md:p-6">
+            <div>
+              <p className="font-display text-lg uppercase tracking-tight md:text-xl">
+                {name}
+              </p>
+              <p className="mt-0.5 font-mono text-xs text-muted">{role}</p>
+              {linkedin && (
+                <a
+                  href={linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="mt-3 inline-flex items-center gap-1.5 text-xs text-gold lead-card-linkedin"
+                  aria-label={`${name} on LinkedIn`}
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <LinkedInIcon size={12} />
+                  <span className="font-mono uppercase tracking-widest">LinkedIn</span>
+                </a>
+              )}
+            </div>
+          </div>
+
+          {/* Hover description overlay */}
+          {description && (
+            <div className="lead-card-desc absolute inset-0 flex items-center bg-foreground/90 p-5 md:p-6 opacity-0 pointer-events-none">
+              <div>
+                <p className="font-display text-sm uppercase tracking-tight text-gold">
+                  {name}
+                </p>
+                <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-white/50">
+                  {role}
+                </p>
+                <p className="mt-3 text-xs leading-relaxed text-white/80 md:text-sm">
+                  {description}
+                </p>
+                {linkedin && (
+                  <a
+                    href={linkedin}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-3 inline-flex items-center gap-1.5 text-xs text-gold lead-card-linkedin"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <LinkedInIcon size={12} />
+                    <span className="font-mono uppercase tracking-widest">LinkedIn</span>
+                  </a>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Gold accent line at bottom */}
+        <div className="lead-card-accent absolute bottom-0 left-0 h-[2px] w-full origin-left scale-x-0 bg-gold" />
+      </div>
+    );
+  }
 
   return (
     <div className="lead-card group relative overflow-hidden border border-border bg-elevated cursor-pointer">
       {/* Photo area */}
-      <div className={`relative ${aspectClass} w-full bg-surface`}>
+      <div className="relative aspect-[3/4] w-full bg-surface">
         {image ? (
           <Image
             src={image}
@@ -187,7 +257,7 @@ function LeadCard({
         <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">
           <div className="flex items-end justify-between gap-2">
             <div>
-              <p className={nameTextClass}>{name}</p>
+              <p className="font-display text-lg uppercase tracking-tight text-white md:text-xl">{name}</p>
               <p className="mt-0.5 font-mono text-xs text-white/70">{role}</p>
             </div>
             {linkedin && (
@@ -277,24 +347,11 @@ function useScrollReveal() {
 function ExecBoard() {
   const ref = useScrollReveal();
 
-  const heroLeads = executiveBoard.slice(0, 2);
-  const restLeads = executiveBoard.slice(2);
-
   return (
-    <div ref={ref} className="mt-8 space-y-4">
-      {/* Hero row: Chief Engineer + President */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
-        {heroLeads.map((member, i) => (
-          <div key={`exec-hero-${member.name}`} data-index={i}>
-            <LeadCard {...member} variant="hero" />
-          </div>
-        ))}
-      </div>
-
-      {/* Second row: remaining 3 */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {restLeads.map((member, i) => (
-          <div key={`exec-rest-${member.name}`} data-index={i + 2}>
+    <div ref={ref} className="mt-8">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
+        {executiveBoard.map((member, i) => (
+          <div key={`exec-${member.name}`} data-index={i} className="lead-card-wrapper">
             <LeadCard {...member} variant="medium" />
           </div>
         ))}
@@ -306,66 +363,72 @@ function ExecBoard() {
 function SubteamLeadsGrid() {
   const ref = useScrollReveal();
 
-  // Row 1: 2 large cards (indices 0-1)
-  const row1 = subteamLeads.slice(0, 2);
-  // Row 2: 3 medium cards (indices 2-4)
-  const row2 = subteamLeads.slice(2, 5);
-  // Row 3: 2 large cards (indices 5-6)
-  const row3 = subteamLeads.slice(5, 7);
-  // Row 4: 2 medium cards (indices 7-8)
-  const row4 = subteamLeads.slice(7, 9);
+  // Row 1: 3 vertical cards (indices 0-2)
+  const row1 = subteamLeads.slice(0, 3);
+  // Row 2: 1 horizontal card spanning 2 cols + 1 vertical card (indices 3-4)
+  const row2Horizontal = subteamLeads[3];
+  const row2Vertical = subteamLeads[4];
+  // Row 3: 3 vertical cards (indices 5-7)
+  const row3 = subteamLeads.slice(5, 8);
+  // Row 4: 1 vertical card + 1 horizontal card spanning 2 cols (index 8 - mirrored layout)
+  const row4Vertical = subteamLeads[8];
 
   let idx = 0;
 
   return (
     <div ref={ref} className="mt-8 space-y-4">
-      {/* Row 1: 2 large */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
+      {/* Row 1: 3 vertical cards */}
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {row1.map((member) => {
           const i = idx++;
           return (
             <div key={`sub-${member.name}-${member.role}`} data-index={i}>
-              <LeadCard {...member} variant="large" />
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Row 2: 3 medium */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {row2.map((member) => {
-          const i = idx++;
-          return (
-            <div key={`sub-${member.name}-${member.role}`} data-index={i}>
               <LeadCard {...member} variant="medium" />
             </div>
           );
         })}
       </div>
 
-      {/* Row 3: 2 large */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2">
+      {/* Row 2: 1 horizontal (2-col span) + 1 vertical */}
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          key={`sub-${row2Horizontal.name}-${row2Horizontal.role}`}
+          data-index={idx++}
+          className="sm:col-span-2"
+        >
+          <LeadCard {...row2Horizontal} variant="horizontal" />
+        </div>
+        <div
+          key={`sub-${row2Vertical.name}-${row2Vertical.role}`}
+          data-index={idx++}
+        >
+          <LeadCard {...row2Vertical} variant="medium" />
+        </div>
+      </div>
+
+      {/* Row 3: 3 vertical cards */}
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
         {row3.map((member) => {
           const i = idx++;
           return (
             <div key={`sub-${member.name}-${member.role}`} data-index={i}>
-              <LeadCard {...member} variant="large" />
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Row 4: 2 medium */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {row4.map((member) => {
-          const i = idx++;
-          return (
-            <div key={`sub-${member.name}-${member.role}`} data-index={i}>
               <LeadCard {...member} variant="medium" />
             </div>
           );
         })}
       </div>
+
+      {/* Row 4: 1 vertical + mirrored layout (only 1 remaining) */}
+      {row4Vertical && (
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+          <div
+            key={`sub-${row4Vertical.name}-${row4Vertical.role}`}
+            data-index={idx++}
+          >
+            <LeadCard {...row4Vertical} variant="medium" />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

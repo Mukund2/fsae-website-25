@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #FAFAF8;
+  --background: #F7F5F0;
   --foreground: #1A1A1A;
-  --surface: #F3F2EE;
+  --surface: #EFECE4;
   --elevated: #FFFFFF;
-  --gold: #C8A84E;
-  --gold-light: #D4AF37;
+  --gold: #B8965A;
+  --gold-light: #C4A265;
   --blue: #0055A2;
   --accent: #0055A2;
-  --yellow: #FFD000;
-  --muted: #6B6B6B;
-  --border: #E5E5E5;
+  --yellow: #E8C547;
+  --muted: #8A8478;
+  --border: #DDD8CC;
 }
 
 @theme inline {
@@ -52,7 +52,7 @@ body {
 }
 
 .text-gradient-gold {
-  background: linear-gradient(135deg, #C8A84E, #D4AF37, #C8A84E);
+  background: linear-gradient(135deg, #B8965A, #C4A265, #B8965A);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -65,7 +65,7 @@ body {
 
 /* Gold glow utility */
 .glow-gold {
-  box-shadow: 0 0 40px rgba(200, 168, 78, 0.2);
+  box-shadow: 0 0 40px rgba(184, 150, 90, 0.15);
 }
 
 /* Smooth scroll */
@@ -75,7 +75,7 @@ html {
 
 /* Selection color */
 ::selection {
-  background-color: rgba(200, 168, 78, 0.25);
+  background-color: rgba(184, 150, 90, 0.2);
   color: #1A1A1A;
 }
 
@@ -565,8 +565,8 @@ html {
 
 /* Universal card hover glow */
 @keyframes cardHoverGlow {
-  from { box-shadow: 0 0 0 rgba(200, 168, 78, 0); }
-  to { box-shadow: 0 4px 20px rgba(200, 168, 78, 0.1), 0 0 0 1px rgba(200, 168, 78, 0.15); }
+  from { box-shadow: 0 0 0 rgba(184, 150, 90, 0); }
+  to { box-shadow: 0 4px 20px rgba(184, 150, 90, 0.08), 0 0 0 1px rgba(184, 150, 90, 0.12); }
 }
 
 /* Subtle lift on hover */

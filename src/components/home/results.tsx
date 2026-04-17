@@ -148,30 +148,29 @@ export function Results() {
       {/* Inject keyframes for card hover glow */}
       <style jsx global>{`
         @keyframes results-card-glow {
-          0% { box-shadow: 0 0 0 0 rgba(200, 168, 78, 0); }
-          50% { box-shadow: 0 0 20px 2px rgba(200, 168, 78, 0.15); }
-          100% { box-shadow: 0 0 0 0 rgba(200, 168, 78, 0); }
+          0% { box-shadow: 0 0 0 0 rgba(184, 150, 90, 0); }
+          50% { box-shadow: 0 0 20px 2px rgba(184, 150, 90, 0.15); }
+          100% { box-shadow: 0 0 0 0 rgba(184, 150, 90, 0); }
         }
         .results-card:hover {
           animation: results-card-glow 1.5s ease-in-out infinite;
         }
         @keyframes gold-text-glow {
-          0%, 100% { text-shadow: 0 0 20px rgba(200, 168, 78, 0.3); }
-          50% { text-shadow: 0 0 40px rgba(200, 168, 78, 0.5); }
+          0%, 100% { text-shadow: 0 0 20px rgba(184, 150, 90, 0.3); }
+          50% { text-shadow: 0 0 40px rgba(184, 150, 90, 0.5); }
         }
         .gold-glow {
           animation: gold-text-glow 3s ease-in-out infinite;
         }
       `}</style>
 
-      <section ref={sectionRef} className="relative w-full bg-[#0A0F1C]">
-        {/* Angled top divider */}
+      <section ref={sectionRef} className="relative w-full bg-[#1C1917]">
+        {/* Smooth gradient fade from warm background into dark section */}
         <div
-          className="absolute left-0 right-0 top-0 -translate-y-full"
+          className="absolute left-0 right-0 top-0 -translate-y-full pointer-events-none"
           style={{
-            height: "80px",
-            background: "linear-gradient(to bottom, var(--background), #0A0F1C)",
-            clipPath: "polygon(0 0, 100% 60%, 100% 100%, 0 100%)",
+            height: "160px",
+            background: "linear-gradient(to bottom, transparent, #1C1917)",
           }}
         />
 
@@ -193,7 +192,7 @@ export function Results() {
               <div
                 key={`${result.competition}-${result.event}`}
                 data-anim="card"
-                className="results-card relative rounded-sm border border-white/10 border-l-gold border-l-[3px] bg-[#111827] p-6 md:p-8"
+                className="results-card relative rounded-sm border border-white/10 border-l-[#B8965A] border-l-[3px] bg-[#292524] p-6 md:p-8"
               >
                 {/* Stat */}
                 <span className="gold-glow font-display text-6xl uppercase tracking-tight text-gold md:text-7xl">

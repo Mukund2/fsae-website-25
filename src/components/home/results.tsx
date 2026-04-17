@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import Link from "next/link";
 
 const results = [
   {
@@ -106,21 +105,21 @@ export function Results() {
           if (entry.isIntersecting) {
             animEls.forEach((el, i) => {
               const direction = el.getAttribute("data-anim");
-              if (direction === "left") {
+              if (direction === "slide-left") {
                 animateElement(
                   el,
-                  { x: -40, opacity: 0 },
+                  { x: -200, opacity: 0 },
                   { x: 0, opacity: 1 },
-                  600,
-                  i * 100
+                  700,
+                  i * 150
                 );
-              } else if (direction === "card") {
+              } else if (direction === "slide-right") {
                 animateElement(
                   el,
-                  { y: 40, opacity: 0, scale: 0.95 },
-                  { y: 0, opacity: 1, scale: 1 },
+                  { x: 200, opacity: 0 },
+                  { x: 0, opacity: 1 },
                   700,
-                  i * 120
+                  i * 150
                 );
               } else {
                 animateElement(
@@ -136,7 +135,7 @@ export function Results() {
           }
         }
       },
-      { threshold: 0.15 }
+      { threshold: 0.1 }
     );
 
     observer.observe(section);
@@ -145,15 +144,14 @@ export function Results() {
 
   return (
     <>
-      {/* Inject keyframes for card hover glow */}
       <style jsx global>{`
-        @keyframes results-card-glow {
+        @keyframes strip-glow {
           0% { box-shadow: 0 0 0 0 rgba(184, 150, 90, 0); }
-          50% { box-shadow: 0 0 20px 2px rgba(184, 150, 90, 0.15); }
+          50% { box-shadow: 0 0 24px 2px rgba(184, 150, 90, 0.12); }
           100% { box-shadow: 0 0 0 0 rgba(184, 150, 90, 0); }
         }
-        .results-card:hover {
-          animation: results-card-glow 1.5s ease-in-out infinite;
+        .result-strip:hover {
+          animation: strip-glow 1.5s ease-in-out infinite;
         }
         @keyframes gold-text-glow {
           0%, 100% { text-shadow: 0 0 20px rgba(184, 150, 90, 0.3); }
@@ -176,68 +174,54 @@ export function Results() {
 
         <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
           {/* Section header */}
-          <div data-anim="left" className="mb-16">
-            <p className="mb-4 font-mono text-xs uppercase tracking-[0.3em] text-gold">
-              Competition
-            </p>
+          <div data-anim="up" className="mb-16">
             <h2 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] uppercase leading-[0.95] tracking-tight text-white">
-              Track{" "}
-              <span className="text-gold">Record</span>
+              Track Record
             </h2>
           </div>
 
-          {/* Results grid */}
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {/* Result strips */}
+          <div className="flex flex-col gap-3">
             {results.map((result, i) => (
               <div
                 key={`${result.competition}-${result.event}`}
-                data-anim="card"
-                className="results-card relative rounded-sm border border-white/10 border-l-[#B8965A] border-l-[3px] bg-[#292524] p-6 md:p-8"
+                data-anim={i % 2 === 0 ? "slide-left" : "slide-right"}
+                className="result-strip relative flex items-center overflow-hidden bg-[#292524]"
+                style={{
+                  borderLeft: i % 2 === 0 ? "3px solid #B8965A" : "none",
+                  borderRight: i % 2 !== 0 ? "3px solid #B8965A" : "none",
+                  minHeight: "88px",
+                }}
               >
-                {/* Stat */}
-                <span className="gold-glow font-display text-6xl uppercase tracking-tight text-gold md:text-7xl">
-                  {result.stat}
-                </span>
+                {/* Stat number */}
+                <div className="flex-shrink-0 w-[100px] md:w-[140px] flex items-center justify-center px-4">
+                  <span className="gold-glow font-display text-3xl md:text-5xl uppercase tracking-tight text-gold font-bold">
+                    {result.stat}
+                  </span>
+                </div>
 
-                {/* Details */}
-                <div className="mt-4">
-                  <h3 className="font-display text-lg uppercase tracking-wide text-white md:text-xl">
+                {/* Divider */}
+                <div className="h-10 w-px bg-white/10 flex-shrink-0" />
+
+                {/* Event + competition */}
+                <div className="flex-shrink-0 w-[180px] md:w-[280px] px-5 md:px-6">
+                  <h3 className="font-display text-sm md:text-base uppercase tracking-wide text-white leading-tight">
                     {result.event}
                   </h3>
-                  <span className="mt-1 block font-mono text-[11px] uppercase tracking-[0.2em] text-white/60">
+                  <span className="mt-0.5 block font-mono text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-white/50">
                     {result.competition}
                   </span>
-                  <p className="mt-3 text-sm leading-relaxed text-white/60">
-                    {result.description}
-                  </p>
                 </div>
+
+                {/* Divider */}
+                <div className="hidden md:block h-10 w-px bg-white/10 flex-shrink-0" />
+
+                {/* Description */}
+                <p className="hidden md:block flex-1 px-6 text-sm leading-relaxed text-white/45">
+                  {result.description}
+                </p>
               </div>
             ))}
-          </div>
-
-          {/* View full results link */}
-          <div data-anim="up" className="mt-12 flex justify-end">
-            <Link
-              href="/racing"
-              className="group inline-flex items-center gap-3 font-mono text-[13px] uppercase tracking-[0.15em] text-gold"
-            >
-              View Full Results
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                className="text-gold"
-              >
-                <path
-                  d="M5 15L15 5M15 5H8M15 5V12"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </Link>
           </div>
         </div>
       </section>

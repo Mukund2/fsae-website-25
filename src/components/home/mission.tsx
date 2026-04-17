@@ -43,6 +43,7 @@ function animateElement(
 
 export function Mission() {
   const sectionRef = useRef<HTMLElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const section = sectionRef.current;
@@ -78,19 +79,57 @@ export function Mission() {
     return () => observer.disconnect();
   }, []);
 
+  // Parallax scroll effect on background image
+  useEffect(() => {
+    const imageEl = imageRef.current;
+    if (!imageEl) return;
+
+    let rafId: number;
+    const onScroll = () => {
+      rafId = requestAnimationFrame(() => {
+        const rect = imageEl.getBoundingClientRect();
+        const viewH = window.innerHeight;
+        // Only apply when section is in view
+        if (rect.bottom > 0 && rect.top < viewH) {
+          const progress = (viewH - rect.top) / (viewH + rect.height);
+          const shift = (progress - 0.5) * 60; // -30px to +30px
+          imageEl.style.transform = `translateY(${shift}px) scale(1.08)`;
+        }
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll(); // initial position
+
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafId);
+    };
+  }, []);
+
   return (
     <section
       ref={sectionRef}
       className="relative min-h-[70vh] w-full overflow-hidden bg-[#1A1A1A]"
+      style={{ boxShadow: "0 8px 32px rgba(0,0,0,0.12)" }}
     >
-      {/* Background image */}
-      <Image
-        src="/images/flickr/driver-day-4.jpg"
-        alt="SJSU Spartan Racing team"
-        fill
-        className="object-cover"
-        sizes="100vw"
-      />
+      {/* Image caption */}
+      <div className="absolute left-6 top-4 z-20 lg:left-12">
+        <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-white/40">
+          SJSU Engineering Building
+        </span>
+      </div>
+
+      {/* Background image with parallax */}
+      <div ref={imageRef} className="absolute inset-[-30px]" style={{ willChange: "transform" }}>
+        <Image
+          src="/images/flickr/driver-day-4.jpg"
+          alt="SJSU Spartan Racing team"
+          fill
+          className="object-cover"
+          sizes="100vw"
+        />
+      </div>
       <div className="absolute inset-0 bg-black/60" />
 
       {/* Content */}

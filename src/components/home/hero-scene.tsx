@@ -91,7 +91,7 @@ function CarModel() {
   // Rotate wheel pivots around Z axis (the axle direction in this model)
   useFrame((_state, delta) => {
     for (const pivot of wheelPivots.current) {
-      pivot.rotation.z -= delta * 3;
+      pivot.rotation.z += delta * 3;
     }
   });
 

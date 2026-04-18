@@ -8,16 +8,19 @@ import * as THREE from "three";
 function CarModel() {
   const { scene } = useGLTF("/models/sr17.glb");
   const fixed = useRef(false);
-  const wheelRefs = useRef<THREE.Object3D[]>([]);
+  const wheelPivots = useRef<THREE.Group[]>([]);
 
   useEffect(() => {
     if (fixed.current) return;
     fixed.current = true;
 
-    const wheels: THREE.Object3D[] = [];
+    const wheelMeshes: THREE.Mesh[] = [];
 
     scene.traverse((child) => {
-      // Collect wheel objects by name (case-insensitive match)
+      if (!(child instanceof THREE.Mesh)) return;
+      const mat = child.material as THREE.MeshStandardMaterial;
+
+      // Collect wheel meshes by name
       const name = child.name.toLowerCase();
       if (
         name.includes("wheel") ||
@@ -25,11 +28,9 @@ function CarModel() {
         name.includes("rim") ||
         name.includes("tyre")
       ) {
-        wheels.push(child);
+        wheelMeshes.push(child);
       }
 
-      if (!(child instanceof THREE.Mesh)) return;
-      const mat = child.material as THREE.MeshStandardMaterial;
       if (!mat?.color) return;
 
       const r = mat.color.r,
@@ -60,17 +61,37 @@ function CarModel() {
       mat.needsUpdate = true;
     });
 
-    // De-duplicate: keep only top-level wheel objects (skip children of already-collected parents)
-    const topWheels = wheels.filter(
-      (w) => !wheels.some((other) => other !== w && other.children.includes(w))
-    );
-    wheelRefs.current = topWheels.length > 0 ? topWheels : wheels;
+    // For each wheel mesh, center geometry at origin and wrap in a pivot group
+    // so rotation spins the wheel in place instead of orbiting the node origin
+    const pivots: THREE.Group[] = [];
+    for (const mesh of wheelMeshes) {
+      mesh.geometry.computeBoundingBox();
+      const center = new THREE.Vector3();
+      mesh.geometry.boundingBox!.getCenter(center);
+
+      // Shift geometry so its center is at (0,0,0)
+      mesh.geometry.translate(-center.x, -center.y, -center.z);
+
+      // Create a pivot group at the geometry's original center
+      const pivot = new THREE.Group();
+      pivot.position.copy(mesh.position).add(center);
+      pivot.scale.copy(mesh.scale);
+
+      // Reparent: insert pivot between parent and mesh
+      mesh.parent!.add(pivot);
+      mesh.position.set(0, 0, 0);
+      mesh.scale.set(1, 1, 1);
+      pivot.add(mesh);
+
+      pivots.push(pivot);
+    }
+    wheelPivots.current = pivots;
   }, [scene]);
 
-  // Rotate wheels each frame using requestAnimationFrame via R3F's useFrame
+  // Rotate wheel pivots around Z axis (the axle direction in this model)
   useFrame((_state, delta) => {
-    for (const wheel of wheelRefs.current) {
-      wheel.rotation.z -= delta * 3;
+    for (const pivot of wheelPivots.current) {
+      pivot.rotation.z -= delta * 3;
     }
   });
 

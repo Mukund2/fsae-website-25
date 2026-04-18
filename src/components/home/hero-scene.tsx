@@ -70,7 +70,7 @@ function CarModel() {
   // Rotate wheels each frame using requestAnimationFrame via R3F's useFrame
   useFrame((_state, delta) => {
     for (const wheel of wheelRefs.current) {
-      wheel.rotation.x += delta * 3;
+      wheel.rotation.z -= delta * 3;
     }
   });
 

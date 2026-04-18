@@ -115,6 +115,17 @@ html {
   }
 }
 
+@keyframes heroFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
 @keyframes heroFadeIn {
   from {
     opacity: 0;

@@ -105,21 +105,13 @@ export function Results() {
           if (entry.isIntersecting) {
             animEls.forEach((el, i) => {
               const direction = el.getAttribute("data-anim");
-              if (direction === "slide-left") {
+              if (direction === "slam") {
                 animateElement(
                   el,
-                  { x: -200, opacity: 0 },
-                  { x: 0, opacity: 1 },
-                  700,
-                  i * 150
-                );
-              } else if (direction === "slide-right") {
-                animateElement(
-                  el,
-                  { x: 200, opacity: 0 },
-                  { x: 0, opacity: 1 },
-                  700,
-                  i * 150
+                  { y: -30, opacity: 0, scale: 1.1 },
+                  { y: 0, opacity: 1, scale: 1 },
+                  400,
+                  i * 100
                 );
               } else {
                 animateElement(
@@ -145,81 +137,100 @@ export function Results() {
   return (
     <>
       <style jsx global>{`
-        @keyframes strip-glow {
-          0% { box-shadow: 0 0 0 0 rgba(184, 150, 90, 0); }
-          50% { box-shadow: 0 0 24px 2px rgba(184, 150, 90, 0.12); }
-          100% { box-shadow: 0 0 0 0 rgba(184, 150, 90, 0); }
+        @keyframes rowPulse {
+          0% { box-shadow: inset 0 0 0 0 rgba(184, 150, 90, 0); }
+          50% { box-shadow: inset 0 0 30px 0 rgba(184, 150, 90, 0.06); }
+          100% { box-shadow: inset 0 0 0 0 rgba(184, 150, 90, 0); }
         }
-        .result-strip:hover {
-          animation: strip-glow 1.5s ease-in-out infinite;
-        }
-        @keyframes gold-text-glow {
-          0%, 100% { text-shadow: 0 0 20px rgba(184, 150, 90, 0.3); }
-          50% { text-shadow: 0 0 40px rgba(184, 150, 90, 0.5); }
-        }
-        .gold-glow {
-          animation: gold-text-glow 3s ease-in-out infinite;
+        .result-row:hover {
+          animation: rowPulse 1.5s ease-in-out infinite;
         }
       `}</style>
 
-      <section ref={sectionRef} className="relative w-full bg-[#1C1917]">
-        {/* Smooth gradient fade from warm background into dark section */}
+      <section ref={sectionRef} className="relative w-full bg-[#111]">
+        {/* Smooth gradient fade */}
         <div
           className="absolute left-0 right-0 top-0 -translate-y-full pointer-events-none"
           style={{
             height: "160px",
-            background: "linear-gradient(to bottom, transparent, #1C1917)",
+            background: "linear-gradient(to bottom, transparent, #111)",
           }}
         />
 
-        <div className="mx-auto max-w-7xl px-6 py-24 md:py-32">
-          {/* Section header */}
-          <div data-anim="up" className="mb-16">
-            <h2 className="font-display text-[clamp(2.5rem,5vw,4.5rem)] uppercase leading-[0.95] tracking-tight text-white">
-              Track Record
+        {/* Diagonal accent lines in background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div
+            className="absolute -right-20 -top-20 w-[400px] h-[400px]"
+            style={{
+              background: "linear-gradient(135deg, transparent 48%, rgba(184,150,90,0.08) 49%, rgba(184,150,90,0.08) 51%, transparent 52%)",
+            }}
+          />
+          <div
+            className="absolute -left-20 -bottom-20 w-[300px] h-[300px]"
+            style={{
+              background: "linear-gradient(135deg, transparent 48%, rgba(184,150,90,0.05) 49%, rgba(184,150,90,0.05) 51%, transparent 52%)",
+            }}
+          />
+        </div>
+
+        <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-28">
+          {/* Header - F1 style bold */}
+          <div data-anim="up" className="mb-10">
+            <h2 className="font-display text-[clamp(3rem,6vw,5.5rem)] font-bold uppercase leading-[0.9] tracking-tight text-white">
+              Track
+              <br />
+              <span className="text-gold">Record</span>
             </h2>
           </div>
 
-          {/* Result strips */}
-          <div className="flex flex-col gap-3">
+          {/* F1-style leaderboard table */}
+          <div className="overflow-hidden">
             {results.map((result, i) => (
               <div
                 key={`${result.competition}-${result.event}`}
-                data-anim={i % 2 === 0 ? "slide-left" : "slide-right"}
-                className="result-strip relative flex items-center overflow-hidden bg-[#292524]"
-                style={{
-                  borderLeft: i % 2 === 0 ? "3px solid #B8965A" : "none",
-                  borderRight: i % 2 !== 0 ? "3px solid #B8965A" : "none",
-                  minHeight: "88px",
-                }}
+                data-anim="slam"
+                className="result-row relative flex items-stretch border-b border-white/5"
               >
-                {/* Stat number */}
-                <div className="flex-shrink-0 w-[100px] md:w-[140px] flex items-center justify-center px-4">
-                  <span className="gold-glow font-display text-3xl md:text-5xl uppercase tracking-tight text-gold font-bold">
+                {/* Rank number - big bold italic style */}
+                <div className="flex w-[60px] md:w-[80px] flex-shrink-0 items-center justify-center bg-white/[0.03]">
+                  <span className="font-display text-2xl md:text-3xl font-bold text-white/30">
+                    {i + 1}
+                  </span>
+                </div>
+
+                {/* Main content row */}
+                <div className="flex flex-1 items-center py-4 md:py-5">
+                  {/* Event name - bold, uppercase, dominant */}
+                  <div className="flex-1 px-4 md:px-6">
+                    <h3 className="font-display text-base md:text-xl font-bold uppercase tracking-wide text-white">
+                      {result.event}
+                    </h3>
+                    <span className="mt-0.5 block font-mono text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-white/35">
+                      {result.competition}
+                    </span>
+                  </div>
+
+                  {/* Description - hidden on mobile */}
+                  <p className="hidden lg:block flex-1 px-4 text-[13px] leading-relaxed text-white/30">
+                    {result.description}
+                  </p>
+                </div>
+
+                {/* Stat badge - colored accent block on the right, F1 style */}
+                <div
+                  className="flex w-[80px] md:w-[110px] flex-shrink-0 items-center justify-center"
+                  style={{
+                    background: result.stat === "1st"
+                      ? "linear-gradient(135deg, #B8965A, #9A7D45)"
+                      : result.stat === "2nd"
+                        ? "linear-gradient(135deg, #7A7A7A, #5A5A5A)"
+                        : "linear-gradient(135deg, #8B6B3D, #6B5230)",
+                  }}
+                >
+                  <span className="font-display text-xl md:text-3xl font-bold uppercase text-white">
                     {result.stat}
                   </span>
                 </div>
-
-                {/* Divider */}
-                <div className="h-10 w-px bg-white/10 flex-shrink-0" />
-
-                {/* Event + competition */}
-                <div className="flex-shrink-0 w-[180px] md:w-[280px] px-5 md:px-6">
-                  <h3 className="font-display text-sm md:text-base uppercase tracking-wide text-white leading-tight">
-                    {result.event}
-                  </h3>
-                  <span className="mt-0.5 block font-mono text-[10px] md:text-[11px] uppercase tracking-[0.2em] text-white/50">
-                    {result.competition}
-                  </span>
-                </div>
-
-                {/* Divider */}
-                <div className="hidden md:block h-10 w-px bg-white/10 flex-shrink-0" />
-
-                {/* Description */}
-                <p className="hidden md:block flex-1 px-6 text-sm leading-relaxed text-white/45">
-                  {result.description}
-                </p>
               </div>
             ))}
           </div>

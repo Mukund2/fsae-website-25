@@ -81,8 +81,8 @@ export function JoinUs() {
       {/* Left: Join the Team */}
       <div className="relative min-h-[50vh] overflow-hidden">
         <Image
-          src="/images/team/team-2.jpg"
-          alt="Join Spartan Racing"
+          src="/images/team/lucid-visit.jpg"
+          alt="Spartan Racing team at Lucid Motors"
           fill
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 50vw"

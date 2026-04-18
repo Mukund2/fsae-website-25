@@ -3,12 +3,15 @@
 export function Hero() {
   return (
     <section className="relative flex h-screen items-end overflow-hidden bg-[#1A1A1A]">
-      {/* Video placeholder */}
-      <div className="absolute inset-0 flex items-center justify-center bg-[#111]">
-        <p className="font-mono text-sm uppercase tracking-[0.3em] text-white/30">
-          Video Coming Soon
-        </p>
-      </div>
+      {/* B-roll video background */}
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover"
+        src="/videos/hero-broll.mp4"
+      />
 
       {/* Gradient overlay - darker at bottom for text readability */}
       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/10" />

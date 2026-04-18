@@ -196,7 +196,7 @@ export function Hero() {
             opacity: showText ? 1 : 0,
             animation: showText
               ? "heroSlam 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards"
-              : "heroSlamOut 0.25s ease-in forwards",
+              : "none",
           }}
         >
           {/* Glitching SR Logo */}

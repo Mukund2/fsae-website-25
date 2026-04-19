@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useCallback, useState } from "react";
 
 const results = [
   {
@@ -41,26 +41,18 @@ const results = [
   },
 ];
 
-/**
- * Gold bar reveal animation:
- * 1. Gold bar covers the row (scaleX 1)
- * 2. Row content slides in from left behind the bar
- * 3. Gold bar sweeps right and disappears (translateX 100%)
- * 4. Row content is revealed
- */
+/* ── Gold bar reveal animation ── */
 function revealRow(row: HTMLElement, delay: number) {
   const content = row.querySelector<HTMLElement>("[data-content]");
   const bar = row.querySelector<HTMLElement>("[data-bar]");
   if (!content || !bar) return;
 
-  // Initial state: content hidden left, bar ready
   content.style.opacity = "0";
   content.style.transform = "translateX(-60px)";
   bar.style.transform = "scaleX(0)";
   bar.style.transformOrigin = "left";
 
   setTimeout(() => {
-    // Phase 1: Gold bar sweeps in from left (covers row)
     const barInStart = performance.now();
     const barInDuration = 350;
 
@@ -73,7 +65,6 @@ function revealRow(row: HTMLElement, delay: number) {
       if (p < 1) {
         requestAnimationFrame(tickBarIn);
       } else {
-        // Phase 2: Content appears, bar sweeps out to right
         content.style.opacity = "1";
         content.style.transform = "translateX(-40px)";
         bar.style.transformOrigin = "right";
@@ -84,13 +75,10 @@ function revealRow(row: HTMLElement, delay: number) {
 
         const tickPhase2 = (now2: number) => {
           const elapsed2 = now2 - phase2Start;
-
-          // Bar sweeps out
           const pBar = Math.min(elapsed2 / barOutDuration, 1);
           const easedBar = 1 - Math.pow(1 - pBar, 3);
           bar.style.transform = `scaleX(${1 - easedBar})`;
 
-          // Content slides in
           const pContent = Math.min(elapsed2 / contentSlideDuration, 1);
           const easedContent = 1 - Math.pow(1 - pContent, 3);
           content.style.transform = `translateX(${-40 * (1 - easedContent)}px)`;
@@ -137,6 +125,71 @@ function animateElement(
   }, delay);
 }
 
+/* ── Glitch text on hover ── */
+const GLITCH_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@&%!?";
+
+function GlitchText({ text, className, style }: { text: string; className?: string; style?: React.CSSProperties }) {
+  const [display, setDisplay] = useState(text);
+  const rafRef = useRef<number>(0);
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
+
+  const startGlitch = useCallback(() => {
+    cancelAnimationFrame(rafRef.current);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+
+    const chars = text.split("");
+    const totalDuration = 400;
+    const stepsPerChar = 3;
+    let step = 0;
+    const totalSteps = chars.length * stepsPerChar;
+
+    const tick = () => {
+      step++;
+      const resolved = Math.floor((step / totalSteps) * chars.length);
+      const next = chars.map((ch, i) => {
+        if (ch === " " || ch === "—") return ch;
+        if (i < resolved) return ch;
+        return GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
+      });
+      setDisplay(next.join(""));
+
+      if (step < totalSteps) {
+        timeoutRef.current = setTimeout(() => {
+          rafRef.current = requestAnimationFrame(tick);
+        }, totalDuration / totalSteps);
+      } else {
+        setDisplay(text);
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+  }, [text]);
+
+  const stopGlitch = useCallback(() => {
+    cancelAnimationFrame(rafRef.current);
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setDisplay(text);
+  }, [text]);
+
+  useEffect(() => {
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    };
+  }, []);
+
+  return (
+    <span
+      className={className}
+      style={style}
+      onMouseEnter={startGlitch}
+      onMouseLeave={stopGlitch}
+    >
+      {display}
+    </span>
+  );
+}
+
 export function Results() {
   const sectionRef = useRef<HTMLElement>(null);
 
@@ -147,9 +200,7 @@ export function Results() {
     const rows = section.querySelectorAll<HTMLElement>("[data-row]");
     rows.forEach((el) => {
       const content = el.querySelector<HTMLElement>("[data-content]");
-      if (content) {
-        content.style.opacity = "0";
-      }
+      if (content) content.style.opacity = "0";
     });
     const headers = section.querySelectorAll<HTMLElement>("[data-header]");
     headers.forEach((el) => {
@@ -161,16 +212,10 @@ export function Results() {
         for (const entry of entries) {
           if (entry.isIntersecting) {
             headers.forEach((el, i) => {
-              animateElement(
-                el,
-                { x: -40, opacity: 0 },
-                { x: 0, opacity: 1 },
-                500,
-                i * 100
-              );
+              animateElement(el, { x: -40, opacity: 0 }, { x: 0, opacity: 1 }, 600, i * 120);
             });
             rows.forEach((el, i) => {
-              revealRow(el, 300 + i * 120);
+              revealRow(el, 350 + i * 120);
             });
             observer.disconnect();
           }
@@ -186,103 +231,169 @@ export function Results() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#111111]"
+      className="relative w-full overflow-hidden"
+      style={{ background: "#0e0e0e" }}
     >
-      {/* Section title — constrained width */}
-      <div className="mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-28 md:pb-14">
+      {/* ── Title block ── */}
+      <div className="px-8 lg:px-16 pt-24 pb-12 md:pt-32 md:pb-16">
         <div data-header>
           <h2
-            className="font-display font-bold uppercase leading-none tracking-tight text-white"
-            style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}
+            className="font-display font-black uppercase leading-[0.9] tracking-tight text-white"
+            style={{ fontSize: "clamp(3rem, 8vw, 6rem)", fontStyle: "italic" }}
           >
             Track Record
           </h2>
+          <p
+            className="font-display font-black uppercase leading-[0.9] tracking-tight"
+            style={{
+              fontSize: "clamp(3rem, 8vw, 6rem)",
+              fontStyle: "italic",
+              color: "#C8A24E",
+            }}
+          >
+            Highlights
+          </p>
         </div>
       </div>
 
-      {/* Table header — full width */}
+      {/* ── Column headers ── */}
       <div
         data-header
-        className="hidden md:grid items-end border-b border-white/10 pb-3 mb-0 px-8 lg:px-16"
+        className="hidden md:grid items-end pb-4 mb-0 px-8 lg:px-16"
         style={{
-          gridTemplateColumns: "1fr 240px 140px 100px",
+          gridTemplateColumns: "1fr 260px 160px 100px",
+          borderBottom: "1px solid rgba(255,255,255,0.08)",
         }}
       >
-        <span className="font-display text-sm font-bold uppercase tracking-[0.25em] text-gold">
+        <span
+          className="font-display font-bold uppercase"
+          style={{ fontSize: "0.7rem", letterSpacing: "0.3em", color: "#8A7A50" }}
+        >
           Event
         </span>
-        <span className="font-display text-sm font-bold uppercase tracking-[0.25em] text-gold">
+        <span
+          className="font-display font-bold uppercase"
+          style={{ fontSize: "0.7rem", letterSpacing: "0.3em", color: "#8A7A50" }}
+        >
           Competition
         </span>
-        <span className="font-display text-sm font-bold uppercase tracking-[0.25em] text-gold text-right">
+        <span
+          className="font-display font-bold uppercase text-right"
+          style={{ fontSize: "0.7rem", letterSpacing: "0.3em", color: "#8A7A50" }}
+        >
           Finish
         </span>
-        <span className="font-display text-sm font-bold uppercase tracking-[0.25em] text-gold text-right">
+        <span
+          className="font-display font-bold uppercase text-right"
+          style={{ fontSize: "0.7rem", letterSpacing: "0.3em", color: "#8A7A50" }}
+        >
           Year
         </span>
       </div>
 
-      {/* Result rows — full width, edge to edge */}
+      {/* ── Result rows ── */}
       <div className="flex flex-col">
-        {results.map((result, i) => (
+        {results.map((result) => (
           <div
             key={`${result.competition}-${result.event}-${result.year}`}
             data-row
-            className="relative border-b border-white/[0.06] overflow-hidden"
+            className="relative overflow-hidden"
+            style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}
           >
             {/* Gold reveal bar */}
             <div
               data-bar
-              className="absolute inset-0 z-10 bg-gold pointer-events-none"
-              style={{ transform: "scaleX(0)", transformOrigin: "left" }}
+              className="absolute inset-0 z-10 pointer-events-none"
+              style={{
+                transform: "scaleX(0)",
+                transformOrigin: "left",
+                background: "linear-gradient(90deg, #C8A24E, #D4B05A)",
+              }}
             />
 
-            {/* Desktop row content */}
+            {/* Desktop row */}
             <div
               data-content
-              className="hidden md:grid items-center px-8 lg:px-16 group/row cursor-default hover:bg-gold"
+              className="hidden md:grid items-center px-8 lg:px-16 group/row cursor-default"
               style={{
-                gridTemplateColumns: "1fr 240px 140px 100px",
-                minHeight: "clamp(68px, 10vw, 88px)",
+                gridTemplateColumns: "1fr 260px 160px 100px",
+                minHeight: "clamp(80px, 11vw, 100px)",
+                background: "transparent",
+              }}
+              onMouseEnter={(e) => {
+                const el = e.currentTarget;
+                el.style.background = "linear-gradient(90deg, #C8A24E, #D4B05A)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
               }}
             >
-              <h3
-                className="font-display font-bold uppercase text-white tracking-wide group-hover/row:text-black"
-                style={{ fontSize: "clamp(1.2rem, 2.8vw, 1.9rem)" }}
-              >
-                {result.event}
-              </h3>
+              <GlitchText
+                text={result.event}
+                className="font-display font-black uppercase text-white tracking-wide group-hover/row:text-[#0e0e0e]"
+                style={{
+                  fontSize: "clamp(1.4rem, 3.2vw, 2.2rem)",
+                  fontStyle: "italic",
+                  letterSpacing: "0.02em",
+                }}
+              />
 
-              <span className="font-display text-sm uppercase tracking-wider text-white group-hover/row:text-black">
+              <span
+                className="font-display font-medium uppercase text-white/70 group-hover/row:text-[#0e0e0e]/60"
+                style={{ fontSize: "0.8rem", letterSpacing: "0.15em" }}
+              >
                 {result.competition}
               </span>
 
               <span
-                className="font-display font-bold text-gold text-right group-hover/row:text-black"
-                style={{ fontSize: "clamp(1.5rem, 2.8vw, 2.2rem)" }}
+                className="font-display font-black text-right group-hover/row:text-[#0e0e0e]"
+                style={{
+                  fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
+                  fontStyle: "italic",
+                  color: "#C8A24E",
+                }}
               >
                 {result.result}
               </span>
 
-              <span className="font-display text-base text-white text-right tabular-nums group-hover/row:text-black">
+              <span
+                className="font-display font-medium text-white/50 text-right tabular-nums group-hover/row:text-[#0e0e0e]/50"
+                style={{ fontSize: "0.95rem" }}
+              >
                 {result.year}
               </span>
             </div>
 
-            {/* Mobile row content */}
+            {/* Mobile row */}
             <div
               data-content
-              className="flex md:hidden items-center justify-between px-6 py-5"
+              className="flex md:hidden items-center justify-between px-6 py-6"
             >
               <div className="flex-1 min-w-0">
-                <h3 className="font-display text-base font-bold uppercase text-white tracking-wide truncate">
+                <h3
+                  className="font-display font-black uppercase text-white tracking-wide truncate"
+                  style={{
+                    fontSize: "1.15rem",
+                    fontStyle: "italic",
+                  }}
+                >
                   {result.event}
                 </h3>
-                <p className="mt-0.5 font-display text-xs uppercase tracking-wider text-white">
+                <p
+                  className="mt-1 font-display font-medium uppercase text-white/50"
+                  style={{ fontSize: "0.7rem", letterSpacing: "0.15em" }}
+                >
                   {result.competition} · {result.year}
                 </p>
               </div>
-              <span className="ml-4 font-display text-xl font-bold text-gold flex-shrink-0">
+              <span
+                className="ml-4 font-display font-black flex-shrink-0"
+                style={{
+                  fontSize: "1.5rem",
+                  fontStyle: "italic",
+                  color: "#C8A24E",
+                }}
+              >
                 {result.result}
               </span>
             </div>
@@ -291,7 +402,7 @@ export function Results() {
       </div>
 
       {/* Bottom spacing */}
-      <div className="h-16 md:h-24" />
+      <div className="h-20 md:h-28" />
     </section>
   );
 }

@@ -7,43 +7,37 @@ const results = [
     stat: "1st",
     event: "Overall",
     competition: "FSAE Lincoln 2015",
-    description:
-      "First place finish against 100+ university teams worldwide",
+    color: "#0055A2", // SJSU blue - top achievement
   },
   {
     stat: "1st",
     event: "Endurance",
     competition: "Michigan FSAE 2025",
-    description:
-      "Fastest and most reliable car in the 22km endurance race, the most demanding event in competition",
+    color: "#B8965A", // Gold
   },
   {
     stat: "2nd",
     event: "Overall",
     competition: "Michigan FSAE 2025",
-    description:
-      "Runner-up out of 120 teams, also awarded Best Aerodynamics Vehicle",
+    color: "#0055A2", // Blue
   },
   {
     stat: "1st",
     event: "Endurance",
     competition: "Michigan FSAE 2021",
-    description:
-      "First running electric car in team history dominated the endurance event, finishing 2nd overall",
+    color: "#B8965A", // Gold
   },
   {
     stat: "1st",
-    event: "Cummins Innovation Award",
+    event: "Innovation Award",
     competition: "Michigan FSAE 2024",
-    description:
-      "Recognized for the most innovative engineering solution at competition, placed 5th overall",
+    color: "#C45A2D", // Warm bronze/red accent
   },
   {
     stat: "1st",
     event: "EV, SoCal Shootout",
     competition: "2024 (x2)",
-    description:
-      "Won the top EV spot at SoCal Shootout twice in the same year",
+    color: "#2D8C5A", // Racing green
   },
 ];
 
@@ -73,13 +67,8 @@ function animateElement(
       const progress = Math.min(elapsed / duration, 1);
       const eased = 1 - Math.pow(1 - progress, 3);
 
-      const currentX = startX + (endX - startX) * eased;
-      const currentY = startY + (endY - startY) * eased;
-      const currentO = startO + (endO - startO) * eased;
-      const currentS = startS + (endS - startS) * eased;
-
-      el.style.opacity = String(currentO);
-      el.style.transform = `translate(${currentX}px, ${currentY}px) scale(${currentS})`;
+      el.style.opacity = String(startO + (endO - startO) * eased);
+      el.style.transform = `translate(${startX + (endX - startX) * eased}px, ${startY + (endY - startY) * eased}px) scale(${startS + (endS - startS) * eased})`;
 
       if (progress < 1) requestAnimationFrame(tick);
     };
@@ -94,40 +83,40 @@ export function Results() {
     const section = sectionRef.current;
     if (!section) return;
 
-    const animEls = section.querySelectorAll<HTMLElement>("[data-anim]");
-    animEls.forEach((el) => {
+    const rows = section.querySelectorAll<HTMLElement>("[data-row]");
+    rows.forEach((el) => {
       el.style.opacity = "0";
     });
+    const header = section.querySelector<HTMLElement>("[data-header]");
+    if (header) header.style.opacity = "0";
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            animEls.forEach((el, i) => {
-              const direction = el.getAttribute("data-anim");
-              if (direction === "slam") {
-                animateElement(
-                  el,
-                  { y: -30, opacity: 0, scale: 1.1 },
-                  { y: 0, opacity: 1, scale: 1 },
-                  400,
-                  i * 100
-                );
-              } else {
-                animateElement(
-                  el,
-                  { y: 30, opacity: 0 },
-                  { y: 0, opacity: 1 },
-                  600,
-                  i * 100
-                );
-              }
+            if (header) {
+              animateElement(
+                header,
+                { y: -20, opacity: 0 },
+                { y: 0, opacity: 1 },
+                500,
+                0
+              );
+            }
+            rows.forEach((el, i) => {
+              animateElement(
+                el,
+                { x: -80, opacity: 0 },
+                { x: 0, opacity: 1 },
+                450,
+                200 + i * 120
+              );
             });
             observer.disconnect();
           }
         }
       },
-      { threshold: 0.1 }
+      { threshold: 0.15 }
     );
 
     observer.observe(section);
@@ -135,107 +124,66 @@ export function Results() {
   }, []);
 
   return (
-    <>
-      <style jsx global>{`
-        @keyframes rowPulse {
-          0% { box-shadow: inset 0 0 0 0 rgba(184, 150, 90, 0); }
-          50% { box-shadow: inset 0 0 30px 0 rgba(184, 150, 90, 0.06); }
-          100% { box-shadow: inset 0 0 0 0 rgba(184, 150, 90, 0); }
-        }
-        .result-row:hover {
-          animation: rowPulse 1.5s ease-in-out infinite;
-        }
-      `}</style>
+    <section ref={sectionRef} className="relative w-full bg-[#0C0C14]">
+      {/* Smooth gradient fade */}
+      <div
+        className="absolute left-0 right-0 top-0 -translate-y-full pointer-events-none"
+        style={{
+          height: "160px",
+          background: "linear-gradient(to bottom, transparent, #0C0C14)",
+        }}
+      />
 
-      <section ref={sectionRef} className="relative w-full bg-[#111]">
-        {/* Smooth gradient fade */}
-        <div
-          className="absolute left-0 right-0 top-0 -translate-y-full pointer-events-none"
-          style={{
-            height: "160px",
-            background: "linear-gradient(to bottom, transparent, #111)",
-          }}
-        />
-
-        {/* Diagonal accent lines in background */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div
-            className="absolute -right-20 -top-20 w-[400px] h-[400px]"
-            style={{
-              background: "linear-gradient(135deg, transparent 48%, rgba(184,150,90,0.08) 49%, rgba(184,150,90,0.08) 51%, transparent 52%)",
-            }}
-          />
-          <div
-            className="absolute -left-20 -bottom-20 w-[300px] h-[300px]"
-            style={{
-              background: "linear-gradient(135deg, transparent 48%, rgba(184,150,90,0.05) 49%, rgba(184,150,90,0.05) 51%, transparent 52%)",
-            }}
-          />
+      <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-28">
+        {/* Header - massive, aggressive */}
+        <div data-header className="mb-8 md:mb-12">
+          <h2 className="font-display text-[clamp(3.5rem,8vw,7rem)] font-bold uppercase leading-[0.85] tracking-tighter text-white">
+            Track
+            <br />
+            <span className="text-gold">Record</span>
+          </h2>
         </div>
 
-        <div className="relative mx-auto max-w-7xl px-6 py-20 md:py-28">
-          {/* Header - F1 style bold */}
-          <div data-anim="up" className="mb-10">
-            <h2 className="font-display text-[clamp(3rem,6vw,5.5rem)] font-bold uppercase leading-[0.9] tracking-tight text-white">
-              Track
-              <br />
-              <span className="text-gold">Record</span>
-            </h2>
-          </div>
-
-          {/* F1-style leaderboard table */}
-          <div className="overflow-hidden">
-            {results.map((result, i) => (
+        {/* Leaderboard rows */}
+        <div className="flex flex-col gap-[3px]">
+          {results.map((result, i) => (
+            <div
+              key={`${result.competition}-${result.event}`}
+              data-row
+              className="relative flex items-stretch overflow-hidden"
+              style={{ minHeight: "72px" }}
+            >
+              {/* Color bar - fills the entire left portion like F1 team color */}
               <div
-                key={`${result.competition}-${result.event}`}
-                data-anim="slam"
-                className="result-row relative flex items-stretch border-b border-white/5"
+                className="flex items-center gap-3 md:gap-5 px-4 md:px-6 flex-1"
+                style={{ background: result.color }}
               >
-                {/* Rank number - big bold italic style */}
-                <div className="flex w-[60px] md:w-[80px] flex-shrink-0 items-center justify-center bg-white/[0.03]">
-                  <span className="font-display text-2xl md:text-3xl font-bold text-white/30">
-                    {i + 1}
-                  </span>
-                </div>
+                {/* Rank number */}
+                <span className="font-display text-3xl md:text-4xl font-bold text-white/40 w-[36px] md:w-[44px] flex-shrink-0">
+                  {i + 1}
+                </span>
 
-                {/* Main content row */}
-                <div className="flex flex-1 items-center py-4 md:py-5">
-                  {/* Event name - bold, uppercase, dominant */}
-                  <div className="flex-1 px-4 md:px-6">
-                    <h3 className="font-display text-base md:text-xl font-bold uppercase tracking-wide text-white">
-                      {result.event}
-                    </h3>
-                    <span className="mt-0.5 block font-mono text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-white/35">
-                      {result.competition}
-                    </span>
-                  </div>
-
-                  {/* Description - hidden on mobile */}
-                  <p className="hidden lg:block flex-1 px-4 text-[13px] leading-relaxed text-white/30">
-                    {result.description}
-                  </p>
-                </div>
-
-                {/* Stat badge - colored accent block on the right, F1 style */}
-                <div
-                  className="flex w-[80px] md:w-[110px] flex-shrink-0 items-center justify-center"
-                  style={{
-                    background: result.stat === "1st"
-                      ? "linear-gradient(135deg, #B8965A, #9A7D45)"
-                      : result.stat === "2nd"
-                        ? "linear-gradient(135deg, #7A7A7A, #5A5A5A)"
-                        : "linear-gradient(135deg, #8B6B3D, #6B5230)",
-                  }}
-                >
-                  <span className="font-display text-xl md:text-3xl font-bold uppercase text-white">
-                    {result.stat}
+                {/* Event name - big and bold */}
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-display text-lg md:text-2xl font-bold uppercase tracking-wide text-white truncate">
+                    {result.event}
+                  </h3>
+                  <span className="block font-mono text-[9px] md:text-[10px] uppercase tracking-[0.15em] text-white/60">
+                    {result.competition}
                   </span>
                 </div>
               </div>
-            ))}
-          </div>
+
+              {/* Stat number - white block on the right */}
+              <div className="flex w-[90px] md:w-[130px] flex-shrink-0 items-center justify-center bg-white">
+                <span className="font-display text-2xl md:text-4xl font-bold uppercase tracking-tight text-[#0C0C14]">
+                  {result.stat}
+                </span>
+              </div>
+            </div>
+          ))}
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

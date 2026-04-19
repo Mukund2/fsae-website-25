@@ -53,7 +53,7 @@ export function CategoryCards() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="bg-[#111] py-16 lg:py-24">
+    <section ref={sectionRef} className="bg-background py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         <div className="flex flex-col gap-4">
           {categories.map((cat) => (

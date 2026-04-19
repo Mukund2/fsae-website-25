@@ -165,8 +165,8 @@ export function Navbar() {
         }
       `}</style>
 
-      <nav className="fixed top-0 left-0 z-50 w-full border-b border-border/50 bg-white">
-        <div className="mx-auto flex w-full max-w-[1400px] items-center justify-between px-6 py-3 lg:px-10">
+      <nav className="fixed top-0 left-0 z-50 flex w-full justify-center px-6 py-3 lg:px-12">
+        <div className="flex w-full max-w-[1200px] items-center justify-between border-b border-border/30 bg-white px-6 py-3">
           {/* Left: Logo + Brand */}
           <Link
             href="/"
@@ -265,7 +265,7 @@ export function Navbar() {
               href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
               target="_blank"
               rel="noopener noreferrer"
-              className="join-btn bg-[#FF8000] px-5 py-2 font-display text-[13px] font-bold uppercase tracking-wider text-white"
+              className="join-btn bg-gold px-5 py-2 font-display text-[13px] font-bold uppercase tracking-wider text-white"
             >
               Join Us
             </Link>

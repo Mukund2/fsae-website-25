@@ -85,14 +85,14 @@ export default function SupportPage() {
             href="https://www.givecampus.com/campaigns/67453/donations/new?designation=spartanracingformulasae"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 border border-gold bg-gold px-8 py-3 font-mono text-sm uppercase tracking-widest text-white hover:bg-gold/90"
+            className="inline-flex items-center gap-2 border border-gold bg-gold px-8 py-3 font-display text-sm uppercase tracking-widest text-white hover:bg-gold/90"
           >
             Donate Now
             <OrangeArrow />
           </Link>
           <Link
             href="mailto:sjsuformulasae@gmail.com"
-            className="inline-flex items-center gap-2 border border-gold bg-gold/10 px-8 py-3 font-mono text-sm uppercase tracking-widest text-gold hover:bg-gold/20"
+            className="inline-flex items-center gap-2 border border-gold bg-gold/10 px-8 py-3 font-display text-sm uppercase tracking-widest text-gold hover:bg-gold/20"
           >
             Become a Sponsor
             <OrangeArrow />

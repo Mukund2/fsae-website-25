@@ -202,7 +202,7 @@ function CheckeredLine({ label }: { label: string }) {
           />
         ))}
       </div>
-      <p className="mt-2 text-center font-mono text-[8px] uppercase tracking-[0.3em] text-foreground/40">
+      <p className="mt-2 text-center font-display text-[8px] uppercase tracking-[0.3em] text-foreground/40">
         {label}
       </p>
     </div>
@@ -214,7 +214,7 @@ export default function CarsPage() {
     <>
       <section className="relative flex min-h-[50vh] items-center overflow-hidden bg-[#0A0A0A] pt-32 pb-16">
         <div className="relative mx-auto max-w-7xl px-6">
-          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-gold">
+          <p className="font-display text-[11px] uppercase tracking-[0.3em] text-gold">
             1989 - Present
           </p>
           <h1
@@ -299,7 +299,7 @@ function TimelineEntry({
         <div className="timeline-card border border-border/60 bg-elevated p-4 shadow-sm" style={{ borderColor: 'rgba(200, 168, 78, 0.1)' }}>
           <div className="flex items-baseline justify-between gap-4">
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/40">
+              <p className="font-display text-[11px] uppercase tracking-[0.2em] text-foreground/40">
                 {car.years}
               </p>
               <h2 className="mt-1 font-display text-2xl uppercase tracking-tight md:text-3xl">
@@ -307,7 +307,7 @@ function TimelineEntry({
               </h2>
             </div>
             {car.battery && (
-              <span className="hidden whitespace-nowrap font-mono text-[10px] uppercase tracking-wider text-muted sm:inline">
+              <span className="hidden whitespace-nowrap font-display text-[10px] uppercase tracking-wider text-muted sm:inline">
                 EV
               </span>
             )}
@@ -328,22 +328,22 @@ function TimelineEntry({
 
           <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1">
             {car.motor && car.motor !== "Senior Project" && (
-              <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted">
+              <span className="font-display text-[11px] uppercase tracking-[0.15em] text-muted">
                 {car.motor}
               </span>
             )}
             {car.power && (
-              <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted">
+              <span className="font-display text-[11px] uppercase tracking-[0.15em] text-muted">
                 {car.power}
               </span>
             )}
             {car.torque && (
-              <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted">
+              <span className="font-display text-[11px] uppercase tracking-[0.15em] text-muted">
                 {car.torque}
               </span>
             )}
             {car.battery && (
-              <span className="font-mono text-[11px] uppercase tracking-[0.15em] text-muted">
+              <span className="font-display text-[11px] uppercase tracking-[0.15em] text-muted">
                 {car.battery}
               </span>
             )}

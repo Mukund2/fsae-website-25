@@ -33,7 +33,7 @@ export function CartButton({ className }: CartButtonProps) {
       {count > 0 && (
         <span
           aria-hidden
-          className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center bg-gold px-1 font-mono text-[9px] font-bold text-white"
+          className="absolute -right-0.5 -top-0.5 flex h-4 min-w-4 items-center justify-center bg-gold px-1 font-display text-[9px] font-bold text-white"
         >
           {count > 99 ? "99+" : count}
         </span>

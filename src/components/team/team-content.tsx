@@ -167,7 +167,7 @@ function LeadCard({
               <p className="font-display text-lg uppercase tracking-tight md:text-xl">
                 {name}
               </p>
-              <p className="mt-0.5 font-mono text-xs text-muted">{role}</p>
+              <p className="mt-0.5 font-display text-xs text-muted">{role}</p>
             </div>
           </div>
 
@@ -178,7 +178,7 @@ function LeadCard({
                 <p className="font-display text-sm uppercase tracking-tight text-gold">
                   {name}
                 </p>
-                <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-white/50">
+                <p className="mt-1 font-display text-[10px] uppercase tracking-widest text-white/50">
                   {role}
                 </p>
                 <p className="mt-3 text-[11px] leading-relaxed text-white/80">
@@ -222,7 +222,7 @@ function LeadCard({
         <div className="absolute inset-x-0 bottom-0 p-4 md:p-5">
           <div>
             <p className="font-display text-lg uppercase tracking-tight text-white md:text-xl">{name}</p>
-            <p className="mt-0.5 font-mono text-xs text-white/70">{role}</p>
+            <p className="mt-0.5 font-display text-xs text-white/70">{role}</p>
           </div>
         </div>
 
@@ -233,7 +233,7 @@ function LeadCard({
               <p className="font-display text-sm uppercase tracking-tight text-gold">
                 {name}
               </p>
-              <p className="mt-1 font-mono text-[10px] uppercase tracking-widest text-white/50">
+              <p className="mt-1 font-display text-[10px] uppercase tracking-widest text-white/50">
                 {role}
               </p>
               <p className="mt-3 text-[11px] leading-relaxed text-white/80">

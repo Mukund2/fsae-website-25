@@ -152,7 +152,7 @@ export function InlineFlipbook({ pdfUrl }: InlineFlipbookProps) {
               className="h-8 w-8 animate-spin border-2 border-border border-t-gold"
               style={{ borderRadius: "50%" }}
             />
-            <p className="font-mono text-xs uppercase tracking-[0.2em] text-muted">
+            <p className="font-display text-xs uppercase tracking-[0.2em] text-muted">
               Loading pages...
             </p>
           </div>
@@ -160,12 +160,12 @@ export function InlineFlipbook({ pdfUrl }: InlineFlipbookProps) {
 
         {error && (
           <div className="flex flex-col items-center gap-4">
-            <p className="font-mono text-sm text-red-500">{error}</p>
+            <p className="font-display text-sm text-red-500">{error}</p>
             <a
               href={pdfUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="font-mono text-xs uppercase tracking-[0.2em] text-gold underline"
+              className="font-display text-xs uppercase tracking-[0.2em] text-gold underline"
             >
               Open PDF directly
             </a>
@@ -227,7 +227,7 @@ export function InlineFlipbook({ pdfUrl }: InlineFlipbookProps) {
             </svg>
           </button>
 
-          <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
+          <span className="font-display text-[11px] uppercase tracking-[0.2em] text-muted">
             {currentPage + 1} / {totalPages}
           </span>
 
@@ -252,7 +252,7 @@ export function InlineFlipbook({ pdfUrl }: InlineFlipbookProps) {
             href={pdfUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="ml-3 font-mono text-[11px] uppercase tracking-[0.2em] text-gold"
+            className="ml-3 font-display text-[11px] uppercase tracking-[0.2em] text-gold"
           >
             Download PDF
           </a>

@@ -105,14 +105,14 @@ function MerchCard({ item, index }: { item: MerchProduct; index: number }) {
                 <line x1="3" y1="6" x2="21" y2="6" />
                 <path d="M16 10a4 4 0 01-8 0" />
               </svg>
-              <span className="font-mono text-[10px] uppercase tracking-[0.2em]">
+              <span className="font-display text-[10px] uppercase tracking-[0.2em]">
                 Coming Soon
               </span>
             </div>
           </div>
         )}
         {!item.available && (
-          <div className="absolute right-3 top-3 bg-background/90 px-2 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/60">
+          <div className="absolute right-3 top-3 bg-background/90 px-2 py-1 font-display text-[10px] uppercase tracking-[0.2em] text-foreground/60">
             Sold Out
           </div>
         )}
@@ -131,17 +131,17 @@ function MerchCard({ item, index }: { item: MerchProduct; index: number }) {
 
         <div className="mt-4 flex items-center justify-between">
           <div className="flex items-baseline gap-2">
-            <span className="font-mono text-lg text-gold">
+            <span className="font-display text-lg text-gold">
               {formatPrice(item.price, item.currency)}
             </span>
             {item.compareAtPrice && item.compareAtPrice > item.price && (
-              <span className="font-mono text-xs text-foreground/30 line-through">
+              <span className="font-display text-xs text-foreground/30 line-through">
                 {formatPrice(item.compareAtPrice, item.currency)}
               </span>
             )}
           </div>
           {item.sizes.length > 0 && (
-            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-foreground/30">
+            <span className="font-display text-[10px] uppercase tracking-[0.2em] text-foreground/30">
               {item.sizes.join(" / ")}
             </span>
           )}
@@ -194,7 +194,7 @@ export function MerchContent({ products }: { products: MerchProduct[] }) {
             data-reveal
             className="border border-border bg-elevated px-8 py-16 text-center"
           >
-            <p className="font-mono text-xs uppercase tracking-[0.3em] text-gold">
+            <p className="font-display text-xs uppercase tracking-[0.3em] text-gold">
               Stocking the shelves
             </p>
             <p className="mx-auto mt-4 max-w-lg text-lg leading-relaxed text-muted">

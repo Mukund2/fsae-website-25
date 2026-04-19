@@ -164,7 +164,7 @@ function TierTable() {
       <table className="w-full border-collapse">
         <thead>
           <tr>
-            <th className="border border-border/50 bg-surface p-4 text-left font-mono text-xs uppercase tracking-[0.2em] text-muted">
+            <th className="border border-border/50 bg-surface p-4 text-left font-display text-xs uppercase tracking-[0.2em] text-muted">
               Benefit
             </th>
             {TIERS.map((tier) => (
@@ -175,7 +175,7 @@ function TierTable() {
                 <span className={`block font-display text-base uppercase tracking-wider ${tier.color}`}>
                   {tier.label}
                 </span>
-                <span className="mt-1 block font-mono text-xs text-muted">{tier.price}</span>
+                <span className="mt-1 block font-display text-xs text-muted">{tier.price}</span>
               </th>
             ))}
           </tr>
@@ -225,7 +225,7 @@ function TierCards() {
             <h3 className={`font-display text-2xl uppercase tracking-wider ${tier.color}`}>
               {tier.label}
             </h3>
-            <p className="mt-1 font-mono text-sm text-muted">{tier.price}</p>
+            <p className="mt-1 font-display text-sm text-muted">{tier.price}</p>
           </div>
           {/* Benefits list */}
           <ul className="divide-y divide-border/30 p-5">
@@ -298,7 +298,7 @@ export function BecomeASponsorContent() {
       {/* Why Support Us */}
       <section className="mx-auto max-w-7xl px-6 py-20 md:py-28">
         <div data-reveal>
-          <h2 className="font-mono text-sm uppercase tracking-[0.25em] text-gold md:text-base">
+          <h2 className="font-display text-sm uppercase tracking-[0.25em] text-gold md:text-base">
             Why Support Us
           </h2>
           <div className="mt-3 h-px w-full bg-gold/30" />
@@ -362,7 +362,7 @@ export function BecomeASponsorContent() {
       <section id="tiers" className="bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <div data-reveal>
-            <h2 className="font-mono text-sm uppercase tracking-[0.25em] text-gold md:text-base">
+            <h2 className="font-display text-sm uppercase tracking-[0.25em] text-gold md:text-base">
               Sponsorship Tiers
             </h2>
             <div className="mt-3 h-px w-full bg-gold/30" />
@@ -382,7 +382,7 @@ export function BecomeASponsorContent() {
       {/* How to Donate */}
       <section className="mx-auto max-w-7xl px-6 py-20 md:py-28">
         <div data-reveal>
-          <h2 className="font-mono text-sm uppercase tracking-[0.25em] text-gold md:text-base">
+          <h2 className="font-display text-sm uppercase tracking-[0.25em] text-gold md:text-base">
             How to Donate
           </h2>
           <div className="mt-3 h-px w-full bg-gold/30" />
@@ -401,7 +401,7 @@ export function BecomeASponsorContent() {
               </span>{" "}
               and mail to:
             </p>
-            <address className="mt-4 border-l-2 border-gold/40 pl-4 font-mono text-sm not-italic leading-loose text-foreground/80">
+            <address className="mt-4 border-l-2 border-gold/40 pl-4 font-display text-sm not-italic leading-loose text-foreground/80">
               Mechanical Engr. Bldg
               <br />
               ATTN: Formula SAE Ally Almiranez
@@ -424,7 +424,7 @@ export function BecomeASponsorContent() {
             <div className="mt-6">
               <a
                 href="mailto:sjsuformulasae@gmail.com"
-                className="inline-flex items-center gap-2 font-mono text-sm uppercase tracking-wider text-gold hover:text-gold/80"
+                className="inline-flex items-center gap-2 font-display text-sm uppercase tracking-wider text-gold hover:text-gold/80"
               >
                 Contact us for online donation link
                 <ArrowIcon className="text-gold" />
@@ -492,7 +492,7 @@ export function BecomeASponsorContent() {
           <p
             data-reveal
             data-reveal-delay="400"
-            className="mt-6 font-mono text-sm text-muted"
+            className="mt-6 font-display text-sm text-muted"
           >
             sjsuformulasae@gmail.com
           </p>

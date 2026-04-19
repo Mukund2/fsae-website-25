@@ -26,7 +26,7 @@ export function Highlights() {
                   duration={2}
                 />
               </div>
-              <div className="mt-3 font-mono text-[11px] uppercase tracking-[0.2em] text-muted">
+              <div className="mt-3 font-display text-[11px] uppercase tracking-[0.2em] text-muted">
                 {spec.label}
               </div>
             </div>

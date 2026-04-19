@@ -190,7 +190,7 @@ function TierSection({ tier }: { tier: string }) {
     <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
       {/* Tier heading */}
       <div data-reveal>
-        <h2 className="font-mono text-sm uppercase tracking-[0.25em] text-gold md:text-base">
+        <h2 className="font-display text-sm uppercase tracking-[0.25em] text-gold md:text-base">
           {meta.label}
         </h2>
         <div className="mt-3 h-px w-full bg-gold/30" />

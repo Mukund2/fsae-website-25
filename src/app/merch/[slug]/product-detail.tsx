@@ -76,7 +76,7 @@ export function ProductDetail({ product }: { product: MerchProduct }) {
       <div className="mx-auto max-w-7xl px-6 pt-32">
         <Link
           href="/merch"
-          className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/50 hover:text-foreground"
+          className="inline-flex items-center gap-2 font-display text-[11px] uppercase tracking-[0.2em] text-foreground/50 hover:text-foreground"
         >
           <ChevronLeft size={14} />
           Back to Merch
@@ -98,12 +98,12 @@ export function ProductDetail({ product }: { product: MerchProduct }) {
                   sizes="(max-width: 1024px) 100vw, 50vw"
                 />
               ) : (
-                <div className="flex h-full items-center justify-center font-mono text-xs uppercase tracking-[0.2em] text-foreground/20">
+                <div className="flex h-full items-center justify-center font-display text-xs uppercase tracking-[0.2em] text-foreground/20">
                   No Image
                 </div>
               )}
               {!product.available && (
-                <div className="absolute right-4 top-4 bg-background/90 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.2em] text-foreground/60">
+                <div className="absolute right-4 top-4 bg-background/90 px-3 py-1.5 font-display text-[11px] uppercase tracking-[0.2em] text-foreground/60">
                   Sold Out
                 </div>
               )}
@@ -146,7 +146,7 @@ export function ProductDetail({ product }: { product: MerchProduct }) {
                 {formatPrice(price, currency)}
               </span>
               {compareAt && compareAt > price && (
-                <span className="font-mono text-base text-foreground/30 line-through">
+                <span className="font-display text-base text-foreground/30 line-through">
                   {formatPrice(compareAt, currency)}
                 </span>
               )}
@@ -162,7 +162,7 @@ export function ProductDetail({ product }: { product: MerchProduct }) {
             {/* Color selector */}
             {product.colors.length > 1 && (
               <div className="mt-8">
-                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40">
+                <p className="font-display text-[10px] uppercase tracking-[0.3em] text-foreground/40">
                   Color
                   {selectedColor && (
                     <span className="ml-2 text-foreground/80">
@@ -189,7 +189,7 @@ export function ProductDetail({ product }: { product: MerchProduct }) {
                       }
                     >
                       {!c.swatch && (
-                        <span className="font-mono text-[10px]">
+                        <span className="font-display text-[10px]">
                           {c.name.slice(0, 2)}
                         </span>
                       )}
@@ -202,7 +202,7 @@ export function ProductDetail({ product }: { product: MerchProduct }) {
             {/* Size selector */}
             {product.sizes.length > 0 && (
               <div className="mt-8">
-                <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40">
+                <p className="font-display text-[10px] uppercase tracking-[0.3em] text-foreground/40">
                   Size
                 </p>
                 <div className="mt-3 flex flex-wrap gap-2">
@@ -220,7 +220,7 @@ export function ProductDetail({ product }: { product: MerchProduct }) {
                         disabled={disabled}
                         onClick={() => setSelectedSize(size)}
                         className={cn(
-                          "min-w-[3rem] border px-4 py-2 font-mono text-xs uppercase tracking-[0.15em]",
+                          "min-w-[3rem] border px-4 py-2 font-display text-xs uppercase tracking-[0.15em]",
                           selectedSize === size
                             ? "border-gold bg-gold text-white"
                             : "border-border text-foreground/60 hover:border-foreground/30",
@@ -258,7 +258,7 @@ export function ProductDetail({ product }: { product: MerchProduct }) {
                 selectedVariant?.stockCount !== undefined &&
                 selectedVariant.stockCount <= 10 &&
                 selectedVariant.stockCount > 0 && (
-                  <p className="mt-3 text-center font-mono text-[10px] uppercase tracking-[0.2em] text-gold">
+                  <p className="mt-3 text-center font-display text-[10px] uppercase tracking-[0.2em] text-gold">
                     Only {selectedVariant.stockCount} left
                   </p>
                 )}

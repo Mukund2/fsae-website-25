@@ -152,7 +152,7 @@ export function Mission() {
             <Link
               href="/about"
               data-anim="up"
-              className="group inline-flex items-center gap-3 bg-gold px-8 py-4 font-mono text-[13px] uppercase tracking-[0.15em] text-white"
+              className="group inline-flex items-center gap-3 bg-gold px-8 py-4 font-display text-[13px] uppercase tracking-[0.15em] text-white"
             >
               Meet the Team
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-white">

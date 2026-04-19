@@ -1,137 +1,234 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import Image from "next/image";
-import Link from "next/link";
-import dynamic from "next/dynamic";
+import { Suspense, useEffect, useRef, useState, useCallback } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
+import { useGLTF, Center } from "@react-three/drei";
+import * as THREE from "three";
 
-const HeroScene = dynamic(() => import("./hero-scene"), { ssr: false });
+// Unveiling: Saturday April 26, 2026 at 12:00 PM PT
+const UNVEIL_DATE = new Date("2026-04-26T12:00:00-07:00");
 
-function ArrowIcon() {
+function useCountdown(target: Date) {
+  const calc = useCallback(() => {
+    const now = Date.now();
+    const diff = Math.max(0, target.getTime() - now);
+    const days = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
+    return { days, hours, minutes, seconds };
+  }, [target]);
+
+  // Start with null to avoid hydration mismatch, then set on client
+  const [time, setTime] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null);
+
+  useEffect(() => {
+    setTime(calc());
+    const id = setInterval(() => setTime(calc()), 1000);
+    return () => clearInterval(id);
+  }, [calc]);
+
+  return time ?? { days: 0, hours: 0, minutes: 0, seconds: 0 };
+}
+
+function CarModel({ scrollProgress }: { scrollProgress: number }) {
+  const { scene } = useGLTF("/models/sr17.glb");
+  const fixed = useRef(false);
+  const wheelPivots = useRef<THREE.Group[]>([]);
+  const groupRef = useRef<THREE.Group>(null);
+
+  useEffect(() => {
+    if (fixed.current) return;
+    fixed.current = true;
+
+    const wheelMeshes: THREE.Mesh[] = [];
+
+    scene.traverse((child) => {
+      if (!(child instanceof THREE.Mesh)) return;
+      const mat = child.material as THREE.MeshStandardMaterial;
+
+      const name = child.name.toLowerCase();
+      if (
+        name.includes("wheel") ||
+        name.includes("tire") ||
+        name.includes("rim") ||
+        name.includes("tyre")
+      ) {
+        wheelMeshes.push(child);
+      }
+
+      if (!mat?.color) return;
+
+      const r = mat.color.r,
+        g = mat.color.g,
+        b = mat.color.b;
+
+      if (r < 0.15 && g < 0.15 && b < 0.15) {
+        mat.roughness = Math.max(mat.roughness, 0.4);
+        mat.metalness = 0;
+        mat.needsUpdate = true;
+        return;
+      }
+
+      if (r > 0.5 && g > 0.2 && g < 0.6 && b < 0.2) {
+        mat.color.set(0xc8a020);
+        mat.roughness = 0.3;
+        mat.metalness = 0.15;
+        mat.needsUpdate = true;
+        return;
+      }
+
+      mat.color.set(0x1a1a1a);
+      mat.roughness = 0.5;
+      mat.metalness = 0.15;
+      mat.needsUpdate = true;
+    });
+
+    const pivots: THREE.Group[] = [];
+    for (const mesh of wheelMeshes) {
+      mesh.geometry.computeBoundingBox();
+      const center = new THREE.Vector3();
+      mesh.geometry.boundingBox!.getCenter(center);
+      mesh.geometry.translate(-center.x, -center.y, -center.z);
+
+      const pivot = new THREE.Group();
+      pivot.position.copy(mesh.position).add(center);
+      pivot.scale.copy(mesh.scale);
+
+      mesh.parent!.add(pivot);
+      mesh.position.set(0, 0, 0);
+      mesh.scale.set(1, 1, 1);
+      pivot.add(mesh);
+
+      pivots.push(pivot);
+    }
+    wheelPivots.current = pivots;
+  }, [scene]);
+
+  // Spin wheels based on scroll speed
+  const prevProgress = useRef(scrollProgress);
+  useFrame((_state, delta) => {
+    // Wheel spin — proportional to scroll movement
+    const scrollDelta = scrollProgress - prevProgress.current;
+    prevProgress.current = scrollProgress;
+    if (Math.abs(scrollDelta) > 0.0001) {
+      for (const pivot of wheelPivots.current) {
+        pivot.rotation.z += scrollDelta * 80;
+      }
+    }
+
+    // Move car from right to left based on scroll progress
+    // Remap so car starts off-screen right and only enters once section is well in view
+    if (groupRef.current) {
+      // Car enters from right, centered when section is fully visible (~50%)
+      const adjusted = Math.max(0, (scrollProgress - 0.15) / 0.5);
+      const targetX = 7 - adjusted * 14;
+      groupRef.current.position.x = targetX;
+    }
+  });
+
   return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gold">
-      <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
+    <group ref={groupRef}>
+      <Center>
+        <primitive object={scene} />
+      </Center>
+    </group>
   );
 }
 
-const CARDS = [
-  { title: "Racing", href: "/racing", image: "/images/flickr/driver-day-6.jpg" },
-  { title: "Our Cars", href: "/cars", image: "/images/flickr/driver-day-1.jpg" },
-  { title: "The Team", href: "/about", image: "/images/flickr/driver-day-2.jpg" },
-] as const;
-
-function animateElement(
-  el: HTMLElement,
-  from: { x?: number; y?: number; opacity?: number },
-  to: { x?: number; y?: number; opacity?: number },
-  duration: number,
-  delay: number
-) {
-  const startX = from.x ?? 0;
-  const startY = from.y ?? 0;
-  const startO = from.opacity ?? 0;
-  const endX = to.x ?? 0;
-  const endY = to.y ?? 0;
-  const endO = to.opacity ?? 1;
-
-  el.style.opacity = String(startO);
-  el.style.transform = `translate(${startX}px, ${startY}px)`;
-
-  setTimeout(() => {
-    const start = performance.now();
-    const tick = (now: number) => {
-      const elapsed = now - start;
-      const progress = Math.min(elapsed / duration, 1);
-      const eased = 1 - Math.pow(1 - progress, 3);
-
-      el.style.opacity = String(startO + (endO - startO) * eased);
-      el.style.transform = `translate(${startX + (endX - startX) * eased}px, ${startY + (endY - startY) * eased}px)`;
-
-      if (progress < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  }, delay);
-}
-
 export function CarShowcase() {
-  const sectionRef = useRef<HTMLElement>(null);
+  const sectionRef = useRef<HTMLDivElement>(null);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     const section = sectionRef.current;
     if (!section) return;
 
-    const animEls = section.querySelectorAll<HTMLElement>("[data-anim]");
-    animEls.forEach((el) => {
-      el.style.opacity = "0";
-      el.style.transform = "translate(-40px, 0px)";
-    });
+    let rafId = 0;
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const rect = section.getBoundingClientRect();
+        const windowH = window.innerHeight;
+        // Progress: 0 when section enters viewport, 1 when it leaves
+        const total = rect.height + windowH;
+        const scrolled = windowH - rect.top;
+        const progress = Math.max(0, Math.min(1, scrolled / total));
+        setScrollProgress(progress);
+      });
+    };
 
-    const cardEls = section.querySelectorAll<HTMLElement>("[data-card]");
-    cardEls.forEach((el) => {
-      el.style.opacity = "0";
-      el.style.transform = "translate(40px, 0px)";
-    });
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            animEls.forEach((el, i) => {
-              animateElement(el, { x: -40, opacity: 0 }, { x: 0, opacity: 1 }, 600, i * 100);
-            });
-            cardEls.forEach((el, i) => {
-              animateElement(el, { x: 40, opacity: 0 }, { x: 0, opacity: 1 }, 600, 200 + i * 120);
-            });
-            observer.disconnect();
-          }
-        }
-      },
-      { threshold: 0.1 }
-    );
-
-    observer.observe(section);
-    return () => observer.disconnect();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      cancelAnimationFrame(rafId);
+    };
   }, []);
 
-  return (
-    <section ref={sectionRef} className="w-full bg-background">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-12 lg:py-20">
-        {/* Two-column: Car LEFT, Image cards RIGHT */}
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-          {/* LEFT: 3D Car Model */}
-          <div data-anim className="relative aspect-square w-full overflow-hidden lg:aspect-auto lg:min-h-[500px]">
-            <HeroScene />
-          </div>
+  const { days, hours, minutes, seconds } = useCountdown(UNVEIL_DATE);
 
-          {/* RIGHT: Stacked image cards */}
-          <div className="flex flex-col gap-4">
-            {CARDS.map((card) => (
-              <Link
-                key={card.title}
-                href={card.href}
-                data-card
-                className="showcase-card group relative aspect-[3/1] overflow-hidden"
+  const countdownBlocks = [
+    { value: days, label: "Days" },
+    { value: hours, label: "Hours" },
+    { value: minutes, label: "Min" },
+    { value: seconds, label: "Sec" },
+  ];
+
+  return (
+    <section
+      ref={sectionRef}
+      className="relative w-full overflow-hidden bg-[#F5F5F0]"
+    >
+      {/* Big countdown behind the car */}
+      <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center gap-2 lg:gap-4">
+        {countdownBlocks.map((block, i) => (
+          <div key={block.label} className="flex items-baseline">
+            <div className="flex flex-col items-center">
+              <span
+                className="font-display font-black tabular-nums text-foreground/[0.07]"
+                style={{
+                  fontSize: "clamp(6rem, 14vw, 16rem)",
+                  fontVariantNumeric: "tabular-nums",
+                  lineHeight: 1,
+                }}
+                suppressHydrationWarning
               >
-                <Image
-                  src={card.image}
-                  alt={card.title}
-                  fill
-                  className="showcase-card-img object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-black/30 to-transparent" />
-                <div className="absolute bottom-0 left-0 flex w-full items-end justify-between p-5">
-                  <span className="font-display text-lg font-bold uppercase tracking-tight text-white">
-                    {card.title}
-                  </span>
-                  <span className="showcase-card-arrow"><ArrowIcon /></span>
-                </div>
-              </Link>
-            ))}
+                {String(block.value).padStart(2, "0")}
+              </span>
+              <span className="font-display text-[10px] uppercase tracking-[0.3em] text-foreground/20">
+                {block.label}
+              </span>
+            </div>
+            {i < countdownBlocks.length - 1 && (
+              <span
+                className="font-display font-black text-foreground/[0.05]"
+                style={{ fontSize: "clamp(4rem, 10vw, 12rem)", lineHeight: 1 }}
+              >
+                :
+              </span>
+            )}
           </div>
-        </div>
+        ))}
       </div>
+
+      {/* 3D Canvas — car drives across */}
+      <div className="relative z-10 h-[70vh] min-h-[450px] w-full">
+        <Canvas
+          camera={{ position: [0, 0.8, 4], fov: 40 }}
+          gl={{ alpha: true }}
+          style={{ background: "transparent" }}
+        >
+          <ambientLight intensity={0.8} />
+          <directionalLight position={[5, 5, 5]} intensity={1.5} />
+          <directionalLight position={[-3, 2, -2]} intensity={0.5} />
+          <directionalLight position={[0, -1, 3]} intensity={0.3} />
+          <Suspense fallback={null}>
+            <CarModel scrollProgress={scrollProgress} />
+          </Suspense>
+        </Canvas>
+      </div>
+
     </section>
   );
 }

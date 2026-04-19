@@ -97,7 +97,7 @@ export function JoinUs() {
             target="_blank"
             rel="noopener noreferrer"
             data-anim
-            className="mt-8 inline-flex items-center gap-3 bg-gold px-8 py-4 font-mono text-[13px] uppercase tracking-[0.15em] text-white"
+            className="mt-8 inline-flex items-center gap-3 bg-gold px-8 py-4 font-display text-[13px] uppercase tracking-[0.15em] text-white"
           >
             Join Us
             <ArrowIcon />
@@ -122,7 +122,7 @@ export function JoinUs() {
           <a
             href="/support"
             data-anim
-            className="mt-8 inline-flex items-center gap-3 bg-gold px-8 py-4 font-mono text-[13px] uppercase tracking-[0.15em] text-white"
+            className="mt-8 inline-flex items-center gap-3 bg-gold px-8 py-4 font-display text-[13px] uppercase tracking-[0.15em] text-white"
           >
             Donate
             <ArrowIcon />

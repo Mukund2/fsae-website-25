@@ -101,7 +101,7 @@ export function SponsorStrip() {
           </h2>
           <a
             href="/sponsors"
-            className="inline-flex items-center gap-2 font-mono text-[13px] uppercase tracking-[0.15em] text-gold"
+            className="inline-flex items-center gap-2 font-display text-[13px] uppercase tracking-[0.15em] text-gold"
           >
             View All Sponsors
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gold">

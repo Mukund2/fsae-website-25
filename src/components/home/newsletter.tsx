@@ -200,7 +200,7 @@ export function Newsletter() {
             </div>
             {/* Active newsletter info below flipbook */}
             <div className="mt-4 flex items-center gap-3">
-              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-gold">
+              <span className="font-display text-[11px] uppercase tracking-[0.2em] text-gold">
                 {newsletters[active].date}
               </span>
               <span className="text-border">|</span>
@@ -226,7 +226,7 @@ export function Newsletter() {
                 {/* Content */}
                 <div className="flex-1 px-5 py-5">
                   <span className={cn(
-                    "font-mono text-[10px] uppercase tracking-[0.2em]",
+                    "font-display text-[10px] uppercase tracking-[0.2em]",
                     active === i ? "text-gold" : "text-muted"
                   )}>
                     {nl.date}
@@ -259,7 +259,7 @@ export function Newsletter() {
                 href={newsletters[0].pdf}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.15em] text-gold hover:text-gold-light"
+                className="inline-flex items-center gap-2 font-display text-[12px] uppercase tracking-[0.15em] text-gold hover:text-gold-light"
               >
                 View Latest PDF
                 <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
@@ -285,7 +285,7 @@ export function Newsletter() {
                 )}
               >
                 <span className={cn(
-                  "font-mono text-[9px] uppercase tracking-[0.2em]",
+                  "font-display text-[9px] uppercase tracking-[0.2em]",
                   active === i ? "text-gold" : "text-muted"
                 )}>
                   {nl.date}

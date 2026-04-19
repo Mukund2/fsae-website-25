@@ -86,7 +86,7 @@ export default function ContactPage() {
                 </h2>
                 <Link
                   href="mailto:sjsuformulasae@gmail.com"
-                  className="mt-2 block font-mono text-sm text-gold hover:underline"
+                  className="mt-2 block font-display text-sm text-gold hover:underline"
                 >
                   sjsuformulasae@gmail.com
                 </Link>
@@ -99,7 +99,7 @@ export default function ContactPage() {
               <h2 className="font-display text-xl uppercase tracking-tight">
                 Address
               </h2>
-              <p className="mt-2 font-mono text-sm leading-relaxed text-muted">
+              <p className="mt-2 font-display text-sm leading-relaxed text-muted">
                 Mechanical Engineering Dept.
                 <br />
                 1 Washington Square
@@ -114,14 +114,14 @@ export default function ContactPage() {
                 Club Rooms
               </h2>
               <div className="mt-2 space-y-2">
-                <p className="font-mono text-sm leading-relaxed text-muted">
+                <p className="font-display text-sm leading-relaxed text-muted">
                   <span className="text-foreground">Room 344</span> - Design & engineering workspace
                 </p>
-                <p className="font-mono text-sm leading-relaxed text-muted">
+                <p className="font-display text-sm leading-relaxed text-muted">
                   <span className="text-foreground">Rooms 123 & 130</span> - Hands-on fabrication & manufacturing
                 </p>
               </div>
-              <p className="mt-2 font-mono text-xs text-muted/60">
+              <p className="mt-2 font-display text-xs text-muted/60">
                 Engineering Building, San Jos&eacute; State University
               </p>
             </div>

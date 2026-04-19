@@ -87,7 +87,7 @@ export function CartDrawer() {
         {/* Header */}
         <div className="flex items-center justify-between border-b border-border px-6 py-5">
           <div>
-            <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-gold">
+            <p className="font-display text-[10px] uppercase tracking-[0.3em] text-gold">
               Your Bag
             </p>
             <h2 className="font-display text-2xl uppercase tracking-tight">
@@ -108,7 +108,7 @@ export function CartDrawer() {
         <div className="flex-1 overflow-y-auto">
           {!hasItems ? (
             <div className="flex h-full flex-col items-center justify-center px-6 text-center">
-              <p className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/30">
+              <p className="font-display text-[10px] uppercase tracking-[0.3em] text-foreground/30">
                 Nothing here yet
               </p>
               <p className="mt-3 max-w-xs text-sm leading-relaxed text-muted">
@@ -141,11 +141,11 @@ export function CartDrawer() {
                       {line.productName}
                     </p>
                     {(line.size || line.color) && (
-                      <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.15em] text-foreground/40">
+                      <p className="mt-1 font-display text-[10px] uppercase tracking-[0.15em] text-foreground/40">
                         {[line.color, line.size].filter(Boolean).join(" / ")}
                       </p>
                     )}
-                    <p className="mt-1 font-mono text-sm text-gold">
+                    <p className="mt-1 font-display text-sm text-gold">
                       {formatPrice(line.unitPrice, line.currency)}
                     </p>
 
@@ -163,7 +163,7 @@ export function CartDrawer() {
                         >
                           <Minus size={14} />
                         </button>
-                        <span className="flex h-8 w-10 items-center justify-center font-mono text-xs">
+                        <span className="flex h-8 w-10 items-center justify-center font-display text-xs">
                           {line.quantity}
                         </span>
                         <button
@@ -199,14 +199,14 @@ export function CartDrawer() {
         {hasItems && cart && (
           <div className="border-t border-border bg-surface px-6 py-5">
             <div className="flex items-center justify-between">
-              <span className="font-mono text-[10px] uppercase tracking-[0.3em] text-foreground/40">
+              <span className="font-display text-[10px] uppercase tracking-[0.3em] text-foreground/40">
                 Subtotal
               </span>
               <span className="font-display text-2xl">
                 {formatPrice(cart.subtotal, cart.currency)}
               </span>
             </div>
-            <p className="mt-1 font-mono text-[10px] uppercase tracking-[0.15em] text-foreground/30">
+            <p className="mt-1 font-display text-[10px] uppercase tracking-[0.15em] text-foreground/30">
               Shipping + taxes at checkout
             </p>
             <button

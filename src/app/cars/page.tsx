@@ -136,20 +136,24 @@ function RacetrackCar() {
       const sectionHeight = rect.height;
       const viewH = window.innerHeight;
 
-      // Progress: 0 when section top hits viewport center, 1 when section bottom hits viewport center
-      const viewCenter = viewH / 2;
-      let progress = (viewCenter - sectionTop) / (sectionHeight - viewH);
+      // Progress: 0 at section top, 1 at section bottom
+      let progress = -sectionTop / (sectionHeight - viewH);
       progress = Math.max(0, Math.min(1, progress));
 
-      // Get point on path at the viewport center position
+      // Get point on path
       const point = path.getPointAtLength(progress * totalLen);
 
-      // Convert SVG X coordinate to screen X
+      // Convert SVG coordinates to screen coordinates
       const svgRect = svgEl.getBoundingClientRect();
       const svgViewBox = svgEl.viewBox.baseVal;
       const scaleX = svgRect.width / svgViewBox.width;
+      const scaleY = svgRect.height / svgViewBox.height;
 
       const screenX = svgRect.left + point.x * scaleX;
+      const screenY = svgRect.top + point.y * scaleY;
+
+      // Clamp Y to stay within viewport (with padding)
+      const clampedY = Math.max(80, Math.min(viewH - 40, screenY));
 
       // Calculate path angle for steering
       const nextPoint = path.getPointAtLength(Math.min(progress * totalLen + 5, totalLen));
@@ -160,10 +164,10 @@ function RacetrackCar() {
       const targetAngle = pathAngle + directionOffset;
       currentAngle += (targetAngle - currentAngle) * 0.15;
 
-      // Car stays fixed at viewport center vertically, follows track horizontally
+      // Car follows the track position, clamped to viewport
       car.style.position = "fixed";
       car.style.left = `${screenX}px`;
-      car.style.top = `${viewCenter}px`;
+      car.style.top = `${clampedY}px`;
       car.style.transform = `translate(-50%, -50%) rotate(${currentAngle}deg)`;
 
       raf = requestAnimationFrame(tick);

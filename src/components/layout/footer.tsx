@@ -68,7 +68,7 @@ const socialIcons = [
 
 export function Footer() {
   return (
-    <footer className="bg-[#1a1a1a]">
+    <footer className="bg-background">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-10 lg:px-12">
         {/* Left: Logo + Text */}
         <Link href="/" className="inline-block">
@@ -96,7 +96,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              className="footer-social-icon text-white/40"
+              className="footer-social-icon text-foreground/40"
             >
               <Icon size={20} />
             </a>

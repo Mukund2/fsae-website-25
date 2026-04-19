@@ -94,7 +94,7 @@ export function SponsorStrip() {
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
         <h2 className="text-center text-[clamp(1.6rem,3.5vw,2.5rem)] tracking-tight">
           <span className="font-display font-bold uppercase italic text-foreground">Thank you to our </span>
-          <span className="italic text-gold" style={{ fontFamily: "var(--font-script), serif" }}>Sponsors</span>
+          <span className="ml-2 italic text-gold" style={{ fontFamily: "var(--font-script), serif" }}>Sponsors</span>
         </h2>
       </div>
 

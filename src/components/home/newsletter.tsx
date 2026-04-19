@@ -192,19 +192,23 @@ export function Newsletter() {
   return (
     <>
       <style>{`
-        @keyframes newsletter-bar-expand {
-          0% { padding-left: 20px; }
-          100% { padding-left: 28px; }
+        @keyframes newsletter-bar-jut {
+          0% { padding-left: 20px; border-left-color: transparent; }
+          100% { padding-left: 32px; border-left-color: #C8A24E; }
         }
-        @keyframes newsletter-bar-shrink {
-          0% { padding-left: 28px; }
-          100% { padding-left: 20px; }
+        @keyframes newsletter-bar-retract {
+          0% { padding-left: 32px; border-left-color: #C8A24E; }
+          100% { padding-left: 20px; border-left-color: transparent; }
         }
-        .newsletter-bar:hover {
-          animation: newsletter-bar-expand 0.25s ease-out forwards;
+        .newsletter-bar:not(.newsletter-bar-active):hover {
+          animation: newsletter-bar-jut 0.25s ease-out forwards;
         }
-        .newsletter-bar:not(:hover) {
-          animation: newsletter-bar-shrink 0.2s ease-out forwards;
+        .newsletter-bar:not(.newsletter-bar-active):not(:hover) {
+          animation: newsletter-bar-retract 0.2s ease-out forwards;
+        }
+        .newsletter-bar-active {
+          padding-left: 32px;
+          border-left-color: #C8A24E;
         }
       `}</style>
       <section ref={sectionRef} className="w-full bg-background py-24 md:py-32">
@@ -212,7 +216,7 @@ export function Newsletter() {
           {/* Header */}
           <div data-anim="left" className="mb-10 flex items-end justify-between">
             <div>
-              <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] font-bold uppercase italic leading-[0.95] tracking-tight text-white">
+              <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] font-bold uppercase italic leading-[0.95] tracking-tight text-foreground">
                 Spartan Racing
               </h2>
               <span
@@ -295,8 +299,8 @@ export function Newsletter() {
                     className={cn(
                       "newsletter-bar group relative flex items-stretch text-left border-l-4 overflow-hidden",
                       active === globalIdx
-                        ? "border-l-gold bg-surface"
-                        : "border-l-transparent bg-background hover:bg-surface/50"
+                        ? "newsletter-bar-active border-l-gold"
+                        : "border-l-transparent"
                     )}
                   >
                     {/* Content */}

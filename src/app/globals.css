@@ -267,6 +267,14 @@ html {
   animation: goldLineExpand 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 0.3s forwards;
 }
 
+.subteam-card:hover .lead-card-desc {
+  animation: leadDescReveal 0.25s ease-out forwards;
+}
+
+.subteam-card:not(:hover) .lead-card-desc.was-visible {
+  animation: leadDescHide 0.2s ease-in forwards;
+}
+
 /* Racing page card hover — keyframe-based, no CSS transitions */
 @keyframes racingCardGlow {
   from {
@@ -606,13 +614,13 @@ html {
 
 /* Footer social icon hover */
 @keyframes socialIconHover {
-  from { color: rgba(255, 255, 255, 0.4); transform: translateY(0); }
-  to { color: #ffffff; transform: translateY(-2px); }
+  from { color: rgba(26, 26, 26, 0.4); transform: translateY(0); }
+  to { color: #1A1A1A; transform: translateY(-2px); }
 }
 
 @keyframes footerLinkHover {
-  from { color: rgba(255, 255, 255, 0.6); }
-  to { color: #ffffff; }
+  from { color: rgba(26, 26, 26, 0.6); }
+  to { color: #1A1A1A; }
 }
 
 @keyframes footerJoinHover {

@@ -10,18 +10,21 @@ const categories = [
     href: "/racing",
     image: "/images/flickr/comp-action-2.jpg",
     alt: "Spartan Racing car in competition",
+    yellowTint: false,
   },
   {
     title: "Our Cars",
     href: "/cars",
     image: "/images/sr16/car-action-1.jpg",
     alt: "SR16 on track",
+    yellowTint: true,
   },
   {
     title: "The Team",
     href: "/about",
     image: "/images/team/team-group.jpg",
     alt: "Spartan Racing team group photo",
+    yellowTint: false,
   },
 ];
 
@@ -62,7 +65,7 @@ export function CategoryCards() {
               Spartan Racing
             </h2>
             <p
-              className="text-[clamp(2.2rem,5vw,4rem)] italic leading-[0.9] tracking-tight text-foreground/30"
+              className="text-[clamp(2.2rem,5vw,4rem)] italic leading-[0.9] tracking-tight text-foreground/50"
               style={{ fontFamily: "var(--font-script), serif" }}
             >
               About Us
@@ -86,10 +89,15 @@ export function CategoryCards() {
                   src={cat.image}
                   alt={cat.alt}
                   fill
-                  className="object-cover category-card-img"
+                  className={`object-cover category-card-img${cat.yellowTint ? " sepia-[.50] saturate-200 hue-rotate-[-10deg]" : ""}`}
                   sizes="(max-width: 640px) 100vw, 33vw"
                 />
               </div>
+
+              {/* Yellow tint overlay for gold car effect */}
+              {cat.yellowTint && (
+                <div className="absolute inset-0 bg-yellow-500/15 mix-blend-multiply" />
+              )}
 
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />

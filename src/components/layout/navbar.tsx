@@ -48,16 +48,16 @@ function MegaDropdown({ cards, state }: { cards: DropdownCard[]; state: "open" |
   return (
     <div
       className={cn(
-        "absolute left-0 right-0 top-full z-40 overflow-hidden bg-white shadow-xl",
+        "overflow-hidden bg-white",
         state === "open" ? "mega-dropdown-open" : "mega-dropdown-close"
       )}
     >
-      <div className="mx-auto flex max-w-[1200px] gap-3 px-6 py-5">
+      <div className="flex gap-3 px-6 py-5">
         {cards.map((card) => (
           <Link
             key={card.title}
             href={card.href}
-            className="group/card relative flex-1 overflow-hidden rounded-lg"
+            className="group/card relative flex-1 overflow-hidden"
             style={{ aspectRatio: "16/9" }}
           >
             <Image

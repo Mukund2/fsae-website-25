@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -25,115 +25,96 @@ const MOBILE_NAV_ITEMS = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
-function RacingDropdown() {
+interface DropdownCard {
+  title: string;
+  href: string;
+  image: string;
+}
+
+const TEAM_CARDS: DropdownCard[] = [
+  { title: "Subteams", href: "/about", image: "/images/team/team-1.jpg" },
+  { title: "Leads", href: "/team", image: "/images/team/team-group.jpg" },
+];
+
+const RACING_CARDS: DropdownCard[] = [
+  { title: "Competitions", href: "/racing", image: "/images/flickr/comp-action-2.jpg" },
+  { title: "Endurance", href: "/racing", image: "/images/flickr/comp-action-1.jpg" },
+  { title: "Driver Days", href: "/racing", image: "/images/flickr/driver-day-1.jpg" },
+];
+
+function MegaDropdown({ cards, state }: { cards: DropdownCard[]; state: "open" | "closing" | "closed" }) {
+  if (state === "closed") return null;
+
   return (
-    <div className="dropdown-reveal absolute left-1/2 top-full z-50 hidden w-[720px] -translate-x-1/2 border border-border/50 bg-white pt-6 pb-8 px-8 shadow-xl group-hover:block">
-      {/* Caret / connector strip so there's no hover gap */}
-      <div className="absolute -top-2 left-0 h-2 w-full" />
-
-      <div className="grid grid-cols-3 gap-8">
-        {/* Column 1 */}
-        <div>
-          <h4 className="font-display text-xs font-bold uppercase tracking-widest text-[#FF8000]">
-            What is Formula SAE?
-          </h4>
-          <p className="mt-3 text-[13px] leading-relaxed text-white/60">
-            Formula SAE is the world&apos;s largest collegiate engineering
-            competition. Student teams design, build, and race open-wheel cars
-            judged on engineering excellence.
-          </p>
+    <div
+      className={cn(
+        "absolute left-0 right-0 top-full z-40 overflow-hidden bg-white shadow-xl",
+        state === "open" ? "mega-dropdown-open" : "mega-dropdown-close"
+      )}
+    >
+      <div className="mx-auto flex max-w-[1200px] gap-3 px-6 py-5">
+        {cards.map((card) => (
           <Link
-            href="/racing"
-            className="mt-4 inline-block text-[12px] font-semibold uppercase tracking-wider text-[#FF8000] hover:text-white"
+            key={card.title}
+            href={card.href}
+            className="group/card relative flex-1 overflow-hidden rounded-lg"
+            style={{ aspectRatio: "16/9" }}
           >
-            Learn more
+            <Image
+              src={card.image}
+              alt={card.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 1200px) 33vw, 400px"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            <span className="absolute bottom-4 left-5 font-display text-[clamp(0.9rem,1.5vw,1.25rem)] font-bold uppercase tracking-wide text-white">
+              {card.title}
+            </span>
           </Link>
-        </div>
-
-        {/* Column 2 */}
-        <div>
-          <h4 className="font-display text-xs font-bold uppercase tracking-widest text-[#FF8000]">
-            Dynamic Events
-          </h4>
-          <ul className="mt-3 flex flex-col gap-2">
-            {["Acceleration", "Skidpad", "Autocross", "Endurance"].map(
-              (event) => (
-                <li key={event}>
-                  <Link
-                    href="/racing"
-                    className="text-[13px] text-foreground/60 hover:text-foreground"
-                  >
-                    {event}
-                  </Link>
-                </li>
-              )
-            )}
-          </ul>
-        </div>
-
-        {/* Column 3 */}
-        <div>
-          <h4 className="font-display text-xs font-bold uppercase tracking-widest text-[#FF8000]">
-            Static Events
-          </h4>
-          <ul className="mt-3 flex flex-col gap-2">
-            {["Design", "Cost", "Business Presentation"].map((event) => (
-              <li key={event}>
-                <Link
-                  href="/racing"
-                  className="text-[13px] text-foreground/60 hover:text-foreground"
-                >
-                  {event}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        ))}
       </div>
     </div>
   );
 }
 
-function TeamDropdown() {
-  return (
-    <div className="dropdown-reveal absolute left-1/2 top-full z-50 hidden w-[320px] -translate-x-1/2 border border-border/50 bg-white pt-6 pb-6 px-8 shadow-xl group-hover:block">
-      {/* Hover bridge */}
-      <div className="absolute -top-2 left-0 h-2 w-full" />
+function useDropdown() {
+  const [state, setState] = useState<"open" | "closing" | "closed">("closed");
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
 
-      <div className="flex flex-col gap-4">
-        <Link
-          href="/about"
-          className="group/item flex flex-col"
-        >
-          <span className="font-display text-xs font-bold uppercase tracking-widest text-[#FF8000]">
-            Subteams
-          </span>
-          <span className="mt-1 text-[13px] text-foreground/60 group-hover/item:text-foreground">
-            Meet the departments that build the car
-          </span>
-        </Link>
+  const open = useCallback(() => {
+    clearTimeout(timeoutRef.current);
+    setState("open");
+  }, []);
 
-        <div className="h-px bg-border" />
+  const close = useCallback(() => {
+    clearTimeout(timeoutRef.current);
+    setState("closing");
+    timeoutRef.current = setTimeout(() => setState("closed"), 280);
+  }, []);
 
-        <Link
-          href="/team"
-          className="group/item flex flex-col"
-        >
-          <span className="font-display text-xs font-bold uppercase tracking-widest text-[#FF8000]">
-            Leads
-          </span>
-          <span className="mt-1 text-[13px] text-foreground/60 group-hover/item:text-foreground">
-            Executive board and subteam leads
-          </span>
-        </Link>
-      </div>
-    </div>
-  );
+  const cancel = useCallback(() => {
+    clearTimeout(timeoutRef.current);
+  }, []);
+
+  useEffect(() => () => clearTimeout(timeoutRef.current), []);
+
+  return { state, open, close, cancel };
 }
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
+  const team = useDropdown();
+  const racing = useDropdown();
+  const navRef = useRef<HTMLElement>(null);
+
+  // Close all dropdowns on route change
+  useEffect(() => {
+    team.close();
+    racing.close();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pathname]);
 
   useEffect(() => {
     document.body.style.overflow = mobileOpen ? "hidden" : "";
@@ -147,145 +128,168 @@ export function Navbar() {
     return pathname === href || pathname.startsWith(`${href}/`);
   };
 
+  // Handlers that open one dropdown and close others
+  const teamEnter = () => { racing.close(); team.open(); };
+  const racingEnter = () => { team.close(); racing.open(); };
+
   return (
     <>
       <style jsx global>{`
-        @keyframes dropdownReveal {
-          from {
-            opacity: 0;
-            transform: translateY(-8px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+        @keyframes megaDown {
+          from { opacity: 0; max-height: 0; }
+          to   { opacity: 1; max-height: 320px; }
         }
-        .dropdown-reveal {
-          animation: dropdownReveal 0.2s ease-out both;
+        @keyframes megaUp {
+          from { opacity: 1; max-height: 320px; }
+          to   { opacity: 0; max-height: 0; }
+        }
+        .mega-dropdown-open {
+          animation: megaDown 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        .mega-dropdown-close {
+          animation: megaUp 0.28s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+          pointer-events: none;
         }
       `}</style>
 
-      <nav className="fixed top-0 left-0 z-50 flex w-full justify-center px-6 py-3 lg:px-12">
-        <div className="flex w-full max-w-[1200px] items-center justify-between border-b border-border/30 bg-white px-6 py-3">
-          {/* Left: Logo + Brand */}
-          <Link
-            href="/"
-            onClick={(e) => {
-              if (pathname === "/") {
-                e.preventDefault();
-                window.scrollTo({ top: 0 });
-              }
-            }}
-            className="flex items-center gap-3"
-          >
-            <Image
-              src="/images/sr-logo.png"
-              alt="Spartan Racing"
-              width={48}
-              height={27}
-              className="h-7 w-auto"
-            />
-            <span className="font-display text-lg tracking-wider md:text-xl">
-              <span className="font-bold text-gold">SPARTAN</span>{" "}
-              <span className="font-bold text-blue">RACING</span>
-            </span>
-          </Link>
+      <nav
+        ref={navRef}
+        className="fixed top-0 left-0 z-50 flex w-full justify-center px-6 py-3 lg:px-12"
+        onMouseLeave={() => { team.close(); racing.close(); }}
+      >
+        <div className="relative flex w-full max-w-[1200px] flex-col border-b border-border/30 bg-white">
+          <div className="flex items-center justify-between px-6 py-3">
+            {/* Left: Logo + Brand */}
+            <Link
+              href="/"
+              onClick={(e) => {
+                if (pathname === "/") {
+                  e.preventDefault();
+                  window.scrollTo({ top: 0 });
+                }
+              }}
+              className="flex items-center gap-3"
+            >
+              <Image
+                src="/images/sr-logo.png"
+                alt="Spartan Racing"
+                width={48}
+                height={27}
+                className="h-7 w-auto"
+              />
+              <span className="font-display text-lg tracking-wider md:text-xl">
+                <span className="font-bold text-gold">SPARTAN</span>{" "}
+                <span className="font-bold text-blue">RACING</span>
+              </span>
+            </Link>
 
-          {/* Right: Nav links + Join Us button */}
-          <div className="hidden items-center gap-6 md:flex lg:gap-8">
-            <ul className="flex items-center gap-5 lg:gap-6">
-              {/* Cars - simple link */}
-              <li>
-                <Link
-                  href="/cars"
-                  className={cn(
-                    "text-[13px] font-medium uppercase tracking-wider",
-                    isActive("/cars")
-                      ? "text-[#FF8000]"
-                      : "text-foreground/60 hover:text-foreground"
-                  )}
+            {/* Right: Nav links + Join Us button */}
+            <div className="hidden items-center gap-6 md:flex lg:gap-8">
+              <ul className="flex items-center gap-5 lg:gap-6">
+                {/* Cars - simple link */}
+                <li
+                  onMouseEnter={() => { team.close(); racing.close(); }}
                 >
-                  Cars
-                </Link>
-              </li>
-
-              {/* Team - dropdown */}
-              <li className="group relative">
-                <Link
-                  href="/about"
-                  className={cn(
-                    "text-[13px] font-medium uppercase tracking-wider",
-                    isActive("/about") || isActive("/team")
-                      ? "text-[#FF8000]"
-                      : "text-foreground/60 hover:text-foreground"
-                  )}
-                >
-                  Team
-                </Link>
-                <TeamDropdown />
-              </li>
-
-              {/* Racing - dropdown */}
-              <li className="group relative">
-                <Link
-                  href="/racing"
-                  className={cn(
-                    "text-[13px] font-medium uppercase tracking-wider",
-                    isActive("/racing")
-                      ? "text-[#FF8000]"
-                      : "text-foreground/60 hover:text-foreground"
-                  )}
-                >
-                  Racing
-                </Link>
-                <RacingDropdown />
-              </li>
-
-              {/* Simple nav items */}
-              {SIMPLE_NAV_ITEMS.filter(
-                (item) => item.label !== "Cars"
-              ).map((link) => (
-                <li key={link.href}>
                   <Link
-                    href={link.href}
+                    href="/cars"
                     className={cn(
                       "text-[13px] font-medium uppercase tracking-wider",
-                      isActive(link.href)
+                      isActive("/cars")
                         ? "text-[#FF8000]"
                         : "text-foreground/60 hover:text-foreground"
                     )}
                   >
-                    {link.label}
+                    Cars
                   </Link>
                 </li>
-              ))}
-            </ul>
 
-            <Link
-              href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="join-btn bg-gold px-5 py-2 font-display text-[13px] font-bold uppercase tracking-wider text-white"
-            >
-              Join Us
-            </Link>
+                {/* Team - mega dropdown */}
+                <li
+                  onMouseEnter={teamEnter}
+                >
+                  <Link
+                    href="/about"
+                    className={cn(
+                      "text-[13px] font-medium uppercase tracking-wider",
+                      isActive("/about") || isActive("/team") || team.state === "open"
+                        ? "text-[#FF8000]"
+                        : "text-foreground/60 hover:text-foreground"
+                    )}
+                  >
+                    Team
+                  </Link>
+                </li>
 
-            <CartButton />
+                {/* Racing - mega dropdown */}
+                <li
+                  onMouseEnter={racingEnter}
+                >
+                  <Link
+                    href="/racing"
+                    className={cn(
+                      "text-[13px] font-medium uppercase tracking-wider",
+                      isActive("/racing") || racing.state === "open"
+                        ? "text-[#FF8000]"
+                        : "text-foreground/60 hover:text-foreground"
+                    )}
+                  >
+                    Racing
+                  </Link>
+                </li>
+
+                {/* Simple nav items */}
+                {SIMPLE_NAV_ITEMS.filter(
+                  (item) => item.label !== "Cars"
+                ).map((link) => (
+                  <li
+                    key={link.href}
+                    onMouseEnter={() => { team.close(); racing.close(); }}
+                  >
+                    <Link
+                      href={link.href}
+                      className={cn(
+                        "text-[13px] font-medium uppercase tracking-wider",
+                        isActive(link.href)
+                          ? "text-[#FF8000]"
+                          : "text-foreground/60 hover:text-foreground"
+                      )}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="join-btn bg-gold px-5 py-2 font-display text-[13px] font-bold uppercase tracking-wider text-white"
+              >
+                Join Us
+              </Link>
+
+              <CartButton />
+            </div>
+
+            {/* Mobile right: cart + hamburger */}
+            <div className="flex items-center gap-1 md:hidden">
+              <CartButton />
+              <button
+                type="button"
+                onClick={() => setMobileOpen((prev) => !prev)}
+                className="relative z-50 flex h-10 w-10 items-center justify-center text-foreground"
+                aria-label={mobileOpen ? "Close menu" : "Open menu"}
+                aria-expanded={mobileOpen}
+              >
+                {mobileOpen ? <X size={24} /> : <Menu size={24} />}
+              </button>
+            </div>
           </div>
 
-          {/* Mobile right: cart + hamburger */}
-          <div className="flex items-center gap-1 md:hidden">
-            <CartButton />
-            <button
-              type="button"
-              onClick={() => setMobileOpen((prev) => !prev)}
-              className="relative z-50 flex h-10 w-10 items-center justify-center text-foreground"
-              aria-label={mobileOpen ? "Close menu" : "Open menu"}
-              aria-expanded={mobileOpen}
-            >
-              {mobileOpen ? <X size={24} /> : <Menu size={24} />}
-            </button>
-          </div>
+          {/* Mega dropdowns render inside the nav container */}
+          <MegaDropdown cards={TEAM_CARDS} state={team.state} />
+          <MegaDropdown cards={RACING_CARDS} state={racing.state} />
         </div>
       </nav>
 

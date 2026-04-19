@@ -340,9 +340,10 @@ export function Results() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full overflow-hidden"
-      style={{ background: "#0e0e0e" }}
+      className="relative w-full bg-background py-12 md:py-20"
     >
+    <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
+    <div className="relative overflow-hidden" style={{ background: "#0e0e0e" }}>
       {/* ── Pulsating wave lines ── */}
       <style>{`
         @keyframes waveLine1 {
@@ -496,6 +497,8 @@ export function Results() {
 
       {/* Bottom spacing */}
       <div className="h-16 md:h-24" />
+    </div>
+    </div>
     </section>
   );
 }

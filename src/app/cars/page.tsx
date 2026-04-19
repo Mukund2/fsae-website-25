@@ -136,21 +136,20 @@ function RacetrackCar() {
       const sectionHeight = rect.height;
       const viewH = window.innerHeight;
 
-      // Progress: 0 at section top, 1 at section bottom
-      let progress = -sectionTop / (sectionHeight - viewH);
+      // Progress based on where the viewport center is within the section
+      const viewCenter = viewH / 2;
+      let progress = (viewCenter - sectionTop) / sectionHeight;
       progress = Math.max(0, Math.min(1, progress));
 
-      // Get point on path
+      // Get point on path at the viewport center position
       const point = path.getPointAtLength(progress * totalLen);
 
-      // Convert SVG coordinates to screen coordinates
+      // Convert SVG X coordinate to screen X
       const svgRect = svgEl.getBoundingClientRect();
       const svgViewBox = svgEl.viewBox.baseVal;
       const scaleX = svgRect.width / svgViewBox.width;
-      const scaleY = svgRect.height / svgViewBox.height;
 
       const screenX = svgRect.left + point.x * scaleX;
-      const screenY = svgRect.top + point.y * scaleY;
 
       // Calculate path angle for steering
       const nextPoint = path.getPointAtLength(Math.min(progress * totalLen + 5, totalLen));
@@ -161,9 +160,10 @@ function RacetrackCar() {
       const targetAngle = pathAngle + directionOffset;
       currentAngle += (targetAngle - currentAngle) * 0.15;
 
+      // Car stays fixed at viewport center vertically, follows track horizontally
       car.style.position = "fixed";
       car.style.left = `${screenX}px`;
-      car.style.top = `${screenY}px`;
+      car.style.top = `${viewCenter}px`;
       car.style.transform = `translate(-50%, -50%) rotate(${currentAngle}deg)`;
 
       raf = requestAnimationFrame(tick);
@@ -175,15 +175,15 @@ function RacetrackCar() {
 
   return (
     <div ref={carRef} className="z-30 hidden md:block" style={{ position: "fixed" }}>
-      <svg viewBox="0 0 28 48" width="20" height="34">
-        <rect x="5" y="6" width="18" height="34" rx="9" fill="#111" />
-        <path d="M9 6 L14 0 L19 6" fill="#111" />
-        <rect x="1" y="12" width="5" height="9" rx="2" fill="#000" />
-        <rect x="22" y="12" width="5" height="9" rx="2" fill="#000" />
-        <rect x="1" y="29" width="5" height="9" rx="2" fill="#000" />
-        <rect x="22" y="29" width="5" height="9" rx="2" fill="#000" />
-        <ellipse cx="14" cy="20" rx="4" ry="5" fill="#333" />
-        <rect x="3" y="38" width="22" height="3" rx="1" fill="#000" />
+      <svg viewBox="0 0 28 48" width="22" height="38">
+        <rect x="5" y="6" width="18" height="34" rx="9" fill="#D4A843" />
+        <path d="M9 6 L14 0 L19 6" fill="#D4A843" />
+        <rect x="1" y="12" width="5" height="9" rx="2" fill="#1a1a1a" />
+        <rect x="22" y="12" width="5" height="9" rx="2" fill="#1a1a1a" />
+        <rect x="1" y="29" width="5" height="9" rx="2" fill="#1a1a1a" />
+        <rect x="22" y="29" width="5" height="9" rx="2" fill="#1a1a1a" />
+        <ellipse cx="14" cy="20" rx="4" ry="5" fill="#B8962E" />
+        <rect x="3" y="38" width="22" height="3" rx="1" fill="#1a1a1a" />
       </svg>
     </div>
   );

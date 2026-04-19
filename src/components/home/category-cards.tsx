@@ -55,12 +55,12 @@ export function CategoryCards() {
   return (
     <section ref={sectionRef} className="bg-background py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
-        <div className="flex flex-col gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {categories.map((cat) => (
             <Link
               key={cat.title}
               href={cat.href}
-              className="category-card group relative block aspect-[2/1] w-full overflow-hidden sm:aspect-[16/9] lg:aspect-[2.4/1]"
+              className="category-card group relative block aspect-[3/4] w-full overflow-hidden sm:aspect-[3/4]"
             >
               {/* Image */}
               <div className="absolute inset-0">
@@ -69,23 +69,23 @@ export function CategoryCards() {
                   alt={cat.alt}
                   fill
                   className="object-cover category-card-img"
-                  sizes="(max-width: 1280px) 100vw, 1200px"
+                  sizes="(max-width: 640px) 100vw, 33vw"
                 />
               </div>
 
               {/* Gradient overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
 
-              {/* Title bottom-left */}
-              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-6 lg:p-10">
-                <h3 className="font-display text-[clamp(1.75rem,4vw,3.5rem)] font-bold uppercase leading-none tracking-tight text-white">
+              {/* Title + arrow bottom */}
+              <div className="absolute inset-x-0 bottom-0 flex items-end justify-between p-5 lg:p-6">
+                <h3 className="font-display text-[clamp(1.25rem,2.5vw,1.75rem)] font-bold uppercase leading-none tracking-tight text-white">
                   {cat.title}
                 </h3>
 
-                {/* Arrow bottom-right */}
+                {/* Arrow */}
                 <svg
-                  width="28"
-                  height="28"
+                  width="22"
+                  height="22"
                   viewBox="0 0 28 28"
                   fill="none"
                   className="text-gold category-card-arrow flex-shrink-0"
@@ -93,7 +93,7 @@ export function CategoryCards() {
                   <path
                     d="M7 21L21 7M21 7H11M21 7V17"
                     stroke="currentColor"
-                    strokeWidth="2"
+                    strokeWidth="2.5"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />

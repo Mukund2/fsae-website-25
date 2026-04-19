@@ -130,7 +130,7 @@ export function Newsletter() {
   const [loaded, setLoaded] = useState<Set<number>>(() => new Set([0]));
   const sectionRef = useRef<HTMLElement>(null);
 
-  const handleTabClick = (i: number) => {
+  const handleSelect = (i: number) => {
     setActive(i);
     setLoaded((prev) => {
       if (prev.has(i)) return prev;
@@ -170,11 +170,14 @@ export function Newsletter() {
     return () => observer.disconnect();
   }, []);
 
+  // Show first 5 newsletters as cards on the right
+  const sideCards = newsletters.slice(0, 5);
+
   return (
     <section ref={sectionRef} className="w-full bg-background py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-12">
         {/* Header */}
-        <div data-anim="left">
+        <div data-anim="left" className="mb-10">
           <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[0.95] tracking-tight">
             <span className="font-bold text-foreground">Up 2</span>
             <br />
@@ -182,53 +185,120 @@ export function Newsletter() {
           </h2>
         </div>
 
-        {/* Newsletter tabs */}
-        <div className="mt-8 -mx-6 px-6 overflow-x-auto scrollbar-hide">
-          <div className="flex gap-2 pb-2" style={{ minWidth: "max-content" }}>
-          {newsletters.map((nl, i) => (
-            <button
-              key={nl.date}
-              data-anim="up"
-              onClick={() => handleTabClick(i)}
-              className={cn(
-                "newsletter-tab flex shrink-0 flex-col items-start border px-4 py-2.5 text-left",
-                active === i
-                  ? "border-gold bg-gold/5"
-                  : "border-border"
+        {/* McLaren-style layout: flipbook left, card stack right */}
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Left: Active newsletter flipbook */}
+          <div data-anim="left" className="lg:w-[58%] flex-shrink-0">
+            <div className="relative">
+              {newsletters.map((nl, i) =>
+                loaded.has(i) ? (
+                  <div key={nl.pdf} style={{ display: active === i ? "block" : "none" }}>
+                    <InlineFlipbook pdfUrl={nl.pdf} />
+                  </div>
+                ) : null
               )}
-            >
-              <span
+            </div>
+            {/* Active newsletter info below flipbook */}
+            <div className="mt-4 flex items-center gap-3">
+              <span className="font-mono text-[11px] uppercase tracking-[0.2em] text-gold">
+                {newsletters[active].date}
+              </span>
+              <span className="text-border">|</span>
+              <span className="font-display text-sm font-bold uppercase tracking-tight text-foreground">
+                {newsletters[active].title}
+              </span>
+            </div>
+          </div>
+
+          {/* Right: Stacked newsletter cards */}
+          <div data-anim="up" className="flex flex-col gap-[2px] lg:w-[42%]">
+            {sideCards.map((nl, i) => (
+              <button
+                key={nl.date}
+                onClick={() => handleSelect(i)}
                 className={cn(
-                  "font-mono text-[10px] uppercase tracking-[0.2em]",
-                  active === i ? "text-gold" : "text-muted"
+                  "group relative flex items-stretch text-left border-l-4 overflow-hidden",
+                  active === i
+                    ? "border-l-gold bg-surface"
+                    : "border-l-transparent bg-background hover:bg-surface/50"
                 )}
               >
-                {nl.date}
-              </span>
-              <span
-                className={cn(
-                  "mt-1 font-display text-sm uppercase tracking-tight",
-                  active === i ? "text-foreground" : "text-foreground/60"
-                )}
+                {/* Content */}
+                <div className="flex-1 px-5 py-5">
+                  <span className={cn(
+                    "font-mono text-[10px] uppercase tracking-[0.2em]",
+                    active === i ? "text-gold" : "text-muted"
+                  )}>
+                    {nl.date}
+                  </span>
+                  <h3 className={cn(
+                    "mt-2 font-display text-lg font-bold uppercase tracking-tight leading-tight",
+                    active === i ? "text-foreground" : "text-foreground/70"
+                  )}>
+                    {nl.title}
+                  </h3>
+                  <p className="mt-1 text-[13px] text-foreground/50 line-clamp-2">
+                    Read the latest from Spartan Racing...
+                  </p>
+                </div>
+
+                {/* Arrow */}
+                <div className="flex items-center pr-4">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className={cn(
+                    active === i ? "text-gold" : "text-foreground/30 group-hover:text-gold"
+                  )}>
+                    <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+              </button>
+            ))}
+
+            {/* View all newsletters link */}
+            <div className="mt-4 pl-5">
+              <a
+                href={newsletters[0].pdf}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 font-mono text-[12px] uppercase tracking-[0.15em] text-gold hover:text-gold-light"
               >
-                {nl.title}
-              </span>
-            </button>
-          ))}
+                View Latest PDF
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                  <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
 
-        <div className="mt-2 h-px w-full bg-border/50" />
-
-        {/* Inline flipbook */}
-        <div data-anim="up" className="mt-10">
-          {newsletters.map((nl, i) =>
-            loaded.has(i) ? (
-              <div key={nl.pdf} style={{ display: active === i ? "block" : "none" }}>
-                <InlineFlipbook pdfUrl={nl.pdf} />
-              </div>
-            ) : null
-          )}
+        {/* Scrollable tabs for ALL newsletters below - smaller, more compact */}
+        <div className="mt-10 -mx-6 px-6 overflow-x-auto scrollbar-hide">
+          <div className="flex gap-2 pb-2" style={{ minWidth: "max-content" }}>
+            {newsletters.map((nl, i) => (
+              <button
+                key={nl.date}
+                onClick={() => handleSelect(i)}
+                className={cn(
+                  "flex shrink-0 flex-col items-start border px-3 py-2 text-left",
+                  active === i
+                    ? "border-gold bg-gold/5"
+                    : "border-border hover:border-gold/30"
+                )}
+              >
+                <span className={cn(
+                  "font-mono text-[9px] uppercase tracking-[0.2em]",
+                  active === i ? "text-gold" : "text-muted"
+                )}>
+                  {nl.date}
+                </span>
+                <span className={cn(
+                  "mt-0.5 font-display text-xs uppercase tracking-tight",
+                  active === i ? "text-foreground" : "text-foreground/60"
+                )}>
+                  {nl.title}
+                </span>
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     </section>

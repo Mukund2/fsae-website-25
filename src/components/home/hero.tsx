@@ -174,7 +174,7 @@ export function Hero() {
         }
       `}</style>
 
-      <section className="relative flex h-screen items-center justify-center overflow-hidden bg-black">
+      <section className="relative flex h-screen min-h-screen w-full items-center justify-center overflow-hidden bg-black">
         {/* B-roll video background */}
         <video
           ref={videoRef}

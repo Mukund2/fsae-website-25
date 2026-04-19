@@ -369,52 +369,6 @@ export function RacingContent() {
         );
       })}
 
-      {/* ── Results section ─────────────────────────────────── */}
-      <section id="results" className="py-20 md:py-32">
-        <div className="mx-auto max-w-7xl px-6">
-          <span
-            className="sr-slide-left text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
-            style={{ fontFamily: "var(--font-script), serif" }}
-          >
-            Results
-          </span>
-          <h2 className="sr-slide-left mt-2 font-display text-3xl font-bold uppercase italic tracking-tight md:text-4xl" data-delay="0.1">
-            Our Record
-          </h2>
-
-          <div className="mt-12 divide-y divide-border">
-            {keyResults.map((result, idx) => (
-              <div
-                key={result.context}
-                className="sr-reveal flex flex-col gap-1 py-6 sm:flex-row sm:items-baseline sm:gap-6"
-                data-delay={String(idx * 0.08)}
-              >
-                <span className="font-display text-4xl tracking-tight md:text-5xl">
-                  {result.stat}
-                </span>
-                <span className="font-display text-lg uppercase text-foreground/70">
-                  {result.label}
-                </span>
-                <span className="font-display text-xs uppercase tracking-[0.2em] text-muted sm:ml-auto">
-                  {result.context}
-                </span>
-                {result.sub.length > 0 && (
-                  <div className="flex flex-wrap gap-3">
-                    {result.sub.map((s) => (
-                      <span
-                        key={s}
-                        className="font-display text-[11px] uppercase tracking-wider text-gold"
-                      >
-                        {s}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

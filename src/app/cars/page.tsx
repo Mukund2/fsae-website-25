@@ -6,34 +6,35 @@ import { cars } from "@/data/cars";
 
 // The SVG path that defines the curving racetrack
 // Sways left/right with varying amplitude for organic feel
+// Consistent S-curve with uniform amplitude so road width stays the same
 const TRACK_PATH = `
   M 100 0
-  C 100 40, 145 80, 145 120
-  C 145 160, 55 200, 55 240
-  C 55 280, 150 320, 150 360
-  C 150 400, 45 440, 45 480
-  C 45 520, 155 560, 155 600
-  C 155 640, 50 680, 50 720
-  C 50 760, 148 800, 148 840
-  C 148 880, 52 920, 52 960
-  C 52 1000, 145 1040, 145 1080
-  C 145 1120, 55 1160, 55 1200
-  C 55 1240, 150 1280, 150 1320
-  C 150 1360, 48 1400, 48 1440
-  C 48 1480, 152 1520, 152 1560
-  C 152 1600, 50 1640, 50 1680
-  C 50 1720, 148 1760, 148 1800
-  C 148 1840, 55 1880, 55 1920
-  C 55 1960, 100 1980, 100 2000
+  C 100 30, 130 60, 130 100
+  C 130 140, 70 180, 70 220
+  C 70 260, 130 300, 130 340
+  C 130 380, 70 420, 70 460
+  C 70 500, 130 540, 130 580
+  C 130 620, 70 660, 70 700
+  C 70 740, 130 780, 130 820
+  C 130 860, 70 900, 70 940
+  C 70 980, 130 1020, 130 1060
+  C 130 1100, 70 1140, 70 1180
+  C 70 1220, 130 1260, 130 1300
+  C 130 1340, 70 1380, 70 1420
+  C 70 1460, 130 1500, 130 1540
+  C 130 1580, 70 1620, 70 1660
+  C 70 1700, 130 1740, 130 1780
+  C 130 1820, 70 1860, 70 1900
+  C 70 1940, 100 1970, 100 2000
 `;
 
 function RacetrackSurface() {
   return (
     <svg
-      className="absolute left-1/2 top-0 hidden -translate-x-1/2 md:block"
+      className="absolute left-1/2 top-0 hidden h-full -translate-x-1/2 md:block"
+      preserveAspectRatio="none"
       viewBox="0 0 200 2000"
-      preserveAspectRatio="xMidYMin slice"
-      style={{ height: "100%", width: "200px" }}
+      style={{ height: "100%", width: "120px" }}
     >
       <defs>
         <path id="track-path" d={TRACK_PATH} />

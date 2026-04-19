@@ -89,8 +89,11 @@ function useDropdown() {
 
   const close = useCallback(() => {
     clearTimeout(timeoutRef.current);
-    setState("closing");
-    timeoutRef.current = setTimeout(() => setState("closed"), 280);
+    setState((prev) => {
+      if (prev !== "open") return prev;
+      timeoutRef.current = setTimeout(() => setState("closed"), 280);
+      return "closing";
+    });
   }, []);
 
   const cancel = useCallback(() => {

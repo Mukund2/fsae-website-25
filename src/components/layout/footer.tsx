@@ -66,116 +66,41 @@ const socialIcons = [
   { href: SOCIAL_LINKS.facebook, icon: FacebookIcon, label: "Facebook" },
 ] as const;
 
-const navColumns = [
-  {
-    title: "Team",
-    links: [
-      { label: "About", href: "/about" },
-      { label: "Leads", href: "/team" },
-      { label: "History", href: "/history" },
-    ],
-  },
-  {
-    title: "Racing",
-    links: [
-      { label: "Cars", href: "/cars" },
-      { label: "Competitions", href: "/racing" },
-      { label: "Merch", href: "/merch" },
-    ],
-  },
-  {
-    title: "Connect",
-    links: [
-      { label: "Sponsors", href: "/sponsors" },
-      { label: "Support", href: "/support" },
-      { label: "Contact", href: "/contact" },
-      { label: "FAQ", href: "/faq" },
-    ],
-  },
-] as const;
-
 export function Footer() {
   return (
-    <footer className="bg-[#111]">
-      <div className="mx-auto max-w-7xl px-6 py-16 lg:px-12">
-        {/* Main footer grid */}
-        <div className="grid grid-cols-1 gap-12 md:grid-cols-12">
-          {/* Left: Logo + SR badge */}
-          <div className="md:col-span-4">
-            <Link href="/" className="inline-block">
-              <div className="flex items-center gap-4">
-                <Image
-                  src="/images/sr-logo.png"
-                  alt="SR Logo"
-                  width={48}
-                  height={48}
-                  className="opacity-90"
-                />
-                <h3 className="font-display text-3xl uppercase tracking-tight">
-                  <span className="font-bold text-gold">Spartan</span>{" "}
-                  <span className="font-bold text-blue">Racing</span>
-                </h3>
-              </div>
-            </Link>
-            <p className="mt-4 max-w-xs text-sm leading-relaxed text-white/40">
-              San Jos&eacute; State University Formula SAE Racing Team.
-              Engineering excellence since 1991.
-            </p>
-
-            {/* Social icons */}
-            <div className="mt-6 flex items-center gap-4">
-              {socialIcons.map(({ href, icon: Icon, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={label}
-                  className="footer-social-icon text-white/40"
-                >
-                  <Icon size={20} />
-                </a>
-              ))}
-            </div>
+    <footer className="bg-[#1a1a1a]">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-10 lg:px-12">
+        {/* Left: Logo + Text */}
+        <Link href="/" className="inline-block">
+          <div className="flex items-center gap-4">
+            <Image
+              src="/images/sr-logo.png"
+              alt="SR Logo"
+              width={48}
+              height={48}
+              className="opacity-90"
+            />
+            <h3 className="font-display text-3xl uppercase tracking-tight">
+              <span className="font-bold text-gold">Spartan</span>{" "}
+              <span className="font-bold text-blue">Racing</span>
+            </h3>
           </div>
+        </Link>
 
-          {/* Center + Right: Navigation columns */}
-          <div className="grid grid-cols-3 gap-8 md:col-span-6 md:col-start-7">
-            {navColumns.map((column) => (
-              <div key={column.title}>
-                <h4 className="font-display text-xs font-bold uppercase tracking-[0.2em] text-white/30">
-                  {column.title}
-                </h4>
-                <ul className="mt-4 space-y-3">
-                  {column.links.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className="footer-link text-sm text-white/60"
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Bottom bar */}
-        <div className="mt-16 border-t border-gold/30 pt-6">
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <p className="text-xs text-white/30">
-              &copy; 2025 SJSU Spartan Racing. All rights reserved.
-            </p>
-            <Link
-              href="/join"
-              className="footer-join-link font-display text-xs font-bold uppercase tracking-[0.15em] text-gold/70"
+        {/* Right: Social icons */}
+        <div className="flex items-center gap-4">
+          {socialIcons.map(({ href, icon: Icon, label }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={label}
+              className="footer-social-icon text-white/40"
             >
-              Join the Team
-            </Link>
-          </div>
+              <Icon size={20} />
+            </a>
+          ))}
         </div>
       </div>
     </footer>

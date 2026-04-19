@@ -34,7 +34,7 @@ const results = [
     result: "1ST",
   },
   {
-    event: "EV — SOCAL SHOOTOUT",
+    event: "EV, SOCAL SHOOTOUT",
     competition: "SOCAL SHOOTOUT",
     year: "2024",
     result: "1ST",
@@ -343,6 +343,104 @@ export function Results() {
       className="relative w-full overflow-hidden"
       style={{ background: "#0e0e0e" }}
     >
+      {/* ── Pulsating wave background ── */}
+      <style>{`
+        @keyframes wavePulse1 {
+          0%, 100% { opacity: 0.6; transform: scaleY(1); }
+          50% { opacity: 1; transform: scaleY(1.08); }
+        }
+        @keyframes wavePulse2 {
+          0%, 100% { opacity: 1; transform: scaleY(1.05); }
+          50% { opacity: 0.5; transform: scaleY(0.95); }
+        }
+        @keyframes wavePulse3 {
+          0%, 100% { opacity: 0.7; transform: scaleY(0.95); }
+          50% { opacity: 1; transform: scaleY(1.1); }
+        }
+      `}</style>
+      <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+        {/* Wave 1 — top area */}
+        <svg
+          className="absolute w-full"
+          style={{
+            top: "10%",
+            left: 0,
+            height: "220px",
+            animationName: "wavePulse1",
+            animationDuration: "8s",
+            animationTimingFunction: "ease-in-out",
+            animationIterationCount: "infinite",
+            transformOrigin: "center center",
+          }}
+          viewBox="0 0 1440 220"
+          preserveAspectRatio="none"
+          fill="none"
+        >
+          <path
+            d="M0 120C240 40 480 180 720 100C960 20 1200 160 1440 80V220H0Z"
+            fill="rgba(255,255,255,0.025)"
+          />
+          <path
+            d="M0 160C200 100 400 200 720 130C1040 60 1240 170 1440 120V220H0Z"
+            fill="rgba(255,255,255,0.015)"
+          />
+        </svg>
+
+        {/* Wave 2 — middle area */}
+        <svg
+          className="absolute w-full"
+          style={{
+            top: "40%",
+            left: 0,
+            height: "250px",
+            animationName: "wavePulse2",
+            animationDuration: "11s",
+            animationTimingFunction: "ease-in-out",
+            animationIterationCount: "infinite",
+            transformOrigin: "center center",
+          }}
+          viewBox="0 0 1440 250"
+          preserveAspectRatio="none"
+          fill="none"
+        >
+          <path
+            d="M0 80C360 160 720 20 1080 100C1260 140 1380 60 1440 90V250H0Z"
+            fill="rgba(255,255,255,0.03)"
+          />
+          <path
+            d="M0 140C180 80 540 190 900 110C1140 60 1320 150 1440 100V250H0Z"
+            fill="rgba(255,255,255,0.02)"
+          />
+        </svg>
+
+        {/* Wave 3 — bottom area */}
+        <svg
+          className="absolute w-full"
+          style={{
+            bottom: "0",
+            left: 0,
+            height: "200px",
+            animationName: "wavePulse3",
+            animationDuration: "14s",
+            animationTimingFunction: "ease-in-out",
+            animationIterationCount: "infinite",
+            transformOrigin: "center center",
+          }}
+          viewBox="0 0 1440 200"
+          preserveAspectRatio="none"
+          fill="none"
+        >
+          <path
+            d="M0 60C300 140 600 20 900 80C1200 140 1350 40 1440 70V200H0Z"
+            fill="rgba(255,255,255,0.025)"
+          />
+          <path
+            d="M0 100C240 40 480 150 720 90C960 30 1200 130 1440 60V200H0Z"
+            fill="rgba(255,255,255,0.018)"
+          />
+        </svg>
+      </div>
+
       {/* ── Title block ── */}
       <div className="px-6 lg:px-14 pt-20 pb-10 md:pt-26 md:pb-13">
         <div data-header>

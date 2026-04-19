@@ -58,29 +58,18 @@ export function CategoryCards() {
         {/* McLaren-style header */}
         <div className="mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <div className="mb-3 flex items-center gap-3">
-              <Image
-                src="/images/sr-logo.png"
-                alt="Spartan Racing"
-                width={28}
-                height={28}
-                className="h-7 w-auto"
-              />
-              <span className="font-display text-sm font-bold uppercase tracking-[0.2em] text-foreground/60">
-                2026
-              </span>
-            </div>
-            <h2 className="font-display text-[clamp(2.2rem,5vw,4rem)] font-black uppercase leading-[0.9] tracking-tight text-foreground">
+            <h2 className="font-display text-[clamp(2.2rem,5vw,4rem)] font-bold uppercase italic leading-[0.9] tracking-tight text-foreground">
               Spartan Racing
             </h2>
             <p
-              className="font-display text-[clamp(2.2rem,5vw,4rem)] font-black uppercase leading-[0.9] tracking-tight text-foreground/30"
+              className="text-[clamp(2.2rem,5vw,4rem)] italic leading-[0.9] tracking-tight text-foreground/30"
+              style={{ fontFamily: "var(--font-script), serif" }}
             >
-              Teams
+              About Us
             </p>
           </div>
           <p className="max-w-md text-[15px] leading-relaxed text-foreground/60 lg:text-right">
-            From design and manufacturing to data and strategy — every member plays a critical role in putting our car on track.
+            From design and manufacturing to data and strategy, every member plays a critical role in putting our car on track.
           </p>
         </div>
 

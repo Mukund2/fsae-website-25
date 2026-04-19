@@ -88,6 +88,8 @@ const newsletters = [
   },
 ];
 
+const PAGE_SIZE = 5;
+
 function animateElement(
   el: HTMLElement,
   from: { x?: number; y?: number; opacity?: number },
@@ -128,7 +130,10 @@ function animateElement(
 export function Newsletter() {
   const [active, setActive] = useState(0);
   const [loaded, setLoaded] = useState<Set<number>>(() => new Set([0]));
+  const [pageIndex, setPageIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
+
+  const totalPages = Math.ceil(newsletters.length / PAGE_SIZE);
 
   const handleSelect = (i: number) => {
     setActive(i);
@@ -136,6 +141,14 @@ export function Newsletter() {
       if (prev.has(i)) return prev;
       return new Set(prev).add(i);
     });
+  };
+
+  const handlePrevPage = () => {
+    setPageIndex((prev) => Math.max(0, prev - 1));
+  };
+
+  const handleNextPage = () => {
+    setPageIndex((prev) => Math.min(totalPages - 1, prev + 1));
   };
 
   useEffect(() => {
@@ -170,137 +183,153 @@ export function Newsletter() {
     return () => observer.disconnect();
   }, []);
 
-  // Show first 5 newsletters as cards on the right
-  const sideCards = newsletters.slice(0, 5);
+  // Current page of newsletters to display
+  const sideCards = newsletters.slice(
+    pageIndex * PAGE_SIZE,
+    pageIndex * PAGE_SIZE + PAGE_SIZE
+  );
 
   return (
-    <section ref={sectionRef} className="w-full bg-background py-24 md:py-32">
-      <div className="mx-auto max-w-7xl px-6 lg:px-12">
-        {/* Header */}
-        <div data-anim="left" className="mb-10">
-          <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[0.95] tracking-tight">
-            <span className="font-bold text-foreground">Up 2</span>
-            <br />
-            <span className="font-light text-foreground/40">Speed</span>
-          </h2>
-        </div>
-
-        {/* McLaren-style layout: flipbook left, card stack right */}
-        <div className="flex flex-col lg:flex-row gap-6">
-          {/* Left: Active newsletter flipbook */}
-          <div data-anim="left" className="lg:w-[58%] flex-shrink-0">
-            <div className="relative">
-              {newsletters.map((nl, i) =>
-                loaded.has(i) ? (
-                  <div key={nl.pdf} style={{ display: active === i ? "block" : "none" }}>
-                    <InlineFlipbook pdfUrl={nl.pdf} />
-                  </div>
-                ) : null
-              )}
-            </div>
-            {/* Active newsletter info below flipbook */}
-            <div className="mt-4 flex items-center gap-3">
-              <span className="font-display text-[11px] uppercase tracking-[0.2em] text-gold">
-                {newsletters[active].date}
-              </span>
-              <span className="text-border">|</span>
-              <span className="font-display text-sm font-bold uppercase tracking-tight text-foreground">
-                {newsletters[active].title}
+    <>
+      <style>{`
+        @keyframes newsletter-bar-expand {
+          0% { padding-left: 20px; }
+          100% { padding-left: 28px; }
+        }
+        @keyframes newsletter-bar-shrink {
+          0% { padding-left: 28px; }
+          100% { padding-left: 20px; }
+        }
+        .newsletter-bar:hover {
+          animation: newsletter-bar-expand 0.25s ease-out forwards;
+        }
+        .newsletter-bar:not(:hover) {
+          animation: newsletter-bar-shrink 0.2s ease-out forwards;
+        }
+      `}</style>
+      <section ref={sectionRef} className="w-full bg-background py-24 md:py-32">
+        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+          {/* Header */}
+          <div data-anim="left" className="mb-10 flex items-end justify-between">
+            <div>
+              <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] font-bold uppercase italic leading-[0.95] tracking-tight text-white">
+                Spartan Racing
+              </h2>
+              <span
+                className="text-[clamp(1.8rem,3.5vw,3rem)] italic text-gold"
+                style={{ fontFamily: "var(--font-script), serif" }}
+              >
+                Newsletters
               </span>
             </div>
-          </div>
 
-          {/* Right: Stacked newsletter cards */}
-          <div data-anim="up" className="flex flex-col gap-[2px] lg:w-[42%]">
-            {sideCards.map((nl, i) => (
+            {/* Pagination arrows */}
+            <div className="flex items-center gap-2">
               <button
-                key={nl.date}
-                onClick={() => handleSelect(i)}
-                className={cn(
-                  "group relative flex items-stretch text-left border-l-4 overflow-hidden",
-                  active === i
-                    ? "border-l-gold bg-surface"
-                    : "border-l-transparent bg-background hover:bg-surface/50"
-                )}
+                onClick={handlePrevPage}
+                disabled={pageIndex === 0}
+                className="flex h-10 w-10 items-center justify-center border border-gold text-gold disabled:opacity-20 disabled:cursor-not-allowed"
+                aria-label="Previous newsletters"
               >
-                {/* Content */}
-                <div className="flex-1 px-5 py-5">
-                  <span className={cn(
-                    "font-display text-[10px] uppercase tracking-[0.2em]",
-                    active === i ? "text-gold" : "text-muted"
-                  )}>
-                    {nl.date}
-                  </span>
-                  <h3 className={cn(
-                    "mt-2 font-display text-lg font-bold uppercase tracking-tight leading-tight",
-                    active === i ? "text-foreground" : "text-foreground/70"
-                  )}>
-                    {nl.title}
-                  </h3>
-                  <p className="mt-1 text-[13px] text-foreground/50 line-clamp-2">
-                    Read the latest from Spartan Racing...
-                  </p>
-                </div>
-
-                {/* Arrow */}
-                <div className="flex items-center pr-4">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className={cn(
-                    active === i ? "text-gold" : "text-foreground/30 group-hover:text-gold"
-                  )}>
-                    <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                </div>
-              </button>
-            ))}
-
-            {/* View all newsletters link */}
-            <div className="mt-4 pl-5">
-              <a
-                href={newsletters[0].pdf}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 font-display text-[12px] uppercase tracking-[0.15em] text-gold hover:text-gold-light"
-              >
-                View Latest PDF
                 <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
-                  <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  <path
+                    d="M12 15L7 10L12 5"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
                 </svg>
-              </a>
+              </button>
+              <button
+                onClick={handleNextPage}
+                disabled={pageIndex >= totalPages - 1}
+                className="flex h-10 w-10 items-center justify-center border border-gold text-gold disabled:opacity-20 disabled:cursor-not-allowed"
+                aria-label="Next newsletters"
+              >
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+                  <path
+                    d="M8 5L13 10L8 15"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {/* McLaren-style layout: flipbook left, card stack right */}
+          <div className="flex flex-col lg:flex-row gap-6">
+            {/* Left: Active newsletter flipbook */}
+            <div data-anim="left" className="lg:w-[58%] flex-shrink-0">
+              <div className="relative">
+                {newsletters.map((nl, i) =>
+                  loaded.has(i) ? (
+                    <div key={nl.pdf} style={{ display: active === i ? "block" : "none" }}>
+                      <InlineFlipbook pdfUrl={nl.pdf} />
+                    </div>
+                  ) : null
+                )}
+              </div>
+              {/* Active newsletter info below flipbook */}
+              <div className="mt-4 flex items-center gap-3">
+                <span className="font-display text-[11px] uppercase tracking-[0.2em] text-gold">
+                  {newsletters[active].date}
+                </span>
+                <span className="font-display text-sm font-bold uppercase tracking-tight text-foreground">
+                  {newsletters[active].title}
+                </span>
+              </div>
+            </div>
+
+            {/* Right: Stacked newsletter cards */}
+            <div data-anim="up" className="flex flex-col gap-[2px] lg:w-[42%]">
+              {sideCards.map((nl, idx) => {
+                const globalIdx = pageIndex * PAGE_SIZE + idx;
+                return (
+                  <button
+                    key={nl.date}
+                    onClick={() => handleSelect(globalIdx)}
+                    className={cn(
+                      "newsletter-bar group relative flex items-stretch text-left border-l-4 overflow-hidden",
+                      active === globalIdx
+                        ? "border-l-gold bg-surface"
+                        : "border-l-transparent bg-background hover:bg-surface/50"
+                    )}
+                  >
+                    {/* Content */}
+                    <div className="flex-1 px-5 py-5">
+                      <span className={cn(
+                        "font-display text-[10px] uppercase tracking-[0.2em]",
+                        active === globalIdx ? "text-gold" : "text-muted"
+                      )}>
+                        {nl.date}
+                      </span>
+                      <h3 className={cn(
+                        "mt-2 font-display text-lg font-bold uppercase tracking-tight leading-tight",
+                        active === globalIdx ? "text-foreground" : "text-foreground/70"
+                      )}>
+                        {nl.title}
+                      </h3>
+                    </div>
+
+                    {/* Arrow */}
+                    <div className="flex items-center pr-4">
+                      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className={cn(
+                        active === globalIdx ? "text-gold" : "text-foreground/30 group-hover:text-gold"
+                      )}>
+                        <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                      </svg>
+                    </div>
+                  </button>
+                );
+              })}
             </div>
           </div>
         </div>
-
-        {/* Scrollable tabs for ALL newsletters below - smaller, more compact */}
-        <div className="mt-10 -mx-6 px-6 overflow-x-auto scrollbar-hide">
-          <div className="flex gap-2 pb-2" style={{ minWidth: "max-content" }}>
-            {newsletters.map((nl, i) => (
-              <button
-                key={nl.date}
-                onClick={() => handleSelect(i)}
-                className={cn(
-                  "flex shrink-0 flex-col items-start border px-3 py-2 text-left",
-                  active === i
-                    ? "border-gold bg-gold/5"
-                    : "border-border hover:border-gold/30"
-                )}
-              >
-                <span className={cn(
-                  "font-display text-[9px] uppercase tracking-[0.2em]",
-                  active === i ? "text-gold" : "text-muted"
-                )}>
-                  {nl.date}
-                </span>
-                <span className={cn(
-                  "mt-0.5 font-display text-xs uppercase tracking-tight",
-                  active === i ? "text-foreground" : "text-foreground/60"
-                )}>
-                  {nl.title}
-                </span>
-              </button>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }

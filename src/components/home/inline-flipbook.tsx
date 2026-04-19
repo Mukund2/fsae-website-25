@@ -248,14 +248,6 @@ export function InlineFlipbook({ pdfUrl }: InlineFlipbookProps) {
             </svg>
           </button>
 
-          <a
-            href={pdfUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="ml-3 font-display text-[11px] uppercase tracking-[0.2em] text-gold"
-          >
-            Download PDF
-          </a>
         </div>
       )}
     </div>

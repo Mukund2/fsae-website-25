@@ -80,7 +80,7 @@ function MegaDropdown({ cards, state }: { cards: DropdownCard[]; state: "open" |
 
 function useDropdown() {
   const [state, setState] = useState<"open" | "closing" | "closed">("closed");
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>();
+  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(undefined);
 
   const open = useCallback(() => {
     clearTimeout(timeoutRef.current);

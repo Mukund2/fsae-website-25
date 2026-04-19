@@ -93,22 +93,9 @@ export function SponsorStrip() {
   return (
     <section className="relative w-full py-20 bg-background">
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
-        <div className="flex flex-col items-center text-center gap-3">
-          <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] uppercase leading-[0.95] tracking-tight">
-            <span className="font-light text-foreground/40">Our</span>
-            <br />
-            <span className="font-bold text-foreground">Sponsors</span>
-          </h2>
-          <a
-            href="/sponsors"
-            className="inline-flex items-center gap-2 font-display text-[13px] uppercase tracking-[0.15em] text-gold"
-          >
-            View All Sponsors
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-gold">
-              <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-          </a>
-        </div>
+        <h2 className="text-center font-display text-[clamp(1.6rem,3.5vw,2.5rem)] font-black uppercase italic tracking-tight text-foreground">
+          Our Sponsors
+        </h2>
       </div>
 
       <div className="relative mt-10">

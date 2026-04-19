@@ -58,17 +58,31 @@ function CarModel({ scrollProgress }: { scrollProgress: number }) {
 
       if (!mat?.color) return;
 
+      const isWheel = name.includes("wheel") || name.includes("tire") || name.includes("rim") || name.includes("tyre");
+
       const r = mat.color.r,
         g = mat.color.g,
         b = mat.color.b;
 
-      if (r < 0.15 && g < 0.15 && b < 0.15) {
-        mat.roughness = Math.max(mat.roughness, 0.4);
+      // Tires / rubber — matte black, distinct from body
+      if (isWheel) {
+        mat.color.set(0x111111);
+        mat.roughness = 0.95;
         mat.metalness = 0;
         mat.needsUpdate = true;
         return;
       }
 
+      // Already-dark parts — keep dark but add slight sheen for definition
+      if (r < 0.15 && g < 0.15 && b < 0.15) {
+        mat.color.set(0x222222);
+        mat.roughness = 0.35;
+        mat.metalness = 0.1;
+        mat.needsUpdate = true;
+        return;
+      }
+
+      // Gold / orange accent parts
       if (r > 0.5 && g > 0.2 && g < 0.6 && b < 0.2) {
         mat.color.set(0xc8a020);
         mat.roughness = 0.3;
@@ -77,9 +91,10 @@ function CarModel({ scrollProgress }: { scrollProgress: number }) {
         return;
       }
 
-      mat.color.set(0x1a1a1a);
-      mat.roughness = 0.5;
-      mat.metalness = 0.15;
+      // Everything else — dark charcoal with slight metallic sheen
+      mat.color.set(0x2a2a2a);
+      mat.roughness = 0.4;
+      mat.metalness = 0.2;
       mat.needsUpdate = true;
     });
 
@@ -241,10 +256,18 @@ export function CarShowcase() {
             gl={{ alpha: true }}
             style={{ background: "transparent" }}
           >
-            <ambientLight intensity={0.8} />
-            <directionalLight position={[5, 5, 5]} intensity={1.5} />
-            <directionalLight position={[-3, 2, -2]} intensity={0.5} />
-            <directionalLight position={[0, -1, 3]} intensity={0.3} />
+            {/* Ambient — soft base fill */}
+            <ambientLight intensity={1.2} />
+            {/* Key light — top right */}
+            <directionalLight position={[5, 6, 4]} intensity={2.5} />
+            {/* Fill light — left side to define edges */}
+            <directionalLight position={[-4, 3, 2]} intensity={1.2} />
+            {/* Rim light — behind and above for edge separation */}
+            <directionalLight position={[0, 4, -4]} intensity={1.5} />
+            {/* Ground bounce — subtle uplight */}
+            <directionalLight position={[0, -2, 3]} intensity={0.6} />
+            {/* Side accent — catch the body panels */}
+            <directionalLight position={[6, 1, -1]} intensity={0.8} />
             <Suspense fallback={null}>
               <CarModel scrollProgress={scrollProgress} />
             </Suspense>

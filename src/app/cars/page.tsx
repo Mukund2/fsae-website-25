@@ -136,9 +136,9 @@ function RacetrackCar() {
       const sectionHeight = rect.height;
       const viewH = window.innerHeight;
 
-      // Progress based on where the viewport center is within the section
+      // Progress: 0 when section top hits viewport center, 1 when section bottom hits viewport center
       const viewCenter = viewH / 2;
-      let progress = (viewCenter - sectionTop) / sectionHeight;
+      let progress = (viewCenter - sectionTop) / (sectionHeight - viewH);
       progress = Math.max(0, Math.min(1, progress));
 
       // Get point on path at the viewport center position

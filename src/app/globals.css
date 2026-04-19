@@ -74,6 +74,11 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Sponsor logos — darken to black preserving transparency */
+.dark-logo {
+  filter: grayscale(100%) contrast(1000%) brightness(0.3);
+}
+
 /* Selection color */
 ::selection {
   background-color: rgba(184, 150, 90, 0.2);

@@ -69,8 +69,7 @@ function SponsorItem({ sponsor }: { sponsor: Sponsor }) {
       alt={sponsor.name}
       width={140}
       height={48}
-      className="h-7 w-auto object-contain sm:h-9"
-      style={{ filter: "grayscale(100%) brightness(0)" }}
+      className="h-7 w-auto object-contain sm:h-9 dark-logo"
     />
   ) : (
     <span className="whitespace-nowrap font-display text-base uppercase tracking-[0.15em] text-foreground sm:text-lg">

@@ -600,13 +600,31 @@ html {
 
 /* Footer social icon hover */
 @keyframes socialIconHover {
-  from { color: var(--muted); transform: translateY(0); }
-  to { color: var(--gold); transform: translateY(-2px); }
+  from { color: rgba(255, 255, 255, 0.4); transform: translateY(0); }
+  to { color: #ffffff; transform: translateY(-2px); }
+}
+
+@keyframes footerLinkHover {
+  from { color: rgba(255, 255, 255, 0.6); }
+  to { color: #ffffff; }
+}
+
+@keyframes footerJoinHover {
+  from { color: rgba(var(--gold-rgb, 0, 85, 162), 0.7); }
+  to { color: #ffffff; }
 }
 
 /* Hover effect classes */
-.footer-social:hover {
+.footer-social-icon:hover {
   animation: socialIconHover 0.3s ease-out forwards;
+}
+
+.footer-link:hover {
+  animation: footerLinkHover 0.2s ease-out forwards;
+}
+
+.footer-join-link:hover {
+  animation: footerJoinHover 0.2s ease-out forwards;
 }
 
 .join-btn:hover {

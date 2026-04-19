@@ -112,8 +112,8 @@ export function SponsorStrip() {
       </div>
 
       <div className="relative mt-10">
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-32 bg-gradient-to-r from-background to-transparent sm:w-52" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-32 bg-gradient-to-l from-background to-transparent sm:w-52" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-48 bg-gradient-to-r from-background via-background/80 to-transparent sm:w-80" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-48 bg-gradient-to-l from-background via-background/80 to-transparent sm:w-80" />
 
         <Marquee speed={120} gap="gap-16 sm:gap-20">
           {SPONSORS.map((sponsor) => (

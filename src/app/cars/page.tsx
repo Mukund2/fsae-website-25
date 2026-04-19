@@ -307,7 +307,7 @@ function TimelineEntry({
       >
         {/* Polaroid card */}
         <div
-          className="bg-white p-3 pb-12 shadow-lg relative"
+          className="bg-white p-3 pb-20 shadow-lg relative"
           style={{ transform: `rotate(${rotation}deg)` }}
         >
           {/* Photo with vintage filter */}

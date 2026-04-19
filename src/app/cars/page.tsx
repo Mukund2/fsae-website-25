@@ -289,6 +289,14 @@ function TimelineEntry({
     return () => observer.disconnect();
   }, []);
 
+  // Slight random rotation for organic Polaroid feel
+  const rotation = isLeft ? -1.5 : 1.5;
+
+  // Combine specs into a single Sharpie line
+  const specs = [car.motor, car.power, car.torque, car.battery]
+    .filter((s): s is string => !!s && s !== "Senior Project")
+    .join(" · ");
+
   return (
     <div ref={ref} className="relative">
       <div
@@ -296,25 +304,14 @@ function TimelineEntry({
           isLeft ? "md:mr-auto md:pr-10" : "md:ml-auto md:pl-10"
         }`}
       >
-        <div className="timeline-card border border-border/60 bg-elevated p-4 shadow-sm" style={{ borderColor: 'rgba(200, 168, 78, 0.1)' }}>
-          <div className="flex items-baseline justify-between gap-4">
-            <div>
-              <p className="font-display text-[11px] uppercase tracking-[0.2em] text-foreground/40">
-                {car.years}
-              </p>
-              <h2 className="mt-1 font-display text-2xl uppercase tracking-tight md:text-3xl">
-                {car.name}
-              </h2>
-            </div>
-            {car.battery && (
-              <span className="hidden whitespace-nowrap font-display text-[10px] uppercase tracking-wider text-muted sm:inline">
-                EV
-              </span>
-            )}
-          </div>
-
-          {car.image && (
-            <div className="relative mt-3 aspect-video overflow-hidden bg-surface">
+        {/* Polaroid card */}
+        <div
+          className="bg-white p-3 pb-12 shadow-lg relative"
+          style={{ transform: `rotate(${rotation}deg)` }}
+        >
+          {/* Photo with vintage filter */}
+          {car.image ? (
+            <div className="relative aspect-[4/3] overflow-hidden bg-surface">
               <Image
                 src={car.image}
                 alt={car.name}
@@ -322,31 +319,33 @@ function TimelineEntry({
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 45vw"
                 loading="eager"
+                style={{ filter: "sepia(0.15) contrast(1.05) saturate(0.9) brightness(1.02)" }}
               />
+              {/* Slight warm overlay for vintage feel */}
+              <div className="absolute inset-0 bg-amber-100/10 mix-blend-multiply" />
+            </div>
+          ) : (
+            <div className="aspect-[4/3] bg-surface flex items-center justify-center">
+              <span className="text-foreground/20 text-4xl" style={{ fontFamily: "var(--font-marker)" }}>
+                {car.name}
+              </span>
             </div>
           )}
 
-          <div className="mt-3 flex flex-wrap gap-x-5 gap-y-1">
-            {car.motor && car.motor !== "Senior Project" && (
-              <span className="font-display text-[11px] uppercase tracking-[0.15em] text-muted">
-                {car.motor}
-              </span>
-            )}
-            {car.power && (
-              <span className="font-display text-[11px] uppercase tracking-[0.15em] text-muted">
-                {car.power}
-              </span>
-            )}
-            {car.torque && (
-              <span className="font-display text-[11px] uppercase tracking-[0.15em] text-muted">
-                {car.torque}
-              </span>
-            )}
-            {car.battery && (
-              <span className="font-display text-[11px] uppercase tracking-[0.15em] text-muted">
-                {car.battery}
-              </span>
-            )}
+          {/* Sharpie-style text on the white border */}
+          <div className="absolute bottom-0 left-0 right-0 px-4 pb-3">
+            <h2
+              className="text-[1.3rem] text-foreground/90 md:text-[1.5rem]"
+              style={{ fontFamily: "var(--font-marker)" }}
+            >
+              {car.name}
+            </h2>
+            <p
+              className="mt-0.5 text-[0.7rem] text-foreground/50"
+              style={{ fontFamily: "var(--font-marker)" }}
+            >
+              {car.years}{specs ? ` · ${specs}` : ""}
+            </p>
           </div>
         </div>
       </div>

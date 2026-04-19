@@ -1,4 +1,4 @@
-import { Inter, IBM_Plex_Mono, Playfair_Display } from "next/font/google";
+import { Inter, IBM_Plex_Mono, Playfair_Display, Permanent_Marker } from "next/font/google";
 
 export const bebasNeue = Inter({
   weight: ["700", "800", "900"],
@@ -18,6 +18,13 @@ export const jetbrainsMono = IBM_Plex_Mono({
   weight: ["400", "500", "600"],
   subsets: ["latin"],
   variable: "--font-mono",
+  display: "swap",
+});
+
+export const permanentMarker = Permanent_Marker({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-marker",
   display: "swap",
 });
 

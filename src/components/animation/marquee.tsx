@@ -26,17 +26,18 @@ export function Marquee({
         className={cn("flex w-max", gap)}
         style={{
           animation: `marquee var(--marquee-speed) linear infinite${reverse ? " reverse" : ""}`,
+          willChange: "transform",
         }}
       >
-        <div className={cn("flex shrink-0", gap)}>{children}</div>
-        <div className={cn("flex shrink-0", gap)} aria-hidden="true">
+        <div className={cn("flex shrink-0 items-center", gap)}>{children}</div>
+        <div className={cn("flex shrink-0 items-center", gap)} aria-hidden="true">
           {children}
         </div>
       </div>
       <style>{`
         @keyframes marquee {
-          from { transform: translateX(0); }
-          to { transform: translateX(-50%); }
+          from { transform: translate3d(0, 0, 0); }
+          to { transform: translate3d(-50%, 0, 0); }
         }
       `}</style>
     </div>

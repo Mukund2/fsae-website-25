@@ -41,20 +41,85 @@ const results = [
   },
 ];
 
+/**
+ * Gold bar reveal animation:
+ * 1. Gold bar covers the row (scaleX 1)
+ * 2. Row content slides in from left behind the bar
+ * 3. Gold bar sweeps right and disappears (translateX 100%)
+ * 4. Row content is revealed
+ */
+function revealRow(row: HTMLElement, delay: number) {
+  const content = row.querySelector<HTMLElement>("[data-content]");
+  const bar = row.querySelector<HTMLElement>("[data-bar]");
+  if (!content || !bar) return;
+
+  // Initial state: content hidden left, bar ready
+  content.style.opacity = "0";
+  content.style.transform = "translateX(-60px)";
+  bar.style.transform = "scaleX(0)";
+  bar.style.transformOrigin = "left";
+
+  setTimeout(() => {
+    // Phase 1: Gold bar sweeps in from left (covers row)
+    const barInStart = performance.now();
+    const barInDuration = 350;
+
+    const tickBarIn = (now: number) => {
+      const elapsed = now - barInStart;
+      const p = Math.min(elapsed / barInDuration, 1);
+      const eased = 1 - Math.pow(1 - p, 3);
+      bar.style.transform = `scaleX(${eased})`;
+
+      if (p < 1) {
+        requestAnimationFrame(tickBarIn);
+      } else {
+        // Phase 2: Content appears, bar sweeps out to right
+        content.style.opacity = "1";
+        content.style.transform = "translateX(-40px)";
+        bar.style.transformOrigin = "right";
+
+        const phase2Start = performance.now();
+        const barOutDuration = 400;
+        const contentSlideDuration = 500;
+
+        const tickPhase2 = (now2: number) => {
+          const elapsed2 = now2 - phase2Start;
+
+          // Bar sweeps out
+          const pBar = Math.min(elapsed2 / barOutDuration, 1);
+          const easedBar = 1 - Math.pow(1 - pBar, 3);
+          bar.style.transform = `scaleX(${1 - easedBar})`;
+
+          // Content slides in
+          const pContent = Math.min(elapsed2 / contentSlideDuration, 1);
+          const easedContent = 1 - Math.pow(1 - pContent, 3);
+          content.style.transform = `translateX(${-40 * (1 - easedContent)}px)`;
+
+          if (pBar < 1 || pContent < 1) {
+            requestAnimationFrame(tickPhase2);
+          }
+        };
+        requestAnimationFrame(tickPhase2);
+      }
+    };
+    requestAnimationFrame(tickBarIn);
+  }, delay);
+}
+
 function animateElement(
   el: HTMLElement,
-  from: { y?: number; opacity?: number },
-  to: { y?: number; opacity?: number },
+  from: { x?: number; opacity?: number },
+  to: { x?: number; opacity?: number },
   duration: number,
   delay: number
 ) {
-  const startY = from.y ?? 0;
+  const startX = from.x ?? 0;
   const startO = from.opacity ?? 0;
-  const endY = to.y ?? 0;
+  const endX = to.x ?? 0;
   const endO = to.opacity ?? 1;
 
   el.style.opacity = String(startO);
-  el.style.transform = `translateY(${startY}px)`;
+  el.style.transform = `translateX(${startX}px)`;
 
   setTimeout(() => {
     const start = performance.now();
@@ -64,7 +129,7 @@ function animateElement(
       const eased = 1 - Math.pow(1 - progress, 3);
 
       el.style.opacity = String(startO + (endO - startO) * eased);
-      el.style.transform = `translateY(${startY + (endY - startY) * eased}px)`;
+      el.style.transform = `translateX(${startX + (endX - startX) * eased}px)`;
 
       if (progress < 1) requestAnimationFrame(tick);
     };
@@ -81,7 +146,10 @@ export function Results() {
 
     const rows = section.querySelectorAll<HTMLElement>("[data-row]");
     rows.forEach((el) => {
-      el.style.opacity = "0";
+      const content = el.querySelector<HTMLElement>("[data-content]");
+      if (content) {
+        content.style.opacity = "0";
+      }
     });
     const headers = section.querySelectorAll<HTMLElement>("[data-header]");
     headers.forEach((el) => {
@@ -95,20 +163,14 @@ export function Results() {
             headers.forEach((el, i) => {
               animateElement(
                 el,
-                { y: -20, opacity: 0 },
-                { y: 0, opacity: 1 },
+                { x: -40, opacity: 0 },
+                { x: 0, opacity: 1 },
                 500,
                 i * 100
               );
             });
             rows.forEach((el, i) => {
-              animateElement(
-                el,
-                { y: 30, opacity: 0 },
-                { y: 0, opacity: 1 },
-                400,
-                200 + i * 80
-              );
+              revealRow(el, 300 + i * 120);
             });
             observer.disconnect();
           }
@@ -126,44 +188,9 @@ export function Results() {
       ref={sectionRef}
       className="relative w-full overflow-hidden bg-[#111111]"
     >
-      {/* Decorative pit board — the sign held over the pit wall during races */}
-      <div
-        className="pointer-events-none absolute right-8 top-16 z-20 hidden select-none lg:block"
-        style={{ transform: "rotate(4deg)" }}
-      >
-        <div
-          className="flex flex-col items-center rounded-sm border-2 border-white/20 bg-black px-8 py-6 shadow-2xl"
-          style={{
-            minWidth: "160px",
-            boxShadow: "0 8px 40px rgba(0,0,0,0.6)",
-          }}
-        >
-          {/* Position */}
-          <span
-            className="font-display font-bold leading-none text-gold"
-            style={{ fontSize: "4.5rem" }}
-          >
-            P1
-          </span>
-          {/* Divider */}
-          <div className="my-2 h-px w-full bg-white/20" />
-          {/* Lap / gap info */}
-          <span className="font-mono text-sm font-bold tracking-wider text-white/70">
-            LAP 22
-          </span>
-          <span className="mt-1 font-mono text-xs tracking-wider text-green-400">
-            +3.2s
-          </span>
-          {/* Team marker */}
-          <div className="mt-3 h-1.5 w-full rounded-full bg-gold" />
-        </div>
-        {/* Board handle */}
-        <div className="mx-auto h-16 w-2 bg-white/10 rounded-b" />
-      </div>
-
-      <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-28">
-        {/* Section title */}
-        <div data-header className="mb-10 md:mb-14">
+      {/* Section title — constrained width */}
+      <div className="mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-28 md:pb-14">
+        <div data-header>
           <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/30">
             Spartan Racing
           </p>
@@ -174,96 +201,110 @@ export function Results() {
             Track Record
           </h2>
         </div>
+      </div>
 
-        {/* Desktop table header */}
-        <div
-          data-header
-          className="hidden md:grid items-end border-b border-white/10 pb-3 mb-1"
-          style={{
-            gridTemplateColumns: "60px 1fr 220px 120px 80px",
-          }}
-        >
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30">
-            #
-          </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30">
-            Event
-          </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30">
-            Competition
-          </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30 text-right">
-            Finish
-          </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30 text-right">
-            Year
-          </span>
-        </div>
+      {/* Table header — full width */}
+      <div
+        data-header
+        className="hidden md:grid items-end border-b border-white/10 pb-3 mb-0 px-8 lg:px-16"
+        style={{
+          gridTemplateColumns: "80px 1fr 240px 140px 100px",
+        }}
+      >
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30">
+          #
+        </span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30">
+          Event
+        </span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30">
+          Competition
+        </span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30 text-right">
+          Finish
+        </span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30 text-right">
+          Year
+        </span>
+      </div>
 
-        {/* Result rows */}
-        <div className="flex flex-col">
-          {results.map((result, i) => (
+      {/* Result rows — full width, edge to edge */}
+      <div className="flex flex-col">
+        {results.map((result, i) => (
+          <div
+            key={`${result.competition}-${result.event}-${result.year}`}
+            data-row
+            className="relative border-b border-white/[0.06] overflow-hidden"
+          >
+            {/* Gold reveal bar */}
             <div
-              key={`${result.competition}-${result.event}-${result.year}`}
-              data-row
-              className="group/row border-b border-white/[0.06] hover:border-transparent cursor-default"
-            >
-              {/* Desktop row */}
-              <div
-                className="hidden md:grid items-center px-4 -mx-4 rounded-sm group-hover/row:bg-gold"
-                style={{
-                  gridTemplateColumns: "60px 1fr 220px 120px 80px",
-                  minHeight: "clamp(64px, 9vw, 80px)",
-                }}
-              >
-                <span
-                  className="font-display font-bold text-white/15 group-hover/row:text-black/20"
-                  style={{ fontSize: "clamp(1.2rem, 2vw, 1.6rem)" }}
-                >
-                  {String(i + 1).padStart(2, "0")}
-                </span>
+              data-bar
+              className="absolute inset-0 z-10 bg-gold pointer-events-none"
+              style={{ transform: "scaleX(0)", transformOrigin: "left" }}
+            />
 
-                <h3
-                  className="font-display font-bold uppercase text-white tracking-wide group-hover/row:text-black"
-                  style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.7rem)" }}
-                >
+            {/* Desktop row content */}
+            <div
+              data-content
+              className="hidden md:grid items-center px-8 lg:px-16 group/row cursor-default hover:bg-gold"
+              style={{
+                gridTemplateColumns: "80px 1fr 240px 140px 100px",
+                minHeight: "clamp(68px, 10vw, 88px)",
+              }}
+            >
+              <span
+                className="font-display font-bold text-white/15 group-hover/row:text-black/20"
+                style={{ fontSize: "clamp(1.3rem, 2.2vw, 1.8rem)" }}
+              >
+                {String(i + 1).padStart(2, "0")}
+              </span>
+
+              <h3
+                className="font-display font-bold uppercase text-white tracking-wide group-hover/row:text-black"
+                style={{ fontSize: "clamp(1.2rem, 2.8vw, 1.9rem)" }}
+              >
+                {result.event}
+              </h3>
+
+              <span className="font-mono text-[11px] uppercase tracking-wider text-white/40 group-hover/row:text-black/60">
+                {result.competition}
+              </span>
+
+              <span
+                className="font-display font-bold text-gold text-right group-hover/row:text-black"
+                style={{ fontSize: "clamp(1.5rem, 2.8vw, 2.2rem)" }}
+              >
+                {result.result}
+              </span>
+
+              <span className="font-mono text-sm text-white/40 text-right tabular-nums group-hover/row:text-black/60">
+                {result.year}
+              </span>
+            </div>
+
+            {/* Mobile row content */}
+            <div
+              data-content
+              className="flex md:hidden items-center justify-between px-6 py-5"
+            >
+              <div className="flex-1 min-w-0">
+                <h3 className="font-display text-base font-bold uppercase text-white tracking-wide truncate">
                   {result.event}
                 </h3>
-
-                <span className="font-mono text-[11px] uppercase tracking-wider text-white/40 group-hover/row:text-black/60">
-                  {result.competition}
-                </span>
-
-                <span
-                  className="font-display font-bold text-gold text-right group-hover/row:text-black"
-                  style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)" }}
-                >
-                  {result.result}
-                </span>
-
-                <span className="font-mono text-sm text-white/40 text-right tabular-nums group-hover/row:text-black/60">
-                  {result.year}
-                </span>
+                <p className="mt-0.5 font-mono text-[10px] uppercase tracking-wider text-white/30">
+                  {result.competition} · {result.year}
+                </p>
               </div>
-
-              {/* Mobile row */}
-              <div className="flex md:hidden items-center justify-between py-5">
-                <div className="flex-1 min-w-0">
-                  <h3 className="font-display text-base font-bold uppercase text-white tracking-wide truncate">
-                    {result.event}
-                  </h3>
-                  <p className="mt-0.5 font-mono text-[10px] uppercase tracking-wider text-white/30">
-                    {result.competition} · {result.year}
-                  </p>
-                </div>
-                <span className="ml-4 font-display text-xl font-bold text-gold flex-shrink-0">
-                  {result.result}
-                </span>
-              </div>
+              <span className="ml-4 font-display text-xl font-bold text-gold flex-shrink-0">
+                {result.result}
+              </span>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
+
+      {/* Bottom spacing */}
+      <div className="h-16 md:h-24" />
     </section>
   );
 }

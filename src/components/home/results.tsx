@@ -191,7 +191,7 @@ export function Results() {
       {/* Section title — constrained width */}
       <div className="mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-28 md:pb-14">
         <div data-header>
-          <p className="font-display text-[11px] uppercase tracking-[0.3em] text-white/30">
+          <p className="font-display text-[11px] uppercase tracking-[0.3em] text-gold">
             Spartan Racing
           </p>
           <h2
@@ -211,16 +211,16 @@ export function Results() {
           gridTemplateColumns: "1fr 240px 140px 100px",
         }}
       >
-        <span className="font-display text-xs font-bold uppercase tracking-[0.25em] text-gold/60">
+        <span className="font-display text-sm font-bold uppercase tracking-[0.25em] text-gold">
           Event
         </span>
-        <span className="font-display text-xs font-bold uppercase tracking-[0.25em] text-gold/60">
+        <span className="font-display text-sm font-bold uppercase tracking-[0.25em] text-gold">
           Competition
         </span>
-        <span className="font-display text-xs font-bold uppercase tracking-[0.25em] text-gold/60 text-right">
+        <span className="font-display text-sm font-bold uppercase tracking-[0.25em] text-gold text-right">
           Finish
         </span>
-        <span className="font-display text-xs font-bold uppercase tracking-[0.25em] text-gold/60 text-right">
+        <span className="font-display text-sm font-bold uppercase tracking-[0.25em] text-gold text-right">
           Year
         </span>
       </div>
@@ -256,7 +256,7 @@ export function Results() {
                 {result.event}
               </h3>
 
-              <span className="font-display text-[11px] uppercase tracking-wider text-white/40 group-hover/row:text-black/60">
+              <span className="font-display text-sm uppercase tracking-wider text-white group-hover/row:text-black">
                 {result.competition}
               </span>
 
@@ -267,7 +267,7 @@ export function Results() {
                 {result.result}
               </span>
 
-              <span className="font-display text-sm text-white/40 text-right tabular-nums group-hover/row:text-black/60">
+              <span className="font-display text-base text-white text-right tabular-nums group-hover/row:text-black">
                 {result.year}
               </span>
             </div>
@@ -281,7 +281,7 @@ export function Results() {
                 <h3 className="font-display text-base font-bold uppercase text-white tracking-wide truncate">
                   {result.event}
                 </h3>
-                <p className="mt-0.5 font-display text-[10px] uppercase tracking-wider text-white/30">
+                <p className="mt-0.5 font-display text-xs uppercase tracking-wider text-white">
                   {result.competition} · {result.year}
                 </p>
               </div>

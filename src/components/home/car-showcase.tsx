@@ -19,7 +19,6 @@ function useCountdown(target: Date) {
     return { days, hours, minutes, seconds };
   }, [target]);
 
-  // Start with null to avoid hydration mismatch, then set on client
   const [time, setTime] = useState<{ days: number; hours: number; minutes: number; seconds: number } | null>(null);
 
   useEffect(() => {
@@ -105,26 +104,37 @@ function CarModel({ scrollProgress }: { scrollProgress: number }) {
     wheelPivots.current = pivots;
   }, [scene]);
 
-  // Spin wheels based on scroll speed
   const prevProgress = useRef(scrollProgress);
-  useFrame((_state, delta) => {
-    // Wheel spin — proportional to scroll movement
+  useFrame(() => {
     const scrollDelta = scrollProgress - prevProgress.current;
     prevProgress.current = scrollProgress;
+
+    // Spin wheels proportional to scroll
     if (Math.abs(scrollDelta) > 0.0001) {
       for (const pivot of wheelPivots.current) {
         pivot.rotation.z += scrollDelta * 80;
       }
     }
 
-    // Move car from right to left based on scroll progress
-    // Remap so car starts off-screen right and only enters once section is well in view
-    if (groupRef.current) {
-      // Car enters from right, centered when section is fully visible (~50%)
-      const adjusted = Math.max(0, (scrollProgress - 0.15) / 0.5);
-      const targetX = 7 - adjusted * 14;
-      groupRef.current.position.x = targetX;
-    }
+    if (!groupRef.current) return;
+
+    // Phase 1 (0–0.4): Car enters from right to center
+    // Phase 2 (0.4–0.7): Car rotates to face viewer
+    // Phase 3 (0.7–1): Car stays, section scrolls away
+
+    // X position: enter from right, settle at center
+    const driveProgress = Math.min(scrollProgress / 0.4, 1);
+    const eased = 1 - Math.pow(1 - driveProgress, 3);
+    const targetX = 7 - eased * 7; // 7 → 0
+    groupRef.current.position.x = targetX;
+
+    // Y rotation: rotate to face viewer between 0.4 and 0.7
+    const rotateStart = 0.4;
+    const rotateEnd = 0.7;
+    const rotateProgress = Math.max(0, Math.min(1, (scrollProgress - rotateStart) / (rotateEnd - rotateStart)));
+    const rotateEased = 1 - Math.pow(1 - rotateProgress, 3);
+    // Rotate from side view (default ~0) to facing viewer (~Math.PI/2.5 = ~72deg)
+    groupRef.current.rotation.y = rotateEased * (Math.PI / 2.5);
   });
 
   return (
@@ -137,23 +147,25 @@ function CarModel({ scrollProgress }: { scrollProgress: number }) {
 }
 
 export function CarShowcase() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  // Outer wrapper ref for scroll tracking (tall element)
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    const section = sectionRef.current;
-    if (!section) return;
+    const wrapper = wrapperRef.current;
+    if (!wrapper) return;
 
     let rafId = 0;
     const onScroll = () => {
       cancelAnimationFrame(rafId);
       rafId = requestAnimationFrame(() => {
-        const rect = section.getBoundingClientRect();
+        const rect = wrapper.getBoundingClientRect();
         const windowH = window.innerHeight;
-        // Progress: 0 when section enters viewport, 1 when it leaves
-        const total = rect.height + windowH;
-        const scrolled = windowH - rect.top;
-        const progress = Math.max(0, Math.min(1, scrolled / total));
+        // scrollable distance = wrapper height - viewport height (the sticky travel)
+        const scrollableDistance = rect.height - windowH;
+        // How far we've scrolled into the wrapper
+        const scrolled = -rect.top;
+        const progress = Math.max(0, Math.min(1, scrolled / scrollableDistance));
         setScrollProgress(progress);
       });
     };
@@ -175,60 +187,70 @@ export function CarShowcase() {
     { value: seconds, label: "Sec" },
   ];
 
+  // Car only visible once we've started scrolling into the pinned section
+  const carVisible = scrollProgress > 0.02;
+
   return (
-    <section
-      ref={sectionRef}
-      className="relative w-full overflow-hidden bg-[#F5F5F0]"
-    >
-      {/* Big countdown behind the car */}
-      <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center gap-2 lg:gap-4">
-        {countdownBlocks.map((block, i) => (
-          <div key={block.label} className="flex items-baseline">
-            <div className="flex flex-col items-center">
-              <span
-                className="font-display font-black tabular-nums text-foreground/[0.07]"
-                style={{
-                  fontSize: "clamp(6rem, 14vw, 16rem)",
-                  fontVariantNumeric: "tabular-nums",
-                  lineHeight: 1,
-                }}
-                suppressHydrationWarning
-              >
-                {String(block.value).padStart(2, "0")}
-              </span>
-              <span className="font-display text-[10px] uppercase tracking-[0.3em] text-foreground/20">
-                {block.label}
-              </span>
+    <div ref={wrapperRef} className="relative" style={{ height: "300vh" }}>
+      <section
+        className="sticky top-0 w-full overflow-hidden bg-[#F5F5F0]"
+        style={{ height: "100vh" }}
+      >
+        {/* Big countdown behind the car */}
+        <div className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center gap-2 lg:gap-4">
+          {countdownBlocks.map((block, i) => (
+            <div key={block.label} className="flex items-baseline">
+              <div className="flex flex-col items-center">
+                <span
+                  className="font-display font-black tabular-nums text-foreground/[0.07]"
+                  style={{
+                    fontSize: "clamp(6rem, 14vw, 16rem)",
+                    fontVariantNumeric: "tabular-nums",
+                    lineHeight: 1,
+                  }}
+                  suppressHydrationWarning
+                >
+                  {String(block.value).padStart(2, "0")}
+                </span>
+                <span className="font-display text-[10px] uppercase tracking-[0.3em] text-foreground/20">
+                  {block.label}
+                </span>
+              </div>
+              {i < countdownBlocks.length - 1 && (
+                <span
+                  className="font-display font-black text-foreground/[0.05]"
+                  style={{ fontSize: "clamp(4rem, 10vw, 12rem)", lineHeight: 1 }}
+                >
+                  :
+                </span>
+              )}
             </div>
-            {i < countdownBlocks.length - 1 && (
-              <span
-                className="font-display font-black text-foreground/[0.05]"
-                style={{ fontSize: "clamp(4rem, 10vw, 12rem)", lineHeight: 1 }}
-              >
-                :
-              </span>
-            )}
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
 
-      {/* 3D Canvas — car drives across */}
-      <div className="relative z-10 h-[70vh] min-h-[450px] w-full">
-        <Canvas
-          camera={{ position: [0, 0.8, 4], fov: 40 }}
-          gl={{ alpha: true }}
-          style={{ background: "transparent" }}
+        {/* 3D Canvas — car drives in and rotates */}
+        <div
+          className="relative z-10 w-full"
+          style={{
+            height: "100vh",
+            opacity: carVisible ? 1 : 0,
+          }}
         >
-          <ambientLight intensity={0.8} />
-          <directionalLight position={[5, 5, 5]} intensity={1.5} />
-          <directionalLight position={[-3, 2, -2]} intensity={0.5} />
-          <directionalLight position={[0, -1, 3]} intensity={0.3} />
-          <Suspense fallback={null}>
-            <CarModel scrollProgress={scrollProgress} />
-          </Suspense>
-        </Canvas>
-      </div>
-
-    </section>
+          <Canvas
+            camera={{ position: [0, 0.8, 4], fov: 40 }}
+            gl={{ alpha: true }}
+            style={{ background: "transparent" }}
+          >
+            <ambientLight intensity={0.8} />
+            <directionalLight position={[5, 5, 5]} intensity={1.5} />
+            <directionalLight position={[-3, 2, -2]} intensity={0.5} />
+            <directionalLight position={[0, -1, 3]} intensity={0.3} />
+            <Suspense fallback={null}>
+              <CarModel scrollProgress={scrollProgress} />
+            </Suspense>
+          </Canvas>
+        </div>
+      </section>
+    </div>
   );
 }

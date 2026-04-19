@@ -126,9 +126,15 @@ function animateElement(
 }
 
 /* ── Roll text on hover ── */
-function RollText({ text, className, style }: { text: string; className?: string; style?: React.CSSProperties }) {
-  // "idle" = no animation yet, "up" = rolling up, "down" = rolling back
+function RollText({ text, className, style, rolling }: { text: string; className?: string; style?: React.CSSProperties; rolling: boolean }) {
   const [state, setState] = useState<"idle" | "up" | "down">("idle");
+  const prevRolling = useRef(false);
+
+  useEffect(() => {
+    if (rolling && !prevRolling.current) setState("up");
+    if (!rolling && prevRolling.current) setState("down");
+    prevRolling.current = rolling;
+  }, [rolling]);
 
   return (
     <span
@@ -140,16 +146,14 @@ function RollText({ text, className, style }: { text: string; className?: string
         verticalAlign: "bottom",
         position: "relative",
       }}
-      onMouseEnter={() => setState("up")}
-      onMouseLeave={() => { if (state === "up") setState("down"); }}
     >
       <span
         style={{
           display: "block",
           position: "relative",
           animationName: state === "up" ? "rollUp" : state === "down" ? "rollDown" : "none",
-          animationDuration: "0.35s",
-          animationTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
+          animationDuration: "0.22s",
+          animationTimingFunction: "cubic-bezier(0.4, 0, 0.2, 1)",
           animationFillMode: "forwards",
         }}
         onAnimationEnd={() => { if (state === "down") setState("idle"); }}
@@ -169,6 +173,129 @@ function RollText({ text, className, style }: { text: string; className?: string
         </span>
       </span>
     </span>
+  );
+}
+
+function ResultRow({ result }: { result: typeof results[number] }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <div
+      data-row
+      className="relative overflow-hidden"
+      style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}
+    >
+      {/* Gold reveal bar */}
+      <div
+        data-bar
+        className="absolute inset-0 z-10 pointer-events-none"
+        style={{
+          transform: "scaleX(0)",
+          transformOrigin: "left",
+          background: "linear-gradient(90deg, #C8A24E, #D4B05A)",
+        }}
+      />
+
+      {/* Desktop row */}
+      <div
+        data-content
+        className="hidden md:grid items-center px-6 lg:px-14 cursor-default"
+        style={{
+          gridTemplateColumns: "1fr 220px 140px 85px",
+          minHeight: "clamp(66px, 9vw, 83px)",
+          background: hovered ? "linear-gradient(90deg, #C8A24E, #D4B05A)" : "transparent",
+        }}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <RollText
+          text={result.event}
+          rolling={hovered}
+          className="font-display font-black uppercase tracking-wide"
+          style={{
+            fontSize: "clamp(1.15rem, 2.6vw, 1.8rem)",
+            fontStyle: "italic",
+            letterSpacing: "0.02em",
+            color: hovered ? "#0e0e0e" : "#ffffff",
+          }}
+        />
+
+        <span
+          className="font-display font-medium uppercase"
+          style={{
+            fontSize: "0.68rem",
+            letterSpacing: "0.15em",
+            color: hovered ? "rgba(14,14,14,0.6)" : "rgba(255,255,255,0.7)",
+          }}
+        >
+          {result.competition}
+        </span>
+
+        <span
+          className="font-display font-black text-right"
+          style={{
+            fontSize: "clamp(1.3rem, 2.5vw, 2rem)",
+            fontStyle: "italic",
+            color: hovered ? "#0e0e0e" : "#C8A24E",
+          }}
+        >
+          {result.result.replace(/(\d+)(ST|ND|RD|TH)/i, "$1")}
+          <span
+            className="font-display font-bold uppercase"
+            style={{
+              fontSize: "0.5em",
+              verticalAlign: "super",
+              lineHeight: 1,
+            }}
+          >
+            {result.result.match(/(ST|ND|RD|TH)/i)?.[0] ?? ""}
+          </span>
+        </span>
+
+        <span
+          className="font-display font-medium text-right tabular-nums"
+          style={{
+            fontSize: "0.8rem",
+            color: hovered ? "rgba(14,14,14,0.5)" : "rgba(255,255,255,0.5)",
+          }}
+        >
+          {result.year}
+        </span>
+      </div>
+
+      {/* Mobile row */}
+      <div
+        data-content
+        className="flex md:hidden items-center justify-between px-5 py-5"
+      >
+        <div className="flex-1 min-w-0">
+          <h3
+            className="font-display font-black uppercase text-white tracking-wide truncate"
+            style={{ fontSize: "0.95rem", fontStyle: "italic" }}
+          >
+            {result.event}
+          </h3>
+          <p
+            className="mt-1 font-display font-medium uppercase text-white/50"
+            style={{ fontSize: "0.6rem", letterSpacing: "0.15em" }}
+          >
+            {result.competition} · {result.year}
+          </p>
+        </div>
+        <span
+          className="ml-4 font-display font-black flex-shrink-0"
+          style={{ fontSize: "1.25rem", fontStyle: "italic", color: "#C8A24E" }}
+        >
+          {result.result.replace(/(\d+)(ST|ND|RD|TH)/i, "$1")}
+          <span
+            className="font-display font-bold uppercase"
+            style={{ fontSize: "0.5em", verticalAlign: "super", lineHeight: 1 }}
+          >
+            {result.result.match(/(ST|ND|RD|TH)/i)?.[0] ?? ""}
+          </span>
+        </span>
+      </div>
+    </div>
   );
 }
 
@@ -277,130 +404,7 @@ export function Results() {
       {/* ── Result rows ── */}
       <div className="flex flex-col">
         {results.map((result) => (
-          <div
-            key={`${result.competition}-${result.event}-${result.year}`}
-            data-row
-            className="relative overflow-hidden"
-            style={{ borderBottom: "1px solid rgba(255,255,255,0.04)" }}
-          >
-            {/* Gold reveal bar */}
-            <div
-              data-bar
-              className="absolute inset-0 z-10 pointer-events-none"
-              style={{
-                transform: "scaleX(0)",
-                transformOrigin: "left",
-                background: "linear-gradient(90deg, #C8A24E, #D4B05A)",
-              }}
-            />
-
-            {/* Desktop row */}
-            <div
-              data-content
-              className="hidden md:grid items-center px-6 lg:px-14 group/row cursor-default"
-              style={{
-                gridTemplateColumns: "1fr 220px 140px 85px",
-                minHeight: "clamp(66px, 9vw, 83px)",
-                background: "transparent",
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget;
-                el.style.background = "linear-gradient(90deg, #C8A24E, #D4B05A)";
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.background = "transparent";
-              }}
-            >
-              <RollText
-                text={result.event}
-                className="font-display font-black uppercase text-white tracking-wide group-hover/row:text-[#0e0e0e]"
-                style={{
-                  fontSize: "clamp(1.15rem, 2.6vw, 1.8rem)",
-                  fontStyle: "italic",
-                  letterSpacing: "0.02em",
-                }}
-              />
-
-              <span
-                className="font-display font-medium uppercase text-white/70 group-hover/row:text-[#0e0e0e]/60"
-                style={{ fontSize: "0.68rem", letterSpacing: "0.15em" }}
-              >
-                {result.competition}
-              </span>
-
-              <span
-                className="font-display font-black text-right group-hover/row:text-[#0e0e0e]"
-                style={{
-                  fontSize: "clamp(1.3rem, 2.5vw, 2rem)",
-                  fontStyle: "italic",
-                  color: "#C8A24E",
-                }}
-              >
-                {result.result.replace(/(\d+)(ST|ND|RD|TH)/i, "$1")}
-                <span
-                  className="font-display font-bold uppercase"
-                  style={{
-                    fontSize: "0.5em",
-                    verticalAlign: "super",
-                    lineHeight: 1,
-                  }}
-                >
-                  {result.result.match(/(ST|ND|RD|TH)/i)?.[0] ?? ""}
-                </span>
-              </span>
-
-              <span
-                className="font-display font-medium text-white/50 text-right tabular-nums group-hover/row:text-[#0e0e0e]/50"
-                style={{ fontSize: "0.8rem" }}
-              >
-                {result.year}
-              </span>
-            </div>
-
-            {/* Mobile row */}
-            <div
-              data-content
-              className="flex md:hidden items-center justify-between px-5 py-5"
-            >
-              <div className="flex-1 min-w-0">
-                <h3
-                  className="font-display font-black uppercase text-white tracking-wide truncate"
-                  style={{
-                    fontSize: "0.95rem",
-                    fontStyle: "italic",
-                  }}
-                >
-                  {result.event}
-                </h3>
-                <p
-                  className="mt-1 font-display font-medium uppercase text-white/50"
-                  style={{ fontSize: "0.6rem", letterSpacing: "0.15em" }}
-                >
-                  {result.competition} · {result.year}
-                </p>
-              </div>
-              <span
-                className="ml-4 font-display font-black flex-shrink-0"
-                style={{
-                  fontSize: "1.25rem",
-                  fontStyle: "italic",
-                  color: "#C8A24E",
-                }}
-              >
-                {result.result.replace(/(\d+)(ST|ND|RD|TH)/i, "$1")}
-                <span
-                  className="font-display font-bold uppercase"
-                  style={{
-                    fontSize: "0.5em",
-                    verticalAlign: "super",
-                    lineHeight: 1,
-                  }}
-                >
-                  {result.result.match(/(ST|ND|RD|TH)/i)?.[0] ?? ""}
-                </span>
-              </span>
-            </div>
-          </div>
+          <ResultRow key={`${result.competition}-${result.event}-${result.year}`} result={result} />
         ))}
       </div>
 

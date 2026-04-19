@@ -191,11 +191,8 @@ export function Results() {
       {/* Section title — constrained width */}
       <div className="mx-auto max-w-6xl px-6 pt-20 pb-10 md:pt-28 md:pb-14">
         <div data-header>
-          <p className="font-display text-[11px] uppercase tracking-[0.3em] text-gold">
-            Spartan Racing
-          </p>
           <h2
-            className="mt-2 font-display font-bold uppercase leading-none tracking-tight text-white"
+            className="font-display font-bold uppercase leading-none tracking-tight text-white"
             style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}
           >
             Track Record

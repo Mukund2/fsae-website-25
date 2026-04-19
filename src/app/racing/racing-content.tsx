@@ -282,7 +282,7 @@ export function RacingContent() {
         <div className="absolute inset-0 bg-foreground/50" />
         <div className="absolute inset-0 flex items-center justify-center">
           <div className="text-center">
-            <p className="sr-reveal font-display text-xs uppercase tracking-[0.3em] text-white/70" data-delay="0.1">
+            <p className="sr-reveal font-display text-xs uppercase tracking-[0.3em] text-foreground/70" data-delay="0.1">
               From static to
             </p>
             <p className="sr-reveal font-display text-5xl uppercase tracking-tight text-white md:text-7xl" data-delay="0.2">
@@ -372,12 +372,14 @@ export function RacingContent() {
       {/* ── Results section ─────────────────────────────────── */}
       <section className="py-20 md:py-32">
         <div className="mx-auto max-w-7xl px-6">
-          <span className="sr-slide-left font-display text-xs uppercase tracking-[0.25em] text-gold">
+          <span
+            className="sr-slide-left text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
+            style={{ fontFamily: "var(--font-script), serif" }}
+          >
             Results
           </span>
-          <h2 className="sr-slide-left mt-2 font-display text-3xl uppercase tracking-tight md:text-4xl" data-delay="0.1">
-            <span className="font-bold">Our</span>{" "}
-            <span className="font-light text-foreground/40">Record</span>
+          <h2 className="sr-slide-left mt-2 font-display text-3xl font-bold uppercase italic tracking-tight md:text-4xl" data-delay="0.1">
+            Our Record
           </h2>
 
           <div className="mt-12 divide-y divide-border">

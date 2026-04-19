@@ -74,9 +74,9 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Sponsor logos — darken to black preserving transparency */
+/* Sponsor logos — darken preserving transparency */
 .dark-logo {
-  filter: grayscale(100%) contrast(1000%) brightness(0.3);
+  filter: grayscale(100%) contrast(200%) brightness(0.4);
 }
 
 /* Selection color */

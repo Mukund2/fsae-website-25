@@ -62,13 +62,17 @@ export default function ContactPage() {
         />
         <div className="absolute inset-0 bg-black/65" />
         <div className="relative z-10 text-center px-6 pt-24 pb-16">
+          <span
+            className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold hero-fade-in"
+            style={{ fontFamily: "var(--font-script), serif" }}
+          >
+            Get in Touch
+          </span>
           <h1
-            className="mt-3 font-display text-5xl uppercase tracking-tight text-white md:text-7xl hero-fade-in"
+            className="mt-3 font-display text-5xl font-bold uppercase italic tracking-tight text-white md:text-7xl hero-fade-in"
             style={{ animationDelay: "0.1s" }}
           >
-            <span className="font-bold">Contact</span>
-            <br />
-            <span className="font-light text-white/40">Us</span>
+            Contact Us
           </h1>
         </div>
       </section>
@@ -181,10 +185,14 @@ export default function ContactPage() {
       {/* Bottom CTA */}
       <section className="bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-3xl px-6 text-center">
-          <h2 className="font-display text-3xl uppercase tracking-tight md:text-4xl hero-fade-in" style={{ animationDelay: "0.8s" }}>
-            <span className="font-bold">Want to</span>
-            <br />
-            <span className="font-light text-foreground/40">Join?</span>
+          <span
+            className="text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold hero-fade-in"
+            style={{ fontFamily: "var(--font-script), serif", animationDelay: "0.7s" }}
+          >
+            Ready?
+          </span>
+          <h2 className="mt-2 font-display text-3xl font-bold uppercase italic tracking-tight md:text-4xl hero-fade-in" style={{ animationDelay: "0.8s" }}>
+            Want to Join?
           </h2>
           <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-muted hero-fade-in" style={{ animationDelay: "0.9s" }}>
             We&apos;re always looking for passionate engineers, designers, and

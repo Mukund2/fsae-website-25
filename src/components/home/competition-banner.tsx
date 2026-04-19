@@ -42,10 +42,10 @@ export function CompetitionBanner() {
             <h2 className="font-display font-bold uppercase leading-[0.92] tracking-tight text-white" style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}>
               FSAE Michigan 2026
             </h2>
-            <p className="mt-2 font-display text-[clamp(1.2rem,3vw,2rem)] uppercase leading-[0.95] tracking-tight text-white/40">
+            <p className="mt-2 font-display text-[clamp(1.2rem,3vw,2rem)] uppercase leading-[0.95] tracking-tight text-foreground/40">
               14–17 May 2026
             </p>
-            <p className="mt-4 font-display text-[12px] uppercase tracking-[0.2em] text-white/30">
+            <p className="mt-4 font-display text-[12px] uppercase tracking-[0.2em] text-foreground/30">
               Michigan International Speedway, Brooklyn, MI
             </p>
           </div>

@@ -82,7 +82,7 @@ function DownloadIcon({ className = "" }: { className?: string }) {
 const TIERS = [
   { key: "partner", label: "Partner", price: "Under $2,500", color: "text-muted" },
   { key: "bronze", label: "Bronze", price: "$2,500+", color: "text-amber-600" },
-  { key: "silver", label: "Silver", price: "$5,000+", color: "text-gray-400" },
+  { key: "silver", label: "Silver", price: "$5,000+", color: "text-foreground/50" },
   { key: "gold", label: "Gold", price: "$10,000+", color: "text-gold" },
   { key: "platinum", label: "Platinum", price: "$20,000+", color: "text-blue-400" },
   { key: "title", label: "Title", price: "$30,000+", color: "text-gold" },
@@ -259,14 +259,19 @@ export function BecomeASponsorContent() {
       <section className="relative flex min-h-[50vh] items-center overflow-hidden bg-surface pt-32 pb-16">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,85,162,0.06)_0%,_transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-6">
+          <span
+            data-reveal
+            className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
+            style={{ fontFamily: "var(--font-script), serif" }}
+          >
+            Support the Team
+          </span>
           <h1
             data-reveal
             data-reveal-delay="100"
-            className="mt-3 font-display text-5xl uppercase tracking-tight md:text-7xl"
+            className="mt-3 font-display text-5xl font-bold uppercase italic tracking-tight md:text-7xl"
           >
-            <span className="font-bold">Become a</span>
-            <br />
-            <span className="font-light text-foreground/40">Sponsor</span>
+            Become a Sponsor
           </h1>
           <p
             data-reveal
@@ -438,13 +443,18 @@ export function BecomeASponsorContent() {
       <section id="packet" className="bg-surface py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-6">
           <div className="text-center">
+            <span
+              data-reveal
+              className="text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
+              style={{ fontFamily: "var(--font-script), serif" }}
+            >
+              Browse
+            </span>
             <h2
               data-reveal
-              className="font-display text-3xl uppercase tracking-tight md:text-5xl"
+              className="mt-2 font-display text-3xl font-bold uppercase italic tracking-tight md:text-5xl"
             >
-              <span className="font-bold">Sponsor</span>
-              <br />
-              <span className="font-light text-foreground/40">Packet</span>
+              Sponsor Packet
             </h2>
             <p
               data-reveal
@@ -464,13 +474,18 @@ export function BecomeASponsorContent() {
       {/* Contact CTA */}
       <section className="py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-6 text-center">
+          <span
+            data-reveal
+            className="text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
+            style={{ fontFamily: "var(--font-script), serif" }}
+          >
+            Let&apos;s Go
+          </span>
           <h2
             data-reveal
-            className="font-display text-3xl uppercase tracking-tight md:text-5xl"
+            className="mt-2 font-display text-3xl font-bold uppercase italic tracking-tight md:text-5xl"
           >
-            <span className="font-bold">Ready to</span>
-            <br />
-            <span className="font-light text-foreground/40">Partner Up?</span>
+            Ready to Partner Up?
           </h2>
           <p
             data-reveal

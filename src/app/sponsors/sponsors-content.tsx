@@ -223,14 +223,19 @@ export function SponsorsContent() {
         <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-12 px-6 md:grid-cols-2">
           {/* Left — Our Sponsors */}
           <div>
+            <span
+              data-reveal
+              className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
+              style={{ fontFamily: "var(--font-script), serif" }}
+            >
+              Thank You
+            </span>
             <h1
               data-reveal
               data-reveal-delay="100"
-              className="mt-3 font-display text-5xl uppercase tracking-tight md:text-7xl"
+              className="mt-3 font-display text-5xl font-bold uppercase italic tracking-tight md:text-7xl"
             >
-              <span className="font-bold">Our</span>
-              <br />
-              <span className="font-light text-foreground/40">Sponsors</span>
+              Our Sponsors
             </h1>
             <p
               data-reveal
@@ -248,10 +253,8 @@ export function SponsorsContent() {
             data-reveal-delay="300"
             className="flex flex-col items-start gap-5 border-l-0 pl-0 md:border-l md:border-gold/30 md:pl-12"
           >
-            <h2 className="font-display text-3xl uppercase tracking-tight md:text-4xl">
-              <span className="font-bold">How to Become</span>
-              <br />
-              <span className="font-light text-foreground/40">a Sponsor</span>
+            <h2 className="font-display text-3xl font-bold uppercase italic tracking-tight md:text-4xl">
+              How to Become a Sponsor
             </h2>
             <p className="max-w-md text-base leading-relaxed text-muted">
               Partner with the next generation of engineers. View our
@@ -279,13 +282,18 @@ export function SponsorsContent() {
       {/* Become a Sponsor CTA */}
       <section className="bg-surface py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-6 text-center">
+          <span
+            data-reveal
+            className="text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
+            style={{ fontFamily: "var(--font-script), serif" }}
+          >
+            Partner With Us
+          </span>
           <h2
             data-reveal
-            className="font-display text-3xl uppercase tracking-tight md:text-5xl"
+            className="mt-2 font-display text-3xl font-bold uppercase italic tracking-tight md:text-5xl"
           >
-            <span className="font-bold">Become a</span>
-            <br />
-            <span className="font-light text-foreground/40">Sponsor</span>
+            Become a Sponsor
           </h2>
           <p
             data-reveal

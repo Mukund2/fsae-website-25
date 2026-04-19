@@ -17,13 +17,17 @@ export default function TeamPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,85,162,0.06)_0%,_transparent_60%)]" />
 
         <div className="relative mx-auto max-w-7xl px-6">
+          <span
+            className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold hero-fade-in"
+            style={{ fontFamily: "var(--font-script), serif" }}
+          >
+            Meet the Team
+          </span>
           <h1
-            className="mt-3 font-display text-5xl uppercase tracking-tight md:text-7xl hero-fade-in"
+            className="mt-3 font-display text-5xl font-bold uppercase italic tracking-tight md:text-7xl hero-fade-in"
             style={{ animationDelay: "0.1s" }}
           >
-            <span className="font-bold">Our</span>
-            <br />
-            <span className="font-light text-foreground/40">Leads</span>
+            Our Leads
           </h1>
         </div>
       </section>

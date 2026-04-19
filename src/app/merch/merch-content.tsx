@@ -161,14 +161,19 @@ export function MerchContent({ products }: { products: MerchProduct[] }) {
       <section className="relative flex min-h-[50vh] items-center overflow-hidden bg-surface pt-32 pb-16">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,85,162,0.06)_0%,_transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-6">
+          <span
+            data-reveal
+            className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
+            style={{ fontFamily: "var(--font-script), serif" }}
+          >
+            Rep the Team
+          </span>
           <h1
             data-reveal
             data-reveal-delay="100"
-            className="mt-3 font-display text-5xl uppercase tracking-tight md:text-7xl"
+            className="mt-3 font-display text-5xl font-bold uppercase italic tracking-tight md:text-7xl"
           >
-            <span className="font-bold">Team</span>
-            <br />
-            <span className="font-light text-foreground/40">Merch</span>
+            Team Merch
           </h1>
           <p
             data-reveal
@@ -208,13 +213,18 @@ export function MerchContent({ products }: { products: MerchProduct[] }) {
       {/* Contact CTA */}
       <section className="bg-surface py-24 md:py-32">
         <div className="mx-auto max-w-3xl px-6 text-center">
+          <span
+            data-reveal
+            className="text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
+            style={{ fontFamily: "var(--font-script), serif" }}
+          >
+            Interested?
+          </span>
           <h2
             data-reveal
-            className="font-display text-3xl uppercase tracking-tight md:text-5xl"
+            className="mt-2 font-display text-3xl font-bold uppercase italic tracking-tight md:text-5xl"
           >
-            <span className="font-bold">Want to</span>
-            <br />
-            <span className="font-light text-foreground/40">Order?</span>
+            Want to Order?
           </h2>
           <p
             data-reveal

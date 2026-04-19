@@ -36,15 +36,18 @@ function FAQItem({
     >
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="flex w-full cursor-pointer items-center justify-between p-6 text-left font-medium transition-colors hover:text-gold"
+        className="flex w-full cursor-pointer items-center justify-between p-6 text-left font-medium hover:text-gold"
       >
         <span className={isOpen ? "text-gold" : ""}>{question}</span>
         <span
-          className="ml-4 flex-shrink-0 transition-transform duration-300 ease-out"
-          style={{ transform: isOpen ? "rotate(180deg)" : "rotate(0deg)" }}
+          className="ml-4 flex-shrink-0"
+          style={{
+            transform: isOpen ? "rotate(180deg)" : "rotate(0deg)",
+            animation: isOpen ? "faqChevronOpen 0.3s ease-out forwards" : "faqChevronClose 0.3s ease-out forwards",
+          }}
         >
           <ChevronDown
-            className={`h-5 w-5 transition-colors duration-300 ${
+            className={`h-5 w-5 ${
               isOpen ? "text-gold" : "text-muted"
             }`}
           />
@@ -54,8 +57,8 @@ function FAQItem({
         style={{
           height: isOpen ? contentHeight : 0,
           opacity: isOpen ? 1 : 0,
-          transition: "height 0.3s ease-out, opacity 0.3s ease-out",
           overflow: "hidden",
+          animation: isOpen ? "faqExpand 0.3s ease-out forwards" : "faqCollapse 0.3s ease-out forwards",
         }}
       >
         <div ref={contentRef}>
@@ -66,6 +69,34 @@ function FAQItem({
       </div>
     </div>
   );
+}
+
+/* Inject keyframe animations for FAQ accordion (no CSS transitions) */
+if (typeof document !== "undefined") {
+  const id = "faq-keyframes";
+  if (!document.getElementById(id)) {
+    const style = document.createElement("style");
+    style.id = id;
+    style.textContent = `
+      @keyframes faqChevronOpen {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(180deg); }
+      }
+      @keyframes faqChevronClose {
+        from { transform: rotate(180deg); }
+        to { transform: rotate(0deg); }
+      }
+      @keyframes faqExpand {
+        from { height: 0; opacity: 0; }
+        to { opacity: 1; }
+      }
+      @keyframes faqCollapse {
+        from { opacity: 1; }
+        to { height: 0; opacity: 0; }
+      }
+    `;
+    document.head.appendChild(style);
+  }
 }
 
 export function FAQContent() {
@@ -99,9 +130,16 @@ export function FAQContent() {
         />
         <div className="absolute inset-0 bg-background/80" />
         <div className="relative mx-auto max-w-7xl px-6">
+          <span
+            data-anim="up"
+            className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
+            style={{ fontFamily: "var(--font-script), serif" }}
+          >
+            Got Questions?
+          </span>
           <h1
             data-anim="up"
-            className="font-display text-5xl uppercase tracking-tight md:text-7xl"
+            className="mt-3 font-display text-5xl font-bold uppercase italic tracking-tight md:text-7xl"
           >
             FAQ
           </h1>
@@ -109,7 +147,7 @@ export function FAQContent() {
             data-anim="up"
             className="mt-4 max-w-2xl text-lg text-muted"
           >
-            Got questions? We&apos;ve got answers.
+            We&apos;ve got answers.
           </p>
         </div>
         </section>

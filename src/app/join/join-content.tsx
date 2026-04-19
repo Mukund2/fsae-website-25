@@ -118,10 +118,14 @@ export function JoinContent() {
       {/* Hero */}
       <section className="flex min-h-[50vh] items-center bg-surface pt-32 pb-16">
         <div className="mx-auto max-w-7xl px-6">
-          <h1 className="sr-reveal font-display text-5xl uppercase tracking-tight md:text-7xl" data-delay="0.1">
-            <span className="font-bold">Join</span>
-            <br />
-            <span className="font-light text-foreground/40">Us</span>
+          <span
+            className="sr-reveal text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
+            style={{ fontFamily: "var(--font-script), serif" }}
+          >
+            Be Part of Something
+          </span>
+          <h1 className="sr-reveal mt-3 font-display text-5xl font-bold uppercase italic tracking-tight md:text-7xl" data-delay="0.1">
+            Join Us
           </h1>
           <p className="sr-reveal mt-4 max-w-2xl text-lg text-muted" data-delay="0.2">
             Be part of something bigger. Build a race car. Launch your career.
@@ -162,10 +166,16 @@ export function JoinContent() {
 
       {/* Why Join */}
       <Section>
-        <h2 className="sr-slide-left font-display text-3xl uppercase tracking-tight md:text-4xl">
-          <span className="font-bold">Why</span>{" "}
-          <span className="font-bold text-gold">Spartan</span>{" "}
-          <span className="font-bold text-blue">Racing?</span>
+        <span
+          className="sr-slide-left text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
+          style={{ fontFamily: "var(--font-script), serif" }}
+        >
+          Why Us?
+        </span>
+        <h2 className="sr-slide-left mt-2 font-display text-3xl font-bold uppercase italic tracking-tight md:text-4xl">
+          <span>Why </span>
+          <span className="text-gold">Spartan</span>{" "}
+          <span className="text-blue">Racing?</span>
         </h2>
         <StaggerChildren
           className="mt-12 grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
@@ -196,10 +206,14 @@ export function JoinContent() {
 
       {/* Apply CTA */}
       <Section className="bg-surface text-center">
-        <h2 className="sr-slide-left font-display text-3xl uppercase tracking-tight md:text-5xl">
-          <span className="font-bold">Ready to</span>
-          <br />
-          <span className="font-light text-foreground/40">Apply?</span>
+        <span
+          className="sr-slide-left text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
+          style={{ fontFamily: "var(--font-script), serif" }}
+        >
+          Take the Next Step
+        </span>
+        <h2 className="sr-slide-left mt-2 font-display text-3xl font-bold uppercase italic tracking-tight md:text-5xl">
+          Ready to Apply?
         </h2>
         <p className="sr-reveal mx-auto mt-4 max-w-xl text-muted" data-delay="0.2">
           Fill out our interest form and we&apos;ll reach out with next steps. Recruitment is ongoing. Apply anytime.
@@ -223,9 +237,14 @@ export function JoinContent() {
 
       {/* Contact */}
       <Section>
-        <h2 className="sr-slide-left font-display text-3xl uppercase tracking-tight md:text-4xl">
-          <span className="font-bold">Get in</span>{" "}
-          <span className="font-light text-foreground/40">Touch</span>
+        <span
+          className="sr-slide-left text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
+          style={{ fontFamily: "var(--font-script), serif" }}
+        >
+          Reach Out
+        </span>
+        <h2 className="sr-slide-left mt-2 font-display text-3xl font-bold uppercase italic tracking-tight md:text-4xl">
+          Get in Touch
         </h2>
         <div className="mt-8 grid gap-8 sm:grid-cols-2">
           <div className="sr-reveal">

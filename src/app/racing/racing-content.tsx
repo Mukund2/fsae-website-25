@@ -147,13 +147,14 @@ export function RacingContent() {
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
 
         <div className="relative mx-auto max-w-7xl px-6">
-          <span className="sr-reveal mb-4 inline-block font-display text-xs uppercase tracking-[0.25em] text-gold">
+          <span
+            className="sr-reveal mb-4 inline-block text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
+            style={{ fontFamily: "var(--font-script), serif" }}
+          >
             Formula SAE
           </span>
-          <h1 className="sr-reveal font-display text-5xl uppercase tracking-tight md:text-7xl lg:text-8xl" data-delay="0.1">
-            <span className="font-bold">The</span>
-            <br />
-            <span className="font-light text-foreground/40">Competition</span>
+          <h1 className="sr-reveal font-display text-5xl font-bold uppercase italic tracking-tight md:text-7xl lg:text-8xl" data-delay="0.1">
+            The Competition
           </h1>
           <p className="sr-reveal mt-4 max-w-2xl text-lg text-muted md:text-xl" data-delay="0.25">
             Designing, building, and racing formula-style cars against the best
@@ -166,13 +167,14 @@ export function RacingContent() {
       <section className="bg-background mx-auto max-w-7xl px-6 py-20 md:py-32">
         <div className="grid items-center gap-12 md:grid-cols-2">
           <div className="flex flex-col gap-6">
-            <span className="sr-slide-left font-display text-xs uppercase tracking-[0.25em] text-gold">
+            <span
+              className="sr-slide-left text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
+              style={{ fontFamily: "var(--font-script), serif" }}
+            >
               The Competition
             </span>
-            <h2 className="sr-slide-left font-display text-3xl uppercase tracking-tight md:text-4xl" data-delay="0.1">
-              <span className="font-bold">What is</span>
-              <br />
-              <span className="font-light text-foreground/40">Formula SAE?</span>
+            <h2 className="sr-slide-left font-display text-3xl font-bold uppercase italic tracking-tight md:text-4xl" data-delay="0.1">
+              What is Formula SAE?
             </h2>
             <p className="sr-reveal leading-relaxed text-muted" data-delay="0.2">
               Formula SAE is the world&apos;s premier student engineering
@@ -203,7 +205,10 @@ export function RacingContent() {
       {/* ── STATIC EVENTS heading ──────────────────────────── */}
       <section className="mx-auto max-w-7xl px-6 pb-8">
         <div className="flex items-center gap-6">
-          <span className="sr-slide-left font-display text-xs uppercase tracking-[0.25em] text-gold">
+          <span
+            className="sr-slide-left text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
+            style={{ fontFamily: "var(--font-script), serif" }}
+          >
             Static Events
           </span>
           <div className="sr-reveal h-px flex-1 bg-border" data-delay="0.1" />
@@ -290,7 +295,10 @@ export function RacingContent() {
       {/* ── DYNAMIC EVENTS heading ─────────────────────────── */}
       <section className="mx-auto max-w-7xl px-6 pb-8 pt-20 md:pt-32">
         <div className="flex items-center gap-6">
-          <span className="sr-slide-left font-display text-xs uppercase tracking-[0.25em] text-gold">
+          <span
+            className="sr-slide-left text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
+            style={{ fontFamily: "var(--font-script), serif" }}
+          >
             Dynamic Events
           </span>
           <div className="sr-reveal h-px flex-1 bg-border" data-delay="0.1" />

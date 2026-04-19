@@ -123,77 +123,17 @@ const subteamLeads: Lead[] = [
   },
 ];
 
-type CardVariant = "medium" | "horizontal";
-
 function LeadCard({
   name,
   role,
   description,
   linkedin,
   image,
-  variant = "medium",
-}: Lead & { variant?: CardVariant }) {
+}: Lead) {
   const Tag = linkedin ? "a" : "div";
   const linkProps = linkedin
     ? { href: linkedin, target: "_blank" as const, rel: "noopener noreferrer" }
     : {};
-
-  if (variant === "horizontal") {
-    return (
-      <Tag {...linkProps} className="lead-card group relative block overflow-hidden border border-border bg-elevated cursor-pointer">
-        <div className="flex h-full">
-          {/* Photo area - left side */}
-          <div className="relative w-1/2 min-h-[220px] bg-surface">
-            {image ? (
-              <Image
-                src={image}
-                alt={name}
-                fill
-                sizes="(max-width: 640px) 100vw, 50vw"
-                className="object-cover"
-              />
-            ) : (
-              <div className="absolute inset-0 flex items-center justify-center bg-surface">
-                <span className="font-display text-4xl uppercase tracking-tight text-muted/40">
-                  {getInitials(name)}
-                </span>
-              </div>
-            )}
-          </div>
-
-          {/* Info area - right side */}
-          <div className="flex w-1/2 flex-col justify-end p-5 md:p-6">
-            <div>
-              <p className="font-display text-lg uppercase tracking-tight md:text-xl">
-                {name}
-              </p>
-              <p className="mt-0.5 font-display text-xs text-muted">{role}</p>
-            </div>
-          </div>
-
-          {/* Hover description overlay */}
-          {description && (
-            <div className="lead-card-desc absolute inset-0 flex items-center bg-foreground/90 p-5 md:p-6 opacity-0 pointer-events-none">
-              <div className="overflow-y-auto max-h-full">
-                <p className="font-display text-sm uppercase tracking-tight text-gold">
-                  {name}
-                </p>
-                <p className="mt-1 font-display text-[10px] uppercase tracking-widest text-white/50">
-                  {role}
-                </p>
-                <p className="mt-3 text-[11px] leading-relaxed text-white/80">
-                  {description}
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Gold accent line at bottom */}
-        <div className="lead-card-accent absolute bottom-0 left-0 h-[2px] w-full origin-left scale-x-0 bg-gold" />
-      </Tag>
-    );
-  }
 
   return (
     <Tag {...linkProps} className="lead-card group relative block overflow-hidden border border-border bg-elevated cursor-pointer">
@@ -204,7 +144,7 @@ function LeadCard({
             src={image}
             alt={name}
             fill
-            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
             className="object-cover"
           />
         ) : (
@@ -288,10 +228,10 @@ function ExecBoard() {
 
   return (
     <div ref={ref} className="mt-8">
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {executiveBoard.map((member, i) => (
           <div key={`exec-${member.name}`} data-index={i} className="lead-card-wrapper">
-            <LeadCard {...member} variant="medium" />
+            <LeadCard {...member} />
           </div>
         ))}
       </div>
@@ -302,72 +242,15 @@ function ExecBoard() {
 function SubteamLeadsGrid() {
   const ref = useScrollReveal();
 
-  // Row 1: 3 vertical cards (indices 0-2)
-  const row1 = subteamLeads.slice(0, 3);
-  // Row 2: 1 horizontal card spanning 2 cols + 1 vertical card (indices 3-4)
-  const row2Horizontal = subteamLeads[3];
-  const row2Vertical = subteamLeads[4];
-  // Row 3: 3 vertical cards (indices 5-7)
-  const row3 = subteamLeads.slice(5, 8);
-  // Row 4: 1 vertical card + 1 horizontal card spanning 2 cols (index 8 - mirrored layout)
-  const row4Vertical = subteamLeads[8];
-
-  let idx = 0;
-
   return (
-    <div ref={ref} className="mt-8 space-y-4">
-      {/* Row 1: 3 vertical cards */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {row1.map((member) => {
-          const i = idx++;
-          return (
-            <div key={`sub-${member.name}-${member.role}`} data-index={i}>
-              <LeadCard {...member} variant="medium" />
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Row 2: 1 horizontal (2-col span) + 1 vertical */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        <div
-          key={`sub-${row2Horizontal.name}-${row2Horizontal.role}`}
-          data-index={idx++}
-          className="sm:col-span-2"
-        >
-          <LeadCard {...row2Horizontal} variant="horizontal" />
-        </div>
-        <div
-          key={`sub-${row2Vertical.name}-${row2Vertical.role}`}
-          data-index={idx++}
-        >
-          <LeadCard {...row2Vertical} variant="medium" />
-        </div>
-      </div>
-
-      {/* Row 3: 3 vertical cards */}
-      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-        {row3.map((member) => {
-          const i = idx++;
-          return (
-            <div key={`sub-${member.name}-${member.role}`} data-index={i}>
-              <LeadCard {...member} variant="medium" />
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Row 4: 1 vertical + mirrored layout (only 1 remaining) */}
-      {row4Vertical && (
-        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-          <div
-            key={`sub-${row4Vertical.name}-${row4Vertical.role}`}
-            data-index={idx++}
-          >
-            <LeadCard {...row4Vertical} variant="medium" />
+    <div ref={ref} className="mt-8">
+      <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
+        {subteamLeads.map((member, i) => (
+          <div key={`sub-${member.name}-${member.role}`} data-index={i} className="lead-card-wrapper">
+            <LeadCard {...member} />
           </div>
-        </div>
-      )}
+        ))}
+      </div>
     </div>
   );
 }
@@ -377,7 +260,7 @@ export function TeamContent() {
     <>
       {/* Executive Board */}
       <section className="mx-auto max-w-7xl px-6 pb-16 md:pb-24">
-        <h2 className="font-display text-3xl uppercase tracking-tight md:text-4xl">
+        <h2 className="font-display font-bold uppercase italic text-3xl tracking-tight md:text-4xl">
           Executive Board
         </h2>
         <ExecBoard />
@@ -385,7 +268,7 @@ export function TeamContent() {
 
       {/* Subteam Leads */}
       <section className="mx-auto max-w-7xl px-6 pb-24 md:pb-32">
-        <h2 className="font-display text-3xl uppercase tracking-tight md:text-4xl">
+        <h2 className="font-display font-bold uppercase italic text-3xl tracking-tight md:text-4xl">
           Subteam Leads
         </h2>
         <SubteamLeadsGrid />

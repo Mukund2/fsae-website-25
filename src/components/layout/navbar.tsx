@@ -140,10 +140,10 @@ export function Navbar() {
       <style jsx global>{`
         @keyframes megaDown {
           from { opacity: 0; max-height: 0; }
-          to   { opacity: 1; max-height: 320px; }
+          to   { opacity: 1; max-height: 400px; }
         }
         @keyframes megaUp {
-          from { opacity: 1; max-height: 320px; }
+          from { opacity: 1; max-height: 400px; }
           to   { opacity: 0; max-height: 0; }
         }
         .mega-dropdown-open {
@@ -210,34 +210,36 @@ export function Navbar() {
                 <li
                   onMouseEnter={teamEnter}
                 >
-                  <Link
-                    href="/about"
+                  <button
+                    type="button"
+                    onClick={teamEnter}
                     className={cn(
-                      "text-[13px] font-medium uppercase tracking-wider",
+                      "text-[13px] font-medium uppercase tracking-wider cursor-pointer",
                       isActive("/about") || isActive("/team") || team.state === "open"
                         ? "text-[#FF8000]"
                         : "text-foreground/60 hover:text-foreground"
                     )}
                   >
                     Team
-                  </Link>
+                  </button>
                 </li>
 
                 {/* Racing - mega dropdown */}
                 <li
                   onMouseEnter={racingEnter}
                 >
-                  <Link
-                    href="/racing"
+                  <button
+                    type="button"
+                    onClick={racingEnter}
                     className={cn(
-                      "text-[13px] font-medium uppercase tracking-wider",
+                      "text-[13px] font-medium uppercase tracking-wider cursor-pointer",
                       isActive("/racing") || racing.state === "open"
                         ? "text-[#FF8000]"
                         : "text-foreground/60 hover:text-foreground"
                     )}
                   >
                     Racing
-                  </Link>
+                  </button>
                 </li>
 
                 {/* Simple nav items */}

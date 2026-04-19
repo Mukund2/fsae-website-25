@@ -212,21 +212,22 @@ function CheckeredLine({ label }: { label: string }) {
 export default function CarsPage() {
   return (
     <>
-      <section className="relative flex min-h-[50vh] items-center overflow-hidden bg-[#0A0A0A] pt-32 pb-16">
+      <section className="relative flex min-h-[50vh] items-center overflow-hidden bg-surface pt-32 pb-16">
         <div className="relative mx-auto max-w-7xl px-6">
-          <p className="font-display text-[11px] uppercase tracking-[0.3em] text-gold">
-            1989 - Present
-          </p>
+          <span
+            className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
+            style={{ fontFamily: "var(--font-script), serif" }}
+          >
+            1989 &ndash; Present
+          </span>
           <h1
-            className="mt-3 font-display text-[clamp(3rem,7vw,6rem)] uppercase leading-[0.95] text-white"
+            className="mt-3 font-display text-[clamp(3rem,7vw,6rem)] font-bold uppercase italic leading-[0.95] text-foreground"
             style={{ opacity: 0, animation: "heroFadeIn 0.8s ease-out 0.3s forwards" }}
           >
-            <span className="font-bold">Our</span>
-            <br />
-            <span className="font-light text-white/40">History</span>
+            Our Cars
           </h1>
           <p
-            className="mt-4 max-w-lg font-body text-lg text-white/60"
+            className="mt-4 max-w-lg font-body text-lg text-foreground/60"
             style={{ opacity: 0, animation: "heroFadeIn 0.8s ease-out 0.6s forwards" }}
           >
             Every car we&apos;ve ever built, from SR-0 to SR-16.

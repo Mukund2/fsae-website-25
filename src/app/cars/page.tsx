@@ -30,11 +30,10 @@ const TRACK_PATH = `
 function RacetrackSurface() {
   return (
     <svg
-      className="absolute left-1/2 top-0 hidden h-full -translate-x-1/2 md:block"
-      width="200"
-      preserveAspectRatio="none"
+      className="absolute left-1/2 top-0 hidden -translate-x-1/2 md:block"
       viewBox="0 0 200 2000"
-      style={{ height: "100%" }}
+      preserveAspectRatio="xMidYMin slice"
+      style={{ height: "100%", width: "200px" }}
     >
       <defs>
         <path id="track-path" d={TRACK_PATH} />

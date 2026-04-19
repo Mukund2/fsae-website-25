@@ -164,7 +164,7 @@ export function RacingContent() {
       </section>
 
       {/* ── What is Formula SAE? ───────────────────────────── */}
-      <section className="bg-background mx-auto max-w-7xl px-6 py-20 md:py-32">
+      <section id="competitions" className="bg-background mx-auto max-w-7xl px-6 py-20 md:py-32">
         <div className="grid items-center gap-12 md:grid-cols-2">
           <div className="flex flex-col gap-6">
             <span
@@ -311,7 +311,7 @@ export function RacingContent() {
         const imageFirst = idx % 2 !== 0;
 
         return (
-          <section key={event.name} className="mx-auto max-w-7xl px-6 py-16 md:py-24">
+          <section key={event.name} id={event.name.toLowerCase().replace(/\s+/g, "-")} className="mx-auto max-w-7xl px-6 py-16 md:py-24">
             <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16 lg:gap-24">
               {imageFirst ? (
                 <>
@@ -370,7 +370,7 @@ export function RacingContent() {
       })}
 
       {/* ── Results section ─────────────────────────────────── */}
-      <section className="py-20 md:py-32">
+      <section id="results" className="py-20 md:py-32">
         <div className="mx-auto max-w-7xl px-6">
           <span
             className="sr-slide-left text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"

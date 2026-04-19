@@ -72,6 +72,7 @@ body {
 /* Smooth scroll */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
 }
 
 /* Sponsor logos — darken preserving transparency */

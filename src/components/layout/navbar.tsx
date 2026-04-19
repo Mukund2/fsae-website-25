@@ -37,9 +37,9 @@ const TEAM_CARDS: DropdownCard[] = [
 ];
 
 const RACING_CARDS: DropdownCard[] = [
-  { title: "Competitions", href: "/racing", image: "/images/flickr/comp-action-2.jpg" },
-  { title: "Endurance", href: "/racing", image: "/images/flickr/comp-action-1.jpg" },
-  { title: "Driver Days", href: "/racing", image: "/images/flickr/driver-day-1.jpg" },
+  { title: "Competitions", href: "/racing#competitions", image: "/images/flickr/comp-action-2.jpg" },
+  { title: "Endurance", href: "/racing#endurance", image: "/images/flickr/comp-action-1.jpg" },
+  { title: "Driver Days", href: "/racing#results", image: "/images/flickr/driver-day-1.jpg" },
 ];
 
 function MegaDropdown({ cards, state }: { cards: DropdownCard[]; state: "open" | "closing" | "closed" }) {

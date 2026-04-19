@@ -4,63 +4,57 @@ import { useEffect, useRef } from "react";
 
 const results = [
   {
-    stat: "1ST",
     event: "OVERALL",
-    competition: "FSAE LINCOLN 2015",
-    color: "#0055A2",
-    colorDark: "#003D7A",
+    competition: "FSAE LINCOLN",
+    year: "2015",
+    result: "1ST",
   },
   {
-    stat: "1ST",
     event: "ENDURANCE",
-    competition: "MICHIGAN FSAE 2025",
-    color: "#B8965A",
-    colorDark: "#8E7343",
+    competition: "MICHIGAN FSAE",
+    year: "2025",
+    result: "1ST",
   },
   {
-    stat: "2ND",
     event: "OVERALL",
-    competition: "MICHIGAN FSAE 2025",
-    color: "#0055A2",
-    colorDark: "#003D7A",
+    competition: "MICHIGAN FSAE",
+    year: "2025",
+    result: "2ND",
   },
   {
-    stat: "1ST",
     event: "ENDURANCE",
-    competition: "MICHIGAN FSAE 2021",
-    color: "#B8965A",
-    colorDark: "#8E7343",
+    competition: "MICHIGAN FSAE",
+    year: "2021",
+    result: "1ST",
   },
   {
-    stat: "1ST",
     event: "INNOVATION AWARD",
-    competition: "MICHIGAN FSAE 2024",
-    color: "#C43C2D",
-    colorDark: "#9A2E22",
+    competition: "MICHIGAN FSAE",
+    year: "2024",
+    result: "1ST",
   },
   {
-    stat: "1ST",
-    event: "EV \u2014 SOCAL SHOOTOUT",
-    competition: "2024 (x2)",
-    color: "#1A8B52",
-    colorDark: "#146B3F",
+    event: "EV — SOCAL SHOOTOUT",
+    competition: "SOCAL SHOOTOUT",
+    year: "2024",
+    result: "1ST",
   },
 ];
 
 function animateElement(
   el: HTMLElement,
-  from: { x?: number; opacity?: number },
-  to: { x?: number; opacity?: number },
+  from: { y?: number; opacity?: number },
+  to: { y?: number; opacity?: number },
   duration: number,
   delay: number
 ) {
-  const startX = from.x ?? 0;
+  const startY = from.y ?? 0;
   const startO = from.opacity ?? 0;
-  const endX = to.x ?? 0;
+  const endY = to.y ?? 0;
   const endO = to.opacity ?? 1;
 
   el.style.opacity = String(startO);
-  el.style.transform = `translateX(${startX}px)`;
+  el.style.transform = `translateY(${startY}px)`;
 
   setTimeout(() => {
     const start = performance.now();
@@ -70,7 +64,7 @@ function animateElement(
       const eased = 1 - Math.pow(1 - progress, 3);
 
       el.style.opacity = String(startO + (endO - startO) * eased);
-      el.style.transform = `translateX(${startX + (endX - startX) * eased}px)`;
+      el.style.transform = `translateY(${startY + (endY - startY) * eased}px)`;
 
       if (progress < 1) requestAnimationFrame(tick);
     };
@@ -86,19 +80,35 @@ export function Results() {
     if (!section) return;
 
     const rows = section.querySelectorAll<HTMLElement>("[data-row]");
-    rows.forEach((el) => { el.style.opacity = "0"; });
-    const header = section.querySelector<HTMLElement>("[data-header]");
-    if (header) header.style.opacity = "0";
+    rows.forEach((el) => {
+      el.style.opacity = "0";
+    });
+    const headers = section.querySelectorAll<HTMLElement>("[data-header]");
+    headers.forEach((el) => {
+      el.style.opacity = "0";
+    });
 
     const observer = new IntersectionObserver(
       (entries) => {
         for (const entry of entries) {
           if (entry.isIntersecting) {
-            if (header) {
-              animateElement(header, { x: -40, opacity: 0 }, { x: 0, opacity: 1 }, 500, 0);
-            }
+            headers.forEach((el, i) => {
+              animateElement(
+                el,
+                { y: -20, opacity: 0 },
+                { y: 0, opacity: 1 },
+                500,
+                i * 100
+              );
+            });
             rows.forEach((el, i) => {
-              animateElement(el, { x: -100, opacity: 0 }, { x: 0, opacity: 1 }, 400, 250 + i * 100);
+              animateElement(
+                el,
+                { y: 30, opacity: 0 },
+                { y: 0, opacity: 1 },
+                400,
+                200 + i * 80
+              );
             });
             observer.disconnect();
           }
@@ -112,123 +122,142 @@ export function Results() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative w-full overflow-hidden" style={{ background: "linear-gradient(180deg, #0D1117 0%, #101820 100%)" }}>
-      {/* Smooth gradient fade from page bg */}
+    <section
+      ref={sectionRef}
+      className="relative w-full overflow-hidden bg-[#111111]"
+    >
+      {/* Decorative pit board — the sign held over the pit wall during races */}
       <div
-        className="absolute left-0 right-0 top-0 -translate-y-full pointer-events-none"
-        style={{ height: "160px", background: "linear-gradient(to bottom, transparent, #0D1117)" }}
-      />
-
-      {/* Diagonal red accent slashes - top right corner like F1 */}
-      <div className="absolute top-0 right-0 w-[300px] h-[200px] pointer-events-none overflow-hidden">
-        <div className="absolute" style={{ top: "-20px", right: "-60px", width: "200px", height: "400px", background: "linear-gradient(155deg, transparent 44%, rgba(196,60,45,0.25) 45%, rgba(196,60,45,0.25) 47%, transparent 48%)" }} />
-        <div className="absolute" style={{ top: "-20px", right: "-30px", width: "200px", height: "400px", background: "linear-gradient(155deg, transparent 44%, rgba(196,60,45,0.15) 45%, rgba(196,60,45,0.15) 47%, transparent 48%)" }} />
+        className="pointer-events-none absolute right-8 top-16 z-20 hidden select-none lg:block"
+        style={{ transform: "rotate(4deg)" }}
+      >
+        <div
+          className="flex flex-col items-center rounded-sm border-2 border-white/20 bg-black px-8 py-6 shadow-2xl"
+          style={{
+            minWidth: "160px",
+            boxShadow: "0 8px 40px rgba(0,0,0,0.6)",
+          }}
+        >
+          {/* Position */}
+          <span
+            className="font-display font-bold leading-none text-gold"
+            style={{ fontSize: "4.5rem" }}
+          >
+            P1
+          </span>
+          {/* Divider */}
+          <div className="my-2 h-px w-full bg-white/20" />
+          {/* Lap / gap info */}
+          <span className="font-mono text-sm font-bold tracking-wider text-white/70">
+            LAP 22
+          </span>
+          <span className="mt-1 font-mono text-xs tracking-wider text-green-400">
+            +3.2s
+          </span>
+          {/* Team marker */}
+          <div className="mt-3 h-1.5 w-full rounded-full bg-gold" />
+        </div>
+        {/* Board handle */}
+        <div className="mx-auto h-16 w-2 bg-white/10 rounded-b" />
       </div>
 
-      {/* Diagonal accent - bottom left */}
-      <div className="absolute bottom-0 left-0 w-[200px] h-[150px] pointer-events-none overflow-hidden">
-        <div className="absolute" style={{ bottom: "-20px", left: "-40px", width: "200px", height: "300px", background: "linear-gradient(155deg, transparent 44%, rgba(196,60,45,0.12) 45%, rgba(196,60,45,0.12) 47%, transparent 48%)" }} />
-      </div>
-
-      <div className="relative mx-auto max-w-5xl px-6 py-20 md:py-28">
-        {/* F1 broadcast-style header */}
-        <div data-header className="mb-6 md:mb-10">
-          <div className="flex items-end gap-4 md:gap-6">
-            <div>
-              <p className="font-display text-[11px] md:text-sm font-bold uppercase tracking-[0.2em] text-white/40">
-                Spartan Racing
-              </p>
-              <h2
-                className="font-display font-bold uppercase leading-[0.82] tracking-tight text-white"
-                style={{ fontSize: "clamp(3rem, 7vw, 5.5rem)", fontStyle: "italic" }}
-              >
-                Track
-                <br />
-                Record
-              </h2>
-            </div>
-            <div className="hidden md:block mb-2">
-              <p className="font-display text-[10px] font-bold uppercase tracking-[0.15em] text-white/30">
-                Key Results
-              </p>
-              <p className="font-display text-[10px] font-bold uppercase tracking-[0.15em]" style={{ color: "#C43C2D" }}>
-                2015 &mdash; 2025
-              </p>
-            </div>
-          </div>
+      <div className="relative mx-auto max-w-6xl px-6 py-20 md:py-28">
+        {/* Section title */}
+        <div data-header className="mb-10 md:mb-14">
+          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-white/30">
+            Spartan Racing
+          </p>
+          <h2
+            className="mt-2 font-display font-bold uppercase leading-none tracking-tight text-white"
+            style={{ fontSize: "clamp(2.5rem, 6vw, 4.5rem)" }}
+          >
+            Track Record
+          </h2>
         </div>
 
-        {/* F1-style leaderboard */}
-        <div className="flex flex-col gap-[2px]">
+        {/* Desktop table header */}
+        <div
+          data-header
+          className="hidden md:grid items-end border-b border-white/10 pb-3 mb-1"
+          style={{
+            gridTemplateColumns: "60px 1fr 220px 120px 80px",
+          }}
+        >
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30">
+            #
+          </span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30">
+            Event
+          </span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30">
+            Competition
+          </span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30 text-right">
+            Finish
+          </span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-white/30 text-right">
+            Year
+          </span>
+        </div>
+
+        {/* Result rows */}
+        <div className="flex flex-col">
           {results.map((result, i) => (
             <div
-              key={`${result.competition}-${result.event}`}
+              key={`${result.competition}-${result.event}-${result.year}`}
               data-row
-              className="relative flex items-stretch"
-              style={{ height: "clamp(64px, 10vw, 82px)" }}
+              className="group/row border-b border-white/[0.06] hover:border-transparent cursor-default"
             >
-              {/* Rank number column - dark */}
+              {/* Desktop row */}
               <div
-                className="flex w-[44px] md:w-[56px] flex-shrink-0 items-center justify-center"
-                style={{ background: "rgba(255,255,255,0.04)" }}
+                className="hidden md:grid items-center px-4 -mx-4 rounded-sm group-hover/row:bg-gold"
+                style={{
+                  gridTemplateColumns: "60px 1fr 220px 120px 80px",
+                  minHeight: "clamp(64px, 9vw, 80px)",
+                }}
               >
                 <span
-                  className="font-display font-bold text-white/30"
-                  style={{ fontSize: "clamp(1.2rem, 2.5vw, 1.8rem)", fontStyle: "italic" }}
+                  className="font-display font-bold text-white/15 group-hover/row:text-black/20"
+                  style={{ fontSize: "clamp(1.2rem, 2vw, 1.6rem)" }}
                 >
-                  {i + 1}
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+
+                <h3
+                  className="font-display font-bold uppercase text-white tracking-wide group-hover/row:text-black"
+                  style={{ fontSize: "clamp(1.1rem, 2.5vw, 1.7rem)" }}
+                >
+                  {result.event}
+                </h3>
+
+                <span className="font-mono text-[11px] uppercase tracking-wider text-white/40 group-hover/row:text-black/60">
+                  {result.competition}
+                </span>
+
+                <span
+                  className="font-display font-bold text-gold text-right group-hover/row:text-black"
+                  style={{ fontSize: "clamp(1.4rem, 2.5vw, 2rem)" }}
+                >
+                  {result.result}
+                </span>
+
+                <span className="font-mono text-sm text-white/40 text-right tabular-nums group-hover/row:text-black/60">
+                  {result.year}
                 </span>
               </div>
 
-              {/* Team color bar with event name */}
-              <div
-                className="flex flex-1 items-center px-4 md:px-6 relative overflow-hidden"
-                style={{
-                  background: `linear-gradient(135deg, ${result.color} 0%, ${result.colorDark} 100%)`,
-                }}
-              >
-                {/* Subtle diagonal texture inside the bar */}
-                <div
-                  className="absolute inset-0 pointer-events-none"
-                  style={{
-                    background: "repeating-linear-gradient(135deg, transparent, transparent 20px, rgba(255,255,255,0.03) 20px, rgba(255,255,255,0.03) 21px)",
-                  }}
-                />
-
-                <div className="relative flex items-center gap-3 md:gap-5 w-full">
-                  {/* Event name - massive bold italic */}
-                  <h3
-                    className="font-display font-bold uppercase text-white truncate"
-                    style={{ fontSize: "clamp(1.1rem, 3vw, 1.8rem)", fontStyle: "italic", letterSpacing: "0.02em" }}
-                  >
+              {/* Mobile row */}
+              <div className="flex md:hidden items-center justify-between py-5">
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-display text-base font-bold uppercase text-white tracking-wide truncate">
                     {result.event}
                   </h3>
-
-                  {/* Competition - small text, right aligned on desktop */}
-                  <span className="hidden md:block ml-auto font-mono text-[10px] uppercase tracking-[0.1em] text-white/50 flex-shrink-0">
-                    {result.competition}
-                  </span>
+                  <p className="mt-0.5 font-mono text-[10px] uppercase tracking-wider text-white/30">
+                    {result.competition} · {result.year}
+                  </p>
                 </div>
-              </div>
-
-              {/* Points/stat column - white background, dark text like F1 */}
-              <div
-                className="flex w-[72px] md:w-[100px] flex-shrink-0 items-center justify-center relative"
-                style={{ background: "#E8E8E8" }}
-              >
-                {/* Skewed left edge for that F1 cut feel */}
-                <div
-                  className="absolute left-0 top-0 bottom-0 w-3 -translate-x-full"
-                  style={{
-                    background: "#E8E8E8",
-                    clipPath: "polygon(100% 0, 100% 100%, 0 100%)",
-                  }}
-                />
-                <span
-                  className="font-display font-bold uppercase text-[#0D1117] relative z-10"
-                  style={{ fontSize: "clamp(1.2rem, 3vw, 2rem)", fontStyle: "italic" }}
-                >
-                  {result.stat}
+                <span className="ml-4 font-display text-xl font-bold text-gold flex-shrink-0">
+                  {result.result}
                 </span>
               </div>
             </div>

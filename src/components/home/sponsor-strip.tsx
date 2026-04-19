@@ -93,8 +93,9 @@ export function SponsorStrip() {
   return (
     <section className="relative w-full py-20 bg-background">
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
-        <h2 className="text-center font-display text-[clamp(1.6rem,3.5vw,2.5rem)] font-black uppercase italic tracking-tight text-foreground">
-          Our Sponsors
+        <h2 className="text-center font-display text-[clamp(1.6rem,3.5vw,2.5rem)] font-black uppercase italic tracking-tight">
+          <span className="text-gold">Our</span>{" "}
+          <span className="text-blue">Sponsors</span>
         </h2>
       </div>
 

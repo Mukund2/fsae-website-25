@@ -692,6 +692,17 @@ html {
   animation: categoryArrowNudge 0.3s ease-out forwards;
 }
 
+/* Roll-up text animation for results hover */
+@keyframes rollUp {
+  from { transform: translateY(0); }
+  to { transform: translateY(-100%); }
+}
+
+@keyframes rollDown {
+  from { transform: translateY(-100%); }
+  to { transform: translateY(0); }
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

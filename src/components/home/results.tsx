@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const results = [
   {
@@ -125,67 +125,49 @@ function animateElement(
   }, delay);
 }
 
-/* ── Glitch text on hover ── */
-const GLITCH_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@&%!?";
-
-function GlitchText({ text, className, style }: { text: string; className?: string; style?: React.CSSProperties }) {
-  const [display, setDisplay] = useState(text);
-  const rafRef = useRef<number>(0);
-  const timeoutRef = useRef<ReturnType<typeof setTimeout>>(null);
-
-  const startGlitch = useCallback(() => {
-    cancelAnimationFrame(rafRef.current);
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-
-    const chars = text.split("");
-    const totalDuration = 400;
-    const stepsPerChar = 3;
-    let step = 0;
-    const totalSteps = chars.length * stepsPerChar;
-
-    const tick = () => {
-      step++;
-      const resolved = Math.floor((step / totalSteps) * chars.length);
-      const next = chars.map((ch, i) => {
-        if (ch === " " || ch === "—") return ch;
-        if (i < resolved) return ch;
-        return GLITCH_CHARS[Math.floor(Math.random() * GLITCH_CHARS.length)];
-      });
-      setDisplay(next.join(""));
-
-      if (step < totalSteps) {
-        timeoutRef.current = setTimeout(() => {
-          rafRef.current = requestAnimationFrame(tick);
-        }, totalDuration / totalSteps);
-      } else {
-        setDisplay(text);
-      }
-    };
-
-    rafRef.current = requestAnimationFrame(tick);
-  }, [text]);
-
-  const stopGlitch = useCallback(() => {
-    cancelAnimationFrame(rafRef.current);
-    if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    setDisplay(text);
-  }, [text]);
-
-  useEffect(() => {
-    return () => {
-      cancelAnimationFrame(rafRef.current);
-      if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    };
-  }, []);
+/* ── Roll text on hover ── */
+function RollText({ text, className, style }: { text: string; className?: string; style?: React.CSSProperties }) {
+  // "idle" = no animation yet, "up" = rolling up, "down" = rolling back
+  const [state, setState] = useState<"idle" | "up" | "down">("idle");
 
   return (
     <span
       className={className}
-      style={style}
-      onMouseEnter={startGlitch}
-      onMouseLeave={stopGlitch}
+      style={{
+        ...style,
+        display: "inline-block",
+        overflow: "hidden",
+        verticalAlign: "bottom",
+        position: "relative",
+      }}
+      onMouseEnter={() => setState("up")}
+      onMouseLeave={() => { if (state === "up") setState("down"); }}
     >
-      {display}
+      <span
+        style={{
+          display: "block",
+          position: "relative",
+          animationName: state === "up" ? "rollUp" : state === "down" ? "rollDown" : "none",
+          animationDuration: "0.35s",
+          animationTimingFunction: "cubic-bezier(0.25, 0.1, 0.25, 1)",
+          animationFillMode: "forwards",
+        }}
+        onAnimationEnd={() => { if (state === "down") setState("idle"); }}
+      >
+        {text}
+        <span
+          aria-hidden
+          style={{
+            display: "block",
+            position: "absolute",
+            top: "100%",
+            left: 0,
+            width: "100%",
+          }}
+        >
+          {text}
+        </span>
+      </span>
     </span>
   );
 }
@@ -329,7 +311,7 @@ export function Results() {
                 e.currentTarget.style.background = "transparent";
               }}
             >
-              <GlitchText
+              <RollText
                 text={result.event}
                 className="font-display font-black uppercase text-white tracking-wide group-hover/row:text-[#0e0e0e]"
                 style={{

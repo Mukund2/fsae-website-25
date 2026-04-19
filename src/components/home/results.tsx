@@ -208,22 +208,19 @@ export function Results() {
         data-header
         className="hidden md:grid items-end border-b border-white/10 pb-3 mb-0 px-8 lg:px-16"
         style={{
-          gridTemplateColumns: "80px 1fr 240px 140px 100px",
+          gridTemplateColumns: "1fr 240px 140px 100px",
         }}
       >
-        <span className="font-display text-[10px] font-medium uppercase tracking-[0.2em] text-white/30">
-          #
-        </span>
-        <span className="font-display text-[10px] font-medium uppercase tracking-[0.2em] text-white/30">
+        <span className="font-display text-xs font-bold uppercase tracking-[0.25em] text-gold/60">
           Event
         </span>
-        <span className="font-display text-[10px] font-medium uppercase tracking-[0.2em] text-white/30">
+        <span className="font-display text-xs font-bold uppercase tracking-[0.25em] text-gold/60">
           Competition
         </span>
-        <span className="font-display text-[10px] font-medium uppercase tracking-[0.2em] text-white/30 text-right">
+        <span className="font-display text-xs font-bold uppercase tracking-[0.25em] text-gold/60 text-right">
           Finish
         </span>
-        <span className="font-display text-[10px] font-medium uppercase tracking-[0.2em] text-white/30 text-right">
+        <span className="font-display text-xs font-bold uppercase tracking-[0.25em] text-gold/60 text-right">
           Year
         </span>
       </div>
@@ -248,17 +245,10 @@ export function Results() {
               data-content
               className="hidden md:grid items-center px-8 lg:px-16 group/row cursor-default hover:bg-gold"
               style={{
-                gridTemplateColumns: "80px 1fr 240px 140px 100px",
+                gridTemplateColumns: "1fr 240px 140px 100px",
                 minHeight: "clamp(68px, 10vw, 88px)",
               }}
             >
-              <span
-                className="font-display font-bold text-white/15 group-hover/row:text-black/20"
-                style={{ fontSize: "clamp(1.3rem, 2.2vw, 1.8rem)" }}
-              >
-                {String(i + 1).padStart(2, "0")}
-              </span>
-
               <h3
                 className="font-display font-bold uppercase text-white tracking-wide group-hover/row:text-black"
                 style={{ fontSize: "clamp(1.2rem, 2.8vw, 1.9rem)" }}

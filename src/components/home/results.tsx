@@ -343,101 +343,49 @@ export function Results() {
       className="relative w-full overflow-hidden"
       style={{ background: "#0e0e0e" }}
     >
-      {/* ── Pulsating wave background ── */}
+      {/* ── Pulsating wave lines ── */}
       <style>{`
-        @keyframes wavePulse1 {
-          0%, 100% { opacity: 0.6; transform: scaleY(1); }
-          50% { opacity: 1; transform: scaleY(1.08); }
+        @keyframes waveLine1 {
+          0%, 100% { opacity: 0.4; transform: translateY(0); }
+          50% { opacity: 0.8; transform: translateY(-6px); }
         }
-        @keyframes wavePulse2 {
-          0%, 100% { opacity: 1; transform: scaleY(1.05); }
-          50% { opacity: 0.5; transform: scaleY(0.95); }
+        @keyframes waveLine2 {
+          0%, 100% { opacity: 0.5; transform: translateY(0); }
+          50% { opacity: 0.3; transform: translateY(4px); }
         }
-        @keyframes wavePulse3 {
-          0%, 100% { opacity: 0.7; transform: scaleY(0.95); }
-          50% { opacity: 1; transform: scaleY(1.1); }
+        @keyframes waveLine3 {
+          0%, 100% { opacity: 0.3; transform: translateY(0); }
+          50% { opacity: 0.7; transform: translateY(-5px); }
+        }
+        @keyframes waveLine4 {
+          0%, 100% { opacity: 0.5; transform: translateY(0); }
+          50% { opacity: 0.25; transform: translateY(3px); }
+        }
+        @keyframes waveLine5 {
+          0%, 100% { opacity: 0.35; transform: translateY(0); }
+          50% { opacity: 0.65; transform: translateY(-4px); }
         }
       `}</style>
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        {/* Wave 1 — top area */}
-        <svg
-          className="absolute w-full"
-          style={{
-            top: "10%",
-            left: 0,
-            height: "220px",
-            animationName: "wavePulse1",
-            animationDuration: "8s",
-            animationTimingFunction: "ease-in-out",
-            animationIterationCount: "infinite",
-            transformOrigin: "center center",
-          }}
-          viewBox="0 0 1440 220"
-          preserveAspectRatio="none"
-          fill="none"
-        >
-          <path
-            d="M0 120C240 40 480 180 720 100C960 20 1200 160 1440 80V220H0Z"
-            fill="rgba(255,255,255,0.025)"
-          />
-          <path
-            d="M0 160C200 100 400 200 720 130C1040 60 1240 170 1440 120V220H0Z"
-            fill="rgba(255,255,255,0.015)"
-          />
+        {/* Line 1 */}
+        <svg className="absolute w-full" style={{ top: "12%", left: 0, height: "40px", animationName: "waveLine1", animationDuration: "7s", animationTimingFunction: "ease-in-out", animationIterationCount: "infinite" }} viewBox="0 0 1440 40" preserveAspectRatio="none" fill="none">
+          <path d="M0 20C180 8 360 32 540 20C720 8 900 32 1080 20C1260 8 1380 28 1440 20" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" />
         </svg>
-
-        {/* Wave 2 — middle area */}
-        <svg
-          className="absolute w-full"
-          style={{
-            top: "40%",
-            left: 0,
-            height: "250px",
-            animationName: "wavePulse2",
-            animationDuration: "11s",
-            animationTimingFunction: "ease-in-out",
-            animationIterationCount: "infinite",
-            transformOrigin: "center center",
-          }}
-          viewBox="0 0 1440 250"
-          preserveAspectRatio="none"
-          fill="none"
-        >
-          <path
-            d="M0 80C360 160 720 20 1080 100C1260 140 1380 60 1440 90V250H0Z"
-            fill="rgba(255,255,255,0.03)"
-          />
-          <path
-            d="M0 140C180 80 540 190 900 110C1140 60 1320 150 1440 100V250H0Z"
-            fill="rgba(255,255,255,0.02)"
-          />
+        {/* Line 2 */}
+        <svg className="absolute w-full" style={{ top: "28%", left: 0, height: "40px", animationName: "waveLine2", animationDuration: "9s", animationTimingFunction: "ease-in-out", animationIterationCount: "infinite" }} viewBox="0 0 1440 40" preserveAspectRatio="none" fill="none">
+          <path d="M0 20C240 6 480 34 720 20C960 6 1200 34 1440 20" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
         </svg>
-
-        {/* Wave 3 — bottom area */}
-        <svg
-          className="absolute w-full"
-          style={{
-            bottom: "0",
-            left: 0,
-            height: "200px",
-            animationName: "wavePulse3",
-            animationDuration: "14s",
-            animationTimingFunction: "ease-in-out",
-            animationIterationCount: "infinite",
-            transformOrigin: "center center",
-          }}
-          viewBox="0 0 1440 200"
-          preserveAspectRatio="none"
-          fill="none"
-        >
-          <path
-            d="M0 60C300 140 600 20 900 80C1200 140 1350 40 1440 70V200H0Z"
-            fill="rgba(255,255,255,0.025)"
-          />
-          <path
-            d="M0 100C240 40 480 150 720 90C960 30 1200 130 1440 60V200H0Z"
-            fill="rgba(255,255,255,0.018)"
-          />
+        {/* Line 3 */}
+        <svg className="absolute w-full" style={{ top: "48%", left: 0, height: "40px", animationName: "waveLine3", animationDuration: "11s", animationTimingFunction: "ease-in-out", animationIterationCount: "infinite" }} viewBox="0 0 1440 40" preserveAspectRatio="none" fill="none">
+          <path d="M0 22C300 10 600 34 900 18C1100 6 1300 30 1440 22" stroke="rgba(255,255,255,0.07)" strokeWidth="1.5" />
+        </svg>
+        {/* Line 4 */}
+        <svg className="absolute w-full" style={{ top: "66%", left: 0, height: "40px", animationName: "waveLine4", animationDuration: "13s", animationTimingFunction: "ease-in-out", animationIterationCount: "infinite" }} viewBox="0 0 1440 40" preserveAspectRatio="none" fill="none">
+          <path d="M0 18C200 30 400 8 600 22C800 36 1000 10 1200 24C1350 32 1420 16 1440 20" stroke="rgba(255,255,255,0.05)" strokeWidth="1" />
+        </svg>
+        {/* Line 5 */}
+        <svg className="absolute w-full" style={{ top: "82%", left: 0, height: "40px", animationName: "waveLine5", animationDuration: "10s", animationTimingFunction: "ease-in-out", animationIterationCount: "infinite" }} viewBox="0 0 1440 40" preserveAspectRatio="none" fill="none">
+          <path d="M0 20C160 32 320 8 480 20C640 32 800 8 960 20C1120 32 1280 8 1440 20" stroke="rgba(255,255,255,0.06)" strokeWidth="1.5" />
         </svg>
       </div>
 

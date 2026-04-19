@@ -69,7 +69,7 @@ function SponsorItem({ sponsor }: { sponsor: Sponsor }) {
       alt={sponsor.name}
       width={140}
       height={48}
-      className="h-7 w-auto object-contain sm:h-9 dark-logo"
+      className="h-7 w-auto max-w-[120px] object-contain sm:h-9 sm:max-w-[150px] dark-logo"
     />
   ) : (
     <span className="whitespace-nowrap font-display text-base uppercase tracking-[0.15em] text-foreground sm:text-lg">
@@ -99,8 +99,8 @@ export function SponsorStrip() {
       </div>
 
       <div className="relative mt-10">
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-48 bg-gradient-to-r from-background via-background/80 to-transparent sm:w-80" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-48 bg-gradient-to-l from-background via-background/80 to-transparent sm:w-80" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-[35%] bg-gradient-to-r from-background via-background/90 via-60% to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-[35%] bg-gradient-to-l from-background via-background/90 via-60% to-transparent" />
 
         <Marquee speed={120} gap="gap-16 sm:gap-20">
           {SPONSORS.map((sponsor) => (

@@ -320,7 +320,7 @@ function TimelineEntry({
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, 45vw"
                 loading="eager"
-                style={{ filter: "sepia(0.15) contrast(1.05) saturate(0.9) brightness(1.02)" }}
+                style={{ filter: `sepia(0.15) contrast(1.05) saturate(0.9) brightness(${car.slug === "sr-16" || car.slug === "sr-15" ? "1.25" : "1.02"})` }}
               />
               {/* Slight warm overlay for vintage feel */}
               <div className="absolute inset-0 bg-amber-100/10 mix-blend-multiply" />

@@ -235,20 +235,21 @@ export function Results() {
       style={{ background: "#0e0e0e" }}
     >
       {/* ── Title block ── */}
-      <div className="px-8 lg:px-16 pt-24 pb-12 md:pt-32 md:pb-16">
+      <div className="px-6 lg:px-14 pt-20 pb-10 md:pt-26 md:pb-13">
         <div data-header>
           <h2
-            className="font-display font-black uppercase leading-[0.9] tracking-tight text-white"
-            style={{ fontSize: "clamp(3rem, 8vw, 6rem)", fontStyle: "italic" }}
+            className="font-display font-bold uppercase leading-[0.9] tracking-tight text-white"
+            style={{ fontSize: "clamp(2.5rem, 6.6vw, 5rem)", fontStyle: "italic" }}
           >
             Track Record
           </h2>
           <p
-            className="font-display font-black uppercase leading-[0.9] tracking-tight"
+            className="leading-[0.9] tracking-tight"
             style={{
-              fontSize: "clamp(3rem, 8vw, 6rem)",
+              fontSize: "clamp(2.5rem, 6.6vw, 5rem)",
               fontStyle: "italic",
               color: "#C8A24E",
+              fontFamily: "var(--font-script), serif",
             }}
           >
             Highlights
@@ -259,33 +260,33 @@ export function Results() {
       {/* ── Column headers ── */}
       <div
         data-header
-        className="hidden md:grid items-end pb-4 mb-0 px-8 lg:px-16"
+        className="hidden md:grid items-end pb-3 mb-0 px-6 lg:px-14"
         style={{
-          gridTemplateColumns: "1fr 260px 160px 100px",
+          gridTemplateColumns: "1fr 220px 140px 85px",
           borderBottom: "1px solid rgba(255,255,255,0.08)",
         }}
       >
         <span
           className="font-display font-bold uppercase"
-          style={{ fontSize: "0.7rem", letterSpacing: "0.3em", color: "#8A7A50" }}
+          style={{ fontSize: "0.6rem", letterSpacing: "0.3em", color: "#8A7A50" }}
         >
           Event
         </span>
         <span
           className="font-display font-bold uppercase"
-          style={{ fontSize: "0.7rem", letterSpacing: "0.3em", color: "#8A7A50" }}
+          style={{ fontSize: "0.6rem", letterSpacing: "0.3em", color: "#8A7A50" }}
         >
           Competition
         </span>
         <span
           className="font-display font-bold uppercase text-right"
-          style={{ fontSize: "0.7rem", letterSpacing: "0.3em", color: "#8A7A50" }}
+          style={{ fontSize: "0.6rem", letterSpacing: "0.3em", color: "#8A7A50" }}
         >
           Finish
         </span>
         <span
           className="font-display font-bold uppercase text-right"
-          style={{ fontSize: "0.7rem", letterSpacing: "0.3em", color: "#8A7A50" }}
+          style={{ fontSize: "0.6rem", letterSpacing: "0.3em", color: "#8A7A50" }}
         >
           Year
         </span>
@@ -314,10 +315,10 @@ export function Results() {
             {/* Desktop row */}
             <div
               data-content
-              className="hidden md:grid items-center px-8 lg:px-16 group/row cursor-default"
+              className="hidden md:grid items-center px-6 lg:px-14 group/row cursor-default"
               style={{
-                gridTemplateColumns: "1fr 260px 160px 100px",
-                minHeight: "clamp(80px, 11vw, 100px)",
+                gridTemplateColumns: "1fr 220px 140px 85px",
+                minHeight: "clamp(66px, 9vw, 83px)",
                 background: "transparent",
               }}
               onMouseEnter={(e) => {
@@ -332,7 +333,7 @@ export function Results() {
                 text={result.event}
                 className="font-display font-black uppercase text-white tracking-wide group-hover/row:text-[#0e0e0e]"
                 style={{
-                  fontSize: "clamp(1.4rem, 3.2vw, 2.2rem)",
+                  fontSize: "clamp(1.15rem, 2.6vw, 1.8rem)",
                   fontStyle: "italic",
                   letterSpacing: "0.02em",
                 }}
@@ -340,7 +341,7 @@ export function Results() {
 
               <span
                 className="font-display font-medium uppercase text-white/70 group-hover/row:text-[#0e0e0e]/60"
-                style={{ fontSize: "0.8rem", letterSpacing: "0.15em" }}
+                style={{ fontSize: "0.68rem", letterSpacing: "0.15em" }}
               >
                 {result.competition}
               </span>
@@ -348,17 +349,27 @@ export function Results() {
               <span
                 className="font-display font-black text-right group-hover/row:text-[#0e0e0e]"
                 style={{
-                  fontSize: "clamp(1.6rem, 3vw, 2.4rem)",
+                  fontSize: "clamp(1.3rem, 2.5vw, 2rem)",
                   fontStyle: "italic",
                   color: "#C8A24E",
                 }}
               >
-                {result.result}
+                {result.result.replace(/(\d+)(ST|ND|RD|TH)/i, "$1")}
+                <span
+                  className="font-display font-bold uppercase"
+                  style={{
+                    fontSize: "0.5em",
+                    verticalAlign: "super",
+                    lineHeight: 1,
+                  }}
+                >
+                  {result.result.match(/(ST|ND|RD|TH)/i)?.[0] ?? ""}
+                </span>
               </span>
 
               <span
                 className="font-display font-medium text-white/50 text-right tabular-nums group-hover/row:text-[#0e0e0e]/50"
-                style={{ fontSize: "0.95rem" }}
+                style={{ fontSize: "0.8rem" }}
               >
                 {result.year}
               </span>
@@ -367,13 +378,13 @@ export function Results() {
             {/* Mobile row */}
             <div
               data-content
-              className="flex md:hidden items-center justify-between px-6 py-6"
+              className="flex md:hidden items-center justify-between px-5 py-5"
             >
               <div className="flex-1 min-w-0">
                 <h3
                   className="font-display font-black uppercase text-white tracking-wide truncate"
                   style={{
-                    fontSize: "1.15rem",
+                    fontSize: "0.95rem",
                     fontStyle: "italic",
                   }}
                 >
@@ -381,7 +392,7 @@ export function Results() {
                 </h3>
                 <p
                   className="mt-1 font-display font-medium uppercase text-white/50"
-                  style={{ fontSize: "0.7rem", letterSpacing: "0.15em" }}
+                  style={{ fontSize: "0.6rem", letterSpacing: "0.15em" }}
                 >
                   {result.competition} · {result.year}
                 </p>
@@ -389,12 +400,22 @@ export function Results() {
               <span
                 className="ml-4 font-display font-black flex-shrink-0"
                 style={{
-                  fontSize: "1.5rem",
+                  fontSize: "1.25rem",
                   fontStyle: "italic",
                   color: "#C8A24E",
                 }}
               >
-                {result.result}
+                {result.result.replace(/(\d+)(ST|ND|RD|TH)/i, "$1")}
+                <span
+                  className="font-display font-bold uppercase"
+                  style={{
+                    fontSize: "0.5em",
+                    verticalAlign: "super",
+                    lineHeight: 1,
+                  }}
+                >
+                  {result.result.match(/(ST|ND|RD|TH)/i)?.[0] ?? ""}
+                </span>
               </span>
             </div>
           </div>
@@ -402,7 +423,7 @@ export function Results() {
       </div>
 
       {/* Bottom spacing */}
-      <div className="h-20 md:h-28" />
+      <div className="h-16 md:h-24" />
     </section>
   );
 }

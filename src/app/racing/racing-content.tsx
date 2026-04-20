@@ -219,15 +219,9 @@ export function RacingContent() {
       <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
         <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16 lg:gap-24">
           <div className="flex flex-col gap-5">
-            <span className="sr-reveal font-display text-[11px] uppercase tracking-[0.3em] text-muted">
-              01
-            </span>
             <h2 className="sr-slide-left font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
               {staticEvents[0].name}
             </h2>
-            <p className="sr-reveal font-display text-lg text-gold md:text-xl" data-delay="0.1">
-              {staticEvents[0].tagline}
-            </p>
             <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
               {staticEvents[0].description}
             </p>
@@ -255,15 +249,9 @@ export function RacingContent() {
             />
           </div>
           <div className="flex flex-col gap-5 md:order-2">
-            <span className="sr-reveal font-display text-[11px] uppercase tracking-[0.3em] text-muted">
-              02
-            </span>
             <h2 className="sr-slide-left font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
               {staticEvents[1].name}
             </h2>
-            <p className="sr-reveal font-display text-lg text-gold md:text-xl" data-delay="0.1">
-              {staticEvents[1].tagline}
-            </p>
             <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
               {staticEvents[1].description}
             </p>
@@ -307,7 +295,6 @@ export function RacingContent() {
 
       {/* ── Dynamic events: alternating layout ─────────────── */}
       {dynamicEvents.map((event, idx) => {
-        const number = String(idx + 3).padStart(2, "0");
         const imageFirst = idx % 2 !== 0;
 
         return (
@@ -324,15 +311,9 @@ export function RacingContent() {
                     />
                   </div>
                   <div className="flex flex-col gap-5 md:order-2">
-                    <span className="sr-reveal font-display text-[11px] uppercase tracking-[0.3em] text-muted">
-                      {number}
-                    </span>
                     <h2 className="sr-slide-left font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
                       {event.name}
                     </h2>
-                    <p className="sr-reveal font-display text-lg text-gold md:text-xl" data-delay="0.1">
-                      {event.tagline}
-                    </p>
                     <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
                       {event.description}
                     </p>
@@ -341,15 +322,9 @@ export function RacingContent() {
               ) : (
                 <>
                   <div className="flex flex-col gap-5">
-                    <span className="sr-reveal font-display text-[11px] uppercase tracking-[0.3em] text-muted">
-                      {number}
-                    </span>
                     <h2 className="sr-slide-left font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
                       {event.name}
                     </h2>
-                    <p className="sr-reveal font-display text-lg text-gold md:text-xl" data-delay="0.1">
-                      {event.tagline}
-                    </p>
                     <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
                       {event.description}
                     </p>

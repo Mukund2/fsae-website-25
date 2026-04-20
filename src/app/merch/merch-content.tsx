@@ -161,28 +161,12 @@ export function MerchContent({ products }: { products: MerchProduct[] }) {
       <section className="relative flex min-h-[50vh] items-center overflow-hidden bg-surface pt-32 pb-16">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,85,162,0.06)_0%,_transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-6">
-          <span
-            data-reveal
-            className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
-            style={{ fontFamily: "var(--font-script), serif" }}
-          >
-            Rep the Team
-          </span>
           <h1
             data-reveal
-            data-reveal-delay="100"
-            className="mt-3 font-display text-5xl font-bold uppercase italic tracking-tight md:text-7xl"
+            className="font-display text-5xl font-bold uppercase italic tracking-tight md:text-7xl"
           >
             Team Merch
           </h1>
-          <p
-            data-reveal
-            data-reveal-delay="200"
-            className="mt-5 max-w-2xl text-lg leading-relaxed text-muted"
-          >
-            Rep Spartan Racing. All proceeds go directly toward building the
-            next car.
-          </p>
         </div>
       </section>
 

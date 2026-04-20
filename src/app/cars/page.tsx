@@ -216,30 +216,8 @@ function CheckeredLine({ label }: { label: string }) {
 export default function CarsPage() {
   return (
     <>
-      <section className="relative flex min-h-[50vh] items-center overflow-hidden bg-surface pt-32 pb-16">
-        <div className="relative mx-auto max-w-7xl px-6">
-          <span
-            className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
-            style={{ fontFamily: "var(--font-script), serif" }}
-          >
-            1989 &ndash; Present
-          </span>
-          <h1
-            className="mt-3 font-display text-[clamp(3rem,7vw,6rem)] font-bold uppercase italic leading-[0.95] text-foreground"
-            style={{ opacity: 0, animation: "heroFadeIn 0.8s ease-out 0.3s forwards" }}
-          >
-            Our Cars
-          </h1>
-          <p
-            className="mt-4 max-w-lg font-body text-lg text-foreground/60"
-            style={{ opacity: 0, animation: "heroFadeIn 0.8s ease-out 0.6s forwards" }}
-          >
-            Every car we&apos;ve ever built, from SR-0 to SR-16.
-          </p>
-        </div>
-      </section>
-
-      <section className="relative py-12 overflow-hidden" style={{
+      {/* Single continuous section with asphalt texture from hero to finish */}
+      <section className="relative overflow-hidden" style={{
         backgroundColor: "#e8e4dc",
         backgroundImage: `
           radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px),
@@ -248,22 +226,139 @@ export default function CarsPage() {
         backgroundSize: "4px 4px, 8px 8px",
         backgroundPosition: "0 0, 2px 2px",
       }}>
-        {/* Tire track marks */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.04]" aria-hidden="true">
-          <svg className="absolute w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
-            {/* Left tire track */}
-            <path d="M15 0 Q12 25, 18 50 Q14 75, 16 100" stroke="#000" strokeWidth="0.8" fill="none" strokeDasharray="2 3" />
-            <path d="M16.5 0 Q13.5 25, 19.5 50 Q15.5 75, 17.5 100" stroke="#000" strokeWidth="0.4" fill="none" strokeDasharray="1.5 4" />
-            {/* Right tire track */}
-            <path d="M83 0 Q86 25, 80 50 Q84 75, 82 100" stroke="#000" strokeWidth="0.8" fill="none" strokeDasharray="2 3" />
-            <path d="M84.5 0 Q87.5 25, 81.5 50 Q85.5 75, 83.5 100" stroke="#000" strokeWidth="0.4" fill="none" strokeDasharray="1.5 4" />
-            {/* Faint diagonal skid marks */}
-            <path d="M30 15 Q35 18, 38 22" stroke="#000" strokeWidth="0.3" fill="none" />
-            <path d="M65 45 Q70 48, 73 52" stroke="#000" strokeWidth="0.3" fill="none" />
-            <path d="M25 70 Q30 73, 33 77" stroke="#000" strokeWidth="0.3" fill="none" />
-            <path d="M72 85 Q77 88, 80 92" stroke="#000" strokeWidth="0.3" fill="none" />
+
+        {/* ── Hand-drawn illustrations layer ── */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <svg className="absolute w-full h-full" preserveAspectRatio="none" viewBox="0 0 1000 2000" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <g opacity="0.06" stroke="#1a1a1a" strokeLinecap="round" strokeLinejoin="round">
+              {/* Tire tracks - left side, wobbly hand-drawn feel */}
+              <path d="M120 0 Q115 80,125 160 Q118 240,128 320 Q120 400,126 480 Q119 560,127 640 Q121 720,125 800 Q118 880,126 960 Q120 1040,128 1120 Q121 1200,125 1280 Q119 1360,127 1440 Q120 1520,126 1600 Q118 1680,125 1760 Q121 1840,124 1920 Q120 1960,122 2000" strokeWidth="3" strokeDasharray="8 12" />
+              <path d="M135 0 Q130 80,140 160 Q133 240,143 320 Q135 400,141 480 Q134 560,142 640 Q136 720,140 800 Q133 880,141 960 Q135 1040,143 1120 Q136 1200,140 1280 Q134 1360,142 1440 Q135 1520,141 1600 Q133 1680,140 1760 Q136 1840,139 1920 Q135 1960,137 2000" strokeWidth="2" strokeDasharray="6 14" />
+
+              {/* Tire tracks - right side */}
+              <path d="M870 0 Q876 80,864 160 Q872 240,862 320 Q869 400,865 480 Q874 560,863 640 Q868 720,866 800 Q875 880,864 960 Q870 1040,862 1120 Q868 1200,866 1280 Q874 1360,863 1440 Q870 1520,865 1600 Q873 1680,866 1760 Q869 1840,867 1920 Q872 1960,869 2000" strokeWidth="3" strokeDasharray="8 12" />
+              <path d="M855 0 Q861 80,849 160 Q857 240,847 320 Q854 400,850 480 Q859 560,848 640 Q853 720,851 800 Q860 880,849 960 Q855 1040,847 1120 Q853 1200,851 1280 Q859 1360,848 1440 Q855 1520,850 1600 Q858 1680,851 1760 Q854 1840,852 1920 Q857 1960,854 2000" strokeWidth="2" strokeDasharray="6 14" />
+
+              {/* Cactus 1 - top left, saguaro style */}
+              <g transform="translate(60, 280)" strokeWidth="2.5">
+                <path d="M0 60 Q-1 40, 0 10 Q1 5, 0 0" />
+                <path d="M0 35 Q-8 30, -14 20 Q-15 15, -14 10" />
+                <path d="M0 25 Q6 22, 12 15 Q13 10, 12 6" />
+                <path d="M-2 60 L2 60" />
+              </g>
+
+              {/* Cactus 2 - right side, smaller prickly pear */}
+              <g transform="translate(920, 550)" strokeWidth="2">
+                <ellipse cx="0" cy="0" rx="8" ry="12" />
+                <ellipse cx="-10" cy="-14" rx="6" ry="9" transform="rotate(-15)" />
+                <ellipse cx="9" cy="-12" rx="5" ry="8" transform="rotate(10)" />
+                <path d="M0 12 L0 18" />
+              </g>
+
+              {/* Cactus 3 - left side, mid page */}
+              <g transform="translate(40, 900)" strokeWidth="2.5">
+                <path d="M0 45 Q-1 25, 0 5 Q1 2, 0 0" />
+                <path d="M0 28 Q-10 24, -16 16 Q-17 12, -15 8" />
+                <path d="M0 18 Q8 14, 14 8 Q15 5, 13 2" />
+                <path d="M-2 45 L2 45" />
+              </g>
+
+              {/* Desert mountains - background horizon, very subtle */}
+              <g transform="translate(0, 160)" strokeWidth="1.5" opacity="0.5">
+                <path d="M0 40 L40 15 L70 30 L120 5 L180 25 L230 8 L280 22 L340 3 L400 18 L450 10 L500 28 L560 6 L620 20 L680 12 L740 30 L800 8 L860 24 L920 10 L960 18 L1000 40" />
+              </g>
+
+              {/* Autocross cones scattered */}
+              <g strokeWidth="2">
+                {/* Cone 1 */}
+                <g transform="translate(180, 480)">
+                  <path d="M-5 10 L0 -4 L5 10 Z" />
+                  <path d="M-6 10 L6 10" />
+                </g>
+                {/* Cone 2 */}
+                <g transform="translate(820, 720)">
+                  <path d="M-5 10 L0 -4 L5 10 Z" />
+                  <path d="M-6 10 L6 10" />
+                </g>
+                {/* Cone 3 */}
+                <g transform="translate(150, 1100)">
+                  <path d="M-4 8 L0 -3 L4 8 Z" />
+                  <path d="M-5 8 L5 8" />
+                </g>
+                {/* Cone 4 - knocked over */}
+                <g transform="translate(850, 1350) rotate(70)">
+                  <path d="M-4 8 L0 -3 L4 8 Z" />
+                  <path d="M-5 8 L5 8" />
+                </g>
+              </g>
+
+              {/* Small dust clouds / puffs */}
+              <g strokeWidth="1.5" opacity="0.4">
+                <path d="M200 620 Q205 615, 212 616 Q218 614, 222 618 Q226 615, 230 618" />
+                <path d="M780 380 Q785 375, 792 376 Q798 374, 802 378" />
+                <path d="M170 1500 Q175 1495, 182 1496 Q188 1494, 192 1498 Q196 1495, 200 1498" />
+              </g>
+
+              {/* Skid marks - more organic */}
+              <g strokeWidth="1.5" opacity="0.6">
+                <path d="M280 300 Q300 308, 320 312" />
+                <path d="M700 680 Q720 688, 740 690" />
+                <path d="M240 1200 Q260 1208, 280 1212" />
+                <path d="M750 1600 Q770 1605, 790 1610" />
+              </g>
+
+              {/* Cactus 4 - far right, bottom area */}
+              <g transform="translate(940, 1400)" strokeWidth="2">
+                <path d="M0 35 Q-1 18, 0 3 Q1 1, 0 0" />
+                <path d="M0 20 Q-7 17, -11 11 Q-12 8, -10 5" />
+                <path d="M-2 35 L2 35" />
+              </g>
+
+              {/* Small rocks/pebbles */}
+              <g strokeWidth="1.5" opacity="0.3">
+                <ellipse cx="100" cy="650" rx="4" ry="2" />
+                <ellipse cx="900" cy="450" rx="3" ry="1.5" />
+                <ellipse cx="80" cy="1250" rx="5" ry="2" />
+                <ellipse cx="930" cy="1050" rx="3" ry="2" />
+                <ellipse cx="160" cy="1750" rx="4" ry="1.5" />
+              </g>
+
+              {/* Finish flag doodle near bottom */}
+              <g transform="translate(60, 1850)" strokeWidth="2">
+                <path d="M0 20 L0 0" />
+                <path d="M0 0 L12 2 L12 10 L0 8" />
+                <path d="M3 1 L3 5 M6 2 L6 6 M9 3 L9 7" />
+              </g>
+            </g>
           </svg>
         </div>
+
+        {/* ── Hero area ── */}
+        <div className="relative pt-32 pb-16">
+          <div className="mx-auto max-w-7xl px-6">
+            <span
+              className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
+              style={{ fontFamily: "var(--font-script), serif" }}
+            >
+              1989 &ndash; Present
+            </span>
+            <h1
+              className="mt-3 font-display text-[clamp(3rem,7vw,6rem)] font-bold uppercase italic leading-[0.95] text-foreground"
+              style={{ opacity: 0, animation: "heroFadeIn 0.8s ease-out 0.3s forwards" }}
+            >
+              Our Cars
+            </h1>
+            <p
+              className="mt-4 max-w-lg font-body text-lg text-foreground/60"
+              style={{ opacity: 0, animation: "heroFadeIn 0.8s ease-out 0.6s forwards" }}
+            >
+              Every car we&apos;ve ever built, from SR-0 to SR-16.
+            </p>
+          </div>
+        </div>
+
+        {/* ── Timeline area ── */}
+        <div className="relative py-12">
         <RacetrackCar />
         <RacetrackSurface />
 
@@ -279,6 +374,7 @@ export default function CarsPage() {
           <div className="mt-12">
             <CheckeredLine label="finish" />
           </div>
+        </div>
         </div>
       </section>
 

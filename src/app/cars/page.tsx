@@ -227,7 +227,7 @@ export default function CarsPage() {
         backgroundPosition: "0 0, 2px 2px",
       }}>
 
-        {/* ── Warm gradient glow ── */}
+        {/* ── Warm gradient glows ── */}
         <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
           <div className="absolute left-1/4 top-[10%] w-[500px] h-[500px] bg-[radial-gradient(ellipse_at_center,_rgba(212,168,67,0.08)_0%,_transparent_70%)]" />
           <div className="absolute right-1/4 top-[40%] w-[600px] h-[600px] bg-[radial-gradient(ellipse_at_center,_rgba(212,168,67,0.06)_0%,_transparent_70%)]" />
@@ -241,6 +241,91 @@ export default function CarsPage() {
             <path d="M13.5 0 Q11.5 25, 15.5 50 Q12.5 75, 14.5 100" stroke="#000" strokeWidth="0.3" strokeDasharray="1 4" />
             <path d="M87 0 Q89 25, 85 50 Q88 75, 86 100" stroke="#000" strokeWidth="0.6" strokeDasharray="1.5 3" />
             <path d="M85.5 0 Q87.5 25, 83.5 50 Q86.5 75, 84.5 100" stroke="#000" strokeWidth="0.3" strokeDasharray="1 4" />
+          </svg>
+        </div>
+
+        {/* ── Decorative illustrations ── */}
+        <div className="absolute inset-0 pointer-events-none hidden md:block" aria-hidden="true">
+          {/* Saguaro cactus - top left */}
+          <svg className="absolute" style={{ left: "3%", top: "8%", opacity: 0.18 }} width="60" height="120" viewBox="0 0 60 120" fill="none">
+            <path d="M30 115 L30 35 C30 20, 30 15, 30 10 C30 5, 30 3, 30 2" stroke="#2d5a27" strokeWidth="8" strokeLinecap="round" fill="none" />
+            <path d="M30 65 C20 65, 12 58, 12 48 C12 38, 12 32, 12 28" stroke="#2d5a27" strokeWidth="7" strokeLinecap="round" fill="none" />
+            <path d="M30 50 C40 50, 48 42, 48 32 C48 24, 48 20, 48 16" stroke="#2d5a27" strokeWidth="7" strokeLinecap="round" fill="none" />
+            <path d="M30 115 L30 115" stroke="#3a7233" strokeWidth="6" strokeLinecap="round" />
+          </svg>
+
+          {/* Traffic cone - right side */}
+          <svg className="absolute" style={{ right: "5%", top: "22%", opacity: 0.2 }} width="40" height="50" viewBox="0 0 40 50" fill="none">
+            <path d="M20 2 L8 42 L32 42 Z" fill="#FF6B00" />
+            <rect x="5" y="42" width="30" height="6" rx="1" fill="#333" />
+            <path d="M17 14 L13 30 L27 30 L23 14 Z" fill="white" opacity="0.7" />
+          </svg>
+
+          {/* Small cactus - right, mid page */}
+          <svg className="absolute" style={{ right: "4%", top: "45%", opacity: 0.15 }} width="45" height="80" viewBox="0 0 45 80" fill="none">
+            <path d="M22 75 L22 25 C22 12, 22 8, 22 5" stroke="#2d5a27" strokeWidth="7" strokeLinecap="round" fill="none" />
+            <path d="M22 45 C14 45, 8 38, 8 30" stroke="#2d5a27" strokeWidth="6" strokeLinecap="round" fill="none" />
+            <path d="M22 55 C30 55, 36 48, 36 40" stroke="#2d5a27" strokeWidth="6" strokeLinecap="round" fill="none" />
+          </svg>
+
+          {/* Knocked-over cone - left side */}
+          <svg className="absolute" style={{ left: "6%", top: "55%", opacity: 0.16, transform: "rotate(65deg)" }} width="40" height="50" viewBox="0 0 40 50" fill="none">
+            <path d="M20 2 L8 42 L32 42 Z" fill="#FF6B00" />
+            <rect x="5" y="42" width="30" height="6" rx="1" fill="#333" />
+            <path d="M17 14 L13 30 L27 30 L23 14 Z" fill="white" opacity="0.7" />
+          </svg>
+
+          {/* Checkered flag - left, lower */}
+          <svg className="absolute" style={{ left: "2%", top: "78%", opacity: 0.14 }} width="50" height="60" viewBox="0 0 50 60" fill="none">
+            <rect x="5" y="8" width="35" height="25" fill="white" stroke="#222" strokeWidth="1" />
+            {/* Checkered pattern */}
+            <rect x="5" y="8" width="7" height="5" fill="#222" />
+            <rect x="19" y="8" width="7" height="5" fill="#222" />
+            <rect x="33" y="8" width="7" height="5" fill="#222" />
+            <rect x="12" y="13" width="7" height="5" fill="#222" />
+            <rect x="26" y="13" width="7" height="5" fill="#222" />
+            <rect x="5" y="18" width="7" height="5" fill="#222" />
+            <rect x="19" y="18" width="7" height="5" fill="#222" />
+            <rect x="33" y="18" width="7" height="5" fill="#222" />
+            <rect x="12" y="23" width="7" height="5" fill="#222" />
+            <rect x="26" y="23" width="7" height="5" fill="#222" />
+            <rect x="5" y="28" width="7" height="5" fill="#222" />
+            <rect x="19" y="28" width="7" height="5" fill="#222" />
+            <rect x="33" y="28" width="7" height="5" fill="#222" />
+            {/* Pole */}
+            <rect x="4" y="8" width="3" height="50" rx="1" fill="#555" />
+          </svg>
+
+          {/* Tire - right, lower */}
+          <svg className="absolute" style={{ right: "3%", top: "72%", opacity: 0.13 }} width="55" height="55" viewBox="0 0 55 55" fill="none">
+            <circle cx="27.5" cy="27.5" r="25" fill="#222" />
+            <circle cx="27.5" cy="27.5" r="18" fill="#333" />
+            <circle cx="27.5" cy="27.5" r="8" fill="#555" />
+            <circle cx="27.5" cy="27.5" r="4" fill="#222" />
+            {/* Tread marks */}
+            <path d="M27.5 2.5 L27.5 9.5" stroke="#444" strokeWidth="2" />
+            <path d="M27.5 45.5 L27.5 52.5" stroke="#444" strokeWidth="2" />
+            <path d="M2.5 27.5 L9.5 27.5" stroke="#444" strokeWidth="2" />
+            <path d="M45.5 27.5 L52.5 27.5" stroke="#444" strokeWidth="2" />
+            <path d="M9.8 9.8 L14.8 14.8" stroke="#444" strokeWidth="2" />
+            <path d="M40.2 40.2 L45.2 45.2" stroke="#444" strokeWidth="2" />
+            <path d="M9.8 45.2 L14.8 40.2" stroke="#444" strokeWidth="2" />
+            <path d="M40.2 9.8 L45.2 14.8" stroke="#444" strokeWidth="2" />
+          </svg>
+
+          {/* Upright cone - right, near bottom */}
+          <svg className="absolute" style={{ right: "8%", top: "90%", opacity: 0.18 }} width="35" height="45" viewBox="0 0 40 50" fill="none">
+            <path d="M20 2 L8 42 L32 42 Z" fill="#FF6B00" />
+            <rect x="5" y="42" width="30" height="6" rx="1" fill="#333" />
+            <path d="M17 14 L13 30 L27 30 L23 14 Z" fill="white" opacity="0.7" />
+          </svg>
+
+          {/* Prickly pear cactus - left, near bottom */}
+          <svg className="absolute" style={{ left: "5%", top: "92%", opacity: 0.15 }} width="50" height="55" viewBox="0 0 50 55" fill="none">
+            <ellipse cx="25" cy="38" rx="12" ry="16" fill="#3a7a33" />
+            <ellipse cx="14" cy="22" rx="9" ry="13" fill="#2d6a27" transform="rotate(-10 14 22)" />
+            <ellipse cx="36" cy="24" rx="8" ry="11" fill="#347a2e" transform="rotate(8 36 24)" />
+            <ellipse cx="25" cy="10" rx="7" ry="10" fill="#2d6a27" transform="rotate(-5 25 10)" />
           </svg>
         </div>
 

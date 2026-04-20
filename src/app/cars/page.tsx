@@ -239,7 +239,31 @@ export default function CarsPage() {
         </div>
       </section>
 
-      <section className="relative bg-surface py-12 overflow-hidden">
+      <section className="relative py-12 overflow-hidden" style={{
+        backgroundColor: "#e8e4dc",
+        backgroundImage: `
+          radial-gradient(circle, rgba(0,0,0,0.03) 1px, transparent 1px),
+          radial-gradient(circle, rgba(0,0,0,0.02) 1px, transparent 1px)
+        `,
+        backgroundSize: "4px 4px, 8px 8px",
+        backgroundPosition: "0 0, 2px 2px",
+      }}>
+        {/* Tire track marks */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.04]" aria-hidden="true">
+          <svg className="absolute w-full h-full" preserveAspectRatio="none" viewBox="0 0 100 100">
+            {/* Left tire track */}
+            <path d="M15 0 Q12 25, 18 50 Q14 75, 16 100" stroke="#000" strokeWidth="0.8" fill="none" strokeDasharray="2 3" />
+            <path d="M16.5 0 Q13.5 25, 19.5 50 Q15.5 75, 17.5 100" stroke="#000" strokeWidth="0.4" fill="none" strokeDasharray="1.5 4" />
+            {/* Right tire track */}
+            <path d="M83 0 Q86 25, 80 50 Q84 75, 82 100" stroke="#000" strokeWidth="0.8" fill="none" strokeDasharray="2 3" />
+            <path d="M84.5 0 Q87.5 25, 81.5 50 Q85.5 75, 83.5 100" stroke="#000" strokeWidth="0.4" fill="none" strokeDasharray="1.5 4" />
+            {/* Faint diagonal skid marks */}
+            <path d="M30 15 Q35 18, 38 22" stroke="#000" strokeWidth="0.3" fill="none" />
+            <path d="M65 45 Q70 48, 73 52" stroke="#000" strokeWidth="0.3" fill="none" />
+            <path d="M25 70 Q30 73, 33 77" stroke="#000" strokeWidth="0.3" fill="none" />
+            <path d="M72 85 Q77 88, 80 92" stroke="#000" strokeWidth="0.3" fill="none" />
+          </svg>
+        </div>
         <RacetrackCar />
         <RacetrackSurface />
 

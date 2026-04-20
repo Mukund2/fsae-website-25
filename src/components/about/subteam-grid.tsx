@@ -62,8 +62,6 @@ export function SubteamGrid({ subteams }: SubteamGridProps) {
           {/* Dark gradient overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-black/10" />
 
-          {/* Gold accent line at top */}
-          <div className="gold-accent-line absolute top-0 left-0 h-[2px] w-full origin-left scale-x-0 bg-gold" />
 
           {/* Content overlay */}
           <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-8">
@@ -77,9 +75,6 @@ export function SubteamGrid({ subteams }: SubteamGridProps) {
             <div className="overflow-y-auto max-h-full">
               <p className="font-display text-sm uppercase tracking-tight text-gold">
                 {sub.name}
-              </p>
-              <p className="mt-1 font-display text-[10px] uppercase tracking-widest text-white/50">
-                {sub.abbreviation}
               </p>
               <p className="mt-3 text-sm leading-relaxed text-white/80">
                 {sub.description}

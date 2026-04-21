@@ -11,12 +11,14 @@ export default function HomePage() {
   return (
     <>
       <Hero />
-      <CarShowcase />
-      <Results />
-      <CategoryCards />
-      <SponsorStrip />
-      <Newsletter />
-      <JoinUs />
+      <div className="relative z-10 bg-background">
+        <CarShowcase />
+        <Results />
+        <CategoryCards />
+        <SponsorStrip />
+        <Newsletter />
+        <JoinUs />
+      </div>
     </>
   );
 }

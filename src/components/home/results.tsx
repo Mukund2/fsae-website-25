@@ -340,7 +340,7 @@ export function Results() {
   return (
     <section
       ref={sectionRef}
-      className="relative z-10 w-full bg-background py-12 md:py-20"
+      className="relative w-full bg-background py-12 md:py-20"
     >
     <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
     <div className="relative overflow-hidden" style={{ background: "#0e0e0e" }}>

@@ -8,7 +8,7 @@ const categories = [
   {
     title: "Racing",
     href: "/racing",
-    image: "/images/flickr/racing-4.jpg",
+    image: "/images/flickr/comp-action-4.jpg",
     alt: "Spartan Racing car in competition",
     yellowTint: false,
   },
@@ -56,7 +56,7 @@ export function CategoryCards() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative z-10 bg-background py-16 lg:py-24">
+    <section ref={sectionRef} className="relative bg-background py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
         {/* McLaren-style header */}
         <div className="mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">

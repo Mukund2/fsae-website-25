@@ -206,7 +206,7 @@ export function CarShowcase() {
   const carVisible = scrollProgress > 0.02;
 
   return (
-    <div ref={wrapperRef} className="relative z-10 bg-background" style={{ height: "300vh" }}>
+    <div ref={wrapperRef} className="relative bg-background" style={{ height: "300vh" }}>
       <section
         className="sticky top-0 w-full overflow-hidden bg-background"
         style={{ height: "100vh" }}

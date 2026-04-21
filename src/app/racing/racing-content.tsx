@@ -43,16 +43,12 @@ const staticEvents = [
   {
     name: "Design",
     tagline: "Defend every decision.",
-    description:
-      "Present your car's engineering to a panel of industry judges who have decades of motorsport and automotive experience. Teams must justify every design choice, from suspension geometry to aerodynamic philosophy, proving that their vehicle represents the best solution to the design brief.",
     image: "/images/flickr/design-1.jpg",
     imageAlt: "Spartan Racing car showing design details",
   },
   {
     name: "Cost Report",
     tagline: "Every dollar justified.",
-    description:
-      "Demonstrate cost-effective manufacturing and material choices with a comprehensive Bill of Materials. Teams document every component, process, and assembly step, proving they can build a competitive vehicle within real-world budget constraints. Judges evaluate both accuracy and the team's understanding of manufacturing economics.",
     image: "/images/flickr/cost-report-1.jpg",
     imageAlt: "Team working on cost analysis and car assembly",
   },
@@ -62,69 +58,26 @@ const dynamicEvents = [
   {
     name: "Acceleration",
     tagline: "75 meters. Full send.",
-    description:
-      "A 75-meter straight-line sprint from a standing start, testing raw power delivery, traction control, and launch strategy. The difference between first and last is often less than a second. Every detail matters: gear ratios, tire compound, driver reaction time.",
     image: "/images/flickr/acceleration-1.jpg",
     imageAlt: "Spartan Racing car launching off the line",
   },
   {
     name: "Skid Pad",
     tagline: "Lateral grip, measured.",
-    description:
-      "A figure-eight course that isolates lateral acceleration and cornering capability. The car runs two laps in each direction, and only the fastest lap counts. This event strips away everything except mechanical grip, tire performance, and suspension tuning.",
     image: "/images/flickr/skidpad-1.jpg",
     imageAlt: "Car cornering on the skid pad course",
   },
   {
     name: "Autocross",
     tagline: "One lap. One chance.",
-    description:
-      "A single-lap timed run through a tight road course defined by cones. Autocross tests the full dynamic package: acceleration, braking, cornering, and driver skill, all in one concentrated effort. The fastest autocross time also sets the starting order for Endurance.",
     image: "/images/flickr/autocross-1.jpg",
     imageAlt: "Car navigating the autocross cone course",
   },
   {
     name: "Endurance",
-    tagline: "22 kilometers. No margin for error.",
-    description:
-      "The defining event of Formula SAE. A 22-kilometer extended race that tests reliability, speed, fuel efficiency, and driver endurance. Cars must survive a mandatory driver change at the halfway point. Mechanical failures here are season-ending. This is where championships are won and lost.",
+    tagline: "22 km. No margin for error.",
     image: "/images/flickr/endurance.jpg",
     imageAlt: "Spartan Racing car during endurance race",
-  },
-];
-
-/* ── Key results data ─────────────────────────────────────────────────── */
-
-const keyResults = [
-  {
-    stat: "1st",
-    label: "Overall",
-    context: "FSAE Lincoln 2015",
-    sub: [],
-  },
-  {
-    stat: "1st",
-    label: "Endurance Event",
-    context: "Michigan FSAE 2025",
-    sub: ["2nd Overall", "Best Aerodynamics Vehicle Award"],
-  },
-  {
-    stat: "1st",
-    label: "Endurance Event",
-    context: "Michigan FSAE 2021",
-    sub: ["2nd Overall"],
-  },
-  {
-    stat: "1st",
-    label: "Cummins Innovation Award",
-    context: "Michigan FSAE 2024",
-    sub: ["5th Overall"],
-  },
-  {
-    stat: "1st",
-    label: "EV - SoCal Shootout",
-    context: "2024 (x2)",
-    sub: [],
   },
 ];
 
@@ -134,9 +87,9 @@ export function RacingContent() {
   const ref = useScrollReveal();
 
   return (
-    <div ref={ref}>
-      {/* ── Hero ───────────────────────────────────────────── */}
-      <section className="relative flex min-h-[50vh] items-center overflow-hidden pt-32 pb-16">
+    <div ref={ref} className="bg-background">
+      {/* ── Hero (compact) ─────────────────────────────────── */}
+      <section className="relative flex min-h-[40vh] items-end overflow-hidden pt-28 pb-12">
         <Image
           src="/images/flickr/comp-action-1.jpg"
           alt="Spartan Racing competing at Formula SAE"
@@ -146,204 +99,123 @@ export function RacingContent() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
 
-        <div className="relative mx-auto max-w-7xl px-6">
-          <span
-            className="sr-reveal mb-4 inline-block text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
-            style={{ fontFamily: "var(--font-script), serif" }}
-          >
-            Formula SAE
-          </span>
-          <h1 className="sr-reveal font-display text-5xl font-bold uppercase italic tracking-tight md:text-7xl lg:text-8xl" data-delay="0.1">
+        <div className="relative mx-auto w-full max-w-7xl px-6">
+          <h1 className="sr-reveal font-display text-5xl font-bold uppercase italic tracking-tight md:text-7xl">
             The Competition
           </h1>
-          <p className="sr-reveal mt-4 max-w-2xl text-lg text-muted md:text-xl" data-delay="0.25">
+          <p className="sr-reveal mt-3 max-w-xl text-base text-muted md:text-lg" data-delay="0.15">
             Designing, building, and racing formula-style cars against the best
             university engineering teams in the world.
           </p>
         </div>
       </section>
 
-      {/* ── What is Formula SAE? ───────────────────────────── */}
-      <section id="competitions" className="bg-background mx-auto max-w-7xl px-6 py-20 md:py-32">
-        <div className="grid items-center gap-12 md:grid-cols-2">
-          <div className="flex flex-col gap-6">
-            <span
-              className="sr-slide-left text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
-              style={{ fontFamily: "var(--font-script), serif" }}
-            >
-              The Competition
-            </span>
-            <h2 className="sr-slide-left font-display text-3xl font-bold uppercase italic tracking-tight md:text-4xl" data-delay="0.1">
-              What is Formula SAE?
-            </h2>
-            <p className="sr-reveal leading-relaxed text-muted" data-delay="0.2">
-              Formula SAE is the world&apos;s premier student engineering
-              competition, organized by SAE International. Each year, university
-              teams design, build, and race a small formula-style vehicle,
-              evaluated across engineering design, cost efficiency, and on-track
-              performance.
-            </p>
-            <p className="sr-reveal leading-relaxed text-muted" data-delay="0.3">
-              Over 600 teams from six continents participate, making it one of
-              the most competitive and respected engineering challenges in
-              academia. Spartan Racing has represented San Jos&eacute; State
-              University in this competition since 2008.
-            </p>
-          </div>
-
-          <div className="sr-reveal relative aspect-[4/3] overflow-hidden" data-delay="0.15">
-            <Image
-              src="/images/flickr/racing-1.jpg"
-              alt="Spartan Racing car on track at Formula SAE competition"
-              fill
-              className="object-cover"
-            />
-          </div>
-        </div>
+      {/* ── What is Formula SAE? (compact intro) ──────────── */}
+      <section className="relative mx-auto max-w-7xl px-6 pt-16 pb-12">
+        {/* gold blob */}
+        <div
+          className="pointer-events-none absolute -top-20 left-1/2 h-[300px] w-[500px] -translate-x-1/2"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, rgba(212,168,67,0.07) 0%, transparent 70%)",
+          }}
+        />
+        <h2 className="sr-reveal font-display text-2xl font-bold uppercase italic tracking-tight md:text-3xl">
+          What is Formula SAE?
+        </h2>
+        <p className="sr-reveal mt-3 max-w-3xl text-sm leading-relaxed text-muted md:text-base" data-delay="0.1">
+          Formula SAE is the world&apos;s premier student engineering
+          competition, organized by SAE International. Over 600 teams from six
+          continents design, build, and race small formula-style vehicles,
+          evaluated across engineering design, cost efficiency, and on-track
+          performance. Spartan Racing has represented San Jos&eacute; State
+          University since 2008.
+        </p>
       </section>
 
-      {/* ── STATIC EVENTS heading ──────────────────────────── */}
-      <section className="mx-auto max-w-7xl px-6 pb-8">
-        <div className="flex items-center gap-6">
+      {/* ── Static Events ─────────────────────────────────── */}
+      <section className="relative mx-auto max-w-7xl px-6 pt-8 pb-10">
+        <div className="flex items-center gap-4 pb-6">
           <span
-            className="sr-slide-left text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
+            className="sr-slide-left text-[clamp(1rem,2vw,1.4rem)] italic text-gold"
             style={{ fontFamily: "var(--font-script), serif" }}
           >
             Static Events
           </span>
           <div className="sr-reveal h-px flex-1 bg-border" data-delay="0.1" />
         </div>
-      </section>
 
-      {/* ── Static Event: Design ───────────────────────────── */}
-      <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
-        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16 lg:gap-24">
-          <div className="flex flex-col gap-5">
-            <h2 className="sr-slide-left font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
-              {staticEvents[0].name}
-            </h2>
-            <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
-              {staticEvents[0].description}
-            </p>
-          </div>
-          <div className="sr-reveal relative aspect-[4/3] overflow-hidden" data-delay="0.1">
-            <Image
-              src={staticEvents[0].image}
-              alt={staticEvents[0].imageAlt}
-              fill
-              className="object-cover"
-            />
-          </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          {staticEvents.map((event, idx) => (
+            <div
+              key={event.name}
+              className="sr-reveal group relative aspect-[4/3] overflow-hidden rounded-sm"
+              data-delay={String(idx * 0.1)}
+            >
+              <Image
+                src={event.image}
+                alt={event.imageAlt}
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-5">
+                <h3 className="font-display text-xl font-bold uppercase tracking-tight text-white md:text-2xl">
+                  {event.name}
+                </h3>
+                <p className="mt-1 text-sm text-white/70">{event.tagline}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ── Static Event: Cost Report ──────────────────────── */}
-      <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
-        <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16 lg:gap-24">
-          <div className="sr-reveal relative aspect-[4/3] overflow-hidden md:order-1" data-delay="0.1">
-            <Image
-              src={staticEvents[1].image}
-              alt={staticEvents[1].imageAlt}
-              fill
-              className="object-cover"
-            />
-          </div>
-          <div className="flex flex-col gap-5 md:order-2">
-            <h2 className="sr-slide-left font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
-              {staticEvents[1].name}
-            </h2>
-            <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
-              {staticEvents[1].description}
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* ── Full-bleed divider image ───────────────────────── */}
-      <section className="sr-reveal relative h-[50vh] w-full overflow-hidden md:h-[60vh]">
-        <Image
-          src="/images/flickr/racing-3.jpg"
-          alt="Spartan Racing car on track"
-          fill
-          className="object-cover"
+      {/* ── Dynamic Events ────────────────────────────────── */}
+      <section className="relative mx-auto max-w-7xl px-6 pt-8 pb-20">
+        {/* gold blob */}
+        <div
+          className="pointer-events-none absolute top-0 right-0 h-[400px] w-[400px]"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, rgba(212,168,67,0.06) 0%, transparent 70%)",
+          }}
         />
-        <div className="absolute inset-0 bg-foreground/50" />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <div className="text-center">
-            <p className="sr-reveal font-display text-xs uppercase tracking-[0.3em] text-foreground/70" data-delay="0.1">
-              From static to
-            </p>
-            <p className="sr-reveal font-display text-5xl uppercase tracking-tight text-white md:text-7xl" data-delay="0.2">
-              Dynamic
-            </p>
-          </div>
-        </div>
-      </section>
 
-      {/* ── DYNAMIC EVENTS heading ─────────────────────────── */}
-      <section className="mx-auto max-w-7xl px-6 pb-8 pt-20 md:pt-32">
-        <div className="flex items-center gap-6">
+        <div className="flex items-center gap-4 pb-6">
           <span
-            className="sr-slide-left text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
+            className="sr-slide-left text-[clamp(1rem,2vw,1.4rem)] italic text-gold"
             style={{ fontFamily: "var(--font-script), serif" }}
           >
             Dynamic Events
           </span>
           <div className="sr-reveal h-px flex-1 bg-border" data-delay="0.1" />
         </div>
-      </section>
 
-      {/* ── Dynamic events: alternating layout ─────────────── */}
-      {dynamicEvents.map((event, idx) => {
-        const imageFirst = idx % 2 !== 0;
-
-        return (
-          <section key={event.name} id={event.name.toLowerCase().replace(/\s+/g, "-")} className="mx-auto max-w-7xl px-6 py-16 md:py-24">
-            <div className="grid items-center gap-10 md:grid-cols-2 md:gap-16 lg:gap-24">
-              {imageFirst ? (
-                <>
-                  <div className="sr-reveal relative aspect-[4/3] overflow-hidden md:order-1" data-delay="0.1">
-                    <Image
-                      src={event.image}
-                      alt={event.imageAlt}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                  <div className="flex flex-col gap-5 md:order-2">
-                    <h2 className="sr-slide-left font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
-                      {event.name}
-                    </h2>
-                    <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
-                      {event.description}
-                    </p>
-                  </div>
-                </>
-              ) : (
-                <>
-                  <div className="flex flex-col gap-5">
-                    <h2 className="sr-slide-left font-display text-4xl uppercase tracking-tight md:text-5xl lg:text-6xl" data-delay="0.05">
-                      {event.name}
-                    </h2>
-                    <p className="sr-reveal leading-relaxed text-muted" data-delay="0.15">
-                      {event.description}
-                    </p>
-                  </div>
-                  <div className="sr-reveal relative aspect-[4/3] overflow-hidden" data-delay="0.1">
-                    <Image
-                      src={event.image}
-                      alt={event.imageAlt}
-                      fill
-                      className="object-cover"
-                    />
-                  </div>
-                </>
-              )}
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {dynamicEvents.map((event, idx) => (
+            <div
+              key={event.name}
+              id={event.name.toLowerCase().replace(/\s+/g, "-")}
+              className="sr-reveal group relative aspect-[4/3] overflow-hidden rounded-sm"
+              data-delay={String(idx * 0.08)}
+            >
+              <Image
+                src={event.image}
+                alt={event.imageAlt}
+                fill
+                className="object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-5">
+                <h3 className="font-display text-xl font-bold uppercase tracking-tight text-white md:text-2xl">
+                  {event.name}
+                </h3>
+                <p className="mt-1 text-sm text-white/70">{event.tagline}</p>
+              </div>
             </div>
-          </section>
-        );
-      })}
-
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

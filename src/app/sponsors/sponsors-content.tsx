@@ -15,37 +15,37 @@ const TIER_META: Record<
   title: {
     label: "TITLE SPONSORS",
     gridClass: "grid-cols-1 sm:grid-cols-2 gap-px",
-    cardSize: "p-6 min-h-[160px]",
+    cardSize: "p-6 h-[140px]",
     logoH: "h-16",
   },
   platinum: {
     label: "PLATINUM SPONSORS",
     gridClass: "grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px",
-    cardSize: "p-5 min-h-[130px]",
+    cardSize: "p-5 h-[120px]",
     logoH: "h-11",
   },
   gold: {
     label: "GOLD SPONSORS",
     gridClass: "grid-cols-2 lg:grid-cols-3 gap-px",
-    cardSize: "p-4 min-h-[110px]",
+    cardSize: "p-4 h-[100px]",
     logoH: "h-10",
   },
   silver: {
     label: "SILVER SPONSORS",
     gridClass: "grid-cols-2 lg:grid-cols-4 gap-px",
-    cardSize: "p-3 min-h-[95px]",
+    cardSize: "p-3 h-[85px]",
     logoH: "h-8",
   },
   bronze: {
     label: "BRONZE SPONSORS",
     gridClass: "grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-px",
-    cardSize: "p-3 min-h-[80px]",
+    cardSize: "p-3 h-[75px]",
     logoH: "h-6",
   },
   partner: {
     label: "PARTNERS",
     gridClass: "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-px",
-    cardSize: "p-3 min-h-[65px]",
+    cardSize: "p-3 h-[65px]",
     logoH: "h-5",
   },
 };

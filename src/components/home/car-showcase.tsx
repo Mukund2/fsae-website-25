@@ -217,24 +217,25 @@ export function CarShowcase() {
             <div key={block.label} className="flex items-baseline">
               <div className="flex flex-col items-center">
                 <span
-                  className="font-display font-black tabular-nums text-foreground/[0.07]"
+                  className="font-body font-black tabular-nums text-foreground/[0.07]"
                   style={{
                     fontSize: "clamp(6rem, 14vw, 16rem)",
                     fontVariantNumeric: "tabular-nums",
                     lineHeight: 1,
+                    fontFamily: "var(--font-body), system-ui, sans-serif",
                   }}
                   suppressHydrationWarning
                 >
                   {String(block.value).padStart(2, "0")}
                 </span>
-                <span className="font-display text-[10px] uppercase tracking-[0.3em] text-foreground/20">
+                <span className="text-[10px] uppercase tracking-[0.3em] text-foreground/20" style={{ fontFamily: "var(--font-body), system-ui, sans-serif" }}>
                   {block.label}
                 </span>
               </div>
               {i < countdownBlocks.length - 1 && (
                 <span
-                  className="font-display font-black text-foreground/[0.05]"
-                  style={{ fontSize: "clamp(4rem, 10vw, 12rem)", lineHeight: 1 }}
+                  className="font-black text-foreground/[0.05]"
+                  style={{ fontSize: "clamp(4rem, 10vw, 12rem)", lineHeight: 1, fontFamily: "var(--font-body), system-ui, sans-serif" }}
                 >
                   :
                 </span>

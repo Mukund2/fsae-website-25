@@ -180,8 +180,8 @@ function RacetrackCar() {
   return (
     <div ref={carRef} className="z-30 hidden md:block" style={{ position: "fixed" }}>
       <svg viewBox="0 0 28 48" width="22" height="38">
-        <rect x="5" y="6" width="18" height="34" rx="9" fill="#D4960A" />
-        <path d="M9 6 L14 0 L19 6" fill="#D4960A" />
+        <rect x="5" y="6" width="18" height="34" rx="9" fill="#C2850C" />
+        <path d="M9 6 L14 0 L19 6" fill="#C2850C" />
         <rect x="1" y="12" width="5" height="9" rx="2" fill="#1a1a1a" />
         <rect x="22" y="12" width="5" height="9" rx="2" fill="#1a1a1a" />
         <rect x="1" y="29" width="5" height="9" rx="2" fill="#1a1a1a" />

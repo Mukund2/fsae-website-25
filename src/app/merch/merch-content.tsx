@@ -157,8 +157,8 @@ export function MerchContent({ products }: { products: MerchProduct[] }) {
 
   return (
     <div ref={revealRef}>
-      {/* Hero with image */}
-      <section className="relative flex items-end overflow-hidden pt-32 pb-12">
+      {/* Hero with image — Anduril-style centered */}
+      <section className="relative flex min-h-[40vh] items-center justify-center overflow-hidden pt-32 pb-16">
         <Image
           src="/images/flickr/team-hero.jpg"
           alt="SJSU Spartan Racing team"
@@ -167,12 +167,12 @@ export function MerchContent({ products }: { products: MerchProduct[] }) {
           className="object-cover"
           sizes="100vw"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
-        <div className="relative mx-auto max-w-7xl px-6">
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="relative text-center">
           <h1
             data-reveal
-            className="font-display font-bold uppercase italic leading-[0.9] tracking-tight"
-            style={{ fontSize: "clamp(3rem, 8vw, 6rem)", color: "#D4960A" }}
+            className="font-display font-bold uppercase italic leading-[0.9] tracking-tight text-white"
+            style={{ fontSize: "clamp(3.5rem, 10vw, 8rem)" }}
           >
             Merch
           </h1>

@@ -92,7 +92,7 @@ export function SponsorStrip() {
   return (
     <section className="relative w-full py-20 bg-background overflow-hidden">
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[radial-gradient(ellipse_at_center,_rgba(212,150,10,0.10)_0%,_transparent_70%)]" />
+        <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[radial-gradient(ellipse_at_center,_rgba(184,134,11,0.10)_0%,_transparent_70%)]" />
       </div>
 
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">

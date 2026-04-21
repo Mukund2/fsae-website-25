@@ -194,10 +194,10 @@ export function Newsletter() {
       <style>{`
         @keyframes newsletter-bar-jut {
           0% { padding-left: 20px; border-left-color: transparent; }
-          100% { padding-left: 32px; border-left-color: #D4960A; }
+          100% { padding-left: 32px; border-left-color: #C2850C; }
         }
         @keyframes newsletter-bar-retract {
-          0% { padding-left: 32px; border-left-color: #D4960A; }
+          0% { padding-left: 32px; border-left-color: #C2850C; }
           100% { padding-left: 20px; border-left-color: transparent; }
         }
         .newsletter-bar:not(.newsletter-bar-active):hover {
@@ -208,15 +208,20 @@ export function Newsletter() {
         }
         .newsletter-bar-active {
           padding-left: 32px;
-          border-left-color: #D4960A;
+          border-left-color: #C2850C;
         }
       `}</style>
-      <section ref={sectionRef} className="w-full py-24 md:py-32" style={{ backgroundColor: "#F0F0F0" }}>
+      <section ref={sectionRef} className="relative w-full py-24 md:py-32 bg-background overflow-hidden">
+        {/* Warm gold ambient glow */}
+        <div className="pointer-events-none absolute inset-0" aria-hidden="true">
+          <div className="absolute left-1/3 top-1/4 h-[600px] w-[600px] bg-[radial-gradient(ellipse_at_center,_rgba(184,134,11,0.08)_0%,_transparent_70%)]" />
+          <div className="absolute right-1/4 bottom-1/4 h-[500px] w-[500px] bg-[radial-gradient(ellipse_at_center,_rgba(184,134,11,0.06)_0%,_transparent_70%)]" />
+        </div>
         <div className="mx-auto max-w-7xl px-6 lg:px-12">
           {/* Header */}
           <div data-anim="left" className="mb-10 flex items-end justify-between">
             <div>
-              <h2 className="font-display font-bold uppercase italic leading-[0.9] tracking-tight" style={{ fontSize: "clamp(2.5rem, 6.6vw, 5rem)", color: "#D4960A" }}>
+              <h2 className="font-display font-bold uppercase italic leading-[0.9] tracking-tight" style={{ fontSize: "clamp(2.5rem, 6.6vw, 5rem)", color: "#C2850C" }}>
                 Newsletters
               </h2>
             </div>

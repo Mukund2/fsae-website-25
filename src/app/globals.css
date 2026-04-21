@@ -5,8 +5,8 @@
   --foreground: #0A0A0A;
   --surface: #F3F4F6;
   --elevated: #FFFFFF;
-  --gold: #D4960A;
-  --gold-light: #E5A800;
+  --gold: #C2850C;
+  --gold-light: #D4980F;
   --blue: #0055A2;
   --accent: #0055A2;
   --yellow: #E8C547;
@@ -25,9 +25,9 @@
   --color-yellow: var(--yellow);
   --color-muted: var(--muted);
   --color-border: var(--border);
-  --font-display: var(--font-display);
-  --font-body: var(--font-body);
-  --font-mono: var(--font-mono);
+  --font-display: var(--font-geist-sans);
+  --font-body: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
   --font-script: var(--font-script);
   --color-accent: var(--accent);
 }
@@ -48,7 +48,7 @@ body {
 }
 
 .text-gradient-gold {
-  background: linear-gradient(135deg, #D4960A, #E5A800, #D4960A);
+  background: linear-gradient(135deg, #C2850C, #D4980F, #C2850C);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

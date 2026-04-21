@@ -1,25 +1,16 @@
-import { Inter, Space_Grotesk, IBM_Plex_Mono, Playfair_Display, Permanent_Marker } from "next/font/google";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
+import { Playfair_Display, Permanent_Marker } from "next/font/google";
 
-export const bebasNeue = Space_Grotesk({
-  weight: ["500", "600", "700"],
-  subsets: ["latin"],
-  variable: "--font-display",
-  display: "swap",
-});
+// Geist Sans — Vercel's flagship font, the SF tech standard
+// The variable is automatically --font-geist-sans
+export const geistSans = GeistSans;
+export const geistMono = GeistMono;
 
-export const dmSans = Inter({
-  weight: ["300", "400", "500", "600"],
-  subsets: ["latin"],
-  variable: "--font-body",
-  display: "swap",
-});
-
-export const jetbrainsMono = IBM_Plex_Mono({
-  weight: ["400", "500", "600"],
-  subsets: ["latin"],
-  variable: "--font-mono",
-  display: "swap",
-});
+// Legacy aliases used by layout.tsx
+export const bebasNeue = GeistSans;
+export const dmSans = GeistSans;
+export const jetbrainsMono = GeistMono;
 
 export const permanentMarker = Permanent_Marker({
   weight: "400",

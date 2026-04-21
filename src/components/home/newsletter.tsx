@@ -217,7 +217,7 @@ export function Newsletter() {
           <div className="absolute left-1/3 top-1/4 h-[600px] w-[600px] bg-[radial-gradient(ellipse_at_center,_rgba(184,134,11,0.08)_0%,_transparent_70%)]" />
           <div className="absolute right-1/4 bottom-1/4 h-[500px] w-[500px] bg-[radial-gradient(ellipse_at_center,_rgba(184,134,11,0.06)_0%,_transparent_70%)]" />
         </div>
-        <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12">
           {/* Header */}
           <div data-anim="left" className="mb-10 flex items-end justify-between">
             <div>
@@ -231,7 +231,7 @@ export function Newsletter() {
               <button
                 onClick={handlePrevPage}
                 disabled={pageIndex === 0}
-                className="flex h-10 w-10 items-center justify-center border border-gold text-gold disabled:opacity-20 disabled:cursor-not-allowed"
+                className="flex h-11 w-11 items-center justify-center border border-gold text-gold disabled:opacity-20 disabled:cursor-not-allowed"
                 aria-label="Previous newsletters"
               >
                 <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
@@ -247,7 +247,7 @@ export function Newsletter() {
               <button
                 onClick={handleNextPage}
                 disabled={pageIndex >= totalPages - 1}
-                className="flex h-10 w-10 items-center justify-center border border-gold text-gold disabled:opacity-20 disabled:cursor-not-allowed"
+                className="flex h-11 w-11 items-center justify-center border border-gold text-gold disabled:opacity-20 disabled:cursor-not-allowed"
                 aria-label="Next newsletters"
               >
                 <svg width="16" height="16" viewBox="0 0 20 20" fill="none">

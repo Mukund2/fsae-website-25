@@ -52,9 +52,9 @@ export default function ContactPage() {
     <>
       {/* Contact info — starts at the top */}
       <section className="bg-background mx-auto max-w-7xl px-6 pt-32 pb-20 md:pt-40 md:pb-28">
-        <div className="grid gap-12 md:grid-cols-2 items-start">
+        <div className="grid gap-8 md:gap-12 md:grid-cols-2 items-start">
           {/* Left -- contact info card */}
-          <div className="border border-border bg-surface p-8 md:p-10 space-y-8 hero-fade-in" style={{ animationDelay: "0.2s" }}>
+          <div className="border border-border bg-surface p-5 sm:p-8 md:p-10 space-y-8 hero-fade-in" style={{ animationDelay: "0.2s" }}>
             {/* Email */}
             <div className="flex items-start justify-between">
               <div>

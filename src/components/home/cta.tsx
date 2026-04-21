@@ -83,7 +83,7 @@ export function JoinUs() {
         href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
         target="_blank"
         rel="noopener noreferrer"
-        className="cta-panel group relative min-h-[55vh] overflow-hidden"
+        className="cta-panel group relative min-h-[40vh] sm:min-h-[55vh] overflow-hidden"
       >
         <Image
           src="/images/team/lucid-visit.jpg"
@@ -96,7 +96,7 @@ export function JoinUs() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
         {/* Content */}
-        <div className="relative z-10 flex min-h-[55vh] flex-col justify-end p-8 lg:p-12">
+        <div className="relative z-10 flex min-h-[40vh] sm:min-h-[55vh] flex-col justify-end p-5 sm:p-8 lg:p-12">
           <div>
             <h3
               data-anim
@@ -118,7 +118,7 @@ export function JoinUs() {
       {/* Right: Support Us */}
       <a
         href="/support"
-        className="cta-panel group relative min-h-[55vh] overflow-hidden"
+        className="cta-panel group relative min-h-[40vh] sm:min-h-[55vh] overflow-hidden"
       >
         <Image
           src="/images/sr16/car-action-4.jpg"
@@ -131,7 +131,7 @@ export function JoinUs() {
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
         {/* Content */}
-        <div className="relative z-10 flex min-h-[55vh] flex-col justify-end p-8 lg:p-12">
+        <div className="relative z-10 flex min-h-[40vh] sm:min-h-[55vh] flex-col justify-end p-5 sm:p-8 lg:p-12">
           <div>
             <h3
               data-anim

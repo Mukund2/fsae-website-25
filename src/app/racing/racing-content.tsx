@@ -99,8 +99,8 @@ export function RacingContent() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/70 to-background/30" />
 
-        <div className="relative mx-auto w-full max-w-7xl px-6">
-          <h1 className="sr-reveal font-display text-5xl font-bold uppercase italic tracking-tight md:text-7xl">
+        <div className="relative mx-auto w-full max-w-7xl px-4 sm:px-6">
+          <h1 className="sr-reveal font-display text-4xl font-bold uppercase italic tracking-tight sm:text-5xl md:text-7xl">
             The Competition
           </h1>
           <p className="sr-reveal mt-3 max-w-xl text-base text-muted md:text-lg" data-delay="0.15">

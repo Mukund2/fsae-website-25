@@ -80,7 +80,7 @@ export function Footer() {
               height={48}
               className="opacity-90"
             />
-            <h3 className="font-display text-3xl uppercase tracking-tight">
+            <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-tight">
               <span className="font-bold text-gold">Spartan</span>{" "}
               <span className="font-bold text-blue">Racing</span>
             </h3>

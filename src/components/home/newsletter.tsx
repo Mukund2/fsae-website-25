@@ -129,7 +129,7 @@ function animateElement(
 
 export function Newsletter() {
   const [active, setActive] = useState(0);
-  const [loaded, setLoaded] = useState<Set<number>>(() => new Set([0, 1, 2, 3, 4]));
+  const [loaded, setLoaded] = useState<Set<number>>(() => new Set([0]));
   const [pageIndex, setPageIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 

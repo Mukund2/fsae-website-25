@@ -196,7 +196,7 @@ export function RacingContent() {
             <div
               key={event.name}
               id={event.name.toLowerCase().replace(/\s+/g, "-")}
-              className="sr-reveal group relative aspect-[4/3] overflow-hidden rounded-sm"
+              className="sr-reveal group relative aspect-[3/2] overflow-hidden rounded-sm"
               data-delay={String(idx * 0.08)}
             >
               <Image

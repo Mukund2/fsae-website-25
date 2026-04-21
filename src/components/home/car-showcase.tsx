@@ -208,7 +208,7 @@ export function CarShowcase() {
   return (
     <div ref={wrapperRef} className="relative" style={{ height: "300vh" }}>
       <section
-        className="sticky top-0 w-full overflow-hidden bg-[#F5F5F0]"
+        className="sticky top-0 w-full overflow-hidden bg-background"
         style={{ height: "100vh" }}
       >
         {/* Big countdown behind the car */}

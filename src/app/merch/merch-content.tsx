@@ -157,9 +157,17 @@ export function MerchContent({ products }: { products: MerchProduct[] }) {
 
   return (
     <div ref={revealRef}>
-      {/* Hero */}
-      <section className="relative flex items-center overflow-hidden bg-surface pt-32 pb-12">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,168,67,0.06)_0%,_transparent_60%)]" />
+      {/* Hero with image */}
+      <section className="relative flex items-end overflow-hidden pt-32 pb-12">
+        <Image
+          src="/images/flickr/team-hero.jpg"
+          alt="SJSU Spartan Racing team"
+          fill
+          priority
+          className="object-cover"
+          sizes="100vw"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-background/30" />
         <div className="relative mx-auto max-w-7xl px-6">
           <h1
             data-reveal

@@ -5,8 +5,8 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Center } from "@react-three/drei";
 import * as THREE from "three";
 
-// Unveiling: Saturday April 26, 2026 at 12:00 PM PT
-const UNVEIL_DATE = new Date("2026-04-26T12:00:00-07:00");
+// Unveiling: Saturday April 25, 2026 at 11:00 AM PT
+const UNVEIL_DATE = new Date("2026-04-25T11:00:00-07:00");
 
 function useCountdown(target: Date) {
   const calc = useCallback(() => {

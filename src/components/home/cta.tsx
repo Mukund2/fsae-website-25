@@ -95,27 +95,8 @@ export function JoinUs() {
         {/* Gradient overlay — heavy at bottom for text, light elsewhere to show image */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-        {/* Big background text — Anduril-style dramatic type */}
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
-          <span
-            data-anim
-            className="font-display font-black uppercase italic text-white/[0.08] select-none"
-            style={{ fontSize: "clamp(6rem, 14vw, 12rem)", lineHeight: 0.85, letterSpacing: "-0.03em" }}
-          >
-            JOIN
-          </span>
-        </div>
-
         {/* Content */}
-        <div className="relative z-10 flex min-h-[55vh] flex-col justify-between p-8 lg:p-12">
-          {/* Top label */}
-          <div data-anim>
-            <span className="font-display text-[11px] uppercase tracking-[0.3em] text-white/60">
-              Be Part of It
-            </span>
-          </div>
-
-          {/* Bottom content */}
+        <div className="relative z-10 flex min-h-[55vh] flex-col justify-end p-8 lg:p-12">
           <div>
             <h3
               data-anim
@@ -149,27 +130,8 @@ export function JoinUs() {
         {/* Gradient overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
 
-        {/* Big background text */}
-        <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
-          <span
-            data-anim
-            className="font-display font-black uppercase italic text-white/[0.08] select-none"
-            style={{ fontSize: "clamp(6rem, 14vw, 12rem)", lineHeight: 0.85, letterSpacing: "-0.03em" }}
-          >
-            FUEL
-          </span>
-        </div>
-
         {/* Content */}
-        <div className="relative z-10 flex min-h-[55vh] flex-col justify-between p-8 lg:p-12">
-          {/* Top label */}
-          <div data-anim>
-            <span className="font-display text-[11px] uppercase tracking-[0.3em] text-white/60">
-              Make an Impact
-            </span>
-          </div>
-
-          {/* Bottom content */}
+        <div className="relative z-10 flex min-h-[55vh] flex-col justify-end p-8 lg:p-12">
           <div>
             <h3
               data-anim

@@ -22,7 +22,7 @@ export default function SupportPage() {
       {/* Hero banner */}
       <section className="relative flex min-h-[50vh] items-center pt-32 pb-16 overflow-hidden">
         <Image
-          src="/images/sr16/car-action-2.jpg"
+          src="/images/flickr/support-us.jpg"
           alt=""
           fill
           sizes="100vw"

@@ -57,55 +57,55 @@ export const subteams: Subteam[] = [
     abbreviation: "AERO",
     description:
       "Design parts on the car that create downforce and reduce drag, such as the front and rear wings, canards, and side pods.",
-    image: "/images/cars/car-1.jpg",
+    image: "/images/flickr/aero.jpg",
   },
   {
     name: "Powertrain",
     abbreviation: "PWR",
     description:
       "Design the systems that make the car move, such as the electric motor, accumulator (battery), and final drive.",
-    image: "/images/flickr/driver-day-3.jpg",
+    image: "/images/flickr/powertrain.jpg",
   },
   {
     name: "Chassis",
     abbreviation: "CHAS",
     description:
       "Design and create a rigid skeleton for the car so that other subteams can mount parts onto it and so that the car can handle well.",
-    image: "/images/flickr/driver-day-5.jpg",
+    image: "/images/flickr/chassis.jpg",
   },
   {
     name: "Suspension",
     abbreviation: "SUSP",
     description:
       "Design everything that controls the kinematics of the vehicle, such as the brakes, steering, and suspension.",
-    image: "/images/cars/car-2.jpg",
+    image: "/images/flickr/suspension.jpg",
   },
   {
     name: "Electronics",
     abbreviation: "ELEC",
     description:
       "Responsible for designing and installing all analog and digital circuits in the car so that the electronics can work and output data properly.",
-    image: "/images/cars/car-3.jpg",
+    image: "/images/flickr/electronics.jpg",
   },
   {
     name: "Software",
     abbreviation: "SOFT",
     description:
       "Program the electronic components so they behave properly in different states. Also responsible for data collection and logging.",
-    image: "/images/flickr/comp-action-2.jpg",
+    image: "/images/flickr/software.jpg",
   },
   {
     name: "Business",
     abbreviation: "BIZ",
     description:
       "Handle data analytics, marketing, public relations, finances, and logistics for the team.",
-    image: "/images/flickr/comp-action-3.jpg",
+    image: "/images/flickr/business.jpg",
   },
   {
     name: "Research & Development",
     abbreviation: "R&D",
     description:
       "With a focus on multi-year projects and manufacturing an experimental in-hubs powertrain, R&D is focused on developing and optimizing the future of Spartan Racing.",
-    image: "/images/team/team-group.jpg",
+    image: "/images/flickr/rnd.jpg",
   },
 ];

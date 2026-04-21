@@ -45,7 +45,7 @@ const staticEvents = [
     tagline: "Defend every decision.",
     description:
       "Present your car's engineering to a panel of industry judges who have decades of motorsport and automotive experience. Teams must justify every design choice, from suspension geometry to aerodynamic philosophy, proving that their vehicle represents the best solution to the design brief.",
-    image: "/images/sr16/car-action-2.jpg",
+    image: "/images/flickr/design-1.jpg",
     imageAlt: "Spartan Racing car showing design details",
   },
   {
@@ -53,7 +53,7 @@ const staticEvents = [
     tagline: "Every dollar justified.",
     description:
       "Demonstrate cost-effective manufacturing and material choices with a comprehensive Bill of Materials. Teams document every component, process, and assembly step, proving they can build a competitive vehicle within real-world budget constraints. Judges evaluate both accuracy and the team's understanding of manufacturing economics.",
-    image: "/images/flickr/driver-day-1.jpg",
+    image: "/images/flickr/cost-report-1.jpg",
     imageAlt: "Team working on cost analysis and car assembly",
   },
 ];
@@ -64,7 +64,7 @@ const dynamicEvents = [
     tagline: "75 meters. Full send.",
     description:
       "A 75-meter straight-line sprint from a standing start, testing raw power delivery, traction control, and launch strategy. The difference between first and last is often less than a second. Every detail matters: gear ratios, tire compound, driver reaction time.",
-    image: "/images/sr16/car-action-1.jpg",
+    image: "/images/flickr/acceleration-1.jpg",
     imageAlt: "Spartan Racing car launching off the line",
   },
   {
@@ -72,7 +72,7 @@ const dynamicEvents = [
     tagline: "Lateral grip, measured.",
     description:
       "A figure-eight course that isolates lateral acceleration and cornering capability. The car runs two laps in each direction, and only the fastest lap counts. This event strips away everything except mechanical grip, tire performance, and suspension tuning.",
-    image: "/images/sr16/car-action-3.jpg",
+    image: "/images/flickr/skidpad-1.jpg",
     imageAlt: "Car cornering on the skid pad course",
   },
   {
@@ -80,7 +80,7 @@ const dynamicEvents = [
     tagline: "One lap. One chance.",
     description:
       "A single-lap timed run through a tight road course defined by cones. Autocross tests the full dynamic package: acceleration, braking, cornering, and driver skill, all in one concentrated effort. The fastest autocross time also sets the starting order for Endurance.",
-    image: "/images/sr16/car-action-4.jpg",
+    image: "/images/flickr/autocross-1.jpg",
     imageAlt: "Car navigating the autocross cone course",
   },
   {
@@ -88,7 +88,7 @@ const dynamicEvents = [
     tagline: "22 kilometers. No margin for error.",
     description:
       "The defining event of Formula SAE. A 22-kilometer extended race that tests reliability, speed, fuel efficiency, and driver endurance. Cars must survive a mandatory driver change at the halfway point. Mechanical failures here are season-ending. This is where championships are won and lost.",
-    image: "/images/cars/car-1.jpg",
+    image: "/images/flickr/endurance.jpg",
     imageAlt: "Spartan Racing car during endurance race",
   },
 ];
@@ -193,7 +193,7 @@ export function RacingContent() {
 
           <div className="sr-reveal relative aspect-[4/3] overflow-hidden" data-delay="0.15">
             <Image
-              src="/images/flickr/comp-action-4.jpg"
+              src="/images/flickr/racing-1.jpg"
               alt="Spartan Racing car on track at Formula SAE competition"
               fill
               className="object-cover"
@@ -262,7 +262,7 @@ export function RacingContent() {
       {/* ── Full-bleed divider image ───────────────────────── */}
       <section className="sr-reveal relative h-[50vh] w-full overflow-hidden md:h-[60vh]">
         <Image
-          src="/images/cars/car-2.jpg"
+          src="/images/flickr/racing-3.jpg"
           alt="Spartan Racing car on track"
           fill
           className="object-cover"

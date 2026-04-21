@@ -53,7 +53,7 @@ export default function ContactPage() {
       {/* Hero section with team photo background */}
       <section className="relative flex min-h-[50vh] items-center justify-center overflow-hidden pt-32 pb-16">
         <Image
-          src="/images/team/team-1.jpg"
+          src="/images/flickr/team-hero.jpg"
           alt="SJSU Spartan Racing team"
           fill
           priority
@@ -155,7 +155,7 @@ export default function ContactPage() {
           {/* Right -- image */}
           <div className="relative aspect-[4/3] overflow-hidden hero-fade-in" style={{ animationDelay: "0.4s" }}>
             <Image
-              src="/images/flickr/comp-action-1.jpg"
+              src="/images/flickr/competitions.jpg"
               alt="SJSU Spartan Racing at competition"
               fill
               sizes="(max-width: 768px) 100vw, 50vw"
@@ -168,7 +168,7 @@ export default function ContactPage() {
       {/* Full-width image divider */}
       <section className="relative h-[40vh] min-h-[300px] overflow-hidden hero-fade-in" style={{ animationDelay: "0.5s" }}>
         <Image
-          src="/images/team/team-2.jpg"
+          src="/images/flickr/subteams.jpg"
           alt="SJSU Spartan Racing workshop"
           fill
           sizes="100vw"

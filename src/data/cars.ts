@@ -8,7 +8,7 @@ export const cars: Car[] = [
     motor: "Emrax 228",
     torque: "162 ft-lbs",
     battery: "8.3 kWh",
-    image: "/images/cars/sr-16.jpg",
+    image: "/images/flickr/sr16-cars.jpg",
   },
   {
     slug: "sr-15",

@@ -155,7 +155,7 @@ export function JoinContent() {
       <section className="relative w-full">
         <div className="relative aspect-[21/9] w-full overflow-hidden">
           <Image
-            src="/images/team/team-group.jpg"
+            src="/images/flickr/join-team.jpg"
             alt="Spartan Racing team"
             fill
             sizes="100vw"

@@ -56,28 +56,28 @@ export const subteams: Subteam[] = [
     name: "Aerodynamics",
     abbreviation: "AERO",
     description:
-      "Design parts on the car that create downforce and reduce drag, such as the front and rear wings, canards, and side pods.",
+      "Wings, canards, sidepods — we shape every surface to maximize downforce and cut drag. CFD in the sim, carbon on the car.",
     image: "/images/flickr/aero.jpg",
   },
   {
     name: "Powertrain",
     abbreviation: "PWR",
     description:
-      "Design the systems that make the car move, such as the electric motor, accumulator (battery), and final drive.",
+      "Motor, battery, final drive. We build the drivetrain that puts power to the ground — from cell selection to torque vectoring.",
     image: "/images/flickr/powertrain.jpg",
   },
   {
     name: "Chassis",
     abbreviation: "CHAS",
     description:
-      "Design and create a rigid skeleton for the car so that other subteams can mount parts onto it and so that the car can handle well.",
+      "The backbone of every car. We design and weld the steel tube frame that everything bolts to, balancing stiffness with weight.",
     image: "/images/flickr/chassis.jpg",
   },
   {
     name: "Suspension",
     abbreviation: "SUSP",
     description:
-      "Design everything that controls the kinematics of the vehicle, such as the brakes, steering, and suspension.",
+      "Uprights, A-arms, steering, brakes — we tune the contact patch. Every tenth on track starts with suspension geometry.",
     image: "/images/flickr/suspension.jpg",
   },
   {

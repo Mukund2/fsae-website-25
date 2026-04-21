@@ -61,15 +61,9 @@ export function CategoryCards() {
         {/* McLaren-style header */}
         <div className="mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <h2 className="font-display text-[clamp(2.2rem,5vw,4rem)] font-bold uppercase italic leading-[0.9] tracking-tight text-foreground">
-              Spartan Racing
-            </h2>
-            <p
-              className="text-[clamp(2.2rem,5vw,4rem)] italic leading-[0.9] tracking-tight text-foreground/50"
-              style={{ fontFamily: "var(--font-script), serif" }}
-            >
+            <h2 className="font-display font-bold uppercase italic leading-[0.9] tracking-tight" style={{ fontSize: "clamp(2.5rem, 6.6vw, 5rem)", color: "#C8A24E" }}>
               About Us
-            </p>
+            </h2>
           </div>
           <p className="max-w-md text-[15px] leading-relaxed text-foreground/60 lg:text-right">
             From design and manufacturing to data and strategy, every member plays a critical role in putting our car on track.

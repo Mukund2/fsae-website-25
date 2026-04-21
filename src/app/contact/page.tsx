@@ -199,15 +199,17 @@ export default function ContactPage() {
             business minds to join our team.
           </p>
           <div className="mt-8 hero-fade-in" style={{ animationDelay: "1.0s" }}>
-            <Link
-              href="/join"
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-background hover:bg-gold/90"
             >
               Join Us
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-background">
                 <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-            </Link>
+            </a>
           </div>
         </div>
       </section>

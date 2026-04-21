@@ -216,15 +216,9 @@ export function Newsletter() {
           {/* Header */}
           <div data-anim="left" className="mb-10 flex items-end justify-between">
             <div>
-              <h2 className="font-display text-[clamp(2rem,4vw,3.5rem)] font-bold uppercase italic leading-[0.95] tracking-tight text-foreground">
-                Spartan Racing
-              </h2>
-              <span
-                className="text-[clamp(1.8rem,3.5vw,3rem)] italic text-gold"
-                style={{ fontFamily: "var(--font-script), serif" }}
-              >
+              <h2 className="font-display font-bold uppercase italic leading-[0.9] tracking-tight" style={{ fontSize: "clamp(2.5rem, 6.6vw, 5rem)", color: "#C8A24E" }}>
                 Newsletters
-              </span>
+              </h2>
             </div>
 
             {/* Pagination arrows */}

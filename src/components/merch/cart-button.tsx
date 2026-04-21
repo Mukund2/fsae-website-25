@@ -17,7 +17,9 @@ export function CartButton({ className }: CartButtonProps) {
   // Only show the cart button in the merch section, or anywhere if the
   // user already has items in their cart.
   const onMerch = pathname?.startsWith("/merch") ?? false;
-  if (!onMerch && count === 0) return null;
+  if (!onMerch && count === 0) {
+    return <div className="hidden md:block h-10 w-10" />;
+  }
 
   return (
     <button

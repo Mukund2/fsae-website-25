@@ -158,14 +158,15 @@ export function MerchContent({ products }: { products: MerchProduct[] }) {
   return (
     <div ref={revealRef}>
       {/* Hero */}
-      <section className="relative flex min-h-[50vh] items-center overflow-hidden bg-surface pt-32 pb-16">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,85,162,0.06)_0%,_transparent_60%)]" />
+      <section className="relative flex items-center overflow-hidden bg-surface pt-32 pb-12">
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(212,168,67,0.06)_0%,_transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-6">
           <h1
             data-reveal
-            className="font-display text-5xl font-bold uppercase italic tracking-tight md:text-7xl"
+            className="font-display font-bold uppercase italic leading-[0.9] tracking-tight"
+            style={{ fontSize: "clamp(3rem, 8vw, 6rem)", color: "#C8A24E" }}
           >
-            Team Merch
+            Merch
           </h1>
         </div>
       </section>
@@ -194,55 +195,6 @@ export function MerchContent({ products }: { products: MerchProduct[] }) {
         )}
       </section>
 
-      {/* Contact CTA */}
-      <section className="bg-surface py-24 md:py-32">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <span
-            data-reveal
-            className="text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
-            style={{ fontFamily: "var(--font-script), serif" }}
-          >
-            Interested?
-          </span>
-          <h2
-            data-reveal
-            className="mt-2 font-display text-3xl font-bold uppercase italic tracking-tight md:text-5xl"
-          >
-            Want to Order?
-          </h2>
-          <p
-            data-reveal
-            data-reveal-delay="150"
-            className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-muted"
-          >
-            Merch sales open periodically throughout the year. Reach out to
-            place an order or ask about availability.
-          </p>
-          <div data-reveal data-reveal-delay="300" className="mt-10">
-            <a
-              href="mailto:sjsuformulasae@gmail.com"
-              className="inline-flex items-center gap-2 bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-background hover:bg-gold/90"
-            >
-              Contact Us
-              <svg
-                width="20"
-                height="20"
-                viewBox="0 0 20 20"
-                fill="none"
-                className="text-background"
-              >
-                <path
-                  d="M5 15L15 5M15 5H8M15 5V12"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

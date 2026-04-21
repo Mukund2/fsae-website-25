@@ -211,7 +211,7 @@ export function Newsletter() {
           border-left-color: #C2850C;
         }
       `}</style>
-      <section ref={sectionRef} className="relative w-full py-24 md:py-32 bg-background overflow-hidden">
+      <section ref={sectionRef} className="relative z-10 w-full py-24 md:py-32 bg-background overflow-hidden">
         {/* Warm gold ambient glow */}
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
           <div className="absolute left-1/3 top-1/4 h-[600px] w-[600px] bg-[radial-gradient(ellipse_at_center,_rgba(184,134,11,0.08)_0%,_transparent_70%)]" />

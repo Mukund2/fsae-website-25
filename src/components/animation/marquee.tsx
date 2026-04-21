@@ -26,7 +26,9 @@ export function Marquee({
         className={cn("flex w-max", gap)}
         style={{
           animation: `marquee var(--marquee-speed) linear infinite${reverse ? " reverse" : ""}`,
-          willChange: "transform",
+          backfaceVisibility: "hidden",
+          perspective: 1000,
+          transform: "translateZ(0)",
         }}
       >
         <div className={cn("flex shrink-0 items-center", gap)}>{children}</div>

@@ -172,7 +172,7 @@ export function MerchContent({ products }: { products: MerchProduct[] }) {
           <h1
             data-reveal
             className="font-display font-bold uppercase italic leading-[0.9] tracking-tight"
-            style={{ fontSize: "clamp(3rem, 8vw, 6rem)", color: "#C8A24E" }}
+            style={{ fontSize: "clamp(3rem, 8vw, 6rem)", color: "#D4960A" }}
           >
             Merch
           </h1>

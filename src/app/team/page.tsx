@@ -19,7 +19,7 @@ export default function TeamPage() {
         <div className="relative mx-auto max-w-7xl px-6">
           <h1
             className="font-display font-bold uppercase italic leading-[0.9] tracking-tight"
-            style={{ fontSize: "clamp(3rem, 8vw, 6rem)", color: "#C8A24E" }}
+            style={{ fontSize: "clamp(3rem, 8vw, 6rem)", color: "#D4960A" }}
           >
             Leads
           </h1>

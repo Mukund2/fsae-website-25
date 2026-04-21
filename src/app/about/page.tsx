@@ -14,7 +14,7 @@ export default function SubteamsPage() {
       {/* Subteam cards */}
       <section className="mx-auto max-w-7xl px-6 pt-32 pb-24 md:pb-32">
         <div className="mb-10 hero-fade-in" style={{ animationDelay: "0.1s" }}>
-          <h1 className="font-display font-bold uppercase italic leading-[0.9] tracking-tight" style={{ fontSize: "clamp(3rem, 8vw, 6rem)", color: "#C8A24E" }}>
+          <h1 className="font-display font-bold uppercase italic leading-[0.9] tracking-tight" style={{ fontSize: "clamp(3rem, 8vw, 6rem)", color: "#D4960A" }}>
             Subteams
           </h1>
         </div>

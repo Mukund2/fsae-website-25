@@ -82,11 +82,11 @@ function CarModel({ scrollProgress }: { scrollProgress: number }) {
         return;
       }
 
-      // Gold / orange accent parts
+      // Former gold / orange accent parts — now all black
       if (r > 0.5 && g > 0.2 && g < 0.6 && b < 0.2) {
-        mat.color.set(0xc8a020);
+        mat.color.set(0x1a1a1a);
         mat.roughness = 0.3;
-        mat.metalness = 0.15;
+        mat.metalness = 0.3;
         mat.needsUpdate = true;
         return;
       }

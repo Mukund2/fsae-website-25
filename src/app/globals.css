@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F7F5F0;
-  --foreground: #1A1A1A;
-  --surface: #EFECE4;
+  --background: #FAFAFA;
+  --foreground: #0A0A0A;
+  --surface: #F3F4F6;
   --elevated: #FFFFFF;
-  --gold: #D4A843;
-  --gold-light: #E0B84E;
+  --gold: #D4960A;
+  --gold-light: #E5A800;
   --blue: #0055A2;
   --accent: #0055A2;
   --yellow: #E8C547;
-  --muted: #8A8478;
-  --border: #DDD8CC;
+  --muted: #6B7280;
+  --border: #E5E7EB;
 }
 
 @theme inline {
@@ -35,11 +35,6 @@
 /* Base styles */
 body {
   background-color: var(--background);
-  background-image:
-    radial-gradient(circle, rgba(0, 0, 0, 0.02) 1px, transparent 1px),
-    radial-gradient(circle, rgba(0, 0, 0, 0.015) 1px, transparent 1px);
-  background-size: 3px 3px, 7px 7px;
-  background-position: 0 0, 1px 1px;
   color: var(--foreground);
   font-family: var(--font-body), system-ui, sans-serif;
 }
@@ -53,7 +48,7 @@ body {
 }
 
 .text-gradient-gold {
-  background: linear-gradient(135deg, #B8965A, #C4A265, #B8965A);
+  background: linear-gradient(135deg, #D4960A, #E5A800, #D4960A);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

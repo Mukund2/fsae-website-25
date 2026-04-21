@@ -192,7 +192,7 @@ function ResultRow({ result }: { result: typeof results[number] }) {
         style={{
           transform: "scaleX(0)",
           transformOrigin: "left",
-          background: "linear-gradient(90deg, #C8A24E, #D4B05A)",
+          background: "linear-gradient(90deg, #D4960A, #E5A800)",
         }}
       />
 
@@ -203,7 +203,7 @@ function ResultRow({ result }: { result: typeof results[number] }) {
         style={{
           gridTemplateColumns: "1fr 220px 140px 85px",
           minHeight: "clamp(66px, 9vw, 83px)",
-          background: hovered ? "linear-gradient(90deg, #C8A24E, #D4B05A)" : "transparent",
+          background: hovered ? "linear-gradient(90deg, #D4960A, #E5A800)" : "transparent",
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -236,7 +236,7 @@ function ResultRow({ result }: { result: typeof results[number] }) {
           style={{
             fontSize: "clamp(1.3rem, 2.5vw, 2rem)",
             fontStyle: "italic",
-            color: hovered ? "#0e0e0e" : "#C8A24E",
+            color: hovered ? "#0e0e0e" : "#D4960A",
           }}
         >
           {result.result.replace(/(\d+)(ST|ND|RD|TH)/i, "$1")}
@@ -284,7 +284,7 @@ function ResultRow({ result }: { result: typeof results[number] }) {
         </div>
         <span
           className="ml-4 font-display font-black flex-shrink-0"
-          style={{ fontSize: "1.25rem", fontStyle: "italic", color: "#C8A24E" }}
+          style={{ fontSize: "1.25rem", fontStyle: "italic", color: "#D4960A" }}
         >
           {result.result.replace(/(\d+)(ST|ND|RD|TH)/i, "$1")}
           <span
@@ -444,7 +444,7 @@ export function Results() {
             style={{
               fontSize: "clamp(2.5rem, 6.6vw, 5rem)",
               fontStyle: "italic",
-              color: "#C8A24E",
+              color: "#D4960A",
               fontFamily: "var(--font-script), serif",
             }}
           >
@@ -464,25 +464,25 @@ export function Results() {
       >
         <span
           className="font-display font-bold uppercase"
-          style={{ fontSize: "0.6rem", letterSpacing: "0.3em", color: "#8A7A50" }}
+          style={{ fontSize: "0.6rem", letterSpacing: "0.3em", color: "#8B6914" }}
         >
           Event
         </span>
         <span
           className="font-display font-bold uppercase"
-          style={{ fontSize: "0.6rem", letterSpacing: "0.3em", color: "#8A7A50" }}
+          style={{ fontSize: "0.6rem", letterSpacing: "0.3em", color: "#8B6914" }}
         >
           Competition
         </span>
         <span
           className="font-display font-bold uppercase text-right"
-          style={{ fontSize: "0.6rem", letterSpacing: "0.3em", color: "#8A7A50" }}
+          style={{ fontSize: "0.6rem", letterSpacing: "0.3em", color: "#8B6914" }}
         >
           Finish
         </span>
         <span
           className="font-display font-bold uppercase text-right"
-          style={{ fontSize: "0.6rem", letterSpacing: "0.3em", color: "#8A7A50" }}
+          style={{ fontSize: "0.6rem", letterSpacing: "0.3em", color: "#8B6914" }}
         >
           Year
         </span>

@@ -1,14 +1,14 @@
-import { Inter, IBM_Plex_Mono, Playfair_Display, Permanent_Marker } from "next/font/google";
+import { Inter, Space_Grotesk, IBM_Plex_Mono, Playfair_Display, Permanent_Marker } from "next/font/google";
 
-export const bebasNeue = Inter({
-  weight: ["700", "800", "900"],
+export const bebasNeue = Space_Grotesk({
+  weight: ["500", "600", "700"],
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
 });
 
 export const dmSans = Inter({
-  weight: ["400", "500"],
+  weight: ["300", "400", "500", "600"],
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",

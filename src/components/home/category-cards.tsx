@@ -61,7 +61,7 @@ export function CategoryCards() {
         {/* McLaren-style header */}
         <div className="mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <h2 className="font-display font-bold uppercase italic leading-[0.9] tracking-tight" style={{ fontSize: "clamp(2.5rem, 6.6vw, 5rem)", color: "#C8A24E" }}>
+            <h2 className="font-display font-bold uppercase italic leading-[0.9] tracking-tight" style={{ fontSize: "clamp(2.5rem, 6.6vw, 5rem)", color: "#D4960A" }}>
               About Us
             </h2>
           </div>

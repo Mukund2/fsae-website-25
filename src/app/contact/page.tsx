@@ -62,15 +62,8 @@ export default function ContactPage() {
         />
         <div className="absolute inset-0 bg-black/65" />
         <div className="relative z-10 text-center px-6 pt-24 pb-16">
-          <span
-            className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold hero-fade-in"
-            style={{ fontFamily: "var(--font-script), serif" }}
-          >
-            Get in Touch
-          </span>
           <h1
-            className="mt-3 font-display text-5xl font-bold uppercase italic tracking-tight text-white md:text-7xl hero-fade-in"
-            style={{ animationDelay: "0.1s" }}
+            className="font-display text-5xl font-bold uppercase italic tracking-tight text-white md:text-7xl hero-fade-in"
           >
             Contact Us
           </h1>
@@ -165,8 +158,8 @@ export default function ContactPage() {
         </div>
       </section>
 
-      {/* Full-width image divider */}
-      <section className="relative h-[40vh] min-h-[300px] overflow-hidden hero-fade-in" style={{ animationDelay: "0.5s" }}>
+      {/* Full-width image with Join Us overlay — page ends here */}
+      <section className="relative h-[50vh] min-h-[400px] overflow-hidden">
         <Image
           src="/images/flickr/subteams.jpg"
           alt="SJSU Spartan Racing workshop"
@@ -174,43 +167,22 @@ export default function ContactPage() {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-black/40" />
-        <div className="absolute inset-0 flex items-center justify-center px-6">
-          <p className="max-w-2xl text-center font-display text-3xl uppercase tracking-tight text-white md:text-4xl hero-fade-in" style={{ animationDelay: "0.7s" }}>
+        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-6 px-6">
+          <p className="max-w-2xl text-center font-display text-3xl font-bold uppercase tracking-tight text-white md:text-5xl">
             Engineering Excellence Since 1991
           </p>
-        </div>
-      </section>
-
-      {/* Bottom CTA */}
-      <section className="bg-surface py-20 md:py-28">
-        <div className="mx-auto max-w-3xl px-6 text-center">
-          <span
-            className="text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold hero-fade-in"
-            style={{ fontFamily: "var(--font-script), serif", animationDelay: "0.7s" }}
+          <a
+            href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-white hover:bg-gold/90"
           >
-            Ready?
-          </span>
-          <h2 className="mt-2 font-display text-3xl font-bold uppercase italic tracking-tight md:text-4xl hero-fade-in" style={{ animationDelay: "0.8s" }}>
-            Want to Join?
-          </h2>
-          <p className="mx-auto mt-4 max-w-xl text-lg leading-relaxed text-muted hero-fade-in" style={{ animationDelay: "0.9s" }}>
-            We&apos;re always looking for passionate engineers, designers, and
-            business minds to join our team.
-          </p>
-          <div className="mt-8 hero-fade-in" style={{ animationDelay: "1.0s" }}>
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-gold px-8 py-4 font-display text-lg uppercase tracking-wider text-background hover:bg-gold/90"
-            >
-              Join Us
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-background">
-                <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
-          </div>
+            Join Us
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-white">
+              <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </a>
         </div>
       </section>
     </>

@@ -50,28 +50,8 @@ function OrangeArrow() {
 export default function ContactPage() {
   return (
     <>
-      {/* Hero section with team photo background */}
-      <section className="relative flex min-h-[50vh] items-center justify-center overflow-hidden pt-32 pb-16">
-        <Image
-          src="/images/flickr/team-hero.jpg"
-          alt="SJSU Spartan Racing team"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/65" />
-        <div className="relative z-10 text-center px-6 pt-24 pb-16">
-          <h1
-            className="font-display text-5xl font-bold uppercase italic tracking-tight text-white md:text-7xl hero-fade-in"
-          >
-            Contact Us
-          </h1>
-        </div>
-      </section>
-
-      {/* Two-column info section */}
-      <section className="bg-background mx-auto max-w-7xl px-6 py-20 md:py-28">
+      {/* Contact info — starts at the top */}
+      <section className="bg-background mx-auto max-w-7xl px-6 pt-32 pb-20 md:pt-40 md:pb-28">
         <div className="grid gap-12 md:grid-cols-2 items-start">
           {/* Left -- contact info card */}
           <div className="border border-border bg-surface p-8 md:p-10 space-y-8 hero-fade-in" style={{ animationDelay: "0.2s" }}>

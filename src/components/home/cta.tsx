@@ -3,9 +3,9 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 
-function ArrowIcon() {
+function ArrowIcon({ size = 20 }: { size?: number }) {
   return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-white">
+    <svg width={size} height={size} viewBox="0 0 20 20" fill="none" className="text-current">
       <path d="M5 15L15 5M15 5H8M15 5V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
@@ -69,7 +69,7 @@ export function JoinUs() {
           }
         }
       },
-      { threshold: 0.2 }
+      { threshold: 0.15 }
     );
 
     observer.observe(section);
@@ -79,56 +79,114 @@ export function JoinUs() {
   return (
     <section ref={sectionRef} id="join-us" className="grid w-full grid-cols-1 md:grid-cols-2">
       {/* Left: Join the Team */}
-      <div className="relative min-h-[50vh] overflow-hidden">
+      <a
+        href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="cta-panel group relative min-h-[55vh] overflow-hidden"
+      >
         <Image
           src="/images/team/lucid-visit.jpg"
           alt="Spartan Racing team at Lucid Motors"
           fill
-          className="object-cover"
+          className="object-cover cta-panel-img"
           sizes="(max-width: 768px) 100vw, 50vw"
         />
-        <div className="absolute inset-0 bg-black/70" />
-        <div className="relative z-10 flex min-h-[50vh] flex-col items-start justify-end p-10 lg:p-16">
-          <h3 data-anim className="font-display text-[clamp(2rem,4vw,3rem)] uppercase leading-[0.95] tracking-tight text-white">
-            Join the Team
-          </h3>
-          <a
-            href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
-            target="_blank"
-            rel="noopener noreferrer"
+        {/* Gradient overlay — heavy at bottom for text, light elsewhere to show image */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+        {/* Big background text — Anduril-style dramatic type */}
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
+          <span
             data-anim
-            className="mt-8 inline-flex items-center gap-3 bg-gold px-8 py-4 font-display text-[13px] uppercase tracking-[0.15em] text-white"
+            className="font-display font-black uppercase italic text-white/[0.08] select-none"
+            style={{ fontSize: "clamp(6rem, 14vw, 12rem)", lineHeight: 0.85, letterSpacing: "-0.03em" }}
           >
-            Join Us
-            <ArrowIcon />
-          </a>
+            JOIN
+          </span>
         </div>
-      </div>
+
+        {/* Content */}
+        <div className="relative z-10 flex min-h-[55vh] flex-col justify-between p-8 lg:p-12">
+          {/* Top label */}
+          <div data-anim>
+            <span className="font-display text-[11px] uppercase tracking-[0.3em] text-white/60">
+              Be Part of It
+            </span>
+          </div>
+
+          {/* Bottom content */}
+          <div>
+            <h3
+              data-anim
+              className="font-display font-bold uppercase italic leading-[0.9] tracking-tight text-white"
+              style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
+            >
+              Join the<br />Team
+            </h3>
+            <div data-anim className="mt-6 flex items-center gap-3 text-gold">
+              <span className="font-display text-[13px] uppercase tracking-[0.15em]">
+                Apply Now
+              </span>
+              <ArrowIcon size={18} />
+            </div>
+          </div>
+        </div>
+      </a>
 
       {/* Right: Support Us */}
-      <div className="relative min-h-[50vh] overflow-hidden">
+      <a
+        href="/support"
+        className="cta-panel group relative min-h-[55vh] overflow-hidden"
+      >
         <Image
           src="/images/sr16/car-action-4.jpg"
           alt="Support Spartan Racing"
           fill
-          className="object-cover"
+          className="object-cover cta-panel-img"
           sizes="(max-width: 768px) 100vw, 50vw"
         />
-        <div className="absolute inset-0 bg-black/70" />
-        <div className="relative z-10 flex min-h-[50vh] flex-col items-start justify-end p-10 lg:p-16">
-          <h3 data-anim className="font-display text-[clamp(2rem,4vw,3rem)] uppercase leading-[0.95] tracking-tight text-white">
-            Support Us
-          </h3>
-          <a
-            href="/support"
+        {/* Gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+
+        {/* Big background text */}
+        <div className="absolute inset-0 flex items-center justify-center overflow-hidden pointer-events-none">
+          <span
             data-anim
-            className="mt-8 inline-flex items-center gap-3 bg-gold px-8 py-4 font-display text-[13px] uppercase tracking-[0.15em] text-white"
+            className="font-display font-black uppercase italic text-white/[0.08] select-none"
+            style={{ fontSize: "clamp(6rem, 14vw, 12rem)", lineHeight: 0.85, letterSpacing: "-0.03em" }}
           >
-            Donate
-            <ArrowIcon />
-          </a>
+            FUEL
+          </span>
         </div>
-      </div>
+
+        {/* Content */}
+        <div className="relative z-10 flex min-h-[55vh] flex-col justify-between p-8 lg:p-12">
+          {/* Top label */}
+          <div data-anim>
+            <span className="font-display text-[11px] uppercase tracking-[0.3em] text-white/60">
+              Make an Impact
+            </span>
+          </div>
+
+          {/* Bottom content */}
+          <div>
+            <h3
+              data-anim
+              className="font-display font-bold uppercase italic leading-[0.9] tracking-tight text-white"
+              style={{ fontSize: "clamp(2.5rem, 5vw, 4rem)" }}
+            >
+              Support<br />Our Mission
+            </h3>
+            <div data-anim className="mt-6 flex items-center gap-3 text-gold">
+              <span className="font-display text-[13px] uppercase tracking-[0.15em]">
+                Donate
+              </span>
+              <ArrowIcon size={18} />
+            </div>
+          </div>
+        </div>
+      </a>
     </section>
   );
 }

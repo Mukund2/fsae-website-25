@@ -18,8 +18,6 @@ export function Hero() {
         src="/videos/hero-broll.mp4"
       />
 
-      {/* Subtle bottom gradient for separation */}
-      <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/30 to-transparent" />
     </section>
   );
 }

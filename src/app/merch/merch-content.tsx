@@ -76,7 +76,7 @@ function MerchCard({ item, index }: { item: MerchProduct; index: number }) {
       href={`/merch/${item.slug}`}
       data-reveal
       data-reveal-delay={index * 80}
-      className="group block border border-border bg-elevated hover:border-gold/60"
+      className="group block w-full max-w-[320px] flex-[1_1_280px] border border-border bg-elevated hover:border-gold/60"
     >
       {/* Product image */}
       <div className="relative aspect-square bg-surface">
@@ -182,7 +182,7 @@ export function MerchContent({ products }: { products: MerchProduct[] }) {
       {/* Grid or empty state */}
       <section className="mx-auto max-w-7xl px-6 py-16 md:py-24">
         {products.length > 0 ? (
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          <div className="flex flex-wrap justify-center gap-6">
             {products.map((item, i) => (
               <MerchCard key={item.id} item={item} index={i} />
             ))}

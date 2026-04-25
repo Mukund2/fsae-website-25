@@ -10,6 +10,7 @@ import { CartButton } from "@/components/merch/cart-button";
 
 const SIMPLE_NAV_ITEMS = [
   { label: "Cars", href: "/cars" },
+  { label: "Racing", href: "/racing" },
   { label: "Sponsors", href: "/sponsors" },
   { label: "Merch", href: "/merch" },
   { label: "Contact", href: "/contact" },
@@ -36,10 +37,6 @@ const TEAM_CARDS: DropdownCard[] = [
   { title: "Leads", href: "/team", image: "/images/team/team-group.jpg" },
 ];
 
-const RACING_CARDS: DropdownCard[] = [
-  { title: "Static Events", href: "/racing#static-events", image: "/images/flickr/comp-action-2.jpg" },
-  { title: "Dynamic Events", href: "/racing#acceleration", image: "/images/flickr/driver-day-1.jpg" },
-];
 
 function MegaDropdown({ cards, state }: { cards: DropdownCard[]; state: "open" | "closing" | "closed" }) {
   if (state === "closed") return null;
@@ -108,13 +105,11 @@ export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const pathname = usePathname();
   const team = useDropdown();
-  const racing = useDropdown();
   const navRef = useRef<HTMLElement>(null);
 
   // Close all dropdowns on route change
   useEffect(() => {
     team.close();
-    racing.close();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pathname]);
 
@@ -131,8 +126,7 @@ export function Navbar() {
   };
 
   // Handlers that open one dropdown and close others
-  const teamEnter = () => { racing.close(); team.open(); };
-  const racingEnter = () => { team.close(); racing.open(); };
+  const teamEnter = () => { team.open(); };
 
   return (
     <>
@@ -157,7 +151,7 @@ export function Navbar() {
       <nav
         ref={navRef}
         className="fixed top-0 left-0 z-50 flex w-full justify-center px-4 py-3 sm:px-6 lg:px-12"
-        onMouseLeave={() => { team.close(); racing.close(); }}
+        onMouseLeave={() => { team.close(); }}
       >
         <div className="relative flex w-full max-w-[1200px] flex-col border-b border-border/30 bg-white">
           <div className="flex items-center justify-between px-6 py-3">
@@ -190,7 +184,7 @@ export function Navbar() {
               <ul className="flex items-center gap-5 lg:gap-6">
                 {/* Cars - simple link */}
                 <li
-                  onMouseEnter={() => { team.close(); racing.close(); }}
+                  onMouseEnter={() => { team.close(); }}
                 >
                   <Link
                     href="/cars"
@@ -223,31 +217,13 @@ export function Navbar() {
                   </button>
                 </li>
 
-                {/* Racing - mega dropdown */}
-                <li
-                  onMouseEnter={racingEnter}
-                >
-                  <button
-                    type="button"
-                    onClick={racingEnter}
-                    className={cn(
-                      "text-[13px] font-medium uppercase tracking-wider cursor-pointer",
-                      isActive("/racing") || racing.state === "open"
-                        ? "text-[#FF8000]"
-                        : "text-foreground/60 hover:text-foreground"
-                    )}
-                  >
-                    Racing
-                  </button>
-                </li>
-
-                {/* Simple nav items */}
+                {/* Simple nav items (Racing, Sponsors, Merch, Contact) */}
                 {SIMPLE_NAV_ITEMS.filter(
                   (item) => item.label !== "Cars"
                 ).map((link) => (
                   <li
                     key={link.href}
-                    onMouseEnter={() => { team.close(); racing.close(); }}
+                    onMouseEnter={() => { team.close(); }}
                   >
                     <Link
                       href={link.href}
@@ -293,7 +269,6 @@ export function Navbar() {
 
           {/* Mega dropdowns render inside the nav container */}
           <MegaDropdown cards={TEAM_CARDS} state={team.state} />
-          <MegaDropdown cards={RACING_CARDS} state={racing.state} />
         </div>
       </nav>
 

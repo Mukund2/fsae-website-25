@@ -71,20 +71,6 @@ export default function ContactPage() {
               <OrangeArrow />
             </div>
 
-            {/* Address */}
-            <div>
-              <h2 className="font-display text-xl uppercase tracking-tight">
-                Address
-              </h2>
-              <p className="mt-2 font-display text-sm leading-relaxed text-muted">
-                Mechanical Engineering Dept.
-                <br />
-                1 Washington Square
-                <br />
-                San Jos&eacute;, CA 95192
-              </p>
-            </div>
-
             {/* Club Rooms */}
             <div>
               <h2 className="font-display text-xl uppercase tracking-tight">
@@ -93,9 +79,6 @@ export default function ContactPage() {
               <div className="mt-2 space-y-2">
                 <p className="font-display text-sm leading-relaxed text-muted">
                   <span className="text-foreground">Room 344</span> - Design & engineering workspace
-                </p>
-                <p className="font-display text-sm leading-relaxed text-muted">
-                  <span className="text-foreground">Rooms 123 & 130</span> - Hands-on fabrication & manufacturing
                 </p>
               </div>
               <p className="mt-2 font-display text-xs text-muted/60">

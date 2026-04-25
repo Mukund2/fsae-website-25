@@ -39,6 +39,12 @@ const results = [
     year: "2024",
     result: "1ST",
   },
+  {
+    event: "EV, NORCAL SHOOTOUT",
+    competition: "NORCAL SHOOTOUT",
+    year: "2024",
+    result: "1ST",
+  },
 ];
 
 /* ── Gold bar reveal animation ── */

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Section } from "@/components/layout/section";
@@ -227,6 +228,17 @@ function TimelineNode({
             : { opacity: 0 }
         }
       >
+        {event.image && (
+          <div className="relative mb-4 aspect-[16/9] w-full overflow-hidden">
+            <Image
+              src={event.image}
+              alt={event.title}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 50vw"
+            />
+          </div>
+        )}
         <RevealText
           as="span"
           className="font-display text-3xl text-gold"

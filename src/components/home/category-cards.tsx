@@ -58,18 +58,6 @@ export function CategoryCards() {
   return (
     <section ref={sectionRef} className="relative bg-background py-16 lg:py-24">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
-        {/* McLaren-style header */}
-        <div className="mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
-          <div>
-            <h2 className="font-display font-bold uppercase italic leading-[0.9] tracking-tight" style={{ fontSize: "clamp(2.5rem, 6.6vw, 5rem)", color: "#C2850C" }}>
-              About Us
-            </h2>
-          </div>
-          <p className="max-w-md text-[15px] leading-relaxed text-foreground/60 lg:text-right">
-            From design and manufacturing to data and strategy, every member plays a critical role in putting our car on track.
-          </p>
-        </div>
-
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
           {categories.map((cat) => (
             <Link

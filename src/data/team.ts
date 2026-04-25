@@ -56,21 +56,21 @@ export const subteams: Subteam[] = [
     name: "Aerodynamics",
     abbreviation: "AERO",
     description:
-      "Wings, canards, sidepods — we shape every surface to maximize downforce and cut drag. CFD in the sim, carbon on the car.",
+      "Design, manufacture, validate — we design and create the carbon fiber airfoils that push the car to the next level, from the front wing to the drag reduction system.",
     image: "/images/flickr/aero.jpg",
   },
   {
     name: "Powertrain",
     abbreviation: "PWR",
     description:
-      "Motor, battery, final drive. We build the drivetrain that puts power to the ground — from cell selection to torque vectoring.",
+      "Motor, inverter, final drive. We build the drivetrain that puts power to the ground — from cell selection to gear ratio optimization.",
     image: "/images/flickr/powertrain.jpg",
   },
   {
     name: "Chassis",
     abbreviation: "CHAS",
     description:
-      "The backbone of every car. We design and weld the steel tube frame that everything bolts to, balancing stiffness with weight.",
+      "The backbone of every car. We design and weld the steel tube space frame that everything bolts to, balancing stiffness with weight.",
     image: "/images/flickr/chassis.jpg",
   },
   {

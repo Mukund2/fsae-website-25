@@ -52,12 +52,6 @@ export const sponsors: Sponsor[] = [
     url: "https://www.roku.com",
     logo: "/images/sponsors/roku.png",
   },
-  {
-    name: "Phoenix Contact",
-    tier: "title",
-    url: "https://www.phoenixcontact.com",
-    logo: "/images/sponsors/phoenix-contact.png",
-  },
 
   // Platinum ($20,000+)
   {
@@ -75,6 +69,12 @@ export const sponsors: Sponsor[] = [
   {
     name: "BayView Plastics",
     tier: "platinum",
+  },
+  {
+    name: "Phoenix Contact",
+    tier: "platinum",
+    url: "https://www.phoenixcontact.com",
+    logo: "/images/sponsors/phoenix-contact.png",
   },
 
   // Gold ($10,000+)
@@ -117,7 +117,7 @@ export const sponsors: Sponsor[] = [
     tier: "gold",
   },
   {
-    name: "Valence Precision",
+    name: "Curvilinear Components",
     tier: "gold",
   },
 
@@ -151,12 +151,6 @@ export const sponsors: Sponsor[] = [
     tier: "silver",
     url: "https://www.rivian.com",
     logo: "/images/sponsors/rivian-vw.png",
-  },
-  {
-    name: "TE Connectivity",
-    tier: "silver",
-    url: "https://www.te.com",
-    logo: "/images/sponsors/te-connectivity.svg",
   },
 
   // Bronze ($2,500+)
@@ -268,14 +262,16 @@ export const sponsors: Sponsor[] = [
     tier: "partner",
   },
   {
-    name: "Curvilinear Components",
-    tier: "partner",
-  },
-  {
     name: "Shining 3D",
     tier: "partner",
     url: "https://www.shining3d.com",
     logo: "/images/sponsors/shining-3d.png",
+  },
+  {
+    name: "TE Connectivity",
+    tier: "partner",
+    url: "https://www.te.com",
+    logo: "/images/sponsors/te-connectivity.svg",
   },
   {
     name: "Prismatic Powders",
@@ -284,7 +280,8 @@ export const sponsors: Sponsor[] = [
     logo: "/images/sponsors/prismatic-powders.png",
   },
   {
-    name: "ThinBIT",
+    name: "Valence Precision",
     tier: "partner",
+    logo: "/images/sponsors/valence-precision.svg",
   },
 ];

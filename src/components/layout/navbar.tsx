@@ -37,8 +37,7 @@ const TEAM_CARDS: DropdownCard[] = [
 ];
 
 const RACING_CARDS: DropdownCard[] = [
-  { title: "Competitions", href: "/racing#competitions", image: "/images/flickr/comp-action-2.jpg" },
-  { title: "Endurance", href: "/racing#endurance", image: "/images/flickr/comp-action-1.jpg" },
+  { title: "Static Events", href: "/racing#static-events", image: "/images/flickr/comp-action-2.jpg" },
   { title: "Dynamic Events", href: "/racing#acceleration", image: "/images/flickr/driver-day-1.jpg" },
 ];
 

@@ -261,8 +261,7 @@ export function BecomeASponsorContent() {
         <div className="relative mx-auto max-w-7xl px-6">
           <span
             data-reveal
-            className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
-            style={{ fontFamily: "var(--font-script), serif" }}
+            className="font-display text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
           >
             Support the Team
           </span>
@@ -445,8 +444,7 @@ export function BecomeASponsorContent() {
           <div className="text-center">
             <span
               data-reveal
-              className="text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
-              style={{ fontFamily: "var(--font-script), serif" }}
+              className="font-display text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
             >
               Browse
             </span>
@@ -476,8 +474,7 @@ export function BecomeASponsorContent() {
         <div className="mx-auto max-w-3xl px-6 text-center">
           <span
             data-reveal
-            className="text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
-            style={{ fontFamily: "var(--font-script), serif" }}
+            className="font-display text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold"
           >
             Let&apos;s Go
           </span>

@@ -290,8 +290,7 @@ export default function HistoryPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(0,85,162,0.08)_0%,_transparent_60%)]" />
         <div className="relative mx-auto max-w-7xl px-6">
           <span
-            className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
-            style={{ fontFamily: "var(--font-script), serif" }}
+            className="font-display text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
           >
             Since 1989
           </span>

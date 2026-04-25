@@ -1,6 +1,6 @@
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
-import { Syne, Playfair_Display, Permanent_Marker } from "next/font/google";
+import { Syne } from "next/font/google";
 
 // Display: Syne — geometric, bold, tech-forward, has real character
 // Used for headings, titles, CTAs — the "exciting" font
@@ -20,18 +20,3 @@ export const geistMono = GeistMono;
 export const bebasNeue = syne;  // display font
 export const dmSans = GeistSans;  // body font
 export const jetbrainsMono = GeistMono;
-
-export const permanentMarker = Permanent_Marker({
-  weight: "400",
-  subsets: ["latin"],
-  variable: "--font-marker",
-  display: "swap",
-});
-
-export const playfairDisplay = Playfair_Display({
-  weight: ["400", "700"],
-  style: ["italic"],
-  subsets: ["latin"],
-  variable: "--font-script",
-  display: "swap",
-});

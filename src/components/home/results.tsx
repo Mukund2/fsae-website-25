@@ -446,12 +446,10 @@ export function Results() {
             Track Record
           </h2>
           <p
-            className="leading-[0.9] tracking-tight"
+            className="font-display italic leading-[0.9] tracking-tight"
             style={{
               fontSize: "clamp(2.5rem, 6.6vw, 5rem)",
-              fontStyle: "italic",
               color: "#C2850C",
-              fontFamily: "var(--font-script), serif",
             }}
           >
             Highlights

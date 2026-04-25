@@ -137,8 +137,7 @@ export function RacingContent() {
       <section className="relative mx-auto max-w-7xl px-6 pt-8 pb-10">
         <div className="flex items-center gap-4 pb-6">
           <span
-            className="sr-slide-left text-[clamp(1rem,2vw,1.4rem)] italic text-gold"
-            style={{ fontFamily: "var(--font-script), serif" }}
+            className="sr-slide-left font-display text-[clamp(1rem,2vw,1.4rem)] italic text-gold"
           >
             Static Events
           </span>
@@ -183,8 +182,7 @@ export function RacingContent() {
 
         <div className="flex items-center gap-4 pb-6">
           <span
-            className="sr-slide-left text-[clamp(1rem,2vw,1.4rem)] italic text-gold"
-            style={{ fontFamily: "var(--font-script), serif" }}
+            className="sr-slide-left font-display text-[clamp(1rem,2vw,1.4rem)] italic text-gold"
           >
             Dynamic Events
           </span>

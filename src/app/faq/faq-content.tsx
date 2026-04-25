@@ -132,8 +132,7 @@ export function FAQContent() {
         <div className="relative mx-auto max-w-7xl px-6">
           <span
             data-anim="up"
-            className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
-            style={{ fontFamily: "var(--font-script), serif" }}
+            className="font-display text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
           >
             Got Questions?
           </span>

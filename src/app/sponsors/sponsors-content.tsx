@@ -236,8 +236,7 @@ export function SponsorsContent() {
           <div>
             <span
               data-reveal
-              className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
-              style={{ fontFamily: "var(--font-script), serif" }}
+              className="font-display text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
             >
               Thank You
             </span>

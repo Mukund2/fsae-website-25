@@ -90,7 +90,7 @@ function SponsorItem({ sponsor }: { sponsor: Sponsor }) {
 
 export function SponsorStrip() {
   return (
-    <section className="relative w-full py-20 bg-background overflow-hidden">
+    <section className="relative w-full py-20 overflow-hidden" style={{ background: "#F5F5F5" }}>
       <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[400px] bg-[radial-gradient(ellipse_at_center,_rgba(184,134,11,0.10)_0%,_transparent_70%)]" />
       </div>
@@ -98,13 +98,13 @@ export function SponsorStrip() {
       <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
         <h2 className="text-center text-[clamp(1.6rem,3.5vw,2.5rem)] tracking-tight">
           <span className="font-display font-bold uppercase italic text-foreground">Thank you to our </span>
-          <span className="ml-2 italic text-gold" style={{ fontFamily: "var(--font-script), serif" }}>Sponsors</span>
+          <span className="ml-2 font-display italic text-gold">Sponsors</span>
         </h2>
       </div>
 
       <div className="relative mt-10">
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-[35%] bg-gradient-to-r from-background via-background/90 via-60% to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-[35%] bg-gradient-to-l from-background via-background/90 via-60% to-transparent" />
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-[35%]" style={{ background: "linear-gradient(to right, #F5F5F5, rgba(245,245,245,0.9) 60%, transparent)" }} />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-[35%]" style={{ background: "linear-gradient(to left, #F5F5F5, rgba(245,245,245,0.9) 60%, transparent)" }} />
 
         <Marquee speed={120} gap="gap-10 sm:gap-16 lg:gap-20">
           {SPONSORS.map((sponsor) => (

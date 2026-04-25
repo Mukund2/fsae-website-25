@@ -33,8 +33,7 @@ export default function SupportPage() {
 
         <div className="relative mx-auto max-w-7xl px-6">
           <span
-            className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold hero-fade-in"
-            style={{ fontFamily: "var(--font-script), serif" }}
+            className="font-display text-[clamp(1.4rem,3vw,2rem)] italic text-gold hero-fade-in"
           >
             Make a Difference
           </span>
@@ -53,8 +52,8 @@ export default function SupportPage() {
       <section className="mx-auto max-w-7xl px-6 pb-16 md:pb-24">
         <div className="max-w-2xl">
           <span
-            className="text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold hero-fade-in"
-            style={{ fontFamily: "var(--font-script), serif", animationDelay: "0.15s" }}
+            className="font-display text-[clamp(1.2rem,2.5vw,1.8rem)] italic text-gold hero-fade-in"
+            style={{ animationDelay: "0.15s" }}
           >
             Every Dollar Counts
           </span>

@@ -64,7 +64,7 @@ function ConfettiCanvas() {
 
     if (!spawned.current) {
       spawned.current = true;
-      const colors = ["#C2850C", "#D4980F", "#FFD700", "#0055A2", "#FFFFFF", "#FF8000"];
+      const colors = ["#C2850C", "#D4980F", "#FFD700", "#0055A2", "#FFFFFF", "#E8C547"];
       for (let i = 0; i < 200; i++) {
         pieces.current.push({
           x: Math.random() * window.innerWidth,

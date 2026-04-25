@@ -333,8 +333,7 @@ export default function CarsPage() {
         <div className="relative pt-32 pb-16">
           <div className="mx-auto max-w-7xl px-6">
             <span
-              className="text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
-              style={{ fontFamily: "var(--font-script), serif" }}
+              className="font-display text-[clamp(1.4rem,3vw,2rem)] italic text-gold"
             >
               1989 &ndash; Present
             </span>
@@ -461,7 +460,7 @@ function TimelineEntry({
             </div>
           ) : (
             <div className="aspect-[4/3] bg-surface flex items-center justify-center">
-              <span className="text-foreground/20 text-4xl" style={{ fontFamily: "var(--font-marker)" }}>
+              <span className="font-display text-foreground/20 text-4xl font-bold uppercase">
                 {car.name}
               </span>
             </div>
@@ -470,14 +469,12 @@ function TimelineEntry({
           {/* Sharpie-style text on the white border */}
           <div className="absolute bottom-0 left-0 right-0 px-4 pb-3">
             <h2
-              className="text-[1.3rem] text-foreground/90 md:text-[1.5rem]"
-              style={{ fontFamily: "var(--font-marker)" }}
+              className="font-display text-[1.3rem] font-bold uppercase text-foreground/90 md:text-[1.5rem]"
             >
               {car.name}
             </h2>
             <p
-              className="mt-0.5 text-[0.7rem] text-foreground/50"
-              style={{ fontFamily: "var(--font-marker)" }}
+              className="mt-0.5 text-[0.7rem] font-display uppercase text-foreground/50"
             >
               {car.years}{specs ? ` · ${specs}` : ""}
             </p>

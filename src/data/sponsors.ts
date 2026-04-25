@@ -269,7 +269,7 @@ export const sponsors: Sponsor[] = [
   },
   {
     name: "TE Connectivity",
-    tier: "partner",
+    tier: "platinum",
     url: "https://www.te.com",
     logo: "/images/sponsors/te-connectivity.svg",
   },
@@ -281,7 +281,7 @@ export const sponsors: Sponsor[] = [
   },
   {
     name: "Valence Precision",
-    tier: "partner",
+    tier: "silver",
     logo: "/images/sponsors/valence-precision.svg",
   },
 ];

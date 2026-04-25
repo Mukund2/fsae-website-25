@@ -17,6 +17,7 @@ function makePages(folder: string, count: number): string[] {
 
 const newsletters = [
   // 2026
+  { date: "April 2026", title: "The Push", pages: makePages("april-2026", 10) },
   { date: "March 2026", title: "Into the Electric", pages: makePages("into-the-electric", 9) },
   { date: "February 2026", title: "Design to Reality", pages: makePages("design-to-reality", 11) },
   { date: "New Year 2026", title: "2026 Team Resolutions", pages: makePages("2026-team-resolutions", 8) },

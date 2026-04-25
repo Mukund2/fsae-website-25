@@ -304,51 +304,45 @@ export function CarShowcase() {
 
         {/* Big countdown behind the car */}
         <div className="pointer-events-none absolute inset-0 z-0 flex flex-col items-center justify-center">
-          {/* "Revealed privately" messaging */}
-          <p
-            className="mb-4 font-display text-sm uppercase tracking-[0.3em] text-gold/60"
-            style={{ fontFamily: "var(--font-body), system-ui, sans-serif" }}
-          >
-            {done ? "Car Revealed" : "Revealed Privately — Public Reveal In"}
-          </p>
-
-          <div className="flex items-center gap-2 lg:gap-4">
-            {!done && countdownBlocks.map((block, i) => (
-              <div key={block.label} className="flex items-baseline">
-                <div className="flex flex-col items-center">
-                  <span
-                    className="font-body font-black tabular-nums text-foreground/[0.07]"
-                    style={{
-                      fontSize: "clamp(6rem, 14vw, 16rem)",
-                      fontVariantNumeric: "tabular-nums",
-                      lineHeight: 1,
-                      fontFamily: "var(--font-body), system-ui, sans-serif",
-                    }}
-                    suppressHydrationWarning
-                  >
-                    {String(block.value).padStart(2, "0")}
-                  </span>
-                  <span className="text-[10px] uppercase tracking-[0.3em] text-foreground/20" style={{ fontFamily: "var(--font-body), system-ui, sans-serif" }}>
-                    {block.label}
-                  </span>
+          {!done && (
+            <div className="flex items-center gap-2 lg:gap-4">
+              {countdownBlocks.map((block, i) => (
+                <div key={block.label} className="flex items-baseline">
+                  <div className="flex flex-col items-center">
+                    <span
+                      className="font-body font-black tabular-nums text-foreground/[0.07]"
+                      style={{
+                        fontSize: "clamp(6rem, 14vw, 16rem)",
+                        fontVariantNumeric: "tabular-nums",
+                        lineHeight: 1,
+                        fontFamily: "var(--font-body), system-ui, sans-serif",
+                      }}
+                      suppressHydrationWarning
+                    >
+                      {String(block.value).padStart(2, "0")}
+                    </span>
+                    <span className="text-[10px] uppercase tracking-[0.3em] text-foreground/20" style={{ fontFamily: "var(--font-body), system-ui, sans-serif" }}>
+                      {block.label}
+                    </span>
+                  </div>
+                  {i < countdownBlocks.length - 1 && (
+                    <span
+                      className="font-black text-foreground/[0.05]"
+                      style={{ fontSize: "clamp(4rem, 10vw, 12rem)", lineHeight: 1, fontFamily: "var(--font-body), system-ui, sans-serif" }}
+                    >
+                      :
+                    </span>
+                  )}
                 </div>
-                {i < countdownBlocks.length - 1 && (
-                  <span
-                    className="font-black text-foreground/[0.05]"
-                    style={{ fontSize: "clamp(4rem, 10vw, 12rem)", lineHeight: 1, fontFamily: "var(--font-body), system-ui, sans-serif" }}
-                  >
-                    :
-                  </span>
-                )}
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
 
           {done && (
             <p
-              className="mt-2 font-display text-lg uppercase tracking-wider text-foreground/30"
+              className="font-display text-2xl uppercase tracking-[0.2em] text-gold/70 md:text-3xl"
             >
-              Publicly Coming Soon
+              Revealed Privately — Public Access Coming Soon
             </p>
           )}
         </div>

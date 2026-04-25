@@ -5,8 +5,8 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { useGLTF, Center } from "@react-three/drei";
 import * as THREE from "three";
 
-// Public reveal: Sunday April 26, 2026 at 1:00 PM PT
-const UNVEIL_DATE = new Date("2026-04-26T13:00:00-07:00");
+// Public reveal: Friday April 25, 2026 at 1:00 PM PT
+const UNVEIL_DATE = new Date("2026-04-25T13:00:00-07:00");
 
 function useCountdown(target: Date) {
   const calc = useCallback(() => {
@@ -284,7 +284,6 @@ export function CarShowcase() {
   const { days, hours, minutes, seconds, done } = useCountdown(UNVEIL_DATE);
 
   const countdownBlocks = [
-    { value: days, label: "Days" },
     { value: hours, label: "Hours" },
     { value: minutes, label: "Min" },
     { value: seconds, label: "Sec" },

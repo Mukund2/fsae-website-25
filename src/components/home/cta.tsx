@@ -77,13 +77,34 @@ export function JoinUs() {
   }, []);
 
   return (
-    <section ref={sectionRef} id="join-us" className="grid w-full grid-cols-1 md:grid-cols-2">
+    <section ref={sectionRef} id="join-us" className="w-full">
+      {/* Generous breathing room above the CTA panels — this is the
+          last block of the homepage so it deserves a real pause. */}
+      <div className="mx-auto max-w-7xl px-6 pt-32 pb-16 md:pt-44 md:pb-20 lg:px-12">
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-[minmax(0,0.75fr)_minmax(0,1.25fr)] md:items-end md:gap-10">
+          <p
+            data-anim
+            className="font-mono uppercase text-foreground/50"
+            style={{ fontSize: "10px", letterSpacing: "0.32em" }}
+          >
+            §05 — Get involved
+          </p>
+          <h2
+            data-anim
+            className="font-display font-bold uppercase italic leading-[0.9] tracking-tight text-foreground"
+            style={{ fontSize: "clamp(2rem, 5vw, 3.5rem)" }}
+          >
+            Build the car. <span className="text-gold">Race it.</span>
+          </h2>
+        </div>
+      </div>
+    <div className="grid w-full grid-cols-1 md:grid-cols-2">
       {/* Left: Join the Team */}
       <a
         href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
         target="_blank"
         rel="noopener noreferrer"
-        className="cta-panel group relative min-h-[40vh] sm:min-h-[55vh] overflow-hidden"
+        className="cta-panel image-cinematic group relative min-h-[40vh] sm:min-h-[55vh] overflow-hidden"
       >
         <Image
           src="/images/team/lucid-visit.jpg"
@@ -118,7 +139,7 @@ export function JoinUs() {
       {/* Right: Support Us */}
       <a
         href="/support"
-        className="cta-panel group relative min-h-[40vh] sm:min-h-[55vh] overflow-hidden"
+        className="cta-panel image-cinematic group relative min-h-[40vh] sm:min-h-[55vh] overflow-hidden"
       >
         <Image
           src="/images/sr16/car-action-4.jpg"
@@ -149,6 +170,7 @@ export function JoinUs() {
           </div>
         </div>
       </a>
+    </div>
     </section>
   );
 }

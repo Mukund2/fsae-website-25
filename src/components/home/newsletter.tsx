@@ -194,10 +194,10 @@ export function Newsletter() {
       <style>{`
         @keyframes newsletter-bar-jut {
           0% { padding-left: 20px; border-left-color: transparent; }
-          100% { padding-left: 32px; border-left-color: #C2850C; }
+          100% { padding-left: 32px; border-left-color: #B8965A; }
         }
         @keyframes newsletter-bar-retract {
-          0% { padding-left: 32px; border-left-color: #C2850C; }
+          0% { padding-left: 32px; border-left-color: #B8965A; }
           100% { padding-left: 20px; border-left-color: transparent; }
         }
         .newsletter-bar:not(.newsletter-bar-active):hover {
@@ -208,10 +208,10 @@ export function Newsletter() {
         }
         .newsletter-bar-active {
           padding-left: 32px;
-          border-left-color: #C2850C;
+          border-left-color: #B8965A;
         }
       `}</style>
-      <section ref={sectionRef} className="relative w-full py-24 md:py-32 bg-background overflow-hidden">
+      <section ref={sectionRef} className="relative w-full py-20 md:py-28 bg-background overflow-hidden">
         {/* Warm gold ambient glow */}
         <div className="pointer-events-none absolute inset-0" aria-hidden="true">
           <div className="absolute left-1/3 top-1/4 h-[600px] w-[600px] bg-[radial-gradient(ellipse_at_center,_rgba(184,134,11,0.08)_0%,_transparent_70%)]" />
@@ -221,7 +221,7 @@ export function Newsletter() {
           {/* Header */}
           <div data-anim="left" className="mb-10 flex items-end justify-between">
             <div>
-              <h2 className="font-display font-bold uppercase italic leading-[0.9] tracking-tight" style={{ fontSize: "clamp(2.5rem, 6.6vw, 5rem)", color: "#C2850C" }}>
+              <h2 className="font-display font-bold uppercase italic leading-[0.9] tracking-tight" style={{ fontSize: "clamp(2.5rem, 6.6vw, 5rem)", color: "#B8965A" }}>
                 Newsletters
               </h2>
             </div>

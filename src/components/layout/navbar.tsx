@@ -48,7 +48,7 @@ function MegaDropdown({ cards, state }: { cards: DropdownCard[]; state: "open" |
   return (
     <div
       className={cn(
-        "overflow-hidden bg-white",
+        "overflow-hidden bg-elevated",
         state === "open" ? "mega-dropdown-open" : "mega-dropdown-close"
       )}
     >
@@ -107,6 +107,7 @@ function useDropdown() {
 
 export function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [stickState, setStickState] = useState<"top" | "stuck" | "unstuck">("top");
   const pathname = usePathname();
   const team = useDropdown();
   const racing = useDropdown();
@@ -125,6 +126,28 @@ export function Navbar() {
       document.body.style.overflow = "";
     };
   }, [mobileOpen]);
+
+  // Transparent → frosted on scroll. Threshold 60px so the change
+  // happens once you actually leave the hero, not on every wiggle.
+  useEffect(() => {
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        setStickState((prev) => {
+          if (y > 60) return prev === "stuck" ? prev : "stuck";
+          // Only animate the unstick once on the way back up
+          return prev === "stuck" ? "unstuck" : prev === "unstuck" ? "unstuck" : "top";
+        });
+        ticking = false;
+      });
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const isActive = (href: string) => {
     if (href.startsWith("/#")) return pathname === "/";
@@ -160,7 +183,13 @@ export function Navbar() {
         className="fixed top-0 left-0 z-50 flex w-full justify-center px-4 py-3 sm:px-6 lg:px-12"
         onMouseLeave={() => { team.close(); racing.close(); }}
       >
-        <div className="relative flex w-full max-w-[1200px] flex-col border-b border-border/30 bg-white">
+        <div
+          className={cn(
+            "nav-shell relative flex w-full max-w-[1200px] flex-col",
+            stickState === "stuck" && "is-stuck",
+            stickState === "unstuck" && "was-stuck"
+          )}
+        >
           <div className="flex items-center justify-between px-6 py-3">
             {/* Left: Logo + Brand */}
             <Link
@@ -182,7 +211,7 @@ export function Navbar() {
               />
               <span className="font-display text-lg tracking-wider md:text-xl">
                 <span className="font-bold text-gold">SPARTAN</span>{" "}
-                <span className="font-bold text-blue">RACING</span>
+                <span className="font-bold text-foreground">RACING</span>
               </span>
             </Link>
 
@@ -198,7 +227,7 @@ export function Navbar() {
                     className={cn(
                       "text-[13px] font-medium uppercase tracking-wider",
                       isActive("/cars")
-                        ? "text-[#FF8000]"
+                        ? "text-gold"
                         : "text-foreground/60 hover:text-foreground"
                     )}
                   >
@@ -216,7 +245,7 @@ export function Navbar() {
                     className={cn(
                       "text-[13px] font-medium uppercase tracking-wider cursor-pointer",
                       isActive("/about") || isActive("/team") || team.state === "open"
-                        ? "text-[#FF8000]"
+                        ? "text-gold"
                         : "text-foreground/60 hover:text-foreground"
                     )}
                   >
@@ -234,7 +263,7 @@ export function Navbar() {
                     className={cn(
                       "text-[13px] font-medium uppercase tracking-wider cursor-pointer",
                       isActive("/racing") || racing.state === "open"
-                        ? "text-[#FF8000]"
+                        ? "text-gold"
                         : "text-foreground/60 hover:text-foreground"
                     )}
                   >
@@ -255,7 +284,7 @@ export function Navbar() {
                       className={cn(
                         "text-[13px] font-medium uppercase tracking-wider",
                         isActive(link.href)
-                          ? "text-[#FF8000]"
+                          ? "text-gold"
                           : "text-foreground/60 hover:text-foreground"
                       )}
                     >
@@ -301,7 +330,7 @@ export function Navbar() {
       {/* Mobile Menu Overlay */}
       <div
         className={cn(
-          "fixed inset-0 z-40 flex flex-col items-center justify-center bg-white/95 backdrop-blur-lg md:hidden",
+          "fixed inset-0 z-40 flex flex-col items-center justify-center bg-background/95 backdrop-blur-lg md:hidden",
           mobileOpen ? "translate-x-0" : "translate-x-full"
         )}
         aria-hidden={!mobileOpen}
@@ -315,7 +344,7 @@ export function Navbar() {
               className={cn(
                 "font-display text-2xl sm:text-3xl uppercase tracking-widest",
                 isActive(link.href)
-                  ? "text-[#FF8000]"
+                  ? "text-gold"
                   : "text-foreground/60 hover:text-foreground"
               )}
             >
@@ -326,7 +355,7 @@ export function Navbar() {
             href="https://docs.google.com/forms/d/e/1FAIpQLSc5dX8x-oh8OP0M61hb4o8S3POhIpPr7bCrbw0sXiaoXK3l6g/viewform"
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-4 bg-[#FF8000] px-8 py-3 font-display text-xl font-bold uppercase tracking-wider text-white"
+            className="mt-4 bg-gold px-8 py-3 font-display text-xl font-bold uppercase tracking-wider text-white"
           >
             Join Us
           </Link>

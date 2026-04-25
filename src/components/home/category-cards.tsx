@@ -56,16 +56,25 @@ export function CategoryCards() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="relative bg-background py-16 lg:py-24">
+    <section ref={sectionRef} className="relative bg-background pt-28 pb-32 lg:pt-40 lg:pb-44">
       <div className="mx-auto max-w-7xl px-4 lg:px-8">
-        {/* McLaren-style header */}
-        <div className="mb-10 flex flex-col gap-6 lg:mb-14 lg:flex-row lg:items-end lg:justify-between">
+        {/* Asymmetric header — title left-heavy (1.25fr), copy in narrow right (0.75fr) */}
+        <div className="mb-12 grid grid-cols-1 gap-6 lg:mb-20 lg:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] lg:items-end lg:gap-12">
           <div>
-            <h2 className="font-display font-bold uppercase italic leading-[0.9] tracking-tight" style={{ fontSize: "clamp(2.5rem, 6.6vw, 5rem)", color: "#C2850C" }}>
+            <p
+              className="mb-4 font-mono uppercase text-foreground/50"
+              style={{ fontSize: "10px", letterSpacing: "0.32em" }}
+            >
+              §03 — Inside the team
+            </p>
+            <h2
+              className="font-display font-bold uppercase italic leading-[0.9] tracking-tight text-gold"
+              style={{ fontSize: "clamp(2.5rem, 6.6vw, 5rem)" }}
+            >
               About Us
             </h2>
           </div>
-          <p className="max-w-md text-[15px] leading-relaxed text-foreground/60 lg:text-right">
+          <p className="max-w-md text-[15px] leading-relaxed text-foreground/60 lg:pb-3 lg:text-right">
             From design and manufacturing to data and strategy, every member plays a critical role in putting our car on track.
           </p>
         </div>
@@ -75,7 +84,7 @@ export function CategoryCards() {
             <Link
               key={cat.title}
               href={cat.href}
-              className="category-card group relative block aspect-[3/4] w-full overflow-hidden sm:aspect-[3/4]"
+              className="category-card image-cinematic group relative block aspect-[3/4] w-full overflow-hidden sm:aspect-[3/4]"
             >
               {/* Image */}
               <div className="absolute inset-0">

@@ -82,7 +82,7 @@ export function Footer() {
             />
             <h3 className="font-display text-2xl sm:text-3xl uppercase tracking-tight">
               <span className="font-bold text-gold">Spartan</span>{" "}
-              <span className="font-bold text-blue">Racing</span>
+              <span className="font-bold text-foreground">Racing</span>
             </h3>
           </div>
         </Link>

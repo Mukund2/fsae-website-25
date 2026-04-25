@@ -192,7 +192,7 @@ function ResultRow({ result }: { result: typeof results[number] }) {
         style={{
           transform: "scaleX(0)",
           transformOrigin: "left",
-          background: "linear-gradient(90deg, #C2850C, #D4980F)",
+          background: "linear-gradient(90deg, #B8965A, #D1B27A)",
         }}
       />
 
@@ -203,7 +203,7 @@ function ResultRow({ result }: { result: typeof results[number] }) {
         style={{
           gridTemplateColumns: "1fr 220px 140px 85px",
           minHeight: "clamp(66px, 9vw, 83px)",
-          background: hovered ? "linear-gradient(90deg, #C2850C, #D4980F)" : "transparent",
+          background: hovered ? "linear-gradient(90deg, #B8965A, #D1B27A)" : "transparent",
         }}
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
@@ -236,7 +236,7 @@ function ResultRow({ result }: { result: typeof results[number] }) {
           style={{
             fontSize: "clamp(1.3rem, 2.5vw, 2rem)",
             fontStyle: "italic",
-            color: hovered ? "#0e0e0e" : "#C2850C",
+            color: hovered ? "#0e0e0e" : "#B8965A",
           }}
         >
           {result.result.replace(/(\d+)(ST|ND|RD|TH)/i, "$1")}
@@ -284,7 +284,7 @@ function ResultRow({ result }: { result: typeof results[number] }) {
         </div>
         <span
           className="ml-4 font-display font-black flex-shrink-0"
-          style={{ fontSize: "1.25rem", fontStyle: "italic", color: "#C2850C" }}
+          style={{ fontSize: "1.25rem", fontStyle: "italic", color: "#B8965A" }}
         >
           {result.result.replace(/(\d+)(ST|ND|RD|TH)/i, "$1")}
           <span
@@ -340,7 +340,7 @@ export function Results() {
   return (
     <section
       ref={sectionRef}
-      className="relative w-full bg-background py-12 md:py-20"
+      className="relative w-full bg-background pt-8 pb-24 md:pt-12 md:pb-36"
     >
     <div className="relative mx-auto max-w-7xl px-6 lg:px-12">
     <div className="relative overflow-hidden" style={{ background: "#0e0e0e" }}>
@@ -430,25 +430,42 @@ export function Results() {
         </svg>
       </div>
 
-      {/* ── Title block ── */}
+      {/* ── Title block — asymmetric: kicker + title in left 2/3 ── */}
       <div className="px-6 lg:px-14 pt-20 pb-10 md:pt-26 md:pb-13">
-        <div data-header>
-          <h2
-            className="font-display font-bold uppercase leading-[0.9] tracking-tight text-white"
-            style={{ fontSize: "clamp(2.5rem, 6.6vw, 5rem)", fontStyle: "italic" }}
-          >
-            Track Record
-          </h2>
+        <div
+          data-header
+          className="grid grid-cols-1 gap-3 md:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] md:items-end md:gap-10"
+        >
+          <div>
+            <p
+              className="mb-3 font-mono uppercase"
+              style={{ fontSize: "10px", letterSpacing: "0.32em", color: "rgba(255,255,255,0.45)" }}
+            >
+              §02 — Results since 1991
+            </p>
+            <h2
+              className="font-display font-bold uppercase leading-[0.9] tracking-tight text-white"
+              style={{ fontSize: "clamp(2.5rem, 6.6vw, 5rem)", fontStyle: "italic" }}
+            >
+              Track Record
+            </h2>
+            <p
+              className="leading-[0.9] tracking-tight"
+              style={{
+                fontSize: "clamp(2.5rem, 6.6vw, 5rem)",
+                fontStyle: "italic",
+                color: "#B8965A",
+                fontFamily: "var(--font-script), serif",
+              }}
+            >
+              Highlights
+            </p>
+          </div>
           <p
-            className="leading-[0.9] tracking-tight"
-            style={{
-              fontSize: "clamp(2.5rem, 6.6vw, 5rem)",
-              fontStyle: "italic",
-              color: "#C2850C",
-              fontFamily: "var(--font-script), serif",
-            }}
+            className="hidden text-[13px] leading-relaxed text-white/55 md:block md:pb-3"
           >
-            Highlights
+            Six podiums across Lincoln and Michigan FSAE since 2015 — including
+            back-to-back endurance wins.
           </p>
         </div>
       </div>

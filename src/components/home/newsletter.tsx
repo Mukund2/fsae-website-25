@@ -9,83 +9,32 @@ const InlineFlipbook = dynamic(
   { ssr: false }
 );
 
+function makePages(folder: string, count: number): string[] {
+  return Array.from({ length: count }, (_, i) =>
+    `/images/newsletters/${folder}/page-${String(i + 1).padStart(2, "0")}.jpg`
+  );
+}
+
 const newsletters = [
   // 2026
-  {
-    date: "March 2026",
-    title: "Into the Electric",
-    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_234414049a954679966f200b229aee64.pdf",
-  },
-  {
-    date: "February 2026",
-    title: "Design to Reality",
-    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_96fb6ce5ecbf4feab0491278f70f07e0.pdf",
-  },
-  {
-    date: "New Year 2026",
-    title: "2026 Team Resolutions",
-    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_23a0bf9e19ea4f34abb5746375101d73.pdf",
-  },
+  { date: "March 2026", title: "Into the Electric", pages: makePages("into-the-electric", 9) },
+  { date: "February 2026", title: "Design to Reality", pages: makePages("design-to-reality", 11) },
+  { date: "New Year 2026", title: "2026 Team Resolutions", pages: makePages("2026-team-resolutions", 8) },
   // 2025
-  {
-    date: "Fall 2025",
-    title: "November Update",
-    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_22de078a7a1c4559bbc9a270aafac172.pdf",
-  },
-  {
-    date: "Summer 2025",
-    title: "Competition Recap",
-    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_60b226acddbe413ea91fa95a9902aaf8.pdf",
-  },
-  {
-    date: "Spring 2025",
-    title: "March Update",
-    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_989138bdf1b340248759424b3ba49d62.pdf",
-  },
-  {
-    date: "Winter 2025",
-    title: "February Update",
-    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_d3576df32e2b430bb50838aa571d41c7.pdf",
-  },
+  { date: "Fall 2025", title: "November Update", pages: makePages("november-2025", 10) },
+  { date: "Summer 2025", title: "Competition Recap", pages: makePages("competition-recap", 8) },
+  { date: "Spring 2025", title: "March Update", pages: makePages("march-2025", 11) },
+  { date: "Winter 2025", title: "February Update", pages: makePages("february-2025", 13) },
   // 2024
-  {
-    date: "Winter 2024",
-    title: "December Update",
-    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_814e7aff58694194af605109541a320c.pdf",
-  },
-  {
-    date: "Fall 2024",
-    title: "November Update",
-    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_eef97411dfc64ad0be10f122537649a6.pdf",
-  },
-  {
-    date: "March 2024",
-    title: "Spring Update",
-    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_dfb20c3c8d334851a785a4e3841833dc.pdf",
-  },
+  { date: "Winter 2024", title: "December Update", pages: makePages("december-2024", 8) },
+  { date: "Fall 2024", title: "November Update", pages: makePages("november-2024", 17) },
+  { date: "March 2024", title: "Spring Update", pages: makePages("spring-2024", 22) },
   // 2023
-  {
-    date: "February 2023",
-    title: "Winter Update",
-    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_b484c3b3d7e34c8cacc1061a74791660.pdf",
-  },
-  // 2022–23
-  {
-    date: "March–June 2023",
-    title: "Season Recap",
-    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_b8f2c6d86e4942cf9f8f46eac23f80c0.pdf",
-  },
+  { date: "February 2023", title: "Winter Update", pages: makePages("winter-2023", 12) },
+  { date: "March–June 2023", title: "Season Recap", pages: makePages("season-recap-2023", 7) },
   // 2021–22
-  {
-    date: "Nov 2021–Feb 2022",
-    title: "Winter Recap",
-    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_a76ccd1b40ae48a9a4ed5d29d73b1267.pdf",
-  },
-  {
-    date: "October 2021",
-    title: "Inaugural Issue",
-    pdf: "https://www.sjsuformulasae.com/_files/ugd/dfb2a6_be2da463627d4fdf9d63a8fcf717baaa.pdf",
-  },
+  { date: "Nov 2021–Feb 2022", title: "Winter Recap", pages: makePages("winter-recap-2022", 5) },
+  { date: "October 2021", title: "Inaugural Issue", pages: makePages("inaugural-2021", 7) },
 ];
 
 const PAGE_SIZE = 5;
@@ -270,8 +219,8 @@ export function Newsletter() {
               <div className="relative">
                 {newsletters.map((nl, i) =>
                   loaded.has(i) ? (
-                    <div key={nl.pdf} style={{ display: active === i ? "block" : "none" }}>
-                      <InlineFlipbook pdfUrl={nl.pdf} />
+                    <div key={nl.title} style={{ display: active === i ? "block" : "none" }}>
+                      <InlineFlipbook pages={nl.pages} />
                     </div>
                   ) : null
                 )}

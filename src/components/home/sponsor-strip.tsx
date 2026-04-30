@@ -12,7 +12,7 @@ interface Sponsor {
 const SPONSORS: Sponsor[] = [
   { name: "Cadence", url: "https://www.cadence.com", logo: "/images/sponsors/cadence.png" },
   { name: "Military Fasteners", url: "https://www.militaryfasteners.com", logo: "/images/sponsors/military-fasteners.png" },
-  { name: "Altium", url: "https://www.altium.com", logo: "/images/sponsors/altium.png" },
+  { name: "Altium", url: "https://www.altium.com", logo: "/images/sponsors/altium.svg" },
   { name: "Siemens", url: "https://www.siemens.com", logo: "/images/sponsors/siemens.png" },
   { name: "Ansys", url: "https://www.ansys.com", logo: "/images/sponsors/ansys.png" },
   { name: "Toray", url: "https://www.toray.com", logo: "/images/sponsors/toray.png" },

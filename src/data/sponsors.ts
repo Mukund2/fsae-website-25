@@ -41,10 +41,12 @@ export const sponsors: Sponsor[] = [
   {
     name: "Bergman",
     tier: "title",
+    logo: "/images/sponsors/bergman.svg",
   },
   {
     name: "Don Beal",
     tier: "title",
+    logo: "/images/sponsors/don-beal.svg",
   },
   {
     name: "Roku",
@@ -69,6 +71,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "BayView Plastics",
     tier: "platinum",
+    logo: "/images/sponsors/bayview-plastics.svg",
   },
   {
     name: "Phoenix Contact",
@@ -119,6 +122,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "Curvilinear Components",
     tier: "gold",
+    logo: "/images/sponsors/curvilinear.svg",
   },
 
   // Silver ($5,000+)
@@ -175,6 +179,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "LCL Machining",
     tier: "bronze",
+    logo: "/images/sponsors/lcl-machining.svg",
   },
   {
     name: "KLA",
@@ -194,6 +199,7 @@ export const sponsors: Sponsor[] = [
     name: "Rexco",
     tier: "partner",
     url: "https://www.rfrexco.com",
+    logo: "/images/sponsors/rexco.svg",
   },
   {
     name: "Chemtrend",
@@ -246,6 +252,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "Glenrock Builders",
     tier: "partner",
+    logo: "/images/sponsors/glenrock.svg",
   },
   {
     name: "Bojo Tools",
@@ -256,10 +263,12 @@ export const sponsors: Sponsor[] = [
   {
     name: "Garner Heat Treat",
     tier: "partner",
+    logo: "/images/sponsors/garnerheat.svg",
   },
   {
     name: "Bay Technology Mfg",
     tier: "partner",
+    logo: "/images/sponsors/bay-technology.svg",
   },
   {
     name: "Shining 3D",

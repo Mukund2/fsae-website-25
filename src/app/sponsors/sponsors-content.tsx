@@ -15,8 +15,8 @@ const TIER_META: Record<
   title: {
     label: "TITLE SPONSORS",
     gridClass: "grid-cols-1 sm:grid-cols-2 gap-px",
-    cardSize: "p-6 h-[140px]",
-    logoH: "h-16",
+    cardSize: "p-6 h-[160px]",
+    logoH: "h-20",
   },
   platinum: {
     label: "PLATINUM SPONSORS",

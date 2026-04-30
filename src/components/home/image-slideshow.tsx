@@ -89,7 +89,7 @@ export function ImageSlideshow() {
         )}
       </div>
       <p className="py-3 text-center font-display text-sm italic text-white/50">
-        Recents from Unveiling
+        Highlights from SR-17 Unveiling
       </p>
     </section>
   );

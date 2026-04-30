@@ -18,7 +18,7 @@ export const sponsors: Sponsor[] = [
     name: "Altium",
     tier: "title",
     url: "https://www.altium.com",
-    logo: "/images/sponsors/altium.png",
+    logo: "/images/sponsors/altium.svg",
   },
   {
     name: "Siemens",
@@ -50,7 +50,7 @@ export const sponsors: Sponsor[] = [
   },
   {
     name: "Roku",
-    tier: "title",
+    tier: "platinum",
     url: "https://www.roku.com",
     logo: "/images/sponsors/roku.png",
   },

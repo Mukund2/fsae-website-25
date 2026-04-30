@@ -8,7 +8,7 @@ export const cars: Car[] = [
     motor: "Emrax 228",
     torque: "162 ft-lbs",
     battery: "8.3 kWh",
-    image: "/images/flickr/sr16-cars.jpg",
+    image: "/images/timeline/2025.png",
   },
   {
     slug: "sr-15",
@@ -17,7 +17,7 @@ export const cars: Car[] = [
     motor: "Emrax 228",
     torque: "162 ft-lbs",
     battery: "7.6 kWh",
-    image: "/images/cars/sr-15.jpg",
+    image: "/images/timeline/2024.png",
   },
   {
     slug: "sr-14",
@@ -26,7 +26,7 @@ export const cars: Car[] = [
     motor: "Emrax 228",
     torque: "162 ft-lbs",
     battery: "7.6 kWh",
-    image: "/images/cars/sr-14.png",
+    image: "/images/timeline/2022.png",
   },
   {
     slug: "sr-13",
@@ -62,7 +62,7 @@ export const cars: Car[] = [
     motor: "Emrax 228",
     torque: "162 ft-lbs",
     battery: "8.1 kWh",
-    image: "/images/cars/sre-5.png",
+    image: "/images/timeline/2021.png",
   },
   {
     slug: "sr-11",
@@ -123,7 +123,7 @@ export const cars: Car[] = [
     motor: "Honda CBR600 F4i",
     power: "73 HP",
     torque: "37 ft-lbs",
-    image: "/images/history/sr7-2015.jpg",
+    image: "/images/timeline/2015.png",
   },
   {
     slug: "sr-6",
@@ -177,13 +177,13 @@ export const cars: Car[] = [
     motor: "Honda CBR600 F4i",
     power: "73 HP",
     torque: "36 ft-lbs",
-    image: "/images/history/sr1-2008.jpg",
+    image: "/images/timeline/2008.png",
   },
   {
     slug: "sr-0",
     name: "SR-0",
     years: "1992",
     motor: "Senior Project",
-    image: "/images/history/sr0-1989.jpg",
+    image: "/images/timeline/1989.png",
   },
 ];

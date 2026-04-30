@@ -33,7 +33,7 @@ export function ImageSlideshow() {
 
   return (
     <section className="relative w-full overflow-hidden bg-black">
-      <div className="relative mx-auto aspect-[3/2] w-full max-w-[1800px]">
+      <div className="relative mx-auto aspect-[3/2] w-full max-w-[1200px]">
         {SLIDES.map((src, i) => (
           <Image
             key={src}

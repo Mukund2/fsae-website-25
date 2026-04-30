@@ -15,11 +15,7 @@ export default function HomePage() {
         {/* Gradient: Results bg → Sponsor Strip bg */}
         <div className="h-24 md:h-32" style={{ background: "linear-gradient(to bottom, var(--background), #F5F5F5)" }} />
         <SponsorStrip />
-        {/* Gradient: Sponsor Strip bg → Slideshow */}
-        <div className="h-16 md:h-24" style={{ background: "linear-gradient(to bottom, #F5F5F5, #000000)" }} />
         <ImageSlideshow />
-        {/* Gradient: Slideshow → Newsletter bg */}
-        <div className="h-16 md:h-24" style={{ background: "linear-gradient(to bottom, #000000, #FFFFFF)" }} />
         <Newsletter />
         <JoinUs />
       </div>

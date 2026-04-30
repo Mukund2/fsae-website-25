@@ -33,7 +33,7 @@ const executiveBoard: Lead[] = [
     role: "President",
     image: "/images/team/leads/will-kittinger.jpg",
     linkedin: "https://www.linkedin.com/in/william-kittinger/",
-    description: "Will Kittinger is a fifth year Management Information Systems major who began with Spartan Racing as a Business Team intern during SR-15. He quickly expanded his role, contributing to both business operations and mechanical subteams such as Suspension and Final Drive during SR-16. He developed the foundation of the Cost Report while leading sponsor outreach efforts. Will now serves as President and Business Lead for SR-17, where he is focused on guiding the team forward. His goal is to bring home a first place finish at competition next June.",
+    description: "Will Kittinger is a fifth year Management Information Systems major who began with Spartan Racing as a Business Team intern during SR-15. He quickly expanded his role, contributing to both business operations and mechanical subteams such as Suspension and Final Drive during SR-16. He developed the foundation of the Cost Report while leading sponsor outreach efforts. Will now serves as JS President for SR-17, where he is focused on guiding the team forward. His goal is to bring home a first place finish at competition next June.",
   },
   {
     name: "Ally Almiranez",

@@ -17,7 +17,7 @@ const SPONSORS: Sponsor[] = [
   { name: "Ansys", url: "https://www.ansys.com", logo: "/images/sponsors/ansys.png" },
   { name: "Toray", url: "https://www.toray.com", logo: "/images/sponsors/toray.png" },
   { name: "Bergman", logo: "/images/sponsors/bergman.svg" },
-  { name: "Don Beal" },
+  { name: "Don Beal", logo: "/images/sponsors/don-beal.svg" },
   { name: "Roku", url: "https://www.roku.com", logo: "/images/sponsors/roku.png" },
   { name: "Motec USA", url: "https://www.motec.com.au", logo: "/images/sponsors/motec.png" },
   { name: "Levy", url: "https://www.levyrestaurants.com", logo: "/images/sponsors/levy.png" },

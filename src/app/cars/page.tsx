@@ -2,7 +2,19 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
-import { cars } from "@/data/cars";
+
+const timelineEntries: { year: string; image: string }[] = [
+  { year: "1989", image: "/images/timeline/1989.png" },
+  { year: "2008", image: "/images/timeline/2008.png" },
+  { year: "2015", image: "/images/timeline/2015.png" },
+  { year: "2015", image: "/images/timeline/2015-electric.png" },
+  { year: "2021", image: "/images/timeline/2021.png" },
+  { year: "2022", image: "/images/timeline/2022.png" },
+  { year: "2024", image: "/images/timeline/2024.png" },
+  { year: "2025", image: "/images/timeline/2025.png" },
+  { year: "Present", image: "/images/timeline/present.png" },
+  { year: "Thanks", image: "/images/timeline/gratitude.png" },
+];
 
 // The SVG path that defines the curving racetrack
 // Sways left/right with varying amplitude for organic feel
@@ -347,7 +359,7 @@ export default function CarsPage() {
               className="mt-4 max-w-lg font-body text-lg text-foreground/60"
               style={{ opacity: 0, animation: "heroFadeIn 0.8s ease-out 0.6s forwards" }}
             >
-              Every car we&apos;ve ever built, from SR-0 to SR-16.
+              A look back at the years that shaped Spartan Racing.
             </p>
           </div>
         </div>
@@ -361,8 +373,13 @@ export default function CarsPage() {
           <CheckeredLine label="start" />
 
           <div className="mt-12 flex flex-col gap-0">
-            {cars.map((car, i) => (
-              <TimelineEntry key={car.slug} car={car} isLeft={i % 2 === 0} />
+            {timelineEntries.map((entry, i) => (
+              <TimelineEntry
+                key={`${entry.year}-${i}`}
+                year={entry.year}
+                image={entry.image}
+                isLeft={i % 2 === 0}
+              />
             ))}
           </div>
 
@@ -384,10 +401,12 @@ export default function CarsPage() {
 }
 
 function TimelineEntry({
-  car,
+  year,
+  image,
   isLeft,
 }: {
-  car: (typeof cars)[number];
+  year: string;
+  image: string;
   isLeft: boolean;
 }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -409,13 +428,7 @@ function TimelineEntry({
     return () => observer.disconnect();
   }, []);
 
-  // Slight random rotation for organic Polaroid feel
   const rotation = isLeft ? -1.5 : 1.5;
-
-  // Combine specs into a single Sharpie line
-  const specs = [car.motor, car.power, car.torque, car.battery]
-    .filter((s): s is string => !!s && s !== "Senior Project")
-    .join(" · ");
 
   return (
     <div ref={ref} className="relative">
@@ -426,7 +439,7 @@ function TimelineEntry({
       >
         {/* Polaroid card */}
         <div
-          className="bg-white p-3 pb-20 shadow-lg relative"
+          className="bg-white p-3 pb-16 shadow-lg relative"
           style={{ transform: `rotate(${rotation}deg)` }}
         >
           {/* Tape strip - top */}
@@ -444,40 +457,25 @@ function TimelineEntry({
             }}
           />
           {/* Photo with vintage filter */}
-          {car.image ? (
-            <div className="relative aspect-[4/3] overflow-hidden bg-surface">
-              <Image
-                src={car.image}
-                alt={car.name}
-                fill
-                className="object-cover"
-                sizes="(max-width: 768px) 100vw, 45vw"
-                loading="eager"
-                style={{ filter: `sepia(0.15) contrast(${car.slug === "sr-16" || car.slug === "sr-15" ? "0.85" : "1.05"}) saturate(0.9) brightness(${car.slug === "sr-16" || car.slug === "sr-15" ? "1.5" : "1.02"})` }}
-              />
-              {/* Slight warm overlay for vintage feel */}
-              <div className="absolute inset-0 bg-amber-100/10 mix-blend-multiply" />
-            </div>
-          ) : (
-            <div className="aspect-[4/3] bg-surface flex items-center justify-center">
-              <span className="font-display text-foreground/20 text-4xl font-bold uppercase">
-                {car.name}
-              </span>
-            </div>
-          )}
+          <div className="relative aspect-[4/3] overflow-hidden bg-surface">
+            <Image
+              src={image}
+              alt={year}
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 100vw, 45vw"
+              loading="eager"
+              style={{ filter: "sepia(0.15) contrast(1.05) saturate(0.9) brightness(1.02)" }}
+            />
+            {/* Slight warm overlay for vintage feel */}
+            <div className="absolute inset-0 bg-amber-100/10 mix-blend-multiply" />
+          </div>
 
-          {/* Sharpie-style text on the white border */}
+          {/* Sharpie-style year on the white border */}
           <div className="absolute bottom-0 left-0 right-0 px-4 pb-3">
-            <h2
-              className="font-display text-[1.3rem] font-bold uppercase text-foreground/90 md:text-[1.5rem]"
-            >
-              {car.name}
+            <h2 className="font-display text-[1.5rem] font-bold uppercase text-foreground/90 md:text-[1.75rem]">
+              {year}
             </h2>
-            <p
-              className="mt-0.5 text-[0.7rem] font-display uppercase text-foreground/50"
-            >
-              {car.years}{specs ? ` · ${specs}` : ""}
-            </p>
           </div>
         </div>
       </div>

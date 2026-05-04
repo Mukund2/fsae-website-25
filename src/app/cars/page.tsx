@@ -3,17 +3,18 @@
 import { useEffect, useRef } from "react";
 import Image from "next/image";
 
-const timelineEntries: { year: string; image: string }[] = [
-  { year: "1989", image: "/images/timeline/1989.png" },
-  { year: "2008", image: "/images/timeline/2008.png" },
-  { year: "2015", image: "/images/timeline/2015.png" },
-  { year: "2015", image: "/images/timeline/2015-electric.png" },
-  { year: "2021", image: "/images/timeline/2021.png" },
-  { year: "2022", image: "/images/timeline/2022.png" },
-  { year: "2024", image: "/images/timeline/2024.png" },
-  { year: "2025", image: "/images/timeline/2025.png" },
-  { year: "Present", image: "/images/timeline/present.png" },
-  { year: "Thanks", image: "/images/timeline/gratitude.png" },
+const timelineEntries: { year: string; label: string; image: string }[] = [
+  { year: "1989", label: "SR-0", image: "/images/timeline/1989.png" },
+  { year: "2008", label: "SR-1 / Revived", image: "/images/timeline/2008.png" },
+  { year: "2015", label: "SR-7 / First in 2015 FSAE", image: "/images/timeline/2015.png" },
+  { year: "2015", label: "Spartan Racing Electric Born", image: "/images/timeline/2015-electric.png" },
+  { year: "2021", label: "SRE-5", image: "/images/timeline/2021.png" },
+  { year: "2022", label: "SR-13 / Retired", image: "/images/timeline/2022.png" },
+  { year: "2024", label: "SR-15", image: "/images/timeline/2024.png" },
+  { year: "2025", label: "SR-16", image: "/images/timeline/2025.png" },
+  { year: "2026", label: "SR-17", image: "/images/history/sr17-2026.avif" },
+  { year: "Present", label: "Legacy", image: "/images/timeline/present.png" },
+  { year: "Thanks", label: "Gratitude", image: "/images/timeline/gratitude.png" },
 ];
 
 // The SVG path that defines the curving racetrack
@@ -377,6 +378,7 @@ export default function CarsPage() {
               <TimelineEntry
                 key={`${entry.year}-${i}`}
                 year={entry.year}
+                label={entry.label}
                 image={entry.image}
                 isLeft={i % 2 === 0}
               />
@@ -402,10 +404,12 @@ export default function CarsPage() {
 
 function TimelineEntry({
   year,
+  label,
   image,
   isLeft,
 }: {
   year: string;
+  label: string;
   image: string;
   isLeft: boolean;
 }) {
@@ -471,11 +475,14 @@ function TimelineEntry({
             <div className="absolute inset-0 bg-amber-100/10 mix-blend-multiply" />
           </div>
 
-          {/* Sharpie-style year on the white border */}
+          {/* Sharpie-style year + label on the white border */}
           <div className="absolute bottom-0 left-0 right-0 px-4 pb-3">
             <h2 className="font-display text-[1.5rem] font-bold uppercase text-foreground/90 md:text-[1.75rem]">
               {year}
             </h2>
+            <p className="mt-0.5 font-display text-[0.75rem] uppercase text-foreground/50">
+              {label}
+            </p>
           </div>
         </div>
       </div>

@@ -64,11 +64,4 @@ export const timeline: TimelineEvent[] = [
       "The latest iteration of our electric race car, SR-17, continues the legacy of Spartan Racing Electric.",
     image: "/images/history/sr17-2026.avif",
   },
-  {
-    year: "Present",
-    title: "Legacy",
-    description:
-      "Spartan Racing Electric continues on today, designing, building, testing, and competing in the International Formula SAE Competitions.",
-    image: "/images/history/sr16-2025-b.jpg",
-  },
 ];

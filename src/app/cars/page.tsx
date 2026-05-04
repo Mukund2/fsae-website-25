@@ -13,8 +13,6 @@ const timelineEntries: { year: string; label: string; image: string }[] = [
   { year: "2024", label: "SR-15", image: "/images/timeline/2024.png" },
   { year: "2025", label: "SR-16", image: "/images/timeline/2025.png" },
   { year: "2026", label: "SR-17", image: "/images/history/sr17-2026.avif" },
-  { year: "Present", label: "Legacy", image: "/images/timeline/present.png" },
-  { year: "Thanks", label: "Gratitude", image: "/images/timeline/gratitude.png" },
 ];
 
 // The SVG path that defines the curving racetrack

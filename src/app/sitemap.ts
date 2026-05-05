@@ -1,13 +1,7 @@
 import { MetadataRoute } from "next";
-import { cars } from "@/data/cars";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = "https://sjsuformulasae.com";
-
-  const carPages = cars.map((car) => ({
-    url: `${baseUrl}/cars/${car.slug}`,
-    lastModified: new Date(),
-  }));
 
   return [
     {
@@ -28,7 +22,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly" as const,
       priority: 0.8,
     },
-    ...carPages,
     {
       url: `${baseUrl}/history`,
       lastModified: new Date(),

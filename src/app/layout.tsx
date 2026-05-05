@@ -35,7 +35,7 @@ export default function RootLayout({
       lang="en"
       className={`${bebasNeue.variable} ${dmSans.variable} ${jetbrainsMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full bg-background text-foreground">
+      <body className="flex min-h-screen flex-col bg-background text-foreground">
         <SmoothScrollProvider>
           <CartProvider>
             <a href="#main-content" className="skip-nav">

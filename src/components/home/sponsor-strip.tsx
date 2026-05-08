@@ -54,11 +54,11 @@ const SPONSORS: Sponsor[] = [
   { name: "Bojo Tools", url: "https://www.bojotools.com", logo: "/images/sponsors/bojo-tools.png" },
   { name: "Garner Heat Treat", logo: "/images/sponsors/garnerheat.svg" },
   { name: "Bay Technology Mfg", logo: "/images/sponsors/bay-technology.svg" },
-  { name: "Curvilinear Components", logo: "/images/sponsors/curvilinear.svg" },
+  { name: "Curvilinear Components", url: "https://oneoffparts.com" },
   { name: "Shining 3D", url: "https://www.shining3d.com", logo: "/images/sponsors/shining-3d.png" },
   { name: "TE Connectivity", url: "https://www.te.com", logo: "/images/sponsors/te-connectivity.svg" },
   { name: "Prismatic Powders", url: "https://www.prismaticpowders.com", logo: "/images/sponsors/prismatic-powders.png" },
-  { name: "Valence Precision", logo: "/images/sponsors/valence-precision.svg" },
+  { name: "Valence Precision", url: "https://valenceprecision.com" },
 ];
 
 function SponsorItem({ sponsor }: { sponsor: Sponsor }) {

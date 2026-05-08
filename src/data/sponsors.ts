@@ -122,7 +122,7 @@ export const sponsors: Sponsor[] = [
   {
     name: "Curvilinear Components",
     tier: "gold",
-    logo: "/images/sponsors/curvilinear.svg",
+    url: "https://oneoffparts.com",
   },
 
   // Silver ($5,000+)
@@ -286,6 +286,6 @@ export const sponsors: Sponsor[] = [
   {
     name: "Valence Precision",
     tier: "silver",
-    logo: "/images/sponsors/valence-precision.svg",
+    url: "https://valenceprecision.com",
   },
 ];

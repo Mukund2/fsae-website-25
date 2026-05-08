@@ -40,7 +40,7 @@ const SPONSORS: Sponsor[] = [
   { name: "Airtech", url: "https://www.airtechintl.com", logo: "/images/sponsors/airtech.png" },
   { name: "Sabalcore", url: "https://www.sabalcore.com", logo: "/images/sponsors/sabalcore.png" },
   { name: "LCL Machining", logo: "/images/sponsors/lcl-machining.svg" },
-  { name: "Amex Plating", url: "https://amexplating.com" },
+  { name: "Amex Plating", url: "https://amexplating.com", logo: "/images/sponsors/amex-plating.png" },
   { name: "Rexco", url: "https://www.rfrexco.com", logo: "/images/sponsors/rexco.svg" },
   { name: "Chemtrend", url: "https://www.chemtrend.com", logo: "/images/sponsors/chemtrend.png" },
   { name: "SMC", url: "https://www.smcusa.com", logo: "/images/sponsors/smc.png" },

@@ -185,6 +185,7 @@ export const sponsors: Sponsor[] = [
     name: "Amex Plating",
     tier: "bronze",
     url: "https://amexplating.com",
+    logo: "/images/sponsors/amex-plating.png",
   },
 
   // Partner (Under $2,500)

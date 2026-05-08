@@ -42,7 +42,7 @@ const results = [
   {
     event: "EV, NORCAL SHOOTOUT",
     competition: "NORCAL SHOOTOUT",
-    year: "2024",
+    year: "2025",
     result: "1ST",
   },
 ];

@@ -181,18 +181,6 @@ export const sponsors: Sponsor[] = [
     tier: "bronze",
     logo: "/images/sponsors/lcl-machining.svg",
   },
-  {
-    name: "KLA",
-    tier: "bronze",
-    url: "https://www.kla.com",
-    logo: "/images/sponsors/kla.png",
-  },
-  {
-    name: "Amex",
-    tier: "bronze",
-    url: "https://www.americanexpress.com",
-    logo: "/images/sponsors/amex.png",
-  },
 
   // Partner (Under $2,500)
   {
@@ -218,6 +206,7 @@ export const sponsors: Sponsor[] = [
     tier: "partner",
     url: "https://www.dremel.com",
     logo: "/images/sponsors/dremel.png",
+    invertOnLight: true,
   },
   {
     name: "FibreGlast",

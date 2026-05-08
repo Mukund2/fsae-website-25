@@ -140,7 +140,7 @@ function SponsorCard({
       alt={sponsor.name}
       width={240}
       height={80}
-      className={`${tierMeta.logoH} w-auto object-contain group-hover:scale-110`}
+      className={`${tierMeta.logoH} w-auto object-contain group-hover:scale-110${sponsor.invertOnLight ? " [filter:invert(1)]" : ""}`}
       style={{ willChange: "transform" }}
     />
   ) : (

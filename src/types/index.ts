@@ -37,6 +37,7 @@ export interface Sponsor {
   logo?: string;
   url?: string;
   description?: string;
+  invertOnLight?: boolean;
 }
 
 export interface CompetitionResult {

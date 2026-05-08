@@ -181,6 +181,10 @@ export const sponsors: Sponsor[] = [
     tier: "bronze",
     logo: "/images/sponsors/lcl-machining.svg",
   },
+  {
+    name: "Amex Plating",
+    tier: "bronze",
+  },
 
   // Partner (Under $2,500)
   {

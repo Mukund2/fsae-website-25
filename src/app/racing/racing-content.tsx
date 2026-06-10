@@ -58,8 +58,8 @@ const dynamicEvents = [
   {
     name: "Acceleration",
     tagline: "75 meters. Full send.",
-    image: "/images/flickr/acceleration-1.jpg",
-    imageAlt: "Spartan Racing car launching off the line",
+    image: "/images/flickr/endurance.jpg",
+    imageAlt: "Spartan Racing car during endurance race",
   },
   {
     name: "Skid Pad",
@@ -76,8 +76,8 @@ const dynamicEvents = [
   {
     name: "Endurance",
     tagline: "22 km. No margin for error.",
-    image: "/images/flickr/endurance.jpg",
-    imageAlt: "Spartan Racing car during endurance race",
+    image: "/images/flickr/acceleration-1.jpg",
+    imageAlt: "Spartan Racing car launching off the line",
   },
 ];
 

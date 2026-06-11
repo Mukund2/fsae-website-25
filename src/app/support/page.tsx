@@ -3,7 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Support | SJSU Spartan Racing",
+  title: "Support",
   description:
     "Support SJSU Spartan Racing through donations or sponsorship partnerships.",
 };

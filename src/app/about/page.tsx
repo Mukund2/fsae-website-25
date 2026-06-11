@@ -3,7 +3,7 @@ import { subteams } from "@/data/team";
 import { SubteamGrid } from "@/components/about/subteam-grid";
 
 export const metadata: Metadata = {
-  title: "Subteams | SJSU Spartan Racing",
+  title: "Subteams",
   description:
     "Meet the 8 subteams behind SJSU Spartan Racing, from Aerodynamics to R&D, every group plays a critical role in building a competitive formula-style race car.",
 };

@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { FAQContent } from "./faq-content";
 
 export const metadata: Metadata = {
-  title: "FAQ | SJSU Spartan Racing",
+  title: "FAQ",
   description: "Frequently asked questions about SJSU Spartan Racing.",
 };
 

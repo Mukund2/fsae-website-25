@@ -3,7 +3,7 @@ import { TeamContent } from "@/components/team/team-content";
 import { AlumniSection } from "@/components/team/alumni-section";
 
 export const metadata: Metadata = {
-  title: "Leads | SJSU Spartan Racing",
+  title: "Leads",
   description:
     "Meet the executive board and subteam leads of SJSU Spartan Racing.",
 };

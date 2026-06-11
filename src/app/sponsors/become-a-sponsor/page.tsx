@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import { BecomeASponsorContent } from "./become-a-sponsor-content";
 
 export const metadata: Metadata = {
-  title: "Become a Sponsor | SJSU Spartan Racing",
+  title: "Become a Sponsor",
   description: "Support the next generation of engineers. View our sponsorship tiers and benefits.",
 };
 

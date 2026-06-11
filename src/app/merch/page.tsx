@@ -3,7 +3,7 @@ import { MerchContent } from "./merch-content";
 import { getMerchProducts } from "@/lib/fourthwall";
 
 export const metadata: Metadata = {
-  title: "Merch | SJSU Spartan Racing",
+  title: "Merch",
   description:
     "Official SJSU Spartan Racing merchandise. Rep the team with tees, hoodies, caps, and more.",
 };

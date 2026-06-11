@@ -4,7 +4,7 @@ import Link from "next/link";
 import { SOCIAL_LINKS } from "@/lib/constants";
 
 export const metadata: Metadata = {
-  title: "Contact | SJSU Spartan Racing",
+  title: "Contact",
   description:
     "Get in touch with SJSU Spartan Racing. Email, address, and social media.",
 };

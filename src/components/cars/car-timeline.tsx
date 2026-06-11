@@ -55,11 +55,8 @@ export function CarTimeline({ cars }: CarTimelineProps) {
         const year = headlineYear(car.years);
         const chips = specs(car);
         return (
-          <article
-            key={car.slug}
-            data-index={i}
-            className="car-card sr-reveal group flex flex-col overflow-hidden rounded-lg border border-border bg-elevated"
-          >
+          <article key={car.slug} data-index={i} className="car-card sr-reveal">
+            <div className="car-card-inner flex h-full flex-col overflow-hidden rounded-lg border border-border bg-elevated">
             {/* Photo */}
             <div className="relative aspect-[16/10] overflow-hidden bg-surface">
               {car.image && (
@@ -111,6 +108,7 @@ export function CarTimeline({ cars }: CarTimelineProps) {
                   {car.description}
                 </p>
               )}
+            </div>
             </div>
           </article>
         );

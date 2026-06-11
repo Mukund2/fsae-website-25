@@ -730,6 +730,24 @@ html {
   to { transform: translateY(0); }
 }
 
+/* History — car lineage cards (keyframe hover, no CSS transitions) */
+.car-card .car-card-img {
+  will-change: transform;
+}
+
+.car-card:hover .car-card-img {
+  animation: imageZoom 0.5s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+}
+
+@keyframes carCardLift {
+  from { box-shadow: 0 0 0 rgba(0, 85, 162, 0); border-color: var(--border); }
+  to { box-shadow: 0 10px 30px rgba(0, 85, 162, 0.12); border-color: rgba(0, 85, 162, 0.3); }
+}
+
+.car-card:hover {
+  animation: carCardLift 0.3s ease-out forwards;
+}
+
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

@@ -8,6 +8,8 @@ export interface Car {
   torque?: string;
   battery?: string;
   description?: string;
+  /** Optional corner label, e.g. "Last Combustion Car" or "Current Car". */
+  badge?: string;
 }
 
 export interface CarSpec {

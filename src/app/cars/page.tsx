@@ -27,8 +27,8 @@ export default function CarsPage() {
             The Cars
           </h1>
           <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted">
-            Every car we&apos;ve built, from the 1989 senior project that started
-            it all, through more than a decade of combustion machines, to the
+            Every car we&apos;ve built, from the senior project that started it
+            all, through more than a decade of combustion machines, to the
             electric race cars we field today. This is the full Spartan Racing
             lineage.
           </p>

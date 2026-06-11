@@ -37,7 +37,7 @@ export const cars: Car[] = [
     name: "SR-17",
     years: "2026",
     badge: "Current Car",
-    image: "/images/history/sr17-2026.avif",
+    image: "/images/history/cars/sr-17.jpg",
     description:
       "The latest iteration of our electric race car, SR-17, continues the legacy of Spartan Racing Electric.",
   },
@@ -148,13 +148,6 @@ export const cars: Car[] = [
     image: "/images/history/cars/sre-3.jpg",
   },
   {
-    slug: "sre-2",
-    name: "SRE-2",
-    years: "",
-    motor: "Electric",
-    image: "/images/history/cars/sre-2.jpg",
-  },
-  {
     slug: "sr-9",
     name: "SR-9",
     years: "2017-2016",
@@ -162,6 +155,13 @@ export const cars: Car[] = [
     power: "73 HP",
     torque: "37 ft-lbs",
     image: "/images/history/cars/sr-9.jpg",
+  },
+  {
+    slug: "sre-2",
+    name: "SRE-2",
+    years: "2017-2016",
+    motor: "Electric",
+    image: "/images/history/cars/sre-2.jpg",
   },
   {
     slug: "sr-8",
@@ -241,9 +241,9 @@ export const cars: Car[] = [
   {
     slug: "sr-0",
     name: "SR-0",
-    years: "1989",
+    years: "1992",
     image: "/images/history/cars/sr-0.jpg",
     description:
-      "Spartan Racing was first founded at SJSU in 1989 with the introduction of SR-0, a senior project developed by students. After SR-0, Spartan Racing remained inactive until 2008.",
+      "Spartan Racing's first car, SR-0, was a senior project developed by students. After SR-0, the team remained inactive until it was revived in 2008.",
   },
 ];

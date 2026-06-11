@@ -61,6 +61,10 @@ const SPONSORS: Sponsor[] = [
   { name: "Valence Precision", url: "https://valenceprecision.com" },
 ];
 
+// Each sponsor sits in an equal-width, centered slot so the marquee spacing
+// stays uniform regardless of how wide or narrow each logo renders.
+const SLOT_CLASS = "flex min-w-32 shrink-0 items-center justify-center sm:min-w-44";
+
 function SponsorItem({ sponsor }: { sponsor: Sponsor }) {
   const inner = sponsor.logo ? (
     <Image
@@ -78,13 +82,13 @@ function SponsorItem({ sponsor }: { sponsor: Sponsor }) {
 
   if (sponsor.url) {
     return (
-      <a href={sponsor.url} target="_blank" rel="noopener noreferrer" className="flex items-center">
+      <a href={sponsor.url} target="_blank" rel="noopener noreferrer" className={SLOT_CLASS}>
         {inner}
       </a>
     );
   }
 
-  return <span className="flex items-center">{inner}</span>;
+  return <span className={SLOT_CLASS}>{inner}</span>;
 }
 
 export function SponsorStrip() {
@@ -105,7 +109,7 @@ export function SponsorStrip() {
         <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-[35%]" style={{ background: "linear-gradient(to right, #F5F5F5, rgba(245,245,245,0.9) 60%, transparent)" }} />
         <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-[35%]" style={{ background: "linear-gradient(to left, #F5F5F5, rgba(245,245,245,0.9) 60%, transparent)" }} />
 
-        <Marquee speed={120} gap="gap-10 sm:gap-16 lg:gap-20">
+        <Marquee speed={120} gap="gap-2 sm:gap-4 lg:gap-6">
           {SPONSORS.map((sponsor) => (
             <SponsorItem key={sponsor.name} sponsor={sponsor} />
           ))}

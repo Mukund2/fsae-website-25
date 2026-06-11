@@ -9,12 +9,35 @@ const InlineFlipbook = dynamic(
   { ssr: false }
 );
 
+// makePages() builds the list of page-image paths for one newsletter.
+// You don't edit this function — you just CALL it (see the newsletters list
+// below). makePages("<folder-name>", <number-of-pages>) expects scans named
+// page-01.jpg, page-02.jpg, … in public/images/newsletters/<folder-name>/.
 function makePages(folder: string, count: number): string[] {
   return Array.from({ length: count }, (_, i) =>
     `/images/newsletters/${folder}/page-${String(i + 1).padStart(2, "0")}.jpg`
   );
 }
 
+// ═══════════════════════════════════════════════════════════════════════
+// HOW TO EDIT: Newsletters  (shows on: homepage "Newsletters" section)
+//
+// ADD one (newest goes FIRST):
+//   1. Create a folder: public/images/newsletters/<folder-name>/  and put
+//      the page scans in it named page-01.jpg, page-02.jpg, … page-NN.jpg
+//   2. Add ONE line at the TOP of the array below:
+//        { date: "Month Year", title: "Title", pages: makePages("<folder-name>", <number-of-pages>) },
+//
+// REMOVE one → delete its line.   EDIT one → change date / title, or the
+// folder-name / page-count passed to makePages().
+//
+// Fields:
+//   date  — label shown on the card e.g. "May 2026" (required)
+//   title — newsletter title (required)
+//   pages — always makePages("<folder-name>", <number-of-pages>) (required)
+//
+// Full walkthrough: docs/EDITING-GUIDE.md
+// ═══════════════════════════════════════════════════════════════════════
 const newsletters = [
   // 2026
   { date: "May 2026", title: "Built to Perform", pages: makePages("may-2026", 10) },

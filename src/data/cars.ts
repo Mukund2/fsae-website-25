@@ -8,6 +8,29 @@ import type { Car } from "@/types";
  * are only attached to cars where the result is documented; undocumented cars
  * intentionally show specs + photo without invented results.
  */
+// ═══════════════════════════════════════════════════════════════════════
+// HOW TO EDIT: The Cars lineage  (shows on: /cars page)
+//
+// ADD one  → copy a { ... } block below, paste it at the TOP of the array
+//            (newest car goes first), edit the values.
+// REMOVE one → delete its block.   EDIT one → change its values.
+//
+// Fields:
+//   slug        — unique id, kebab-case e.g. "sr-18" (required)
+//   name        — display name e.g. "SR-18" (required)
+//   years       — e.g. "2027-2026"; the FIRST year shows as the big year on
+//                 the card. Use "" if unknown. (required, may be "")
+//   image       — path e.g. "/images/history/cars/sr-18.jpg" (required)
+//   motor       — spec chip (optional — omit to hide the chip)
+//   power       — spec chip (optional — omit to hide the chip)
+//   torque      — spec chip (optional — omit to hide the chip)
+//   battery     — spec chip (optional — omit to hide the chip)
+//   description — race results / story (optional — leave OUT if you have no
+//                 documented results; do NOT invent results)
+//   badge       — small corner label e.g. "Current Car" (optional)
+//
+// Full walkthrough: docs/EDITING-GUIDE.md
+// ═══════════════════════════════════════════════════════════════════════
 export const cars: Car[] = [
   {
     slug: "sr-17",

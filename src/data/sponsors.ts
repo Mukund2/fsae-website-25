@@ -1,5 +1,25 @@
 import type { Sponsor } from "@/types";
 
+// ═══════════════════════════════════════════════════════════════════════
+// HOW TO EDIT: Sponsors  (shows on: /sponsors page)
+//
+// IMPORTANT: The scrolling logo strip on the HOMEPAGE is a SEPARATE list in
+//   src/components/home/sponsor-strip.tsx — update BOTH when adding/removing.
+//
+// ADD one  → copy a { ... } block below, paste it under the right tier
+//            comment, edit the values.
+// REMOVE one → delete its block.   EDIT one → change its values.
+//
+// Fields:
+//   name — sponsor name (required)
+//   tier — one of: "title" | "platinum" | "gold" | "silver" | "bronze" |
+//          "partner" (required — controls which section it appears in)
+//   url  — website link (optional — omit if none)
+//   logo — image path e.g. "/images/sponsors/xxx.png" or ".svg"
+//          (optional — OMIT to show the name as plain text instead)
+//
+// Full walkthrough: docs/EDITING-GUIDE.md
+// ═══════════════════════════════════════════════════════════════════════
 export const sponsors: Sponsor[] = [
   // Title ($30,000+)
   {

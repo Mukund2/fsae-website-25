@@ -3,6 +3,19 @@
 import { useState, useEffect, useCallback } from "react";
 import Image from "next/image";
 
+// ═══════════════════════════════════════════════════════════════════════
+// HOW TO EDIT: Highlights slideshow  (shows on: homepage "Highlights")
+//
+// ADD / REPLACE a slide → add or change an image path in the list below.
+//   Put the actual image files in public/images/slideshow/ and reference
+//   them as "/images/slideshow/slide-0X.jpg".
+// REMOVE one → delete its line.   REORDER → reorder the lines.
+//
+// The caption under the slideshow is the <p> near the BOTTOM of this file
+// (currently "Highlights from SR-17 Unveiling") — edit that text there.
+//
+// Full walkthrough: docs/EDITING-GUIDE.md
+// ═══════════════════════════════════════════════════════════════════════
 const SLIDES = [
   "/images/slideshow/slide-01.jpg",
   "/images/slideshow/slide-02.jpg",
@@ -88,7 +101,9 @@ export function ImageSlideshow() {
           </div>
         )}
       </div>
-      <p className="pb-4 pt-3 text-center font-display text-sm leading-relaxed italic text-foreground/50">
+      {/* leading-loose + extra bottom padding so the italic descenders
+          (e.g. the "g" in Highlights) aren't clipped by overflow-hidden */}
+      <p className="px-4 pb-6 pt-4 text-center font-display text-sm italic leading-loose text-foreground/50">
         Highlights from SR-17 Unveiling
       </p>
     </section>

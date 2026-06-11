@@ -12,11 +12,6 @@ export interface Car {
   badge?: string;
 }
 
-export interface CarSpec {
-  label: string;
-  value: string;
-}
-
 export interface TeamMember {
   name: string;
   role: string;
@@ -40,28 +35,6 @@ export interface Sponsor {
   url?: string;
   description?: string;
   invertOnLight?: boolean;
-}
-
-export interface CompetitionResult {
-  year: number;
-  competition: string;
-  location: string;
-  overallPlace?: number;
-  events: EventResult[];
-  car?: string;
-}
-
-export interface EventResult {
-  name: string;
-  place: number;
-  score?: number;
-}
-
-export interface TimelineEvent {
-  year: number | string;
-  title: string;
-  description: string;
-  image?: string;
 }
 
 export interface FAQ {

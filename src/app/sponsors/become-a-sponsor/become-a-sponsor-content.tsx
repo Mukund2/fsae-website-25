@@ -69,15 +69,6 @@ function ArrowIcon({ className = "" }: { className?: string }) {
   );
 }
 
-/* --- Download icon --- */
-function DownloadIcon({ className = "" }: { className?: string }) {
-  return (
-    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className={className}>
-      <path d="M10 3v10m0 0l-4-4m4 4l4-4M4 15h12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-    </svg>
-  );
-}
-
 /* --- Tier data --- */
 const TIERS = [
   { key: "partner", label: "Partner", price: "Under $2,500", color: "text-muted" },

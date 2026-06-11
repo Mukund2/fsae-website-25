@@ -2,21 +2,24 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 import { Syne } from "next/font/google";
 
-// Display: Syne — geometric, bold, tech-forward, has real character
-// Used for headings, titles, CTAs — the "exciting" font
-const syne = Syne({
+/**
+ * Site fonts. Each export below exposes a CSS variable that Tailwind reads
+ * (wired up in globals.css under `@theme inline`):
+ *
+ *   displayFont → --font-display      → headings, titles, CTAs   (Syne)
+ *   bodyFont    → --font-geist-sans   → body text, nav, labels   (Geist Sans)
+ *   monoFont    → --font-geist-mono   → rarely used              (Geist Mono)
+ *
+ * To change a font: swap the import and the matching object here — nothing
+ * else needs to change because the rest of the site references the CSS
+ * variables (e.g. `font-display`), not the font itself.
+ */
+export const displayFont = Syne({
   weight: ["600", "700", "800"],
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
 });
 
-// Body: Geist Sans — clean, modern, highly readable
-// Used for paragraphs, nav, labels — the "professional" font
-export const geistSans = GeistSans;
-export const geistMono = GeistMono;
-
-// Legacy aliases used by layout.tsx
-export const bebasNeue = syne;  // display font
-export const dmSans = GeistSans;  // body font
-export const jetbrainsMono = GeistMono;
+export const bodyFont = GeistSans;
+export const monoFont = GeistMono;

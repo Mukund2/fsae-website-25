@@ -134,13 +134,15 @@ function animateElement(
 /* ── Roll text on hover ── */
 function RollText({ text, className, style, rolling }: { text: string; className?: string; style?: React.CSSProperties; rolling: boolean }) {
   const [state, setState] = useState<"idle" | "up" | "down">("idle");
-  const prevRolling = useRef(false);
+  const [prevRolling, setPrevRolling] = useState(false);
 
-  useEffect(() => {
-    if (rolling && !prevRolling.current) setState("up");
-    if (!rolling && prevRolling.current) setState("down");
-    prevRolling.current = rolling;
-  }, [rolling]);
+  // Derive the roll-up / roll-down animation from the `rolling` prop's transition.
+  // This is React's recommended "adjust state during render" pattern, so no effect
+  // is needed (and it avoids the cascading-render warning).
+  if (rolling !== prevRolling) {
+    setPrevRolling(rolling);
+    setState(rolling ? "up" : "down");
+  }
 
   return (
     <span

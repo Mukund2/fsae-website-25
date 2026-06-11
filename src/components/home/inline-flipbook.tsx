@@ -37,6 +37,8 @@ export function InlineFlipbook({ pages: initialPages, pdfUrl }: InlineFlipbookPr
   const [loading, setLoading] = useState(!initialPages && !!pdfUrl);
   const [error, setError] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(0);
+  // react-pageflip ships incomplete types for React 19, so the ref is loosely typed.
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const flipBookRef = useRef<any>(null);
   const wrapperRef = useRef<HTMLDivElement>(null);
 
@@ -65,6 +67,8 @@ export function InlineFlipbook({ pages: initialPages, pdfUrl }: InlineFlipbookPr
           canvas.width = viewport.width;
           canvas.height = viewport.height;
           const ctx = canvas.getContext("2d")!;
+          // pdfjs render params type omits `canvas`; cast keeps it happy.
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           await page.render({ canvasContext: ctx, viewport, canvas } as any).promise;
           rendered.push(canvas.toDataURL("image/jpeg", 0.85));
           if (cancelled) return;
@@ -84,7 +88,7 @@ export function InlineFlipbook({ pages: initialPages, pdfUrl }: InlineFlipbookPr
     return () => { cancelled = true; };
   }, [initialPages, pdfUrl]);
 
-  const onFlip = useCallback((e: any) => {
+  const onFlip = useCallback((e: { data: number }) => {
     setCurrentPage(e.data);
   }, []);
 

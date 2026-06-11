@@ -12,8 +12,10 @@ export default function HomePage() {
       <CarShowcase />
       <div className="relative z-10">
         <Results />
-        {/* Gradient: Results bg → Sponsor Strip bg */}
-        <div className="h-24 md:h-32" style={{ background: "linear-gradient(to bottom, var(--background), #F5F5F5)" }} />
+        {/* Short gradient blending Results bg → Sponsor Strip bg. Kept small so
+            the space above the "Thank you to our Sponsors" heading stays balanced
+            with the space below the sponsor logos. */}
+        <div className="h-8 md:h-10" style={{ background: "linear-gradient(to bottom, var(--background), #F5F5F5)" }} />
         <SponsorStrip />
         <ImageSlideshow />
         <Newsletter />

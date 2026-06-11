@@ -3,8 +3,6 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { Section } from "@/components/layout/section";
-import { RevealText } from "@/components/animation/reveal-text";
-import { StaggerChildren } from "@/components/animation/stagger-children";
 import { faqs } from "@/data/faq";
 import { ChevronDown } from "lucide-react";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
@@ -154,7 +152,7 @@ export function FAQContent() {
       {/* Category Tabs */}
       <Section>
         <div ref={tabsRef as React.RefObject<HTMLDivElement>} className="mb-12 flex flex-wrap gap-2">
-          {categories.map((category, i) => (
+          {categories.map((category) => (
             <button
               key={category}
               data-anim="up"

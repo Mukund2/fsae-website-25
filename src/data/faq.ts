@@ -1,5 +1,25 @@
 import type { FAQ } from "@/types";
 
+// ═══════════════════════════════════════════════════════════════════════
+// HOW TO EDIT: FAQ  (shows on: /faq page)
+//
+// Questions are grouped by `category` into tabs; the tabs appear in the
+// order their categories are first used here, so keep each category's
+// questions together.
+//
+// ADD one  → copy a { ... } block below, paste it next to others sharing
+//            the same category, edit the values.
+// REMOVE one → delete its block.   EDIT one → change its values.
+//
+// Fields:
+//   question — the question text (required)
+//   answer   — the answer text (required)
+//   category — the tab it groups under. Reuse an existing string such as
+//              "General" / "Membership" / "Technical" / "Competition", or
+//              type a new one to create a new tab. (required)
+//
+// Full walkthrough: docs/EDITING-GUIDE.md
+// ═══════════════════════════════════════════════════════════════════════
 export const faqs: FAQ[] = [
   // General
   {

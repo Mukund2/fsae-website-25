@@ -1,37 +1,11 @@
-export const SITE_NAME = "SJSU Spartan Racing";
-export const SITE_DESCRIPTION = "San José State University Formula SAE Racing Team. Engineering excellence since 1991.";
-export const SITE_URL = "https://sjsuformulasae.com";
-
-export const COLORS = {
-  gold: "#0055A2",
-  blue: "#0055A2",
-  base: "#FAFAF8",
-  surface: "#F0F0EC",
-  elevated: "#FFFFFF",
-} as const;
-
-export const NAV_LINKS = [
-  { label: "About", href: "/about" },
-  { label: "Cars", href: "/cars" },
-  { label: "Leads", href: "/team" },
-  { label: "History", href: "/history" },
-  { label: "Racing", href: "/racing" },
-
-  { label: "Sponsors", href: "/sponsors" },
-  { label: "Support", href: "/support" },
-  { label: "Contact", href: "/contact" },
-  { label: "FAQ", href: "/faq" },
-] as const;
-
+/**
+ * Site-wide constants.
+ *
+ * The team's social media links — used by the footer and the contact page.
+ * To update a handle, change the URL here and it updates everywhere at once.
+ */
 export const SOCIAL_LINKS = {
   instagram: "https://www.instagram.com/sjsuformulasae/",
   linkedin: "https://www.linkedin.com/school/sjsufsae/",
   facebook: "https://www.facebook.com/SpartanRacingSJSU/",
 } as const;
-
-export const STATS = [
-  { value: 35, suffix: "+", label: "Years Active" },
-  { value: 16, suffix: "", label: "Cars Built" },
-  { value: 100, suffix: "+", label: "Team Members" },
-  { value: 7, suffix: "", label: "Subteams" },
-] as const;

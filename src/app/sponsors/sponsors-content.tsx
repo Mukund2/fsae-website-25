@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useCallback } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import { sponsors } from "@/data/sponsors";
 import type { Sponsor } from "@/types";

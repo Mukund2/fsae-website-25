@@ -1,5 +1,20 @@
 import type { TeamMember, Subteam } from "@/types";
 
+// ═══════════════════════════════════════════════════════════════════════
+// HOW TO EDIT: Team leads  (shows on: /team page)
+//
+// ADD one  → copy a { ... } block below, paste it where you want them to
+//            appear (order here = order on the page), edit the values.
+// REMOVE one → delete its block.   EDIT one → change its values.
+//
+// Fields:
+//   name     — person's name (required)
+//   role     — their title e.g. "Team Captain" (required)
+//   image    — photo path e.g. "/images/team/jane-doe.jpg" (optional)
+//   linkedin — full LinkedIn URL (optional — omit to hide the link)
+//
+// Full walkthrough: docs/EDITING-GUIDE.md
+// ═══════════════════════════════════════════════════════════════════════
 export const team: TeamMember[] = [
   {
     name: "Alex Chen",
@@ -51,6 +66,21 @@ export const team: TeamMember[] = [
   },
 ];
 
+// ═══════════════════════════════════════════════════════════════════════
+// HOW TO EDIT: Subteams  (shows on: /about page)
+//
+// ADD one  → copy a { ... } block below, paste it where you want it to
+//            appear (order here = order on the page), edit the values.
+// REMOVE one → delete its block.   EDIT one → change its values.
+//
+// Fields:
+//   name         — subteam name e.g. "Aerodynamics" (required)
+//   abbreviation — short label e.g. "AERO" (required)
+//   description  — one-paragraph blurb about the subteam (required)
+//   image        — photo path e.g. "/images/flickr/aero.jpg" (required)
+//
+// Full walkthrough: docs/EDITING-GUIDE.md
+// ═══════════════════════════════════════════════════════════════════════
 export const subteams: Subteam[] = [
   {
     name: "Aerodynamics",
